@@ -1,6 +1,6 @@
 [package]
 name = "exam-lecture-zh"
-version = "0.1.1"
+version = "0.1.0"
 entrypoint = "exam-lecture-zh.typ"
 authors = ["<https://github.com/February-bird>"]
 license = "MIT"
