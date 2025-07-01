@@ -2,7 +2,7 @@
 name = "exam-lecture-zh"
 version = "0.1.0"
 entrypoint = "exam-lecture-zh.typ"
-authors = ["february bird <http://>"]
+authors = ["<https://github.com/February-bird>"]
 license = "MIT"
 description = "A test paper and lecture notes template inspired by the LaTeX package exam-zh."
 repository = "https://github.com/February-bird/exam-lecture-zh.git"
