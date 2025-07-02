@@ -1,4 +1,3 @@
-// 页面参数
 #let a3 = (
   paper: "a3",
   margin: 1in,
