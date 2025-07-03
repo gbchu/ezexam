@@ -102,7 +102,7 @@
 }
 
 #let _create-seal(
-  dash: "",
+  dash: "dashed",
   supplement: "",
   info: (:),
 ) = {
