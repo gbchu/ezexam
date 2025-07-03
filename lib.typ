@@ -36,7 +36,7 @@
   doc,
 ) = {
   mode-state.update(mode)
-  let _custom-footer(label, position, is-separate) = context {
+  let _custom-footer(label) = context {
     if label == none { return }
     let _label = label
     if label == auto {
@@ -66,7 +66,7 @@
 
     let _page-numbering = numbering(_label, ..arr)
     // 处于分栏模式下的separate
-    if page.columns == 2 and is-separate {
+    if page.columns == 2 and footer-is-separate {
       grid(
         columns: (1fr, 1fr),
         align: center + horizon,
@@ -79,15 +79,15 @@
       return
     }
     // 如果页面的页脚是未分离状态, 则让奇数页在右侧，偶数页在左侧
-    let _position = position
-    if not is-separate {
+    let position = page-align
+    if not footer-is-separate {
       if calc.odd(current) {
-        _position = right
+        position = right
       } else {
-        _position = left
+        position = left
       }
     }
-    align(_position, _page-numbering)
+    align(position, _page-numbering)
   }
 
   // 弥封线
@@ -154,7 +154,7 @@
         supplement: seal-line-supplement,
       )
     },
-    footer: _custom-footer(page-numbering, page-align, footer-is-separate),
+    footer: _custom-footer(page-numbering),
     background: if paper.columns == 2 and show-gap-line {
       line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
     },
@@ -166,11 +166,7 @@
     title: text(size: 15pt)[目#h(1em)录],
   )
   show outline: it => {
-    set page(header: none, footer: _custom-footer(
-      outline-page-numbering,
-      page-align,
-      footer-is-separate,
-    ))
+    set page(header: none, footer: _custom-footer(outline-page-numbering))
     align(center, it)
     pagebreak(weak: true)
     counter(page).update(1) // 正文页码从1开始

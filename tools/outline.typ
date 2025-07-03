@@ -102,8 +102,8 @@
 }
 
 #let _create-seal(
-  dash: "dashed",
-  supplement: "弥封线内不得答题",
+  dash: "",
+  supplement: "",
   info: (:),
 ) = {
   set par(spacing: 10pt)
