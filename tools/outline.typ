@@ -107,7 +107,7 @@
   info: (:),
 ) = {
   set par(spacing: 10pt)
-  set text(font: "SimHei", size: 12pt)
+  set text(font: hei-ti, size: 12pt)
   set align(center)
   set grid(columns: 2, align: horizon, gutter: .5em)
   if supplement != "" { text(tracking: .8in)[#supplement] }
