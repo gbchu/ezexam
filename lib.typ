@@ -36,7 +36,7 @@
   doc,
 ) = {
   mode-state.update(mode)
-  let _custom-footer(label, position: center, is-separate: true) = context {
+  let _custom-footer(label, position: center, is-separate) = context {
     if label == none { return }
     let _label = label
     if label == auto {
