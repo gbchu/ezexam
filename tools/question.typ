@@ -14,6 +14,7 @@
   top: 0em,
   bottom: 0em,
   with-heading-label: none,
+  line-height: auto,
 ) = {
   // 分数设置
   let result = body
@@ -49,6 +50,7 @@
     text(label-color, weight: label-weight)[#numbering(_label, ..arr)<question-label>]
   })
 
+  set par(leading: line-height) if line-height != auto
   v(top)
   enum(
     numbering: _ => _format,

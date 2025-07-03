@@ -14,7 +14,7 @@
   font-size: 11pt,
   font: page-font,
   font-math: page-font,
-  line-height: 20pt,
+  line-height: 2em,
   par-spacing: 2em,
   first-line-indent: 2em,
   heading-size: 10.5pt,
