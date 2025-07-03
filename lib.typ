@@ -24,7 +24,7 @@
   heading-bottom: 15pt,
   show-answer: false,
   answer-color: blue,
-  show-seal-line: false,
+  show-seal-line: true,
   seal-line-student-info: (
     姓名: underline[~~~~~~~~~~~~~],
     准考证号: inline-square(14),
