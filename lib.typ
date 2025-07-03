@@ -36,7 +36,7 @@
   doc,
 ) = {
   mode-state.update(mode)
-  let _custom-footer(label, position: center, is-separate) = context {
+  let _custom-footer(label, position, is-separate) = context {
     if label == none { return }
     let _label = label
     if label == auto {
@@ -154,7 +154,7 @@
         supplement: seal-line-supplement,
       )
     },
-    footer: _custom-footer(page-numbering, is-separate: footer-is-separate, position: page-align),
+    footer: _custom-footer(page-numbering, page-align, footer-is-separate),
     background: if paper.columns == 2 and show-gap-line {
       line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
     },
@@ -168,8 +168,8 @@
   show outline: it => {
     set page(header: none, footer: _custom-footer(
       outline-page-numbering,
-      is-separate: footer-is-separate,
-      position: page-align,
+      page-align,
+      footer-is-separate,
     ))
     align(center, it)
     pagebreak(weak: true)
