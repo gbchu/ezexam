@@ -8,7 +8,7 @@
   page-numbering: auto,
   page-align: center,
   gap: 1in,
-  show-gap-line: true,
+  show-gap-line: false,
   footer-is-separate: true,
   outline-page-numbering: "⚜ I ⚜",
   font-size: 11pt,
@@ -24,7 +24,7 @@
   heading-bottom: 15pt,
   show-answer: false,
   answer-color: blue,
-  show-seal-line: true,
+  show-seal-line: false,
   seal-line-student-info: (
     姓名: underline[~~~~~~~~~~~~~],
     准考证号: inline-square(14),
