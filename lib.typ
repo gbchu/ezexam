@@ -24,7 +24,13 @@
   heading-bottom: 15pt,
   show-answer: false,
   answer-color: blue,
-  seal-line-student-info: (:),
+  show-seal-line: true,
+  seal-line-student-info: (
+    姓名: underline[~~~~~~~~~~~~~],
+    准考证号: inline-square(14),
+    考场号: inline-square(2),
+    座位号: inline-square(2),
+  ),
   seal-line-type: "dashed",
   seal-line-supplement: "弥封线内不得答题",
   doc,
@@ -84,14 +90,68 @@
     align(_position, _page-numbering)
   }
 
+  // 弥封线
+  let _seal-line(
+    student-info: (:),
+    dash: "",
+    supplement: "",
+  ) = context {
+    // 根据页码决定是否显示弥封线
+    // 如果当前页面有<title>,则显示弥封线,并在该章节最后一页的右侧也设置弥封线
+    let chapter-location = for value in query(<title>) {
+      counter(page).at(value.location())
+    }
+
+    if chapter-location.len() == 0 { return }
+    let current = counter(page).get().first()
+    let last = counter(page).final()
+
+    // 获取上一章最后一页的页码,给最后一页加上弥封线
+    let chapter-last-page-location = chapter-location.map(item => item - 1) + last
+    if page.columns == 2 and footer-is-separate {
+      chapter-last-page-location = chapter-location.map(item => item - 2) + (last.first() - 1,)
+    }
+
+    // 去除第一章,因为第一章前面没有章节了
+    let _ = chapter-last-page-location.remove(0)
+
+    let _margin-y = page.margin * 2
+    let _width = page.height - _margin-y
+    if page.flipped { _width = page.width - _margin-y }
+    block(width: _width)[
+      // 判断当前是在当前章节第一页还是章节最后一页
+      //当前章节第一页弥封线
+      #if chapter-location.contains(current) {
+        place(
+          dx: -_width - 1em,
+          dy: -2em,
+        )[
+          #rotate(-90deg, origin: right + bottom)[
+            #_create-seal(dash: dash, info: student-info, supplement: supplement)
+          ]
+        ]
+        return
+      }
+
+      #if (chapter-last-page-location).contains(current) {
+        _width = if page.flipped {
+          page.height
+        } else { page.width }
+        // 章节最后页的弥封线
+        place(dx: _width - page.margin - 2em, dy: 2em)[
+          #rotate(90deg, origin: left + top, _create-seal())
+        ]
+      }
+    ]
+  }
+
   set page(
     ..paper,
-    header: if mode == EXAM and seal-line-student-info.len() > 0 {
+    header: if mode == EXAM and show-seal-line {
       _seal-line(
         student-info: seal-line-student-info,
         dash: seal-line-type,
         supplement: seal-line-supplement,
-        is-separate: footer-is-separate,
       )
     },
     footer: _custom-footer(page-numbering, is-separate: footer-is-separate, position: page-align),

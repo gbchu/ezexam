@@ -1,4 +1,5 @@
-#import "@preview/exam-cn:0.1.0": *
+// #import "@preview/exam-cn:0.1.0": *
+#import "../lib.typ": *
 #show: setup.with(
   // paper: a3,
   mode: EXAM,
