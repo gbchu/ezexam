@@ -1,7 +1,7 @@
 [package]
 name = "ezexam"
 version = "0.1.0"
-entrypoint = "lib.typ"
+entrypoint = "ezexam.typ"
 authors = ["gbchu <https://github.com/gbchu>"]
 license = "MIT"
 description = "A test paper and lecture notes template inspired by the LaTeX package exam-zh."
