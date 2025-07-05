@@ -98,7 +98,7 @@
       top: top,
       bottom: bottom,
     ),
-    text, move(dx: figure-x, dy: figure-y)[#figure],
+    text, move(dx: figure-x, dy: figure-y)[#box[#figure]],
   )
 }
 

@@ -73,7 +73,6 @@
         }
       }
     }
-
     grid(
       columns: _column * (1fr,),
       column-gutter: c-gap,
