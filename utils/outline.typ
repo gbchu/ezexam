@@ -28,7 +28,7 @@
   subject-state.update(name.text)
 }
 
-#let secret = place(top, text(font: "SimHei")[绝密★启用前])
+#let secret(text: [绝密★启用前]) = place(top, text(font: "SimHei", text))
 
 #let exam-type(type, prefix: "试卷类型: ") = place(top + right, text(font: hei-ti)[#prefix#type])
 
