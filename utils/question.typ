@@ -11,8 +11,8 @@
   points-separate-par: true,
   points-prefix: "（",
   points-suffix: "分）",
-  top: 0em,
-  bottom: 0em,
+  top: 0pt,
+  bottom: 0pt,
   with-heading-label: none,
   line-height: auto,
 ) = {

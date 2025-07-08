@@ -530,3 +530,151 @@
 >
 > 此设置的可选值参考官方文档 [线的类型](https://typst.app/docs/reference/visualize/stroke/#constructor-dash)
 
+### `choices方法`
+>该方法为选择题的选项排列
+
+#### **参数及其默认值**
+
+`column`
+
+`type: int | auto`
+`default: auto`
+>*该参数用于设置选项排列的列数,如未指定列数，则默认根据内容自动排列*
+
+`c-gap`
+
+`type: length`
+`default: 0pt`
+>*该参数用于设置选项之间的水平间距*
+
+`r-gap`
+
+`type: length`
+`default: 25pt`
+>*该参数用于设置选项之间的垂直间距*
+
+`indent`
+
+`type: length`
+`default: 0pt`
+>*该参数用于设置选项的缩进*
+
+`body-indent`
+
+`type: length`
+`default: 5pt`
+>*该参数用于设置选项和标签$ABCD$之间的距离*
+
+`top`
+
+`type: length`
+`default: 0pt`
+>*该参数用于设置选项距离上方的距离*
+
+`bottom`
+
+`type: length`
+`default: 0pt`
+>*该参数用于设置选项距离下方的距离*
+
+`label`
+
+`type: str`
+`default: A.`
+>*该参数用于设置选项的标签类型*
+>
+> 若要修改标签类型，可参考官方文档 [numbering](https://typst.app/docs/reference/model/numbering/) 的参数设置
+
+`options`
+
+>*该参数为可变参数*
+
+### `question方法`
+#### **参数及其默认值**
+
+`body-indent`
+
+`type: length`
+`default: 0.6em`
+>*该参数用于设置题目和题号间的间隔*
+
+`indent`
+
+`type: length`
+`default: 0pt`
+>*该参数用于设置题目的缩进*
+
+`line-height`
+
+`type: length`
+`default: auto`
+>*该参数用于设置题目的行高，当题目中的公式比较高时，题号和题目会错位，这时可以通过该参数来微调。*
+
+`label`
+
+`type: str | function`
+`default: auto`
+>*该参数用于设置题号的类型*
+>
+> 若要修改题号类型，可参考官方文档 [numbering](https://typst.app/docs/reference/model/numbering/) 的参数设置
+
+`label-color`
+
+`type: color`
+`default: black`
+>*该参数用于设置题号的颜色*
+
+`label-weight`
+
+`type: str | int`
+`default: regular`
+>*该参数用于设置题号字体的粗细*
+
+`points`
+
+`type: none | int`
+`default: none`
+>*该参数用于设置题目的分值*
+
+`points-separate-par`
+
+`type: boolean`
+`default: true`
+>*该参数用于设置题目的分值是否独占一行*
+
+`points-prefix`
+
+`type: str`
+`default: " ("`
+>*该参数用于设置题目分值前缀*
+
+`points-suffix`
+
+`type: str`
+`default: "分）"`
+>*该参数用于设置题目的分值后缀*
+
+`top`
+
+`type: length`
+`default: 0pt`
+>*该参数用于设置题目距离上方的距离*
+
+`bottom`
+
+`type: length`
+`default: 0pt`
+>*该参数用于设置题目距离下方的距离*
+
+`with-heading-label`
+
+`type: none | boolean`
+`default: none`
+>*该参数用于设置题目是否带有标题的标签*
+
+`body`
+
+`type: content`
+>*该参数为位置参数，题目的内容*
+
+
