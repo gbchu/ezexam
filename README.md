@@ -32,7 +32,7 @@
 `default: LECTURE`
 `optional value: EXAM`
 
->*该参数用于设置模板的显示模式 `LECTURE`: 讲义模式； `EXAM` : 试卷模式 `LECTURE` 模式和 `EXAM` 模式二者仅在题号的显示方式和目录显示方式上有所不同。`LECTURE` 模式仅符合个人喜好，若你只想组卷则只用`EXAM` 模式即可！*
+>*该参数用于设置模板的显示模式 `LECTURE`: 讲义模式； `EXAM` : 试卷模式 `LECTURE` 模式和 `EXAM` 模式二者仅在题号的显示方式、目录显示方式、页码显示上有所不同。`LECTURE` 模式仅符合个人喜好，若你只想组卷则只用`EXAM` 模式即可！*
 
 `paper`
 
@@ -40,7 +40,7 @@
 `default: a4`
 `optional value: a3`
 
->*该参数用于设置模板的页面大小、边距、是否翻转、是否分页*
+>*该参数用于设置模板的页面类型、边距、是否翻转、是否分页*
 
 ```typst
     a3 和 a4 的默认值
@@ -59,7 +59,7 @@
       flipped: false,
     )
 ```
-> *`a3` 和 `a4` 是内部自定义的两个变量，若需要自定义页面大小，则需要使用字典覆盖默认值，格式如上所示。例如：在调用`setup`方法时`paper`参数使用`( paper: "b5", margin: .5in, columns: 2, flipped: true,)`而非定义好的`a3` 或 `a4`*
+> *`a3` 和 `a4` 是内部自定义的两个变量，若需要自定义页面类型，则需要使用字典覆盖默认值，格式如上所示。例如：在调用`setup`方法时`paper`参数使用`( paper: "b5", margin: .5in, columns: 2, flipped: true,)`而非定义好的`a3` 或 `a4`*
 
 > 注：修改该参数可能会导致页面布局混乱，仅在a3 和 a4 尺寸下测试过
 
@@ -245,6 +245,12 @@
 >*该参数用于设置弥封线的补充信息*
 
 ### `chapter方法`
+#### **参数及其默认值**
+
+`name`
+`type: str | content`
+`default: ""`
+>*章节名称，该参数为位置参数*
 
 >*该方法用于设置章节标题，此标题不会显示在文章中，只会出现在目录中，若不需要显示目录可忽略此方法*
 
@@ -253,6 +259,10 @@
 ### `title方法`
 
 #### **参数及其默认值**
+`name`
+`type: str | content`
+`default: ""`
+>*标题名称，该参数为位置参数*
 
 `font`
 
@@ -299,6 +309,10 @@
 ### `subject方法`
 
 #### **参数及其默认值**
+`name`
+`type: str | content`
+`default: ""`
+>*该参数为位置参数，用于设置科目名*
 
 `font`
 
@@ -344,15 +358,20 @@
 
 ### `exam-type方法`
 #### **参数及其默认值**
+`type`
+`type: str | content`
+`default: ""`
+>*该参数为位置参数，用于设置试卷类型*
 
 `prefix`
 
 `type: str | content`
 `default: 试卷类型:`
 
->*该参数用于设置密级，位置默认在右上角*
+>*该参数用于设置试卷类型的前缀，位置默认在右上角*
 
 ### `exam-info方法`
+> *该方法用于设置试卷信息，例如出卷人，审题人，时间，分值等*
 #### **参数及其默认值**
 
 `info`
@@ -406,6 +425,7 @@
 >*该参数用于设置下间距*
 
 ### `scoring-box方法`
+> *该方法用于绘制一个带有评分人的评分框*
 #### **参数及其默认值**
 
 `x`
@@ -422,27 +442,16 @@
 >*该参数用于设置竖直方向上的偏移*
 
 ### `score-box方法`
-#### **参数及其默认值**
+> *该方法用于绘制一个只有评分的评分框*
+#### **参数及其默认值参照`scoring-box`方法**
 
-`x`
-
-`type: length`
-`default: 0pt`
->*该参数用于设置水平方向上的偏移*
-
-`y`
-
-`type: length`
-`default: 0pt`
-
->*该参数用于设置竖直方向上的偏移*
 
 ### `notice方法`
->该方法接收可变参数
+>*该方法生成注意事项，接收可变参数*
 
 
 ### `zh-arabic方法`
->该方法返回一个函数，用来设置页面页码的格式
+>*该方法返回一个函数，用来设置页面页码的格式*
 >
 >格式为：`"XX  第X页（共XX页）"`
 #### **参数及其默认值**
@@ -463,11 +472,11 @@
 ```typst
   例如：
   zh-arabic("SSS", "试题")
-  输出： SSS科目试题 第X页（共XX页）
+  最终格式化后的页码效果： SSS科目试题 第X页（共XX页）
 ```
 
 ### `inline-square方法`
->该方法生成行内排列的小方格，用于弥封线内准考证号，座位号，考号的占位
+>*该方法生成行内排列的小方格，用于弥封线内准考证号，座位号，考号的占位*
 
 #### **参数及其默认值**
 
@@ -492,7 +501,7 @@
 >*该参数用于设置小方格内的文字内容*
 
 ### `draft方法`
->该方法生成草稿纸
+>*该方法生成草稿纸*
 
 #### **参数及其默认值**
 
@@ -516,10 +525,11 @@
 
 `dash`
 
-`type: str`
-`default: solid`
-
->*该参数用于设置草稿纸下的横线样式*
+`type: str | none | auo | array | dictionary`
+`default: dashed`
+> *该参数用于设置草稿纸下的横线样式*
+>
+> 此设置的可选值参考官方文档 [线的类型](https://typst.app/docs/reference/visualize/stroke/#constructor-dash)
 
 `supplement`
 
@@ -531,7 +541,7 @@
 > 此设置的可选值参考官方文档 [线的类型](https://typst.app/docs/reference/visualize/stroke/#constructor-dash)
 
 ### `choices方法`
->该方法为选择题的选项排列
+>*该方法为选择题的选项排列*
 
 #### **参数及其默认值**
 
@@ -587,7 +597,7 @@
 
 `options`
 
->*该参数为可变参数*
+>*该参数为可变参数，即传递的选项*
 
 ### `question方法`
 #### **参数及其默认值**
@@ -677,4 +687,236 @@
 `type: content`
 >*该参数为位置参数，题目的内容*
 
+### `paren方法`
+>*该方法为选择题的小括号*
+#### **参数及其默认值**
 
+`justify`
+
+`type: boolean`
+`default: false`
+>*该参数用于设置括号的对齐方式*
+
+`placeholder`
+
+`type: str | symbol`
+`default: sym.triangle.filled.small`
+>*该参数用于设置当不显示答案时，括号的占位符*
+>
+>占位符的样式修改参考官方文档：[符号](https://typst.app/docs/reference/symbols/)
+
+`answer`
+
+`type: content`
+>*该参数为位置参数，答案*
+
+### `fillin方法`
+>*该方法为填空题的下划线*
+#### **参数及其默认值**
+
+`length`
+
+`type: length`
+`default: 1em`
+>*该参数用于设置填空题下划线的长度*
+
+`placeholder`
+
+`type: str | symbol`
+`default: sym.triangle.filled.small`
+>*该参数用于设置当不显示答案时，括号的占位符*
+>
+>占位符的样式修改参考官方文档：[符号](https://typst.app/docs/reference/symbols/)
+
+`answer`
+
+`type: content`
+>*该参数为位置参数，答案*
+
+### `text-figure方法`
+>*该方法用于图文混排，默认为左文字，右图*
+#### **参数及其默认值**
+
+`text`
+
+`type: any`
+`default: ""`
+>*该参数用于设置左侧显示的文字*
+
+`figure`
+
+`type: any`
+>*该参数为位置参数，一般用于设置右侧的图片或表格*
+
+`figure-x`
+
+`type: length`
+`default: 0pt`
+>*该参数用于设置图片或表格水平之间的距离*
+
+`figure-y`
+
+`type: length`
+`default: 0pt`
+>*该参数用于设置图片或表格垂直方向上的距离*
+
+`top`
+
+`type: length`
+`default: 0pt`
+>*该参数用于设置图文距离上方的距离*
+
+`bottom`
+
+`type: length`
+`default: 0pt`
+>*该参数用于设置图文距离下方的距离*
+
+### `explain方法`
+>*该方法为题目的解析*
+#### **参数及其默认值**
+
+`title`
+
+`type: str`
+`default: "解 析"`
+>*该参数用于设置解析的标题*
+
+`title-size`
+
+`type: length`
+`default: 12pt`
+>*该参数用于设置标题字体大小*
+
+`title-weight`
+
+`type: int | str`
+`default: "bold"`
+>*该参数用于设置标题字体粗细*
+
+`title-color`
+
+`type: color`
+`default: white`
+>*该参数用于设置标题颜色*
+
+`title-bg-color`
+
+`type: color`
+`default: maroon`
+>*该参数用于设置标题背景色*
+
+`title-radius`
+
+`type: length`
+`default: 5pt`
+>*该参数用于设置标题的圆角大小*
+
+`title-align`
+
+`type: alignment`
+`default: center`
+>*该参数用于设置标题的对齐方式*
+
+`title-x`
+
+`type: length`
+`default: 0pt`
+>*该参数用于设置标题的水平方向上的位置*
+
+`title-y`
+
+`type: length`
+`default: -20pt`
+>*该参数用于设置标题的垂直方向上的位置*
+
+`border-style`
+
+`type: str`
+`default: "dashed"`
+>*该参数用于设置解析盒子的边框样式*
+
+`border-width`
+
+`type: length`
+`default: 0.5pt`
+>*该参数用于设置解析盒子的边框宽度*
+
+`border-color`
+
+`type: color`
+`default: maroon`
+>*该参数用于设置解析盒子的边框颜色*
+
+`color`
+
+`type: color`
+`default: blue`
+>*该参数用于设置解析的颜色*
+
+`radius`
+
+`type: length`
+`default: 5pt`
+>*该参数用于设置解析盒子的圆角大小*
+
+`inset`
+
+`type: length | dictionary`
+`default: 15pt`
+>*该参数用于设置解析盒子的内边距*
+
+`bg-color`
+
+`type: color`
+`default: white`
+>*该参数用于设置解析盒子的背景色*
+
+`breakable`
+
+`type: boolean`
+`default: true`
+>*该参数用于设置解析盒子是否可断行*
+
+`above`
+
+`type: length`
+`default: 40pt`
+>*该参数用于设置解析盒子距离上方的间距*
+
+`below`
+
+`type: length`
+`default: 20pt`
+>*该参数用于设置解析盒子距离下方的间距*
+
+`body`
+
+`type: content`
+>*该参数为位置参数，解析内容*
+
+### `score方法`
+>*该方法为解析里的分值*
+#### **参数及其默认值**
+
+`score-prefix`
+
+`type: str`
+`default: ""`
+>*该参数用于设置分数的前缀*
+
+`score-suffix`
+
+`type: str`
+`default: "分"`
+>*该参数用于设置分数的后缀*
+
+`color`
+
+`type: color`
+`default: maroon`
+>*该参数用于设置分数的颜色*
+
+`points`
+
+>*该参数为位置参数，分值*
