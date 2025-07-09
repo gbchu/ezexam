@@ -1,4 +1,4 @@
-#import "@preview/ezexam:0.1.1": *
+#import "@preview/ezexam:0.1.2": *
 #show: setup.with(
   // paper: a3,
   mode: EXAM,
@@ -9,7 +9,7 @@
 #chapter[2025新高考I卷]
 #title[2025新高考I卷]
 #subject[数学]
-#secret
+#secret()
 
 #notice(
   [答题前，请务必将自已的姓名、准考证号用0.5毫米黑色墨水的签字笔填写在试卷及答题卡的规定位置.],
