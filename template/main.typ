@@ -48,7 +48,7 @@
       [和风 (5.5$tilde$7.8 m/s)],
       [劲风 (8.0$tilde$10.7 m/s)],
     ),
-    image("2025-1-6.png", width: 50%),
+    image("6.png", width: 50%),
   )
 ]
 #question[
@@ -111,7 +111,7 @@
 ]
 #question(points: 15, bottom: 2in)[
   如图所示的四棱锥 $P - A B C D$ 中，$P A perp "平面" A B C D, B C parallel A D, A B perp A D$.
-  #image("2025-1-17.png", width: 30%)
+  #image("17.png", width: 30%)
   + 证明：平面 $P A B perp "平面" P A D$
   + 若 $P A = A B = sqrt(2), A D = sqrt(3) + 1, B C = 2$，$P, B, C, D$ 在同一个球面上，设该球面的球心为 $O$.
     + 证明：$O$ 在平面 $A B C D$上；
