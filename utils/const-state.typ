@@ -27,13 +27,13 @@
 
 // 定义虚线盒子及多选样式
 #let multi = text(maroon)[（多选）]
-#let dotbox(body, color: blue) = {
+#let color-box(body, color: blue, dash: "dotted", radius: 3pt) = {
   box(
     outset: .35em,
-    radius: 3pt,
+    radius: radius,
     stroke: (
       thickness: .5pt,
-      dash: "dotted",
+      dash: dash,
       paint: color,
     ),
     text(font: kai-ti, color, body),
