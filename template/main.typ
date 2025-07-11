@@ -2,7 +2,6 @@
 #show: setup.with(
   // paper: a3,
   mode: EXAM,
-  // show-answer: true,
 )
 
 #outline()
