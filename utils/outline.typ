@@ -28,8 +28,8 @@
   subject-state.update(name.text)
 }
 
-#let secret(text: [绝密★启用前]) = {
-  place(top, text(font: "SimHei", text))
+#let secret(body: [绝密★启用前]) = {
+  place(top, text(font: "SimHei", body))
 }
 
 #let exam-type(type, prefix: "试卷类型: ") = {
