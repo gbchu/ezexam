@@ -44,7 +44,12 @@
         }
       }
 
-      arr.at(index) = h(indent) + numbering(label, index + 1) + h(body-indent) + result
+      arr.at(index) = enum(
+        indent: indent,
+        body-indent: body-indent,
+        numbering: _ => numbering(label, index + 1),
+        result,
+      )
 
       let item-width = measure(arr.at(index)).width
       if _choice-width == none {
