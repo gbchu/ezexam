@@ -45,12 +45,12 @@
       let _choice-width = none
       if result.func() == image {
         result = box(baseline: 40%, result)
+        arr.at(index) = h(indent) + numbering(label, index + 1) + h(body-indent) + result
         // 设置百分比宽度的处理
         let result-body = result.body
         if result-body.has("width") and result-body.width.length == 0pt {
           _choice-width = result.body.width.ratio * container.width
         }
-        arr.at(index) = h(indent) + numbering(label, index + 1) + h(body-indent) + result
       }
 
       let item-width = measure(arr.at(index)).width
