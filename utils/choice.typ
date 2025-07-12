@@ -44,15 +44,15 @@
         }
       }
 
-      arr.at(index) = enum(
-        indent: indent,
-        body-indent: body-indent,
-        numbering: _ => numbering(label, index + 1),
-        result,
-      )
-
       if result.func() == image or result.func() == table {
         arr.at(index) = h(indent) + numbering(label, index + 1) + h(body-indent) + result
+      } else {
+        arr.at(index) = enum(
+          indent: indent,
+          body-indent: body-indent,
+          numbering: _ => numbering(label, index + 1),
+          result,
+        )
       }
 
       let item-width = measure(arr.at(index)).width
