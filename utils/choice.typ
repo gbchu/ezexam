@@ -51,6 +51,10 @@
         result,
       )
 
+      if result.func() == image or result.func() == table {
+        arr.at(index) = h(indent) + numbering(label, index + 1) + h(body-indent) + result
+      }
+
       let item-width = measure(arr.at(index)).width
       if _choice-width == none {
         _choice-width = item-width
