@@ -27,12 +27,22 @@
     for index in range(choice-number) {
       // 加[] 是为了将内容转为content,有可能咋使用时直接传入整数
       let result = [#arr.at(index)]
+
       arr.at(index) = enum(
         indent: indent,
         body-indent: body-indent,
         numbering: _ => numbering(label, index + 1),
         result,
       )
+
+      if result.has("children") {
+        for value in result.children {
+          if value.func() == box and value.body.func() == image {
+            arr.at(index) = h(indent) + numbering(label, index + 1) + h(body-indent) + result
+            break
+          }
+        }
+      }
 
       // 选项为表格的处理
       if result.func() == table {

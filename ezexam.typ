@@ -1,5 +1,5 @@
 #import "utils/outline.typ": *
-#import "utils/question.typ": explain, fillin, paren, question, score, text-figure
+#import "utils/question.typ": explain, fillin, paren, question, score, text-figure, answer
 #import "utils/choice.typ": *
 
 #let setup(
@@ -16,7 +16,7 @@
   font-math: page-font,
   line-height: 2em,
   par-spacing: 2em,
-  first-line-indent: 2em,
+  first-line-indent: 0em,
   heading-size: 10.5pt,
   heading-font: hei-ti,
   heading-color: black,

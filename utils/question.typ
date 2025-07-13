@@ -122,10 +122,12 @@
   inset: 15pt,
   bg-color: luma(100%),
   breakable: true,
-  above: 40pt,
+  above: 30pt,
   below: 20pt,
+  show-explain-number: true,
 ) = context {
   if not answer-state.get() { return }
+
   block(
     above: above,
     below: below,
@@ -134,6 +136,7 @@
     radius: radius,
     stroke: (thickness: border-width, paint: border-color, dash: border-style),
     fill: bg-color,
+    width: 100%,
   )[
     #place(top + title-align, float: true, clearance: 10pt, dx: title-x, dy: title-y)[
       #box(fill: title-bg-color, outset: 8pt, radius: title-radius, text(
@@ -143,10 +146,21 @@
         title,
       ))
     ]
-    #text(fill: color.get(), body)
+    #set enum(numbering: "（1.i）")
+    #counter("explain").step()
+    // 解析题号的格式化
+    #let format(..item) = context () => {
+      context numbering("1.", ..counter("explain").get())
+    }
+
+    #list(marker: if show-explain-number { format } else { none }, text(fill: color.get(), body))
   ]
 }
 
+// 答案
+#let answer(body, color: maroon) = {
+  text(weight: 700, fill: color)[答案: #body]
+}
 // 解析的分值
 #let score(points, color: maroon, score-prefix: "", score-suffix: "分") = {
   text(fill: color)[
