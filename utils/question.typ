@@ -161,6 +161,7 @@
 #let answer(body, color: maroon) = {
   text(weight: 700, fill: color)[答案: #body]
 }
+
 // 解析的分值
 #let score(points, color: maroon, score-prefix: "", score-suffix: "分") = {
   text(fill: color)[
