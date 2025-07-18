@@ -27,7 +27,6 @@
     for index in range(choice-number) {
       // 加[] 是为了将内容转为content,有可能咋使用时直接传入整数
       let result = [#arr.at(index)]
-
       arr.at(index) = enum(
         indent: indent,
         body-indent: body-indent,
