@@ -34,6 +34,7 @@
         result,
       )
 
+      // 选项即有图片又有文字的处理
       if result.has("children") {
         for value in result.children {
           if value.func() == box and value.body.func() == image {
@@ -50,10 +51,9 @@
       }
 
       // 选项为图片的处理
-      // 当选项为图片时,设置百分比宽度使用mesure获取宽度时为0pt
       let _choice-width = none
-      if result.func() == image {
-        // 设置百分比宽度的处理
+      if result.func() == image{
+        // 当选项为图片时,设置百分比宽度使用mesure获取宽度时为0pt, 设置百分比宽度的处理
         if result.has("width") and result.width.length == 0pt {
           _choice-width = result.width.ratio * container.width
         }
@@ -69,7 +69,7 @@
       }
       max-width = calc.max(max-width, _choice-width)
     }
-    
+
     let _column = column
     // 如果未指定列数,则自动排列,默认4列
     if column == auto {

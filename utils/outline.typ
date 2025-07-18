@@ -14,6 +14,8 @@
   v(top)
   align(position, text(font: font, size, weight: weight)[#name <title>])
   v(bottom)
+  counter(heading).update(0)
+  counter("question").update(0)
 }
 
 #let subject(name, size: 21.5pt, spacing: 1em, font: hei-ti, top: -20pt, bottom: 0pt) = {
