@@ -69,6 +69,7 @@
       }
       max-width = calc.max(max-width, _choice-width)
     }
+    
     let _column = column
     // 如果未指定列数,则自动排列,默认4列
     if column == auto {
@@ -88,6 +89,7 @@
         }
       }
     }
+
     grid(
       columns: _column * (1fr,),
       column-gutter: c-gap,
