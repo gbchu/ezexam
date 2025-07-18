@@ -1,5 +1,5 @@
 #import "utils/outline.typ": *
-#import "utils/question.typ": explain, fillin, paren, question, score, text-figure, answer
+#import "utils/question.typ": answer, explain, fillin, paren, question, score, text-figure
 #import "utils/choice.typ": *
 
 #let setup(
@@ -190,7 +190,7 @@
     v(heading-bottom)
     if mode == LECTURE { counter("question").update(0) }
   }
-  set enum(numbering: "（1.1.i.a）", spacing: 2em)
+  set enum(numbering: "（1.i.a）", spacing: 2em)
   set table(stroke: .5pt, align: center)
   set table.cell(align: horizon)
 
