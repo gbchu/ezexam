@@ -56,8 +56,8 @@
     let reg-i = reg-1.replace("1", "i")
     let reg-I = reg-1.replace("1", "I")
     let reg-circled-number = reg-1.replace("1", "①")
-    let reg-circled-number-2 = reg-1.replace("1", "⓵")
-    let reg = reg-1 + "|" + reg-i + "|" + reg-I + "|" + reg-circled-number + "|" + reg-circled-number-2
+    let reg-circled-number2 = reg-1.replace("1", "⓵")
+    let reg = reg-1 + "|" + reg-i + "|" + reg-I + "|" + reg-circled-number + "|" + reg-circled-number2
 
     if (type(_label) == str and regex(reg) in _label) or (type(_label) == function) {
       arr.push(total)
