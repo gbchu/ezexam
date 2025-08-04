@@ -25,7 +25,7 @@
     let max-width = 0pt
     // 拼接选项并添加标签和间距;获取选项中最长的宽度
     for index in range(choice-number) {
-      // 加[] 是为了将内容转为content,有可能咋使用时直接传入整数
+      // 加[] 是为了将内容转为content,有可能在使用时直接传入整数
       let result = [#arr.at(index)]
       arr.at(index) = enum(
         indent: indent,
