@@ -17,11 +17,13 @@
   line-height: 2em,
   par-spacing: 2em,
   first-line-indent: 0em,
+  heading-numbering: "1.1.1",
   heading-size: 10.5pt,
   heading-font: hei-ti,
   heading-color: black,
   heading-top: 10pt,
   heading-bottom: 15pt,
+  enum-numbering: "（1.i.a）",
   show-answer: false,
   answer-color: blue,
   show-seal-line: true,
@@ -46,10 +48,6 @@
         _label = "1 ✏ 1"
       }
     }
-    let current = counter(page).get().first()
-    let total = counter(page).final().first()
-    let arr = (current,)
-    let arr2 = (current + 1,)
     // 如果传进来的label包含两个1,两个1中间不能是连续空格、包含数字
     // 支持双：阿拉伯数字、小写、大写罗马，带圈数字页码
     let reg-1 = "^[\D]*1[\D]*[^\d\s]+[\D]*1[\D]*$"
@@ -59,43 +57,45 @@
     let reg-circled-number2 = reg-1.replace("1", "⓵")
     let reg = reg-1 + "|" + reg-i + "|" + reg-I + "|" + reg-circled-number + "|" + reg-circled-number2
 
+    let current = counter(page).get()
     if (type(_label) == str and regex(reg) in _label) or (type(_label) == function) {
-      arr.push(total)
-      arr2.push(total)
+      current += counter(page).final()
     }
 
-    let _page-numbering = numbering(_label, ..arr)
-    // 处于分栏模式下的separate
+    let _numbering = numbering(_label, ..current)
+
+    // 处于分栏下且左右页脚分离
     if page.columns == 2 and footer-is-separate {
+      current.at(0) += 1
       grid(
         columns: (1fr, 1fr),
         align: center + horizon,
         // 左页码
-        _page-numbering,
+        _numbering,
         // 右页码
-        numbering(_label, ..arr2),
+        numbering(_label, ..current),
       )
       counter(page).step()
       return
     }
-    // 如果页面的页脚是未分离状态, 则让奇数页在右侧，偶数页在左侧
+
+    // 页面的页脚是未分离, 则让奇数页在右侧，偶数页在左侧
     let position = page-align
-    if not footer-is-separate {
-      if calc.odd(current) {
+    if mode == LECTURE and not footer-is-separate {
+      if calc.odd(current.at(0)) {
         position = right
       } else {
         position = left
       }
     }
-    align(position, _page-numbering)
+    align(position, _numbering)
   }
-
-  // 弥封线
-  let _seal-line(
-    student-info: (:),
-    dash: "",
-    supplement: "",
+  let _custom-header(
+    student-info: seal-line-student-info,
+    dash: seal-line-type,
+    supplement: seal-line-supplement,
   ) = context {
+    if mode != EXAM or not show-seal-line { return }
     // 根据页码决定是否显示弥封线
     // 如果当前页面有<title>,则显示弥封线,并在该章节最后一页的右侧也设置弥封线
     let chapter-location = for value in query(<title>) {
@@ -144,20 +144,16 @@
       }
     ]
   }
-
+  let _custom-background() = {
+    if paper.columns == 2 and show-gap-line {
+      line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
+    }
+  }
   set page(
     ..paper,
-    header: if mode == EXAM and show-seal-line {
-      _seal-line(
-        student-info: seal-line-student-info,
-        dash: seal-line-type,
-        supplement: seal-line-supplement,
-      )
-    },
+    header: _custom-header(),
     footer: _custom-footer(page-numbering),
-    background: if paper.columns == 2 and show-gap-line {
-      line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
-    },
+    background: _custom-background(),
   )
   set columns(gutter: gap)
 
@@ -180,7 +176,7 @@
     fallback: true,
   )
 
-  set heading(numbering: "1.1.1 ")
+  set heading(numbering: heading-numbering)
   set heading(numbering: "一、", hanging-indent: 2.3em) if mode == EXAM
   show heading: it => {
     set text(fill: heading-color, font: heading-font)
@@ -190,7 +186,7 @@
     v(heading-bottom)
     if mode == LECTURE { counter("question").update(0) }
   }
-  set enum(numbering: "（1.i.a）", spacing: 2em)
+  set enum(numbering: enum-numbering, spacing: 2em)
   set table(stroke: .5pt, align: center)
   set table.cell(align: horizon)
 
@@ -203,7 +199,7 @@
       math.display(it)
       return
     }
-    //  1. 行内样式默认块级显示样式;2.添加数学符号和中文之间间距
+    //  1. 行内样式默认块级显示样式; 2. 添加数学符号和中文之间间距
     let space = h(0.25em, weak: true)
     space + math.display(it) + space
   }
