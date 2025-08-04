@@ -81,8 +81,8 @@
 
     // 页面的页脚是未分离, 则让奇数页在右侧，偶数页在左侧
     let position = page-align
-    if mode == LECTURE and not footer-is-separate {
-      if calc.odd(current.at(0)) {
+    if not footer-is-separate {
+      if calc.odd(current.first()) {
         position = right
       } else {
         position = left
@@ -195,12 +195,9 @@
   show math.equation: it => {
     // features: 一些特殊符号的设置，如空集符号设置更加漂亮
     set text(font: font-math, features: ("cv01",))
-    if it.block {
-      math.display(it)
-      return
-    }
     //  1. 行内样式默认块级显示样式; 2. 添加数学符号和中文之间间距
-    let space = h(0.25em, weak: true)
+    let hspace = if it.block { 0em } else { 0.25em }
+    let space = h(hspace, weak: true)
     space + math.display(it) + space
   }
 
