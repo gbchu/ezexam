@@ -1,4 +1,4 @@
-#import "../ezexam.typ": *
+#import "@preview/ezexam:0.1.2":*
 #show: setup.with(
   // paper: a3,
   mode: EXAM,
@@ -22,7 +22,7 @@
   #choices([$-1$], [$0$], [$1$], [$6$])
 ]
 #question[
-  集合 $U = {x | x "为小于9的正整数" }$, $A = {1,3,5}$, 则 $C_U A$ 中的元素个数为 #paren[]
+  集合 $U = {x | x "为小于9的正整数" }$, $A = {1,3,5}$, 则 $complement_U A$ 中的元素个数为 #paren[]
   #choices([$0$], [$3$], [$5$], [$8$])
 ]
 #question[
@@ -34,7 +34,8 @@
   #choices([$30°$], [$60°$], [$90°$], [$135°$])
 ]
 #question[
-  设 $f(x)$ 是定义在 $bb(R)$ 上且周期为 2 的偶函数，当 $2 lt.eq.slant x lt.eq.slant 3$ 时，$f(x) = 5 - 2x$，则 $f(-3 / 4 ) =$ #paren[]
+  设 $f(x)$ 是定义在 $bb(R)$ 上且周期为 2 的偶函数，当 $2 lt.eq.slant x lt.eq.slant 3$ 时，$f(x) = 5 - 2x$，则
+  $f(-3 / 4 ) =$ #paren[]
   #choices([$-1 / 2$], [$-1 / 4$], [$1 / 4$], [$1 / 2$])
 ]
 #question[
@@ -51,7 +52,8 @@
   )
 ]
 #question[
-  若圆 $x^2 + (y + 2)^2 = r^2 (r > 0)$ 上到直线 $y = sqrt(3)x + 2$ 的距离为 1 的点有且仅有 2 个，则 $r$ 的取值范围是 #paren[]
+  若圆 $x^2 + (y + 2)^2 = r^2 (r > 0)$ 上到直线 $y = sqrt(3)x + 2$ 的距离为 1 的点有且仅有 2 个，则 $r$ 的取值范围是
+  #paren[]
   #choices([(0, 1)], [(1, 3)], [(3, +∞)], [(0, +∞)])
 ]
 #question[
@@ -65,7 +67,8 @@
   #choices([$A D perp A_1C$], [$B_1C perp "平面" A A_1D$], [$C C_1 parallel "平面" A A_1D$], [$A D parallel A_1B_1$])
 ]
 #question[
-  设抛物线 $C: y^2 = 6x$ 的焦点为 $F$，过 $F$ 的直线交 $C$ 于$A、B$，过 $F$ 且垂直于 $A B$的直线交准线 $l$: $y = -3 / 2x$ 于 $E$，过点$A$作准线的垂线，垂足为$D$，则 #paren[]
+  设抛物线 $C: y^2 = 6x$ 的焦点为 $F$，过 $F$ 的直线交 $C$ 于$A、B$，过 $F$ 且垂直于 $A B$的直线交准线 $l$:
+  $y = -3 / 2x$ 于 $E$，过点$A$作准线的垂线，垂足为$D$，则 #paren[]
   #choices([$|A D| = |A F|$], [$|A E| = |A B|$], [$|A B| >= 6$], [$|A E| dot |B E| >= 18$])
 ]
 #question[
@@ -106,7 +109,7 @@
 #question(points: 15, bottom: 1in)[
   设数列 ${a_n}$ 满足 $a_(n+1) / n = a_n / (n+1) + 1 / (n(n+1))$.
   + 证明：${n a_n}$ 为等差数列；
-  + 设 $f(x) = a_1x + a_2x^2 + ... + a_m x^m，求 f'(2)$.
+  + 设 $f(x) = a_1x + a_2x^2 + dots.c + a_m x^m，求 f'(2)$.
 ]
 #question(points: 15, bottom: 2in)[
   如图所示的四棱锥 $P - A B C D$ 中，$P A perp "平面" A B C D, B C parallel A D, A B perp A D$.
@@ -118,7 +121,8 @@
 
 ]
 #question(points: 17, bottom: 2in)[
-  设椭圆 $C: x^2 / a^2 + y^2 / b^2 = 1 (a > b > 0)$，记 $A$为椭圆下端点，$B$ 为右端点，$|A B| = sqrt(10)$，且椭圆 $C$ 的离心率为 $(2sqrt(2)) / 3$.
+  设椭圆 $C: x^2 / a^2 + y^2 / b^2 = 1 (a > b > 0)$，记 $A$为椭圆下端点，$B$ 为右端点，$|A B| = sqrt(10)$，且椭圆 $C$
+  的离心率为 $(2sqrt(2)) / 3$.
   + 求椭圆的标准方程；
   + 设点 $P(m, n)$.
     + 若 $P$ 不在 $y$ 轴上，设 $R$ 是射线 $A P$ 上一点，$|A R| dot |A P| = 3$，用 $m, n$ 表示点 $RR$ 的坐标；
@@ -127,6 +131,7 @@
 #question(points: 17, bottom: 2in)[
   设函数 $f(x) = 5cos x - cos 5x$.
   + 求 $f(x)$ 在 $[0, pi / 4]$ 的最大值；
-  + 给定 $theta in (0, pi)，a$ 为给定实数，证明：存在 $y in [a - theta, a + theta]$，使得 $cos y lt.eq.slant cos theta$；
+  + 给定 $theta in (0, pi)，a$ 为给定实数，证明：存在 $y in [a - theta, a + theta]$，使得
+    $cos y lt.eq.slant cos theta$；
   + 若存在 $phi$，使得对任意 $x$，都有 $5cos x - cos(5x + phi) lt.eq.slant b$，求 $b$ 的最小值.
 ]

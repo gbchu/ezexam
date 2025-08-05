@@ -23,7 +23,6 @@
     let choice-number = arr.len()
     if choice-number == 0 { return }
     let max-width = 0pt
-    let _body-indent = body-indent
     // 拼接选项并添加标签和间距;获取选项中最长的宽度
     for index in range(choice-number) {
       // 加[] 是为了将内容转为content,有可能在使用时直接传入整数
@@ -36,19 +35,17 @@
         if choice.has("width") and choice.width.length == 0pt {
           _choice-width = choice.width.ratio * container.width
         }
+        choice = box(baseline: 40%, choice)
       }
 
       // 选项为表格的处理
       if choice.func() == table {
-        _body-indent = body-indent * 2
+        choice = box(baseline: 40%, choice, inset: (left: body-indent * 2))
       }
 
-      arr.at(index) = enum(
-        indent: indent,
-        body-indent: _body-indent,
-        numbering: _ => numbering(label, index + 1),
-        number-align: horizon,
-        choice,
+      arr.at(index) = par(
+        hanging-indent: 1.5em,
+        h(indent) + numbering(label, index + 1) + h(body-indent) + choice,
       )
 
       let item-width = measure(arr.at(index)).width
