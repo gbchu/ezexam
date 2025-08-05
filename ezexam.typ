@@ -18,7 +18,7 @@
   par-spacing: 2em,
   first-line-indent: 0em,
   heading-numbering: "1.1.1",
-  heading-size: 10.5pt,
+  heading-size: auto,
   heading-font: hei-ti,
   heading-color: black,
   heading-top: 10pt,
@@ -179,8 +179,13 @@
   set heading(numbering: heading-numbering)
   set heading(numbering: "一、", hanging-indent: 2.3em) if mode == EXAM
   show heading: it => {
-    set text(fill: heading-color, font: heading-font)
-    set text(size: heading-size) if mode == EXAM
+    let size = heading-size
+    if size == auto {
+      if mode == LECTURE { size = 11.5pt } else {
+        size = 10.5pt
+      }
+    }
+    set text(fill: heading-color, font: heading-font, size: size)
     v(heading-top)
     it
     v(heading-bottom)
