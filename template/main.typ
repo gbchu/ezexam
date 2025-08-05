@@ -34,7 +34,7 @@
   #choices([$30°$], [$60°$], [$90°$], [$135°$])
 ]
 #question[
-  设 $f(x)$ 是定义在 $bb(R)$ 上且周期为 2 的偶函数，当 $2 <= x <= 3$ 时，$f(x) = 5 - 2x$，则 $f(-3 / 4 ) =$ #paren[]
+  设 $f(x)$ 是定义在 $bb(R)$ 上且周期为 2 的偶函数，当 $2 lt.eq.slant x lt.eq.slant 3$ 时，$f(x) = 5 - 2x$，则 $f(-3 / 4 ) =$ #paren[]
   #choices([$-1 / 2$], [$-1 / 4$], [$1 / 4$], [$1 / 2$])
 ]
 #question[
@@ -121,12 +121,12 @@
   设椭圆 $C: x^2 / a^2 + y^2 / b^2 = 1 (a > b > 0)$，记 $A$为椭圆下端点，$B$ 为右端点，$|A B| = sqrt(10)$，且椭圆 $C$ 的离心率为 $(2sqrt(2)) / 3$.
   + 求椭圆的标准方程；
   + 设点 $P(m, n)$.
-    + 若 $P$ 不在 $y$ 轴上，设 $R$ 是射线 $A P$ 上一点，$|A R| dot |A P| = 3$，用 $m, n$ 表示点 $R$ 的坐标；
+    + 若 $P$ 不在 $y$ 轴上，设 $R$ 是射线 $A P$ 上一点，$|A R| dot |A P| = 3$，用 $m, n$ 表示点 $RR$ 的坐标；
     + 设直线$O Q$ 的斜率为 $k_1$，直线 $O P$ 的斜率为 $k_2$，若 $k_1 = 3k_2$，$M$为椭圆上一点，求 $|P M|$ 的最大值.
 ]
 #question(points: 17, bottom: 2in)[
   设函数 $f(x) = 5cos x - cos 5x$.
   + 求 $f(x)$ 在 $[0, pi / 4]$ 的最大值；
-  + 给定 $theta in (0, pi)，a$ 为给定实数，证明：存在 $y in [a - theta, a + theta]$，使得 $cos y <= cos theta$；
-  + 若存在 $phi$，使得对任意 $x$，都有 $5cos x - cos(5x + phi) <= b$，求 $b$ 的最小值.
+  + 给定 $theta in (0, pi)，a$ 为给定实数，证明：存在 $y in [a - theta, a + theta]$，使得 $cos y lt.eq.slant cos theta$；
+  + 若存在 $phi$，使得对任意 $x$，都有 $5cos x - cos(5x + phi) lt.eq.slant b$，求 $b$ 的最小值.
 ]

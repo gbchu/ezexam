@@ -184,7 +184,6 @@
     v(heading-top)
     it
     v(heading-bottom)
-    if mode == LECTURE { counter("question").update(0) }
   }
   set enum(numbering: enum-numbering, spacing: 2em)
   set table(stroke: .5pt, align: center)
@@ -196,8 +195,7 @@
     // features: 一些特殊符号的设置，如空集符号设置更加漂亮
     set text(font: font-math, features: ("cv01",))
     //  1. 行内样式默认块级显示样式; 2. 添加数学符号和中文之间间距
-    let hspace = if it.block { 0em } else { 0.25em }
-    let space = h(hspace, weak: true)
+    let space = h(.25em, weak: true)
     space + math.display(it) + space
   }
 

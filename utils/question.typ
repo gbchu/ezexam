@@ -13,7 +13,7 @@
   points-suffix: "分）",
   top: 0pt,
   bottom: 0pt,
-  with-heading-label: none,
+  with-heading-label: false,
   line-height: auto,
 ) = {
   // 分数设置
@@ -25,35 +25,25 @@
   counter("question").step()
   let _format = context counter("question").display(item => {
     let _label = label
-    let _with-heading-label = with-heading-label
     if label == auto {
       if mode-state.get() == LECTURE {
-        _label = "【1.1.1.1.1】"
+        _label = "【1.1.1.1.1.1】"
       } else {
         _label = "1."
       }
     }
-
-    if with-heading-label == none {
-      if mode-state.get() == LECTURE {
-        _with-heading-label = true
-      } else {
-        _with-heading-label = false
-      }
-    }
-
     let arr = (item,)
-    if _with-heading-label {
+    if with-heading-label {
       // 去除heading-label数组中的0
       arr = counter(heading).get().filter(item => item != 0) + arr
     }
-    text(label-color, weight: label-weight)[#numbering(_label, ..arr)<question-label>]
+    text(label-color, weight: label-weight, numbering(_label, ..arr))
   })
 
   set par(leading: line-height) if line-height != auto
   v(top)
   list(
-    marker: _ => _format,
+    marker: _format,
     body-indent: body-indent,
     indent: indent,
     result,
