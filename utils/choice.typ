@@ -4,7 +4,7 @@
  r-gap: 行间距
  indent: 选项的缩进
  body-indent: 选项和标签之间的距离
- ..options: 选项
+ ..choices: 选项
 */
 #let choices(
   column: auto,
@@ -15,51 +15,41 @@
   top: 0pt,
   bottom: 0pt,
   label: "A.",
-  ..options,
+  ..choices,
 ) = {
   // 使用layout获取当前父元素的宽度
   layout(container => {
-    let arr = options.pos()
+    let arr = choices.pos()
     let choice-number = arr.len()
     if choice-number == 0 { return }
     let max-width = 0pt
+    let _body-indent = body-indent
     // 拼接选项并添加标签和间距;获取选项中最长的宽度
     for index in range(choice-number) {
-      // 加[] 是为了将内容转为content,有可能咋使用时直接传入整数
-      let result = [#arr.at(index)]
-      arr.at(index) = enum(
-        indent: indent,
-        body-indent: body-indent,
-        numbering: _ => numbering(label, index + 1),
-        result,
-      )
+      // 加[] 是为了将内容转为content,有可能在使用时直接传入整数
+      let choice = [#arr.at(index)]
 
-      // 选项即有图片又有文字的处理
-      if result.has("children") {
-        for value in result.children {
-          if value.func() == box and value.body.func() == image {
-            arr.at(index) = h(indent) + numbering(label, index + 1) + h(body-indent) + result
-            break
-          }
+      // 选项为图片的处理
+      let _choice-width = none
+      if choice.func() == image {
+        // 当选项为图片时,设置百分比宽度使用mesure获取宽度时为0pt, 设置百分比宽度的处理
+        if choice.has("width") and choice.width.length == 0pt {
+          _choice-width = choice.width.ratio * container.width
         }
       }
 
       // 选项为表格的处理
-      if result.func() == table {
-        result = box(baseline: 40%, inset: (left: body-indent), result)
-        arr.at(index) = h(indent) + numbering(label, index + 1) + h(body-indent) + result
+      if choice.func() == table {
+        _body-indent = body-indent * 2
       }
 
-      // 选项为图片的处理
-      let _choice-width = none
-      if result.func() == image{
-        // 当选项为图片时,设置百分比宽度使用mesure获取宽度时为0pt, 设置百分比宽度的处理
-        if result.has("width") and result.width.length == 0pt {
-          _choice-width = result.width.ratio * container.width
-        }
-        result = box(baseline: 40%, result)
-        arr.at(index) = h(indent) + numbering(label, index + 1) + h(body-indent) + result
-      }
+      arr.at(index) = enum(
+        indent: indent,
+        body-indent: _body-indent,
+        numbering: _ => numbering(label, index + 1),
+        number-align: horizon,
+        choice,
+      )
 
       let item-width = measure(arr.at(index)).width
       if _choice-width == none {
