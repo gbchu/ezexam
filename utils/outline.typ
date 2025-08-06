@@ -50,8 +50,8 @@
   top: 0pt,
   bottom: 0pt,
 ) = {
-  set align(center)
   if info.len() == 0 { return }
+  set align(center)
   grid(
     columns: info.len(),
     gutter: gap,
