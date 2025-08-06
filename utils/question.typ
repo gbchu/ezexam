@@ -27,7 +27,7 @@
     let _label = label
     if label == auto {
       if mode-state.get() == LECTURE {
-        _label = "【1.1.1.1.1.1】"
+        _label = "【 1.1.1.1.1.1 】"
       } else {
         _label = "1."
       }
