@@ -24,6 +24,8 @@
   heading-top: 10pt,
   heading-bottom: 15pt,
   enum-numbering: "（1.i.a）",
+  enum-spacing: 2em,
+  enum-indent: 0pt,
   show-answer: false,
   answer-color: blue,
   show-seal-line: true,
@@ -190,7 +192,7 @@
     it
     v(heading-bottom)
   }
-  set enum(numbering: enum-numbering, spacing: 2em)
+  set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)
   set table(stroke: .5pt, align: center)
   set table.cell(align: horizon)
 
