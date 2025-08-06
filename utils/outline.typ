@@ -20,13 +20,11 @@
 
 #let subject(name, size: 21.5pt, spacing: 1em, font: hei-ti, top: -20pt, bottom: 0pt) = {
   v(top)
-  align(center)[
-    #text(
-      font: font,
-      size: size,
-      name.text.split("").slice(1, -1).join(h(spacing)),
-    )
-  ]
+  align(center, text(
+    font: font,
+    size: size,
+    name.text.split("").slice(1, -1).join(h(spacing)),
+  ))
   v(bottom)
   subject-state.update(name.text)
 }
