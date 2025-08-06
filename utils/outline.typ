@@ -24,7 +24,8 @@
     #text(
       font: font,
       size: size,
-    )[#name.text.split("").slice(1, -1).join(h(spacing))]
+      name.text.split("").slice(1, -1).join(h(spacing)),
+    )
   ]
   v(bottom)
   subject-state.update(name.text)
