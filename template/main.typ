@@ -61,7 +61,6 @@
   #choices([$x > y > z$], [$x > z > y$], [$y > x > z$], [$y > z > x$])
 ]
 = 多选题：本题共 3 小题，每小题 6 分，共 18 分.在每小题给出的选项中，有多项符合题目要求.全部选对的得 6 分，部分选对的得部分分，有选错的得 0 分.
-
 #question[
   在正三棱柱 $A B C-A_1B_1C_1$ 中，$D$ 为 $B C$ 中点，则 #paren[]
   #choices([$A D perp A_1C$], [$B_1C perp "平面" A A_1D$], [$C C_1 parallel "平面" A A_1D$], [$A D parallel A_1B_1$])
