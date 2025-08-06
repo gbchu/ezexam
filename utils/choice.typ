@@ -4,7 +4,7 @@
  r-gap: 行间距
  indent: 选项的缩进
  body-indent: 选项和标签之间的距离
- ..choices: 选项
+ ..options: 选项
 */
 #let choices(
   column: auto,
@@ -15,11 +15,11 @@
   top: 0pt,
   bottom: 0pt,
   label: "A.",
-  ..choices,
+  ..options,
 ) = {
   // 使用layout获取当前父元素的宽度
   layout(container => {
-    let arr = choices.pos()
+    let arr = options.pos()
     let choice-number = arr.len()
     if choice-number == 0 { return }
     let max-width = 0pt
