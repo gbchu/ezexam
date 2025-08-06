@@ -8,7 +8,7 @@
   label-color: luma(0),
   label-weight: "regular",
   points: none,
-  points-separate-par: true,
+  points-separate: true,
   points-prefix: "（",
   points-suffix: "分）",
   top: 0pt,
@@ -19,7 +19,7 @@
   // 分数设置
   let result = body
   if points != none {
-    result = [#points-prefix#points#points-suffix #if points-separate-par [ \ ] #body]
+    result = [#points-prefix#points#points-suffix #if points-separate [ \ ] #body]
   }
   // 格式化题号
   counter("question").step()
