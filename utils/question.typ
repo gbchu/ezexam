@@ -52,23 +52,22 @@
 }
 
 // 题干中选项的括号
-#let _get-answer(answer, placeholder: sym.triangle.filled.small) = {
-  let result = placeholder
+#let _get-answer(body, placeholder) = {
   if answer-state.get() {
-    result = text(fill: answer-color-state.get(), answer)
+    placeholder = text(fill: answer-color-state.get(), body)
   }
-  return result
+  return placeholder
 }
 
-#let paren(answer, justify: false, placeholder: sym.triangle.filled.small) = context {
-  let result = _get-answer(answer, placeholder: placeholder)
+#let paren(body, justify: false, placeholder: sym.triangle.filled.small) = context {
+  let result = _get-answer(body, placeholder)
   [#if justify { h(1fr) } （~~#upper(result)~~）]
 }
 
 // 填空的横线
-#let fillin(answer, length: 1em, placeholder: sym.triangle.filled.small) = context {
+#let fillin(body, length: 1em, placeholder: sym.triangle.filled.small) = context {
   let space = h(length)
-  let result = _get-answer(answer, placeholder: placeholder)
+  let result = _get-answer(body, placeholder)
   $underline(#space#result#space)$
 }
 

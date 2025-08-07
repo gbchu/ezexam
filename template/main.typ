@@ -2,7 +2,7 @@
 #import "../ezexam.typ":*
 #show: setup.with(
   // paper: a3,
-  // mode: EXAM,
+  mode: EXAM,
 )
 
 #outline()
