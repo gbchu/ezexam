@@ -66,8 +66,8 @@
 
 // 填空的横线
 #let fillin(body, length: 1em, placeholder: sym.triangle.filled.small) = context {
-  let space = h(length)
   let result = _get-answer(body, placeholder)
+  let space = h(length)
   $underline(#space#result#space)$
 }
 
