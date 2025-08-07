@@ -187,9 +187,8 @@
         size = 10.5pt
       }
     }
-    set text(fill: heading-color, font: heading-font, size: size)
     v(heading-top)
-    it
+    text(fill: heading-color, font: heading-font, size: size, it)
     v(heading-bottom)
   }
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)

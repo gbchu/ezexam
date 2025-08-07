@@ -4,10 +4,7 @@
   pagebreak(weak: true)
   counter("chapter").step()
   set heading(numbering: _ => counter("chapter").display("一、"))
-  place(top, hide[= #name <chapter>])
-  // 同一个文档写多个章节一heading和question的计数重新开始
-  counter(heading).update(0)
-  counter("question").update(0)
+  place(top, hide[= #name])
 }
 
 #let title(name, size: 15pt, weight: "bold", font: page-font, position: center, top: 0pt, bottom: 18pt) = {
