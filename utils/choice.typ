@@ -56,19 +56,15 @@
   // 如果未指定列数,则自动排列,默认4列
   if column == auto {
     _column = 4
-    // 选项实际占用的宽度
-    let choice-width = max-width + c-gap
-    // 1行排列选项之间的间距
-    let one-row-choice-gap = container.width / choice-number - choice-width
-    // 2行排列选项之间的间距
-    let two-row-choice-gap = container.width / (choice-number / 2) - choice-width
-    let choice-min-gap = 0.15in
-    if one-row-choice-gap < choice-min-gap {
-      if two-row-choice-gap < choice-min-gap {
-        _column = 1
-      } else {
-        _column = 2
-      }
+    let actual-occupied-width = max-width + c-gap
+    // 排成1行,选项之间的间距
+    let choice-gap = container.width / choice-number - actual-occupied-width
+    let min-gap = 0.15in
+    if choice-gap < min-gap {
+      _column = 2
+      // 排成2行,选项之间的间距
+      choice-gap = container.width * 2 / choice-number - actual-occupied-width
+      if choice-gap < min-gap { _column = 1 }
     }
   }
 
