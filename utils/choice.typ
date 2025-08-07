@@ -63,7 +63,7 @@
     if choice-gap < min-gap {
       _column = 2
       // 排成2行,选项之间的间距
-      choice-gap = container.width * 2 / choice-number - actual-occupied-width
+      choice-gap = choice-gap * 2 + actual-occupied-width
       if choice-gap < min-gap { _column = 1 }
     }
   }
