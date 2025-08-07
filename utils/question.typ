@@ -4,7 +4,7 @@
   body,
   body-indent: 0.6em,
   indent: 0pt,
-  label: "1.",
+  label: auto,
   label-color: luma(0),
   label-weight: "regular",
   points: none,
@@ -25,8 +25,12 @@
   counter("question").step()
   let _format = context counter("question").display(item => {
     let _label = label
-    if label == "1." and mode-state.get() == LECTURE {
-      _label = "【1.1.1.1.1.1】"
+    if label == auto {
+      if mode-state.get() == LECTURE {
+        _label = "【1.1.1.1.1.1】"
+      } else {
+        _label = "1."
+      }
     }
     let arr = (item,)
     if with-heading-label {
