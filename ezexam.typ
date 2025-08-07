@@ -26,6 +26,7 @@
   enum-numbering: "（1.i.a）",
   enum-spacing: 2em,
   enum-indent: 0pt,
+  title-color: blue,
   show-answer: false,
   answer-color: blue,
   show-seal-line: true,
@@ -209,6 +210,9 @@
     answer-state.update(true)
     answer-color-state.update(answer-color)
   }
+
+  show <title>: set text(fill: title-color)
+
   doc
 }
 
