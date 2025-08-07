@@ -105,7 +105,7 @@
   border-style: "dashed",
   border-width: .5pt,
   border-color: maroon,
-  color: answer-color-state,
+  color: blue,
   radius: 5pt,
   inset: 15pt,
   bg-color: luma(100%),
@@ -115,7 +115,6 @@
   show-number: true,
 ) = context {
   if not answer-state.get() { return }
-
   block(
     above: above,
     below: below,
@@ -126,14 +125,13 @@
     fill: bg-color,
     width: 100%,
   )[
-
     #counter("explain").step()
     // 解析题号的格式化
     #let format(..item) = context () => {
       context numbering("1.", ..counter("explain").get())
     }
 
-    #list(marker: if show-number { format } else { none }, text(fill: color.get(), body))
+    #list(marker: if show-number { format } else { none }, text(fill: color, body))
 
     #if title == none { return }
     #place(top + title-align, float: true, clearance: 10pt, dx: title-x, dy: title-y)[

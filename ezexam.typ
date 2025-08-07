@@ -20,7 +20,7 @@
   heading-numbering: "1.1.1",
   heading-size: auto,
   heading-font: hei-ti,
-  heading-color: black,
+  heading-color: luma(0%),
   heading-top: 10pt,
   heading-bottom: 15pt,
   enum-numbering: "（1.i.a）",
