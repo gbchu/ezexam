@@ -43,6 +43,8 @@
 #question[
   已知视风速是真风速和船风速的和向量，船风速与船行驶速度大小相等，方向相反.则真风速等级是 #paren[]
   #text-figure(
+    top: -15pt,
+    bottom: -10pt,
     text: choices(
       column: 1,
       [轻风 (1.6$tilde$3.3 m/s)],
@@ -50,7 +52,7 @@
       [和风 (5.5$tilde$7.8 m/s)],
       [劲风 (8.0$tilde$10.7 m/s)],
     ),
-    image("6.png", width: 50%),
+    image("6.png", width: 60%),
   )
 ]
 #question[
