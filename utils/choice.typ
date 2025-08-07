@@ -16,7 +16,8 @@
   bottom: 0pt,
   label: "A.",
   ..options,
-) = layout(container => { // 使用layout获取当前父元素的宽度
+) = layout(container => {
+  // 使用layout获取当前父元素的宽度
   let arr = options.pos()
   let choice-number = arr.len()
   if choice-number == 0 { return }
@@ -27,7 +28,7 @@
     let choice = [#arr.at(index)]
 
     // 选项为图片的处理
-    let _choice-width = none
+    let _choice-width = 0pt
     if choice.func() == image {
       // 当选项为图片时,设置百分比宽度使用mesure获取宽度时为0pt, 设置百分比宽度的处理
       if choice.has("width") and choice.width.length == 0pt {
@@ -47,13 +48,7 @@
     )
 
     if column != auto { continue }
-
-    let item-width = measure(arr.at(index)).width
-    if _choice-width == none {
-      _choice-width = item-width
-    } else {
-      _choice-width += item-width
-    }
+    _choice-width += measure(arr.at(index)).width
     max-width = calc.max(max-width, _choice-width)
   }
 
