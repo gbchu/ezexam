@@ -7,20 +7,15 @@
   label: auto,
   label-color: luma(0),
   label-weight: "regular",
+  with-heading-label: false,
   points: none,
   points-separate: true,
   points-prefix: "（",
   points-suffix: "分）",
   top: 0pt,
   bottom: 0pt,
-  with-heading-label: false,
   line-height: auto,
 ) = {
-  // 分数设置
-  let result = body
-  if points != none {
-    result = [#points-prefix#points#points-suffix #if points-separate [ \ ] #body]
-  }
   // 格式化题号
   counter("question").step()
   let _format = context counter("question").display(item => {
@@ -34,19 +29,23 @@
     }
     let arr = (item,)
     if with-heading-label {
-      // 去除heading-label数组中的0
+      // 去除heading label数组中的0
       arr = counter(heading).get().filter(item => item != 0) + arr
     }
     text(label-color, weight: label-weight, numbering(_label, ..arr))
   })
 
+  // 分数设置
+  if points != none {
+    body = [#points-prefix#points#points-suffix #if points-separate [ \ ] #body]
+  }
   set par(leading: line-height) if line-height != auto
   v(top)
   list(
     marker: _format,
     body-indent: body-indent,
     indent: indent,
-    result,
+    body,
   )
   v(bottom)
 }
@@ -60,15 +59,15 @@
 }
 
 #let paren(body, justify: false, placeholder: sym.triangle.filled.small) = context {
-  let result = _get-answer(body, placeholder)
-  [#if justify { h(1fr) } （~~#upper(result)~~）]
+  let body = _get-answer(body, placeholder)
+  [#if justify { h(1fr) } （~~#upper(body)~~）]
 }
 
 // 填空的横线
 #let fillin(body, length: 1em, placeholder: sym.triangle.filled.small) = context {
-  let result = _get-answer(body, placeholder)
+  let body = _get-answer(body, placeholder)
   let space = h(length)
-  $underline(#space#result#space)$
+  $underline(#space#body#space)$
 }
 
 // 图文混排(左文右图)
