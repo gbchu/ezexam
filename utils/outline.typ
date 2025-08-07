@@ -4,7 +4,7 @@
   pagebreak(weak: true)
   counter("chapter").step()
   set heading(numbering: _ => counter("chapter").display("一、"))
-  place(top, hide[= #name])
+  place(top, hide[= #name <chapter>])
 }
 
 #let title(name, size: 15pt, weight: "bold", font: page-font, position: center, top: 0pt, bottom: 18pt) = {
