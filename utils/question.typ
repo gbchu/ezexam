@@ -2,7 +2,7 @@
 
 #let question(
   body,
-  body-indent: 0.6em,
+  body-indent: .6em,
   indent: 0pt,
   label: auto,
   label-color: luma(0),
@@ -32,7 +32,7 @@
       // 去除heading label数组中的0
       arr = counter(heading).get().filter(item => item != 0) + arr
     }
-    text(label-color, weight: label-weight, numbering(_label, ..arr))
+    text(label-color, weight: label-weight, box(numbering(_label, ..arr), width: 1.5em))
   })
 
   // 分数设置
@@ -41,8 +41,8 @@
   }
   set par(leading: line-height) if line-height != auto
   v(top)
-  list(
-    marker: _format,
+  enum(
+    numbering: _ => _format,
     body-indent: body-indent,
     indent: indent,
     body,

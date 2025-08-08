@@ -12,20 +12,20 @@
   flipped: false,
 )
 
-#let math-font = "New Computer Modern Math"
-#let page-font = (math-font, "Source Han Serif")
-#let hei-ti = (math-font, "SimHei")
-#let kai-ti = (math-font, "KaiTi")
+#let NCMM = "New Computer Modern Math"
+#let source-han = (NCMM, "Source Han Serif")
+#let hei-ti = (NCMM, "SimHei")
+#let kai-ti = (NCMM, "KaiTi")
 
 //"exam": 试卷模式; "lecture": 讲义模式(默认)
 #let EXAM = "exam"
 #let LECTURE = "lecture"
 #let mode-state = state("mode", LECTURE)
+
 #let answer-state = state("answer", false)
 #let answer-color-state = state("answer-color", blue)
 #let subject-state = state("subject", "")
 
-// 定义虚线盒子及多选样式
 #let multi = text(maroon)[（多选）]
 #let color-box(body, color: blue, dash: "dotted", radius: 3pt) = {
   box(

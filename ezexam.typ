@@ -12,18 +12,19 @@
   footer-is-separate: true,
   outline-page-numbering: "⚜ I ⚜",
   font-size: 11pt,
-  font: page-font,
-  font-math: page-font,
+  font: source-han,
+  font-math: source-han,
   line-height: 2em,
   par-spacing: 2em,
   first-line-indent: 0em,
-  heading-numbering: "1.1.1",
+  heading-numbering: auto,
+  heading-hanging-indent: auto,
   heading-size: auto,
   heading-font: hei-ti,
   heading-color: luma(0%),
   heading-top: 10pt,
   heading-bottom: 15pt,
-  enum-numbering: "（1.i.a）",
+  enum-numbering: "（1.1.i.a）",
   enum-spacing: 2em,
   enum-indent: 0pt,
   title-color: blue,
@@ -176,17 +177,21 @@
     lang: "zh",
     font: font,
     size: font-size,
-    fallback: true,
+    top-edge: "ascender",
+    bottom-edge: "descender",
   )
 
-  set heading(numbering: heading-numbering)
-  set heading(numbering: "一、", hanging-indent: 2.3em) if mode == EXAM
+  if heading-numbering == auto {
+    if mode == EXAM {
+      heading-numbering = "一、"
+      heading-hanging-indent = 2.3em
+    } else { heading-numbering = "1.1.1" }
+  }
+  set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
   show heading: it => {
     let size = heading-size
     if size == auto {
-      if mode == LECTURE { size = 11.5pt } else {
-        size = 10.5pt
-      }
+      if mode == LECTURE { size = 11.5pt } else { size = 10.5pt }
     }
     v(heading-top)
     text(fill: heading-color, font: heading-font, size: size, it)
@@ -210,8 +215,6 @@
     answer-state.update(true)
     answer-color-state.update(answer-color)
   }
-
-  show <title>: set text(fill: title-color)
 
   doc
 }

@@ -7,7 +7,7 @@
   place(top, hide[= #name <chapter>])
 }
 
-#let title(name, size: 15pt, weight: "bold", font: page-font, position: center, top: 0pt, bottom: 18pt) = {
+#let title(name, size: 15pt, weight: "bold", font: source-han, position: center, top: 0pt, bottom: 18pt) = {
   v(top)
   align(position, text(font: font, size, weight: weight)[#name <title>])
   v(bottom)
