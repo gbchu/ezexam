@@ -118,7 +118,6 @@
   )
 }
 
-// 解析
 #let explain(
   body,
   title: none,
@@ -173,11 +172,6 @@
   ]
 }
 
-// 答案
-#let answer(body, color: maroon) = {
-  par(text(weight: 700, fill: color)[答案: #body])
-}
-
 // 解析的分值
 #let score(points, color: maroon, score-prefix: "", score-suffix: "分") = {
   text(fill: color)[
@@ -185,3 +179,6 @@
   ]
 }
 
+#let answer(body, color: maroon) = {
+  par(text(weight: 700, fill: color)[答案: #body])
+}

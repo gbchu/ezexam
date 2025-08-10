@@ -77,13 +77,11 @@
   ]
 }
 
-#let notice(..items) = context {
-  set par(first-line-indent: 0em)
+#let notice(format: "1.", ..items) = context {
   text(font: hei-ti)[注意事项:]
   let indent = 2em
-  let _numbering = "1."
-  set enum(numbering: _numbering, indent: indent)
-  set par(hanging-indent: -indent - enum.body-indent - measure(_numbering).width)
+  set enum(numbering: format, indent: indent)
+  set par(hanging-indent: -indent - enum.body-indent - measure(format).width)
   let arr = items.pos()
   for value in arr [+ #par(value)]
 }
