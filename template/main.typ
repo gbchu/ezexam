@@ -1,5 +1,4 @@
-// #import "@preview/ezexam:0.1.3": *
-#import "/ezexam.typ": *
+#import "@preview/ezexam:0.1.3": *
 #show: setup.with(
   // paper: a3,
   mode: EXAM,
@@ -28,7 +27,7 @@
   #choices([$0$], [$3$], [$5$], [$8$])
 ]
 #question[
-  若双曲线 $C$ 的虚轴长为实轴长的 7 倍，则 $C$ 的离心率为 #paren[]
+  若双曲线 $C$ 的虚轴长为实轴长的 $sqrt(7)$ 倍，则 $C$ 的离心率为 #paren[]
   #choices([$sqrt(2)$], [$2$], [$sqrt(7)$], [$2sqrt(2)$])
 ]
 #question[
@@ -111,9 +110,9 @@
   ))
 ]
 #question(points: 15, bottom: 1in)[
-  设数列 ${a_n}$ 满足 $a_(n+1) / n = a_n / (n+1) + 1 / (n(n+1))$.
+  设数列 ${a_n}$ 满足 $a_1 = 3"， "a_(n+1) / n = a_n / (n+1) + 1 / (n(n+1))$.
   + 证明：${n a_n}$ 为等差数列；
-  + 设 $f(x) = a_1x + a_2x^2 + dots.c + a_m x^m，求 f'(2)$.
+  + 设 $f(x) = a_1x + a_2x^2 + dots.c + a_m x^m，求 f'(-2)$.
 ]
 #question(points: 15, bottom: 2in)[
   如图所示的四棱锥 $P - A B C D$ 中，$P A perp "平面" A B C D, B C parallel A D, A B perp A D$.
@@ -135,8 +134,7 @@
 #question(points: 17, bottom: 2in)[
   设函数 $f(x) = 5cos x - cos 5x$.
   + 求 $f(x)$ 在 $[0, pi / 4]$ 的最大值；
-  + 给定 $theta in (0, pi)，a$ 为给定实数，证明：存在 $y in [a - theta, a + theta]$，使得
-    $cos y lt.eq.slant cos theta$；
+  + 给定 $theta in (0, pi)，a$ 为实数，证明：存在 $y in [a - theta, a + theta]$，使得 $cos y lt.eq.slant cos theta$；
   + 若存在 $phi$，使得对任意 $x$，都有 $5cos x - cos(5x + phi) lt.eq.slant b$，求 $b$ 的最小值.
 ]
 
@@ -145,5 +143,12 @@
 #title[参考答案]
 
 #explain[
-  若一个正项等比数列的前
+  答案
 ]
+#explain[
+  答案
+]
+#explain[
+  答案
+]
+
