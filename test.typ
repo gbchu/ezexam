@@ -1,23 +1,23 @@
 #import "/ezexam.typ": *
 #show: setup.with(mode: EXAM)
 
-// #question[
-//   #choices(
-//     [text],
-//     [text],
-//     [text],
-//     [text],
-//   )
-// ]
+#question[
+  #choices(
+    [text],
+    [text],
+    [text],
+    [text],
+  )
+]
 
-// #question[
-//   #choices(
-//     [text],
-//     [text],
-//     [text],
-//     [text],
-//   )
-// ]
+#question[
+  #choices(
+    [text],
+    [text],
+    [text],
+    [text],
+  )
+]
 
 
 

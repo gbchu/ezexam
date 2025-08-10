@@ -1,20 +1,12 @@
 /*
  column: 列数
-
  c-gap: 列间距
-
  r-gap: 行间距
-
  indent: 选项的缩进
-
  body-indent: 选项和标签之间的距离
-
  top: 选项距离上方的距离
-
  bottom: 选项距离下方的距离
-
  label: 选项的标签
-
  ..options: 选项
 */
 #let choices(
