@@ -57,8 +57,8 @@
   v(bottom)
 }
 
-#let _get-answer(body, placeholder, with-number, update) = {
-  context if answer-state.get() {
+#let _get-answer(body, placeholder, with-number, update) = context {
+  if answer-state.get() {
     return text(fill: answer-color-state.get(), body)
   }
 

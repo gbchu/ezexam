@@ -1,5 +1,5 @@
 #import "/ezexam.typ": *
-#show: setup.with(mode: EXAM)
+#show: setup.with(mode: EXAM, /* show-answer: true */)
 
 #question[
   #choices(
@@ -107,7 +107,7 @@ apartment today, loving each of the #fillin(with-number: true)[] that share our 
   )
 ]
 
-on a new price and reposted it. The #fillin_[]: I hate thisvase. Maybe you won't. In an instant, a woman raced into my
+on a new price and reposted it. The #fillin_[A]: I hate thisvase. Maybe you won't. In an instant, a woman raced into my
 house and left happilywith the vase. #fillin_[], I posted more. My daily posts and the #fillin_[]I received became
 aprecious ray of light in the chaos of my house. Each exchange provided a chance to#fillin_[] the landfill and to please
 another person I might not otherwise have #fillin_[]. I sit in my apartment today, loving each of the #fillin_[] that
