@@ -1,4 +1,5 @@
-#import "@preview/ezexam:0.1.3": *
+// #import "@preview/ezexam:0.1.3": *
+#import "/ezexam.typ": *
 #show: setup.with(
   // paper: a3,
   mode: EXAM,
@@ -137,4 +138,12 @@
   + 给定 $theta in (0, pi)，a$ 为给定实数，证明：存在 $y in [a - theta, a + theta]$，使得
     $cos y lt.eq.slant cos theta$；
   + 若存在 $phi$，使得对任意 $x$，都有 $5cos x - cos(5x + phi) lt.eq.slant b$，求 $b$ 的最小值.
+]
+
+
+#show: setup.with(show-seal-line: false, page-numbering: zh-arabic(suffix: "答案"), show-answer: true)
+#title[参考答案]
+
+#explain[
+  若一个正项等比数列的前
 ]
