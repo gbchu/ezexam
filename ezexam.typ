@@ -1,5 +1,5 @@
 #import "utils/outline.typ": *
-#import "utils/question.typ": answer, explain, fillin, paren, question, score, text-figure
+#import "utils/question.typ": answer, explain, fillin, fillin_, paren, paren_, question, score, text-figure
 #import "utils/choice.typ": *
 
 #let setup(

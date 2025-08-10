@@ -16,9 +16,15 @@
   bottom: 0pt,
   line-height: auto,
 ) = {
+  // 分数设置
+  if points != none {
+    body = [#points-prefix#points#points-suffix #if points-separate [ \ ] #body]
+  }
+  set par(leading: line-height) if line-height != auto
+
   // 格式化题号
   counter("question").step()
-  let _format = context counter("question").display(item => {
+  let _format = context counter("question").display(num => {
     let _label = label
     if label == auto {
       if mode-state.get() == LECTURE {
@@ -27,7 +33,13 @@
         _label = "1."
       }
     }
-    let arr = (item,)
+
+    let _counter = counter("placeholder")
+    if _counter.get().first() < num {
+      _counter.step()
+    }
+
+    let arr = (num,)
     if with-heading-label {
       // 去除heading label数组中的0
       arr = counter(heading).get().filter(item => item != 0) + arr
@@ -35,11 +47,6 @@
     text(label-color, weight: label-weight, box(numbering(_label, ..arr), width: 1.5em))
   })
 
-  // 分数设置
-  if points != none {
-    body = [#points-prefix#points#points-suffix #if points-separate [ \ ] #body]
-  }
-  set par(leading: line-height) if line-height != auto
   v(top)
   enum(
     numbering: _ => _format,
@@ -51,24 +58,45 @@
 }
 
 // 题干中选项的括号
-#let _get-answer(body, placeholder) = {
-  if answer-state.get() {
-    placeholder = text(fill: answer-color-state.get(), body)
+#let _get-answer(body, placeholder, with-number, update) = {
+  context if answer-state.get() {
+    return text(fill: answer-color-state.get(), body)
   }
-  return placeholder
+
+  if not with-number { return placeholder }
+
+  counter("placeholder").step()
+  context counter("placeholder").display()
+  if update { counter("question").step() }
 }
 
-#let paren(body, justify: false, placeholder: sym.triangle.filled.small) = context {
-  let body = _get-answer(body, placeholder)
+#let paren(
+  body,
+  justify: false,
+  placeholder: sym.triangle.filled.small,
+  with-number: false,
+  update: false,
+) = {
+  let body = _get-answer(body, placeholder, with-number, update)
   [#if justify { h(1fr) } （~~#upper(body)~~）]
 }
 
 // 填空的横线
-#let fillin(body, length: 1em, placeholder: sym.triangle.filled.small) = context {
-  let body = _get-answer(body, placeholder)
+#let fillin(
+  body,
+  length: 1em,
+  placeholder: sym.triangle.filled.small,
+  with-number: false,
+  update: false,
+) = {
+  let body = _get-answer(body, placeholder, with-number, update)
   let space = h(length)
   $underline(#space#body#space)$
 }
+
+// 类似英文中的7选5题型专用语法糖
+#let paren_ = paren.with(with-number: true, update: true)
+#let fillin_ = fillin.with(with-number: true, update: true)
 
 // 图文混排(左文右图)
 #let text-figure(
