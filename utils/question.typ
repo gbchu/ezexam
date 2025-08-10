@@ -57,7 +57,6 @@
   v(bottom)
 }
 
-// 题干中选项的括号
 #let _get-answer(body, placeholder, with-number, update) = {
   context if answer-state.get() {
     return text(fill: answer-color-state.get(), body)
@@ -70,6 +69,7 @@
   if update { counter("question").step() }
 }
 
+// 选项的括号
 #let paren(
   body,
   justify: false,
