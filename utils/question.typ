@@ -118,7 +118,7 @@
   )
 }
 
-#let explain(
+#let solution(
   body,
   title: none,
   title-size: 12pt,
