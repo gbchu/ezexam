@@ -1,4 +1,4 @@
-#import "const-state.typ": LECTURE, answer-color-state, answer-state, mode-state
+#import "const-state.typ": HANDOUTS, answer-color-state, answer-state, mode-state
 
 #let question(
   body,
@@ -27,7 +27,7 @@
   let _format = context counter("question").display(num => {
     let _label = label
     if label == auto {
-      if mode-state.get() == LECTURE {
+      if mode-state.get() == HANDOUTS {
         _label = "【1.1.1.1.1.1】"
       } else {
         _label = "1."

@@ -1,9 +1,9 @@
 #import "utils/outline.typ": *
-#import "utils/question.typ": answer, solution, fillin, fillinn, paren, parenn, question, score, text-figure
+#import "utils/question.typ": answer, fillin, fillinn, paren, parenn, question, score, solution, text-figure
 #import "utils/choice.typ": *
 
 #let setup(
-  mode: LECTURE,
+  mode: HANDOUTS,
   paper: a4,
   page-numbering: auto,
   page-align: center,
@@ -190,7 +190,7 @@
   show heading: it => {
     let size = heading-size
     if size == auto {
-      if mode == LECTURE { size = 11.5pt } else { size = 10.5pt }
+      if mode == HANDOUTS { size = 11.5pt } else { size = 10.5pt }
     }
     v(heading-top)
     text(fill: heading-color, font: heading-font, size: size, it)

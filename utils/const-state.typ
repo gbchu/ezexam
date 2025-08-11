@@ -17,10 +17,10 @@
 #let hei-ti = (NCMM, "SimHei")
 #let kai-ti = (NCMM, "KaiTi")
 
-//"exam": 试卷模式; "lecture": 讲义模式(默认)
+//"exam": 试卷模式; "handouts": 讲义模式(默认)
 #let EXAM = "exam"
-#let LECTURE = "lecture"
-#let mode-state = state("mode", LECTURE)
+#let HANDOUTS = "handouts"
+#let mode-state = state("mode", HANDOUTS)
 
 #let answer-state = state("answer", false)
 #let answer-color-state = state("answer-color", blue)
