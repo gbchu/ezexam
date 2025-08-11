@@ -1,5 +1,5 @@
 # `ezexam`
-## 简介
-`A typst exam and lecture notes template inspired by the LaTeX package exam-zh.`
+## Introduction
+`This template is primarily designed to facilitate Chinese primary, middle, and high school teachers or students in creating exams or handouts.`
 
-[Online Document](https://ezexam.pages.dev/)
+[Online Documentation](https://ezexam.pages.dev/)
