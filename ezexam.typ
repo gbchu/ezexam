@@ -34,14 +34,6 @@
   watermark-size: 88pt,
   watermark-rotate: -45deg,
   watermark-opacity: -66%,
-  /*   watermark: (
-    body: "ezexam",
-    size: 88pt,
-    font: source-han,
-    color: red,
-    rotate-degree: -45deg,
-    opacify: -66%,
-  ), */
   show-answer: false,
   answer-color: blue,
   show-seal-line: true,
@@ -168,8 +160,8 @@
     }
 
     if show-watermark {
-      // set text(size: size, fill: color.opacify(opacify))
       set text(size: watermark-size, fill: watermark-color.opacify(watermark-opacity))
+      set par(leading: .5em)
       place(horizon)[
         #grid(
           columns: paper.columns * (1fr,),

@@ -1,7 +1,7 @@
 #import "/ezexam.typ": *
-#show: setup.with(show-watermark: true, show-gap-line: true, /* paper: a3 */ watermark: "ezexam")
+#show: setup.with(show-watermark: true, show-gap-line: true, paper: a3, watermark: "exexam", watermark-rotate: 0deg)
 
-#lorem(500)
+#lorem(5000)
 
 // #let pat = tiling(size: (30pt, 30pt))[
 //   #place(line(start: (0%, 0%), end: (100%, 100%)))
