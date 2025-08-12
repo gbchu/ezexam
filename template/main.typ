@@ -1,7 +1,7 @@
 #import "@preview/ezexam:0.1.4": *
 #show: setup.with(
   // paper: a3,
-  mode: EXAM,
+  mode: EXAM
 )
 
 #outline()
@@ -139,7 +139,7 @@
 ]
 
 
-#show: setup.with(show-seal-line: false, page-numbering: zh-arabic(suffix: "答案"), show-answer: true)
+#show: setup.with(page-numbering: zh-arabic(suffix: "答案"), show-answer: true)
 #title[参考答案]
 
 #solution[

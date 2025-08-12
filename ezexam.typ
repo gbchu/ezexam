@@ -32,7 +32,7 @@
   watermark-color: red,
   watermark-font: source-han,
   watermark-size: 88pt,
-  watermark-rotate: -45deg,
+  watermark-rotate-degree: -45deg,
   watermark-opacity: -66%,
   show-answer: false,
   answer-color: blue,
@@ -102,7 +102,7 @@
   }
   let _custom-header(
     student-info: seal-line-student-info,
-    dash: seal-line-type,
+    line-type: seal-line-type,
     supplement: seal-line-supplement,
   ) = context {
     if mode != EXAM or not show-seal-line { return }
@@ -137,7 +137,7 @@
           dy: -2em,
         )[
           #rotate(-90deg, origin: right + bottom)[
-            #_create-seal(dash: dash, info: student-info, supplement: supplement)
+            #_create-seal(dash: line-type, info: student-info, supplement: supplement)
           ]
         ]
         return
@@ -149,7 +149,7 @@
         } else { page.width }
         // 章节最后页的弥封线
         place(dx: _width - page.margin - 2em, dy: 2em)[
-          #rotate(90deg, origin: left + top, _create-seal(supplement: supplement))
+          #rotate(90deg, origin: left + top, _create-seal(dash: line-type, supplement: supplement))
         ]
       }
     ]
@@ -165,7 +165,7 @@
       place(horizon)[
         #grid(
           columns: paper.columns * (1fr,),
-          ..paper.columns * (rotate(watermark-rotate, watermark),),
+          ..paper.columns * (rotate(watermark-rotate-degree, watermark),),
         )
       ]
     }
