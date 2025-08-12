@@ -137,7 +137,7 @@
   inset: 15pt,
   bg-color: luma(100%),
   breakable: true,
-  above: 30pt,
+  above: 20pt,
   below: 20pt,
   show-number: true,
 ) = context {
