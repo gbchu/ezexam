@@ -27,13 +27,11 @@
   enum-numbering: "（1.1.i.a）",
   enum-spacing: 2em,
   enum-indent: 0pt,
-  show-watermark: false,
-  watermark: "ezexam",
-  watermark-color: red,
+  watermark: none,
+  watermark-color: rgb("FFCBC4"),
   watermark-font: source-han,
   watermark-size: 88pt,
-  watermark-rotate-degree: -45deg,
-  watermark-opacity: -66%,
+  watermark-rotate: -45deg,
   show-answer: false,
   answer-color: blue,
   show-seal-line: true,
@@ -159,16 +157,16 @@
       line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
     }
 
-    if show-watermark {
-      set text(size: watermark-size, fill: watermark-color.opacify(watermark-opacity))
-      set par(leading: .5em)
-      place(horizon)[
-        #grid(
-          columns: paper.columns * (1fr,),
-          ..paper.columns * (rotate(watermark-rotate-degree, watermark),),
-        )
-      ]
-    }
+    if watermark == none { return }
+
+    set text(size: watermark-size, fill: watermark-color)
+    set par(leading: .5em)
+    place(horizon)[
+      #grid(
+        columns: paper.columns * (1fr,),
+        ..paper.columns * (rotate(watermark-rotate, watermark),),
+      )
+    ]
   }
   set page(
     ..paper,
