@@ -27,6 +27,21 @@
   enum-numbering: "（1.1.i.a）",
   enum-spacing: 2em,
   enum-indent: 0pt,
+  show-watermark: false,
+  watermark: "ezexam",
+  watermark-color: red,
+  watermark-font: source-han,
+  watermark-size: 88pt,
+  watermark-rotate: -45deg,
+  watermark-opacity: -66%,
+  /*   watermark: (
+    body: "ezexam",
+    size: 88pt,
+    font: source-han,
+    color: red,
+    rotate-degree: -45deg,
+    opacify: -66%,
+  ), */
   show-answer: false,
   answer-color: blue,
   show-seal-line: true,
@@ -150,6 +165,17 @@
   let _custom-background() = {
     if paper.columns == 2 and show-gap-line {
       line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
+    }
+
+    if show-watermark {
+      // set text(size: size, fill: color.opacify(opacify))
+      set text(size: watermark-size, fill: watermark-color.opacify(watermark-opacity))
+      place(horizon)[
+        #grid(
+          columns: paper.columns * (1fr,),
+          ..paper.columns * (rotate(watermark-rotate, watermark),),
+        )
+      ]
     }
   }
   set page(

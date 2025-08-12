@@ -110,7 +110,7 @@
   set text(font: hei-ti, size: 12pt)
   set align(center)
   set grid(columns: 2, align: horizon, gutter: .5em)
-  if supplement != "" { text(tracking: .8in)[#supplement] }
+  if supplement != "" { text(tracking: .8in, supplement) }
   grid(
     columns: if info.len() == 0 { 1 } else { info.len() },
     gutter: 1em,
