@@ -57,16 +57,12 @@
   v(bottom)
 }
 
-#let _get-answer(body, placeholder) = context {
+#let _get-answer(body, placeholder, with-number, update) = context {
   if answer-state.get() {
     return text(fill: answer-color-state.get(), body)
   }
 
-  let (default, with-number, update) = (
-    (default: sym.triangle.filled.small, with-number: false, update: false) + placeholder
-  )
-
-  if not with-number { return default }
+  if not with-number { return placeholder }
 
   counter("placeholder").step()
   context counter("placeholder").display()
@@ -77,9 +73,11 @@
 #let paren(
   body,
   justify: false,
-  placeholder: (default: sym.triangle.filled.small, with-number: false, update: false),
+  placeholder: sym.triangle.filled.small,
+  with-number: false,
+  update: false,
 ) = {
-  let body = _get-answer(body, placeholder)
+  let body = _get-answer(body, placeholder, with-number, update)
   [#if justify { h(1fr) } （~~#upper(body)~~）]
 }
 
@@ -87,16 +85,18 @@
 #let fillin(
   body,
   length: 1em,
-  placeholder: (default: sym.triangle.filled.small, with-number: false, update: false),
+  placeholder: sym.triangle.filled.small,
+  with-number: false,
+  update: false,
 ) = {
-  let body = _get-answer(body, placeholder)
+  let body = _get-answer(body, placeholder, with-number, update)
   let space = h(length)
   $underline(#space#body#space)$
 }
 
 // 类似英文中的7选5题型专用语法糖
-#let parenn = paren.with(placeholder: (with-number: true, update: true))
-#let fillinn = fillin.with(placeholder: (with-number: true, update: true))
+#let parenn = paren.with(with-number: true, update: true)
+#let fillinn = fillin.with(with-number: true, update: true)
 
 // 图文混排(左文右图)
 #let text-figure(
