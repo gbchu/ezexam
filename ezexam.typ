@@ -28,7 +28,7 @@
   enum-spacing: 2em,
   enum-indent: 0pt,
   watermark: none,
-  watermark-color: rgb("FFCBC4"),
+  watermark-color: rgb("#f666"),
   watermark-font: source-han,
   watermark-size: 88pt,
   watermark-rotate: -45deg,
@@ -46,7 +46,7 @@
   doc,
 ) = {
   mode-state.update(mode)
-  let _custom-footer(label) = context {
+  let _footer(label) = context {
     if label == none { return }
     let _label = label
     if label == auto {
@@ -98,7 +98,7 @@
     }
     align(position, _numbering)
   }
-  let _custom-header(
+  let _header(
     student-info: seal-line-student-info,
     line-type: seal-line-type,
     supplement: seal-line-supplement,
@@ -152,13 +152,13 @@
       }
     ]
   }
-  let _custom-background() = {
+  let _background() = {
     if paper.columns == 2 and show-gap-line {
       line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
     }
-
+  }
+  let _foreground() = {
     if watermark == none { return }
-
     set text(size: watermark-size, fill: watermark-color)
     set par(leading: .5em)
     place(horizon)[
@@ -170,9 +170,10 @@
   }
   set page(
     ..paper,
-    header: _custom-header(),
-    footer: _custom-footer(page-numbering),
-    background: _custom-background(),
+    header: _header(),
+    footer: _footer(page-numbering),
+    background: _background(),
+    foreground: _foreground(),
   )
   set columns(gutter: gap)
 
@@ -181,7 +182,7 @@
     title: text(size: 15pt)[目#h(1em)录],
   )
   show outline: it => {
-    set page(header: none, footer: _custom-footer(outline-page-numbering))
+    set page(header: none, footer: _footer(outline-page-numbering))
     align(center, it)
     pagebreak(weak: true)
     counter(page).update(1) // 正文页码从1开始
