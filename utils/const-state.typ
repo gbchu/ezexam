@@ -13,7 +13,7 @@
 )
 
 #let NCMM = "New Computer Modern Math"
-#let source-han = (NCMM, "Source Han Serif")
+#let source-han = (NCMM, "Source Han Serif", "SimSun")
 #let hei-ti = (NCMM, "SimHei")
 #let kai-ti = (NCMM, "KaiTi")
 
