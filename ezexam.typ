@@ -1,6 +1,7 @@
 #import "utils/outline.typ": *
 #import "utils/question.typ": answer, fillin, fillinn, paren, parenn, question, score, solution, text-figure
 #import "utils/choice.typ": *
+#import "utils/chem-e.typ": chem-e
 
 #let setup(
   mode: HANDOUTS,
