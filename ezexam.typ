@@ -1,6 +1,7 @@
 #import "utils/outline.typ": *
 #import "utils/question.typ": answer, fillin, fillinn, paren, parenn, question, score, solution, text-figure
 #import "utils/choice.typ": *
+#import "utils/chem.typ": e-bridge
 
 #let setup(
   mode: HANDOUTS,
@@ -194,7 +195,6 @@
     font: font,
     size: font-size,
     top-edge: "ascender",
-    bottom-edge: "descender",
   )
 
   if heading-numbering == auto {
