@@ -208,7 +208,7 @@
   }
 
   show heading.where(level: 1): it => {
-    let size = heading1-size
+    let size = h1-size
     if size == auto {
       if mode == HANDOUTS { size = text.size } else { size = 10.5pt }
     }
