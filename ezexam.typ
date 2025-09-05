@@ -19,7 +19,7 @@
   first-line-indent: 0em,
   heading-numbering: auto,
   heading-hanging-indent: auto,
-  heading-size: auto,
+  heading1-size: auto,
   heading-font: hei-ti,
   heading-color: luma(0%),
   heading-top: 10pt,
@@ -202,13 +202,17 @@
   }
   set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
   show heading: it => {
-    let size = heading-size
-    if size == auto {
-      if mode == HANDOUTS { size = 11.5pt } else { size = 10.5pt }
-    }
     v(heading-top)
-    text(fill: heading-color, font: heading-font, size: size, it)
+    text(fill: heading-color, font: heading-font, it)
     v(heading-bottom)
+  }
+  
+  show heading.where(level: 1): it => {
+    let size = heading1-size
+    if size == auto {
+      if mode == HANDOUTS { size = text.size } else { size = 10.5pt }
+    }
+    text(size: size, it)
   }
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)
   set table(stroke: .5pt, align: center)
