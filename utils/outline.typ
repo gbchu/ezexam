@@ -7,9 +7,18 @@
   place(top, hide[= #name <chapter>])
 }
 
-#let title(name, size: 15pt, weight: "bold", font: source-han, position: center, top: 0pt, bottom: 18pt) = {
+#let title(
+  name,
+  size: 15pt,
+  weight: "bold",
+  font: source-han,
+  color: black,
+  position: center,
+  top: 0pt,
+  bottom: 18pt,
+) = {
   v(top)
-  align(position, text(font: font, size, weight: weight)[#name <title>])
+  align(position, text(font: font, size, weight: weight, fill: color)[#name <title>])
   v(bottom)
   counter(heading).update(0)
   counter("question").update(0)
