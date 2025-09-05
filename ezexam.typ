@@ -19,7 +19,7 @@
   first-line-indent: 0em,
   heading-numbering: auto,
   heading-hanging-indent: auto,
-  heading1-size: auto,
+  h1-size: auto,
   heading-font: hei-ti,
   heading-color: luma(0%),
   heading-top: 10pt,
@@ -206,7 +206,7 @@
     text(fill: heading-color, font: heading-font, it)
     v(heading-bottom)
   }
-  
+
   show heading.where(level: 1): it => {
     let size = heading1-size
     if size == auto {
