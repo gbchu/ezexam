@@ -137,14 +137,14 @@
   inset: 15pt,
   bg-color: luma(100%),
   breakable: true,
-  above: 20pt,
-  below: 20pt,
+  top: 20pt,
+  bottom: 20pt,
   show-number: true,
 ) = context {
   if not answer-state.get() { return }
   block(
-    above: above,
-    below: below,
+    above: top,
+    below: bottom,
     breakable: breakable,
     inset: inset,
     radius: radius,
@@ -161,7 +161,7 @@
     #list(marker: if show-number { format } else { none }, text(color, body))
 
     #if title == none { return }
-    #place(top + title-align, float: true, clearance: 10pt, dx: title-x, dy: title-y)[
+    #place(alignment.top + title-align, float: true, clearance: 10pt, dx: title-x, dy: title-y)[
       #box(fill: title-bg-color, outset: 8pt, radius: title-radius, text(
         size: title-size,
         weight: title-weight,
@@ -180,5 +180,5 @@
 }
 
 #let answer(body, color: maroon) = {
-  par(text(weight: 700,color)[答案: #body])
+  par(text(weight: 700, color)[答案: #body])
 }
