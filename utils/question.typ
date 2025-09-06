@@ -126,9 +126,9 @@
   title-color: luma(100%),
   title-bg-color: maroon,
   title-radius: 5pt,
-  title-align: center,
+  title-align: top + center,
   title-x: 0pt,
-  title-y: -20pt,
+  title-y: 0pt,
   border-style: "dashed",
   border-width: .5pt,
   border-color: maroon,
@@ -142,11 +142,15 @@
   show-number: true,
 ) = context {
   if not answer-state.get() { return }
+  let _inset = inset
+  if type(inset) == dictionary {
+    _inset = (left: 15pt, right: 15pt, top: 15pt, bottom: 30pt) + _inset
+  }
   block(
     above: top,
     below: bottom,
     breakable: breakable,
-    inset: inset,
+    inset: _inset,
     radius: radius,
     stroke: (thickness: border-width, paint: border-color, dash: border-style),
     fill: bg-color,
@@ -160,15 +164,22 @@
 
     #list(marker: if show-number { format } else { none }, text(color, body))
 
-    #if title == none { return }
-    #place(alignment.top + title-align, float: true, clearance: 10pt, dx: title-x, dy: title-y)[
-      #box(fill: title-bg-color, outset: 8pt, radius: title-radius, text(
-        size: title-size,
-        weight: title-weight,
-        title-color,
-        title,
-      ))
-    ]
+    #if title == none or title == "" { return }
+    #let title-box = box(fill: title-bg-color, inset: 8pt, radius: title-radius, text(
+      size: title-size,
+      weight: title-weight,
+      title-color,
+      title,
+    ))
+
+    #let _title-height = measure(title-box).height
+    #place(
+      title-align,
+      float: true,
+      clearance: 0pt,
+      dx: title-x,
+      dy: if type(inset) == length { -inset } else { -_inset.top } - _title-height / 2 + title-y,
+    )[#title-box]
   ]
 }
 

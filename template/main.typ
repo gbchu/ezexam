@@ -142,7 +142,7 @@
 #show: setup.with(page-numbering: zh-arabic(suffix: "答案"), show-answer: true)
 #title[参考答案]
 
-#solution[
+#solution(title: "解析")[
   答案
 ]
 #solution[
@@ -151,4 +151,3 @@
 #solution[
   答案
 ]
-
