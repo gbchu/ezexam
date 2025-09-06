@@ -168,6 +168,7 @@
     #let title-box = box(fill: title-bg-color, inset: 6pt, radius: title-radius, text(
       size: title-size,
       weight: title-weight,
+      tracking: 3pt,
       title-color,
       title,
     ))
