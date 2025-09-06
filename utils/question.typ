@@ -165,7 +165,7 @@
     #list(marker: if show-number { format } else { none }, text(color, body))
 
     #if title == none or title == "" { return }
-    #let title-box = box(fill: title-bg-color, inset: 8pt, radius: title-radius, text(
+    #let title-box = box(fill: title-bg-color, inset: 6pt, radius: title-radius, text(
       size: title-size,
       weight: title-weight,
       title-color,
