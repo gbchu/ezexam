@@ -159,7 +159,7 @@
   }
   let _foreground() = {
     if watermark == none { return }
-    set text(size: watermark-size,watermark-color)
+    set text(size: watermark-size, watermark-color)
     set par(leading: .5em)
     place(horizon)[
       #grid(
@@ -203,7 +203,7 @@
   set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
   show heading: it => {
     v(heading-top)
-    text( heading-color, font: heading-font, it)
+    text(heading-color, font: heading-font, it)
     v(heading-bottom)
   }
 
@@ -220,6 +220,8 @@
 
   // 分段函数样式
   set math.cases(gap: 1em)
+  // 显示方程编号
+  set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
   show math.equation: it => {
     // features: 一些特殊符号的设置，如空集符号设置更加漂亮
     set text(font: font-math, features: ("cv01",))
