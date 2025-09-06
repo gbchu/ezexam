@@ -59,7 +59,7 @@
 
 #let _get-answer(body, placeholder, with-number, update) = context {
   if answer-state.get() {
-    return text(fill: answer-color-state.get(), body)
+    return text(answer-color-state.get(), body)
   }
 
   if not with-number { return placeholder }
@@ -158,14 +158,14 @@
       context numbering("1.", ..counter("explain").get())
     }
 
-    #list(marker: if show-number { format } else { none }, text(fill: color, body))
+    #list(marker: if show-number { format } else { none }, text(color, body))
 
     #if title == none { return }
     #place(top + title-align, float: true, clearance: 10pt, dx: title-x, dy: title-y)[
       #box(fill: title-bg-color, outset: 8pt, radius: title-radius, text(
         size: title-size,
         weight: title-weight,
-        fill: title-color,
+        title-color,
         title,
       ))
     ]
@@ -174,11 +174,11 @@
 
 // 解析的分值
 #let score(points, color: maroon, score-prefix: "", score-suffix: "分") = {
-  text(fill: color)[
+  text(color)[
     #box(width: 1fr, repeat($dot$))#score-prefix#points#score-suffix
   ]
 }
 
 #let answer(body, color: maroon) = {
-  par(text(weight: 700, fill: color)[答案: #body])
+  par(text(weight: 700,color)[答案: #body])
 }

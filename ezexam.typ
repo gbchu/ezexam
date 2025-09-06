@@ -159,7 +159,7 @@
   }
   let _foreground() = {
     if watermark == none { return }
-    set text(size: watermark-size, fill: watermark-color)
+    set text(size: watermark-size,watermark-color)
     set par(leading: .5em)
     place(horizon)[
       #grid(
@@ -203,7 +203,7 @@
   set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
   show heading: it => {
     v(heading-top)
-    text(fill: heading-color, font: heading-font, it)
+    text( heading-color, font: heading-font, it)
     v(heading-bottom)
   }
 

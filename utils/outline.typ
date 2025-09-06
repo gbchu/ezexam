@@ -18,7 +18,7 @@
   bottom: 18pt,
 ) = {
   v(top)
-  align(position, text(font: font, size, weight: weight, fill: color)[#name <title>])
+  align(position, text(font: font, size, weight: weight, color)[#name <title>])
   v(bottom)
   counter(heading).update(0)
   counter("question").update(0)
