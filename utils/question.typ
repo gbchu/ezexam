@@ -15,10 +15,11 @@
   top: 0pt,
   bottom: 0pt,
   line-height: auto,
-) = {
+) = context {
+  let _body = body
   // 分数设置
   if points != none {
-    body = [#points-prefix#points#points-suffix #if points-separate [ \ ] #body]
+    _body = [#points-prefix#points#points-suffix #if points-separate [ \ ] #body]
   }
   set par(leading: line-height) if line-height != auto
 
@@ -47,12 +48,12 @@
     text(label-color, weight: label-weight, box(numbering(_label, ..arr), width: 1.5em))
   })
 
-  v(top)
+  if top != 0pt { v(top + par.leading) }
   enum(
     numbering: _ => _format,
     body-indent: body-indent,
     indent: indent,
-    body,
+    _body,
   )
   v(bottom)
 }
@@ -140,14 +141,18 @@
   bottom: 20pt,
   inset: (rest: 10pt, top: 20pt, bottom: 20pt),
   show-number: true,
-  dy: 0pt,
+  margin-top: 0pt,
+  line-height: auto,
 ) = context {
   if not answer-state.get() { return }
+  set par(leading: line-height) if line-height != auto
+  assert(type(inset) == dictionary, message: "inset must be a dictionary")
+  let _padding = (rest: 10pt, top: 20pt, bottom: 20pt) + inset
   block(
     above: top,
     below: bottom,
     breakable: breakable,
-    inset: inset + (top: inset.top - dy),
+    inset: _padding + (top: _padding.top),
     radius: radius,
     stroke: (thickness: border-width, paint: border-color, dash: border-style),
     fill: bg-color,
@@ -164,7 +169,7 @@
       place(
         title-align,
         dx: title-x,
-        dy: if type(inset) == length { -inset } else { -inset.top } - _title-height / 2 + title-y + dy,
+        dy: if type(inset) == length { -inset } else { -inset.top } - _title-height / 2 + title-y,
       )[#title-box]
     }
     #block(width: 100%)[
@@ -173,12 +178,21 @@
       #let format(..item) = context () => {
         numbering("1.", ..counter("explain").get())
       }
+      #if margin-top != 0pt {
+        v(margin-top + _padding.top)
+      }
       #list(
         marker: if show-number { format } else { none },
-        move(dy: dy)[#text(color, body)],
+        text(color, body),
       )
     ]
   ]
+}
+
+// 该方法是解决有比较高的公式的时候，题号和解析之间对不齐的问题
+// 不单独使用，仅在question方法 或者 solution方法 中使用
+#let height-content(top: 0pt, line-height: 0pt, body) = context {
+  place(dy: top, float: true, clearance: top + par.leading, alignment.top)[#par(leading: line-height, body)]
 }
 
 // 解析的分值

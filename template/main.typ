@@ -73,7 +73,7 @@
   #choices([$|A D| = |A F|$], [$|A E| = |A B|$], [$|A B| gt.eq.slant 6$], [$|A E| dot |B E| gt.eq.slant 18$])
 ]
 #question[
-  已知 $triangle A B C$ 的面积为 $1 / 4$，若 $cos 2A + cos 2B + cos 2C = 2,cos A cos B sin C = 1 / 4$，则 #paren[]
+  已知 $triangle A B C$的面积为 $1 / 4$，若$cos 2A + cos 2B + cos 2C = 2$,$cos A cos B sin C = 1 / 4$，则#paren[]
   #choices([$sin C = sin^2 A + sin^2 B$], [$A B = sqrt(2)$], [$sin A + sin B = sqrt(6) / 2$], [$A C^2 + B C^2 = 3$])
 ]
 
@@ -148,12 +148,5 @@
 #solution[
   答案
 ]
-#solution[
-  答案
-]
-// #solution(title: "解答", dy: -16pt)[
-//   #par(leading: 50pt)[答案方程$cases(x=sin theta, y=-1+cos theta, z=2sin display(theta/2))$表示dffdf的曲$cases(x=sin theta, y=-1+cos theta, z=2sin display(theta/2))$面的一般方程？表示的dfdfdf曲$cases(x=sin theta, y=-1+cos theta, z=2sin display(theta/2))$
-//   面的df一般方程？表示的曲面的一般方程？表示的曲面的一般方程？表示的曲面的一般方程？$cases(x=sin theta, y=-1+cos theta, z=2sin display(theta/2))$]
-//   #lorem(120)
-// ]
+
 
