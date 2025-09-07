@@ -140,13 +140,14 @@
   bottom: 20pt,
   inset: (rest: 10pt, top: 20pt, bottom: 20pt),
   show-number: true,
+  dy: 0pt,
 ) = context {
   if not answer-state.get() { return }
   block(
     above: top,
     below: bottom,
     breakable: breakable,
-    inset: inset,
+    inset: inset + (top: inset.top - dy),
     radius: radius,
     stroke: (thickness: border-width, paint: border-color, dash: border-style),
     fill: bg-color,
@@ -163,16 +164,19 @@
       place(
         title-align,
         dx: title-x,
-        dy: if type(inset) == length { -inset } else { -inset.top } - _title-height / 2 + title-y,
+        dy: if type(inset) == length { -inset } else { -inset.top } - _title-height / 2 + title-y + dy,
       )[#title-box]
     }
     #block(width: 100%)[
       #counter("explain").step()
       // 解析题号的格式化
       #let format(..item) = context () => {
-        context numbering("1.", ..counter("explain").get())
+        numbering("1.", ..counter("explain").get())
       }
-      #list(marker: if show-number { format } else { none }, text(color, body))
+      #list(
+        marker: if show-number { format } else { none },
+        move(dy: dy)[#text(color, body)],
+      )
     ]
   ]
 }

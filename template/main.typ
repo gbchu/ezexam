@@ -151,4 +151,9 @@
 #solution[
   答案
 ]
+// #solution(title: "解答", dy: -16pt)[
+//   #par(leading: 50pt)[答案方程$cases(x=sin theta, y=-1+cos theta, z=2sin display(theta/2))$表示dffdf的曲$cases(x=sin theta, y=-1+cos theta, z=2sin display(theta/2))$面的一般方程？表示的dfdfdf曲$cases(x=sin theta, y=-1+cos theta, z=2sin display(theta/2))$
+//   面的df一般方程？表示的曲面的一般方程？表示的曲面的一般方程？表示的曲面的一般方程？$cases(x=sin theta, y=-1+cos theta, z=2sin display(theta/2))$]
+//   #lorem(120)
+// ]
 
