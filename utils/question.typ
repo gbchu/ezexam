@@ -134,53 +134,46 @@
   border-color: maroon,
   color: blue,
   radius: 5pt,
-  inset: 15pt,
   bg-color: luma(100%),
   breakable: true,
   top: 20pt,
   bottom: 20pt,
+  inset: (rest: 10pt, top: 20pt, bottom: 20pt),
   show-number: true,
 ) = context {
   if not answer-state.get() { return }
-  let _inset = inset
-  if type(inset) == dictionary {
-    _inset = (left: 15pt, right: 15pt, top: 15pt, bottom: 30pt) + _inset
-  }
   block(
     above: top,
     below: bottom,
     breakable: breakable,
-    inset: _inset,
+    inset: inset,
     radius: radius,
     stroke: (thickness: border-width, paint: border-color, dash: border-style),
     fill: bg-color,
-    width: 100%,
   )[
-    #counter("explain").step()
-    // 解析题号的格式化
-    #let format(..item) = context () => {
-      context numbering("1.", ..counter("explain").get())
+    #if title != none {
+      let title-box = box(fill: title-bg-color, inset: 6pt, radius: title-radius, text(
+        size: title-size,
+        weight: title-weight,
+        tracking: 3pt,
+        title-color,
+        title,
+      ))
+      let _title-height = measure(title-box).height
+      place(
+        title-align,
+        dx: title-x,
+        dy: if type(inset) == length { -inset } else { -inset.top } - _title-height / 2 + title-y,
+      )[#title-box]
     }
-
-    #list(marker: if show-number { format } else { none }, text(color, body))
-
-    #if title == none or title == "" { return }
-    #let title-box = box(fill: title-bg-color, inset: 6pt, radius: title-radius, text(
-      size: title-size,
-      weight: title-weight,
-      tracking: 3pt,
-      title-color,
-      title,
-    ))
-
-    #let _title-height = measure(title-box).height
-    #place(
-      title-align,
-      float: true,
-      clearance: 0pt,
-      dx: title-x,
-      dy: if type(inset) == length { -inset } else { -_inset.top } - _title-height / 2 + title-y,
-    )[#title-box]
+    #block(width: 100%)[
+      #counter("explain").step()
+      // 解析题号的格式化
+      #let format(..item) = context () => {
+        context numbering("1.", ..counter("explain").get())
+      }
+      #list(marker: if show-number { format } else { none }, text(color, body))
+    ]
   ]
 }
 

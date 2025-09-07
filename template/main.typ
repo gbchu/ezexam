@@ -1,4 +1,6 @@
 #import "@preview/ezexam:0.1.7": *
+
+
 #show: setup.with(
   // paper: a3,
   mode: EXAM,
@@ -151,3 +153,4 @@
 #solution[
   答案
 ]
+
