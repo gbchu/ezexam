@@ -63,12 +63,16 @@
 
 ## 0 . 1 . 7
 
-+ 调整逻辑，确保 `heading-size` 只修改一级标题；并将其更名为 `h1-size`
-
-+ `exchem` 包新增电子式的书写。使用详情查看 [`化学相关`](https://ezexam.pages.dev/chem)
++ 优化代码，确保 `heading-size` 只修改一级标题；并将其更名为 `h1-size`
 
 + 为 `title` 方法添加参数 `color`
 
++ 修复 `solution` 方法,当启用 `title` 时，如果解析内容过多，一页放不下，标题会跑到下一页的 `bug`；并将其参数 `above` 更名为 `top`；参数 `below` 更名为 `bottom`；统一参数名新增参数 `line-height` ，`margin-top`
+
++ 新增 `height-content` 方法；该方法不单独使用，仅在 `question` 方法或者 `solution` 方法中使用；
+  该方法是为了完美解决当 `question` 方法或者 `solution` 方法有比较高的公式的时候，题号和解析之间对不齐的问题；使用该方法可以做到自己控制；当然，`question` 方法或者 `solution` 方法也保留了 `line-height` 这样的参数，使用该参数可以无脑对齐，但对齐不够完美！会使得所有当前题目的其它行间距也加大！使用详情查看[`height-content`](https://ezexam.pages.dev/height-content) 方法
+
++ `exchem` 包新增电子式的书写。使用详情查看 [`化学相关`](https://ezexam.pages.dev/chem)
 
 
 
