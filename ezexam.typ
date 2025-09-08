@@ -1,6 +1,6 @@
 #import "utils/outline.typ": *
-#import "utils/question.typ": answer, fillin, fillinn, paren, parenn, question, score, solution, text-figure, height-content
 #import "utils/choice.typ": *
+#import "utils/question.typ": answer, fillin, fillinn, paren, parenn, question, score, solution, text-figure, height-content
 
 #let setup(
   mode: HANDOUTS,
