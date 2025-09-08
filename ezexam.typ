@@ -1,6 +1,6 @@
-#import "utils/outline.typ": *
 #import "utils/choice.typ": *
-#import "utils/question.typ": answer, fillin, fillinn, paren, parenn, question, score, solution, text-figure, height-content
+#import "utils/outline.typ": *
+#import "utils/question.typ": answer, fillin, fillinn, height-content, paren, parenn, question, score, solution, text-figure,
 
 #let setup(
   mode: HANDOUTS,
@@ -47,6 +47,10 @@
 ) = {
   mode-state.update(mode)
   let _footer(label) = context {
+    assert(
+      type(label) in (str, function, none) or label == auto,
+      message: "expected str or function or none or auto, found " + str(type(label)),
+    )
     if label == none { return }
     let _label = label
     if label == auto {

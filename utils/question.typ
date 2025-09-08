@@ -107,17 +107,15 @@
   figure-y: 0pt,
   top: 0pt,
   bottom: 0pt,
-) = {
-  grid(
-    columns: 2,
-    align: horizon,
-    inset: (
-      top: top,
-      bottom: bottom,
-    ),
-    text, move(dx: figure-x, dy: figure-y)[#box[#figure]],
-  )
-}
+) = grid(
+  columns: 2,
+  align: horizon,
+  inset: (
+    top: top,
+    bottom: bottom,
+  ),
+  text, move(dx: figure-x, dy: figure-y)[#box[#figure]],
+)
 
 #let solution(
   body,
@@ -191,17 +189,16 @@
 
 // 该方法是解决有比较高的公式的时候，题号和解析之间对不齐的问题
 // 不单独使用，仅在question方法 或者 solution方法 中使用
-#let height-content(top: 0pt, line-height: 0pt, body) = context {
-  place(dy: top, float: true, clearance: top + par.leading, alignment.top)[#par(leading: line-height, body)]
-}
+#let height-content(top: 0pt, line-height: 0pt, body) = context place(
+  dy: top,
+  float: true,
+  clearance: top + par.leading,
+  alignment.top,
+)[#par(leading: line-height, body)]
 
 // 解析的分值
-#let score(points, color: maroon, score-prefix: "", score-suffix: "分") = {
-  text(color)[
-    #box(width: 1fr, repeat($dot$))#score-prefix#points#score-suffix
-  ]
-}
+#let score(points, color: maroon, score-prefix: "", score-suffix: "分") = text(color)[
+  #box(width: 1fr, repeat($dot$))#score-prefix#points#score-suffix
+]
 
-#let answer(body, color: maroon) = {
-  par(text(weight: 700, color)[答案: #body])
-}
+#let answer(body, color: maroon) = par(text(weight: 700, color)[答案: #body])

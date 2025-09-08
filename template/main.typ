@@ -1,4 +1,5 @@
 #import "@preview/ezexam:0.1.7": *
+
 #show: setup.with(
   // paper: a3,
   mode: EXAM,
@@ -143,10 +144,12 @@
 #title[参考答案]
 
 #solution(title: "解析")[
-  答案
+  #answer[A]
+  解: #lorem(6)#score(6)
 ]
 #solution[
-  答案
+  #answer[B]
+  解:
 ]
 
 

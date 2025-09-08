@@ -35,13 +35,9 @@
   subject-state.update(name.text)
 }
 
-#let secret(body: [绝密★启用前]) = {
-  place(top, text(font: "SimHei", body))
-}
+#let secret(body: [绝密★启用前]) = place(top, text(font: "SimHei", body))
 
-#let exam-type(type, prefix: "试卷类型: ") = {
-  place(top + right, text(font: hei-ti)[#prefix#type])
-}
+#let exam-type(type, prefix: "试卷类型: ") = place(top + right, text(font: hei-ti)[#prefix#type])
 
 #let exam-info(
   info: (
@@ -68,31 +64,26 @@
   )
 }
 
-#let scoring-box(x: 0pt, y: 0pt) = {
-  place(dx: x, dy: y, right + top)[
-    #table(
-      columns: (auto, 1.6cm),
-      inset: 8pt,
-    )[得分][][阅卷人]
-  ]
-}
+#let scoring-box(x: 0pt, y: 0pt) = place(dx: x, dy: y, right + top)[
+  #table(
+    columns: (auto, 1.6cm),
+    inset: 8pt,
+  )[得分][][阅卷人]
+]
 
-#let score-box(x: 0pt, y: 0pt) = {
-  place(dx: x, dy: y, right + top)[
-    #table(
-      rows: (auto, 1.2cm),
-      inset: 8pt,
-    )[得分][#h(3em)]
-  ]
-}
+#let score-box(x: 0pt, y: 0pt) = place(dx: x, dy: y, right + top)[
+  #table(
+    rows: (auto, 1.2cm),
+    inset: 8pt,
+  )[得分][#h(3em)]
+]
 
 #let notice(format: "1.", ..items) = context {
   text(font: hei-ti)[注意事项:]
   let indent = 2em
   set enum(numbering: format, indent: indent)
   set par(hanging-indent: -indent - enum.body-indent - measure(format).width)
-  let arr = items.pos()
-  for value in arr [+ #par(value)]
+  for value in items.pos() [+ #par(value)]
 }
 
 // 一种页码格式: "第x页（共xx页）
@@ -115,6 +106,7 @@
   supplement: "",
   info: (:),
 ) = {
+  assert(type(info) == dictionary, message: "expected dictionary, found " + str(type(info)))
   set par(spacing: 10pt)
   set text(font: hei-ti, size: 12pt)
   set align(center)
