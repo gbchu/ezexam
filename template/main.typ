@@ -23,23 +23,28 @@
   $(1 + 5i)i$ 的虚部为 #paren[]
   #choices([$-1$], [$0$], [$1$], [$6$])
 ]
+
 #question[
   集合 $U = {x | x "为小于9的正整数" }$, $A = {1,3,5}$, 则 $complement_U A$ 中的元素个数为 #paren[]
   #choices([$0$], [$3$], [$5$], [$8$])
 ]
+
 #question[
   若双曲线 $C$ 的虚轴长为实轴长的 $sqrt(7)$ 倍，则 $C$ 的离心率为 #paren[]
   #choices([$sqrt(2)$], [$2$], [$sqrt(7)$], [$2sqrt(2)$])
 ]
+
 #question[
   若点 $(a,0) (a > 0)$ 是函数 $y = 2tan(x - pi / 3)$ 的图象的一个对称中心，则 $a$ 的最小值为 #paren[]
   #choices([$30°$], [$60°$], [$90°$], [$135°$])
 ]
+
 #question[
   设 $f(x)$ 是定义在 $bb(R)$ 上且周期为 2 的偶函数，当 $2 lt.eq.slant x lt.eq.slant 3$ 时，$f(x) = 5 - 2x$，则
   $f(-3 / 4 ) =$ #paren[]
   #choices([$-1 / 2$], [$-1 / 4$], [$1 / 4$], [$1 / 2$])
 ]
+
 #question[
   已知视风速是真风速和船风速的和向量，船风速与船行驶速度大小相等，方向相反.则真风速等级是 #paren[]
   #text-figure(
@@ -53,11 +58,13 @@
     image("6.png", width: 50%),
   )
 ]
+
 #question[
   若圆 $x^2 + (y + 2)^2 = r^2 (r > 0)$ 上到直线 $y = sqrt(3)x + 2$ 的距离为 1 的点有且仅有 2 个，则 $r$ 的取值范围是
   #paren[]
   #choices([(0, 1)], [(1, 3)], [(3, +∞)], [(0, +∞)])
 ]
+
 #question[
   若实数 $x, y, z$ 满足 $2 + log_2 x = 3 + log_3y = 5 + log_5 z$，则 $x, y, z$ 的大小关系不可能是 #paren[]
   #choices([$x > y > z$], [$x > z > y$], [$y > x > z$], [$y > z > x$])
@@ -68,11 +75,13 @@
   在正三棱柱 $A B C-A_1B_1C_1$ 中，$D$ 为 $B C$ 中点，则 #paren[]
   #choices([$A D perp A_1C$], [$B_1C perp "平面" A A_1D$], [$C C_1 parallel "平面" A A_1D$], [$A D parallel A_1B_1$])
 ]
+
 #question[
   设抛物线 $C: y^2 = 6x$ 的焦点为 $F$，过 $F$ 的直线交 $C$ 于$A、B$，过 $F$ 且垂直于 $A B$的直线交准线 $l$:
   $y = -3 / 2x$ 于 $E$，过点$A$作准线的垂线，垂足为$D$，则 #paren[]
   #choices([$|A D| = |A F|$], [$|A E| = |A B|$], [$|A B| gt.eq.slant 6$], [$|A E| dot |B E| gt.eq.slant 18$])
 ]
+
 #question[
   已知 $triangle A B C$的面积为 $1 / 4$，若$cos 2A + cos 2B + cos 2C = 2$,$cos A cos B sin C = 1 / 4$，则#paren[]
   #choices([$sin C = sin^2 A + sin^2 B$], [$A B = sqrt(2)$], [$sin A + sin B = sqrt(6) / 2$], [$A C^2 + B C^2 = 3$])
@@ -82,9 +91,11 @@
 #question[
   若直线 $y = 2x + 5$ 是曲线 $y = e^x + x + a$ 的切线，则 $a =$#fillin[].
 ]
+
 #question[
   若一个正项等比数列的前 4 项和为 4，前 8 项和为 68，则该等比数列的公比为 #fillin[].
 ]
+
 #question[
   一个箱子里有 5 个球，分别以 1$~$5 标号，若有放回取三次，记至少取出一次的球的个数 $X$，则 $E(X) =$#fillin[].
 ]
@@ -110,11 +121,13 @@
     [$k$], [3.841], [6.635], [10.828],
   ))
 ]
+
 #question(points: 15, bottom: 1in)[
   设数列 ${a_n}$ 满足 $a_1 = 3"， "a_(n+1) / n = a_n / (n+1) + 1 / (n(n+1))$.
   + 证明：${n a_n}$ 为等差数列；
   + 设 $f(x) = a_1x + a_2x^2 + dots.c + a_m x^m，求 f'(-2)$.
 ]
+
 #question(points: 15, bottom: 2in)[
   如图所示的四棱锥 $P - A B C D$ 中，$P A perp "平面" A B C D, B C parallel A D, A B perp A D$.
   #image("17.png", width: 30%)
@@ -124,6 +137,7 @@
     + 求直线 $A C$ 与直线 $P O$ 所成角的余弦值.
 
 ]
+
 #question(points: 17, bottom: 2in)[
   设椭圆 $C: x^2 / a^2 + y^2 / b^2 = 1 (a > b > 0)$，记 $A$为椭圆下端点，$B$ 为右端点，$|A B| = sqrt(10)$，且椭圆 $C$
   的离心率为 $(2sqrt(2)) / 3$.
@@ -132,6 +146,7 @@
     + 若 $P$ 不在 $y$ 轴上，设 $R$ 是射线 $A P$ 上一点，$|A R| dot |A P| = 3$，用 $m, n$ 表示点 $RR$ 的坐标；
     + 设直线$O Q$ 的斜率为 $k_1$，直线 $O P$ 的斜率为 $k_2$，若 $k_1 = 3k_2$，$M$为椭圆上一点，求 $|P M|$ 的最大值.
 ]
+
 #question(points: 17, bottom: 2in)[
   设函数 $f(x) = 5cos x - cos 5x$.
   + 求 $f(x)$ 在 $[0, pi / 4]$ 的最大值；
