@@ -162,6 +162,7 @@
   #answer[A]
   解: #lorem(6)#score(6)
 ]
+
 #solution[
   #answer[B]
   解:
