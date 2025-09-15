@@ -5,7 +5,7 @@
   body-indent: .6em,
   indent: 0pt,
   label: auto,
-  label-color: luma(0),
+  label-color: black,
   label-weight: "regular",
   with-heading-label: false,
   points: none,
@@ -14,14 +14,12 @@
   points-suffix: "分）",
   top: 0pt,
   bottom: 0pt,
-  line-height: auto,
-) = context {
-  let _body = body
+) = {
   // 分数设置
+  assert(type(points) == int or points == none, message: "points must be a int or none")
   if points != none {
-    _body = [#points-prefix#points#points-suffix #if points-separate [ \ ] #body]
+    body = [#points-prefix#points#points-suffix #if points-separate [ \ ] #body]
   }
-  set par(leading: line-height) if line-height != auto
 
   // 格式化题号
   counter("question").step()
@@ -48,12 +46,12 @@
     text(label-color, weight: label-weight, box(numbering(_label, ..arr), width: 1.5em))
   })
 
-  if top != 0pt { v(top + par.leading) }
+  v(top)
   enum(
     numbering: _ => _format,
     body-indent: body-indent,
     indent: indent,
-    _body,
+    body,
   )
   v(bottom)
 }
@@ -135,20 +133,16 @@
   radius: 5pt,
   bg-color: luma(100%),
   breakable: true,
-  top: 20pt,
-  bottom: 20pt,
+  top: 0pt,
+  bottom: 0pt,
   inset: (rest: 10pt, top: 20pt, bottom: 20pt),
   show-number: true,
-  margin-top: 0pt,
-  line-height: auto,
 ) = context {
   if not answer-state.get() { return }
-  set par(leading: line-height) if line-height != auto
   assert(type(inset) == dictionary, message: "inset must be a dictionary")
   let _padding = (rest: 10pt, top: 20pt, bottom: 20pt) + inset
+  v(top)
   block(
-    above: top,
-    below: bottom,
     breakable: breakable,
     inset: _padding + (top: _padding.top),
     radius: radius,
@@ -176,25 +170,15 @@
       #let format(..item) = context () => {
         numbering("1.", ..counter("explain").get())
       }
-      #if margin-top != 0pt {
-        v(margin-top + _padding.top)
-      }
+
       #list(
         marker: if show-number { format } else { none },
         text(color, body),
       )
     ]
   ]
+  v(bottom)
 }
-
-// 该方法是解决有比较高的公式的时候，题号和解析之间对不齐的问题
-// 不单独使用，仅在question方法 或者 solution方法 中使用
-#let height-content(top: 0pt, line-height: 0pt, body) = context place(
-  dy: top,
-  float: true,
-  clearance: top + par.leading,
-  alignment.top,
-)[#par(leading: line-height, body)]
 
 // 解析的分值
 #let score(points, color: maroon, score-prefix: "", score-suffix: "分") = text(color)[
