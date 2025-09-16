@@ -147,6 +147,7 @@
   let _inset = (rest: 10pt, top: 20pt, bottom: 20pt) + inset
   v(top)
   block(
+    width: 100%,
     breakable: breakable,
     inset: _inset,
     radius: radius,
@@ -178,9 +179,9 @@
 
     #list(
       marker: if show-number { format } else { none },
-      block(
-        width: 100%,
-        inset: (top: padding-top, bottom: padding-bottom),
+      pad(
+        top: padding-top,
+        bottom: padding-bottom,
         text(color, body),
       ),
     )
