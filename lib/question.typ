@@ -179,11 +179,7 @@
 
     #list(
       marker: if show-number { format } else { none },
-      pad(
-        top: padding-top,
-        bottom: padding-bottom,
-        text(color, body),
-      ),
+      pad(top: padding-top, bottom: padding-bottom, text(color, body)),
     )
   ]
   v(bottom)
