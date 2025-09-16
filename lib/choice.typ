@@ -60,13 +60,14 @@
     }
   }
 
+  v(top)
   grid(
     columns: _column * (1fr,),
     column-gutter: c-gap,
     row-gutter: r-gap,
     align: horizon,
-    inset: (top: top, bottom: bottom),
     ..arr
   )
+  v(bottom)
 })
 

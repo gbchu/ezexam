@@ -14,6 +14,8 @@
   points-suffix: "分）",
   top: 0pt,
   bottom: 0pt,
+  padding-top: 0pt,
+  padding-bottom: 0pt,
 ) = {
   // 分数设置
   assert(type(points) == int or points == none, message: "points must be a int or none")
@@ -46,12 +48,12 @@
     text(label-color, weight: label-weight, box(numbering(_label, ..arr), width: 1.5em))
   })
 
-  v(top)
+  v(top - padding-top)
   enum(
     numbering: _ => _format,
     body-indent: body-indent,
     indent: indent,
-    body,
+    block(inset: (top: padding-top, bottom: padding-bottom))[#body],
   )
   v(bottom)
 }
@@ -135,20 +137,23 @@
   breakable: true,
   top: 0pt,
   bottom: 0pt,
+  padding-top: 0pt,
+  padding-bottom: 0pt,
   inset: (rest: 10pt, top: 20pt, bottom: 20pt),
   show-number: true,
 ) = context {
   if not answer-state.get() { return }
   assert(type(inset) == dictionary, message: "inset must be a dictionary")
-  let _padding = (rest: 10pt, top: 20pt, bottom: 20pt) + inset
+  let _inset = (rest: 10pt, top: 20pt, bottom: 20pt) + inset
   v(top)
   block(
     breakable: breakable,
-    inset: _padding + (top: _padding.top),
+    inset: _inset,
     radius: radius,
     stroke: (thickness: border-width, paint: border-color, dash: border-style),
     fill: bg-color,
   )[
+    // 标题
     #if title != none {
       let title-box = box(fill: title-bg-color, inset: 6pt, radius: title-radius, text(
         size: title-size,
@@ -161,21 +166,24 @@
       place(
         title-align,
         dx: title-x,
-        dy: if type(inset) == length { -inset } else { -inset.top } - _title-height / 2 + title-y,
+        dy: -_inset.top - _title-height / 2 + title-y,
       )[#title-box]
     }
-    #block(width: 100%)[
-      #counter("explain").step()
-      // 解析题号的格式化
-      #let format(..item) = context () => {
-        numbering("1.", ..counter("explain").get())
-      }
 
-      #list(
-        marker: if show-number { format } else { none },
+    // 解析题号的格式化
+    #counter("explain").step()
+    #let format(..item) = context () => {
+      numbering("1.", ..counter("explain").get())
+    }
+
+    #list(
+      marker: if show-number { format } else { none },
+      block(
+        width: 100%,
+        inset: (top: padding-top, bottom: padding-bottom),
         text(color, body),
-      )
-    ]
+      ),
+    )
   ]
   v(bottom)
 }
