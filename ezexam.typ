@@ -46,7 +46,7 @@
   seal-line-supplement: "弥封线内不得答题",
   doc,
 ) = {
-  assert(mode in (HANDOUTS, EXAM), message: "mode must be HANDOUTS or EXAM")
+  assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode must be HANDOUTS or EXAM or SOLUTION")
   mode-state.update(mode)
   let _footer(label) = context {
     assert(
@@ -56,10 +56,11 @@
     if label == none { return }
     let _label = label
     if label == auto {
-      if mode == EXAM {
-        _label = zh-arabic(suffix: "试题")
-      } else {
+      if mode == HANDOUTS {
         _label = "1 ✏ 1"
+      } else {
+        let _suffix = [试题#if mode == SOLUTION [答案]]
+        _label = zh-arabic(suffix: _suffix)
       }
     }
     // 如果传进来的label包含两个1,两个1中间不能是连续空格、包含数字
@@ -198,7 +199,7 @@
   set text(font: font, size: font-size)
 
   if heading-numbering == auto {
-    if mode == EXAM {
+    if mode in (EXAM, SOLUTION) {
       heading-numbering = "一、"
       heading-hanging-indent = 2.3em
     } else { heading-numbering = "1.1.1" }
