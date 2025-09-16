@@ -1,7 +1,7 @@
 #import "lib/tools.typ": *
 #import "lib/outline.typ": *
 #import "lib/choice.typ": *
-#import "lib/question.typ": answer, fillin, fillinn, paren, parenn, question, score, solution, text-figure,
+#import "lib/question.typ": answer, fillin, fillinn, paren, parenn, question, score, solution, text-figure
 
 #let setup(
   mode: HANDOUTS,
@@ -195,7 +195,7 @@
   }
 
   set par(leading: line-height, spacing: par-spacing, first-line-indent: (amount: first-line-indent, all: true))
-  set text(font: font,size: font-size)
+  set text(font: font, size: font-size)
 
   if heading-numbering == auto {
     if mode == EXAM {
