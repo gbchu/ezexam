@@ -1,11 +1,11 @@
 #import "lib/tools.typ": *
 #import "lib/outline.typ": *
 #import "lib/choice.typ": *
-#import "lib/question.typ": answer, fillin, fillinn, paren, parenn, question, score, solution, text-figure
+#import "lib/question.typ": answer, fillin, fillinn, paren, parenn, question, score, solution, text-figure,
 
 #let setup(
   mode: HANDOUTS,
-  page: a4,
+  paper: a4,
   page-numbering: auto,
   page-align: center,
   gap: 1in,
@@ -159,8 +159,8 @@
     ]
   }
   let _background() = {
-    if page.columns == 2 and show-gap-line {
-      line(angle: 90deg, length: 100% - page.margin * 2, stroke: .5pt)
+    if paper.columns == 2 and show-gap-line {
+      line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
     }
   }
   let _foreground() = {
@@ -169,13 +169,13 @@
     set par(leading: .5em)
     place(horizon)[
       #grid(
-        columns: page.columns * (1fr,),
-        ..page.columns * (rotate(watermark-rotate, watermark),),
+        columns: paper.columns * (1fr,),
+        ..paper.columns * (rotate(watermark-rotate, watermark),),
       )
     ]
   }
   set page(
-    ..page,
+    ..paper,
     header: _header(),
     footer: _footer(page-numbering),
     background: _background(),
@@ -195,7 +195,7 @@
   }
 
   set par(leading: line-height, spacing: par-spacing, first-line-indent: (amount: first-line-indent, all: true))
-  set text(font: font, size: font-size)
+  set text(font: font,size: font-size)
 
   if heading-numbering == auto {
     if mode == EXAM {
