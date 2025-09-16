@@ -1,4 +1,4 @@
-#import "@preview/ezexam:0.1.7": *
+#import "@preview/ezexam:0.1.8": *
 
 #show: setup.with(
   // paper: a3,
@@ -155,8 +155,9 @@
 ]
 
 
-#show: setup.with(page-numbering: zh-arabic(suffix: "答案"), show-answer: true)
-#title[参考答案]
+#show: setup.with(mode: SOLUTION)
+
+#title[参考答案及评分细则]
 
 #solution(title: "解析")[
   #answer[A]

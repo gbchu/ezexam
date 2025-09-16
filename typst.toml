@@ -1,6 +1,6 @@
 [package]
 name = "ezexam"
-version = "0.1.7"
+version = "0.1.8"
 entrypoint = "ezexam.typ"
 homepage = "https://ezexam.pages.dev/"
 authors = ["gbchu <https://github.com/gbchu>"]
