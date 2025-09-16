@@ -5,7 +5,7 @@
 
 #let setup(
   mode: HANDOUTS,
-  paper: a4,
+  page: a4,
   page-numbering: auto,
   page-align: center,
   gap: 1in,
@@ -159,8 +159,8 @@
     ]
   }
   let _background() = {
-    if paper.columns == 2 and show-gap-line {
-      line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
+    if page.columns == 2 and show-gap-line {
+      line(angle: 90deg, length: 100% - page.margin * 2, stroke: .5pt)
     }
   }
   let _foreground() = {
@@ -169,13 +169,13 @@
     set par(leading: .5em)
     place(horizon)[
       #grid(
-        columns: paper.columns * (1fr,),
-        ..paper.columns * (rotate(watermark-rotate, watermark),),
+        columns: page.columns * (1fr,),
+        ..page.columns * (rotate(watermark-rotate, watermark),),
       )
     ]
   }
   set page(
-    ..paper,
+    ..page,
     header: _header(),
     footer: _footer(page-numbering),
     background: _background(),
