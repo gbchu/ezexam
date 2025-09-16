@@ -53,7 +53,7 @@
     numbering: _ => _format,
     body-indent: body-indent,
     indent: indent,
-    block(inset: (top: padding-top, bottom: padding-bottom))[#body],
+    pad(top: padding-top, bottom: padding-bottom, body),
   )
   v(bottom)
 }
