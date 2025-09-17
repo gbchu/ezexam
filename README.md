@@ -73,5 +73,5 @@
 
 ### 0 . 1 . 8
 + 为 `mode`  添加新值 `SOLUTION`，当答案解析独立于试题存在时，使用此值可快速统一格式
-+ 优化 `choices` 方法
++ 优化 `choices` 方法；将其参数 `column` 更名为 `columns`，做到和官方的 `columns` 参数一致
 + 废弃 `inline-square` 方法，推荐使用内置的 `table` 方法
