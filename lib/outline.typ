@@ -78,12 +78,12 @@
   )[得分][#h(3em)]
 ]
 
-#let notice(format: "1.", ..items) = context {
+#let notice(format: "1.", ..children) = context {
   text(font: hei-ti)[注意事项:]
   let indent = 2em
   set enum(numbering: format, indent: indent)
   set par(hanging-indent: -indent - enum.body-indent - measure(format).width)
-  for value in items.pos() [+ #par(value)]
+  for value in children.pos() [+ #par(value)]
 }
 
 #let _create-seal(
