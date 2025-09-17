@@ -35,7 +35,7 @@
   subject-state.update(body.text)
 }
 
-#let secret(body: [绝密★启用前]) = place(top, text(font: "SimHei", body))
+#let secret(body: [绝密★启用前]) = place(top, float: true, clearance: 20pt, text(font: "SimHei", body))
 
 #let exam-type(type, prefix: "试卷类型: ") = place(top + right, text(font: hei-ti)[#prefix#type])
 
@@ -51,7 +51,7 @@
   top: 0pt,
   bottom: 0pt,
 ) = {
-  if info.len() == 0 { return }
+  assert(info.len() > 0, message: "info cannot be empty")
   set align(center)
   grid(
     columns: info.len(),
