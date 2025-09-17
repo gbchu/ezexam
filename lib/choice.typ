@@ -1,5 +1,5 @@
 #let choices(
-  column: auto,
+  columns: auto,
   c-gap: 0pt,
   r-gap: 25pt,
   indent: 0pt,
@@ -36,30 +36,30 @@
       )
     }
 
-    if column != auto { continue }
+    if columns != auto { continue }
     _choice-width += measure(arr.at(index)).width
     max-width = calc.max(max-width, _choice-width)
   }
 
-  let _column = column
+  let _columns = columns
   // 如果未指定列数,则自动排列,默认4列
-  if column == auto {
-    _column = 4
+  if columns == auto {
+    _columns = 4
     let actual-occupied-width = max-width + c-gap
     // 排成1行,选项之间的间距
     let choice-gap = container.width / choice-number - actual-occupied-width
     let min-gap = 0.15in
     if choice-gap < min-gap {
-      _column = 2
+      _columns = 2
       // 排成2行,选项之间的间距
       choice-gap = choice-gap * 2 + actual-occupied-width
-      if choice-gap < min-gap { _column = 1 }
+      if choice-gap < min-gap { _columns = 1 }
     }
   }
 
   v(top)
   grid(
-    columns: _column * (1fr,),
+    columns: _columns * (1fr,),
     column-gutter: c-gap,
     row-gutter: r-gap,
     align: horizon,
