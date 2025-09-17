@@ -5,7 +5,7 @@
 [Online Documentation](https://ezexam.pages.dev/)
 
 
-# Changelog
+## Changelog
 
 ## 0 . 1 . 0
 
