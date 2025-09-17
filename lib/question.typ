@@ -74,7 +74,7 @@
 #let paren(
   body,
   justify: false,
-  placeholder: sym.triangle.filled.small,
+  placeholder: "▴",
   with-number: false,
   update: false,
 ) = {
@@ -86,7 +86,7 @@
 #let fillin(
   body,
   length: 1em,
-  placeholder: sym.triangle.filled.small,
+  placeholder: "▴",
   with-number: false,
   update: false,
 ) = {

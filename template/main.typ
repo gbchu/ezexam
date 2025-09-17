@@ -1,5 +1,4 @@
-// #import "@preview/ezexam:0.1.8": *
-#import "/ezexam.typ": *
+#import "@preview/ezexam:0.1.8": *
 
 #show: setup.with(
   // paper: a3,
