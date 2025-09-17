@@ -38,9 +38,9 @@
   show-seal-line: true,
   seal-line-student-info: (
     姓名: underline[~~~~~~~~~~~~~],
-    准考证号: inline-square(14),
-    考场号: inline-square(2),
-    座位号: inline-square(2),
+    准考证号: m-grid(column: 14),
+    考场号: m-grid(column: 2),
+    座位号: m-grid(column: 2),
   ),
   seal-line-type: "dashed",
   seal-line-supplement: "弥封线内不得答题",
