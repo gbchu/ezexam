@@ -74,4 +74,4 @@
 ### 0 . 1 . 8
 + 为 `mode`  添加新值 `SOLUTION`，当答案解析独立于试题存在时，使用此值可快速统一格式
 + 优化 `choices` 方法
-+ 重构 `inline-square` 方法，并将其命名为 `m-grid`
++ 废弃 `inline-square` 方法，推荐使用内置的 `table` 方法
