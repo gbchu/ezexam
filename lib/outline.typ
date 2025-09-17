@@ -78,11 +78,12 @@
   )[得分][#h(3em)]
 ]
 
-#let notice(format: "1.", ..children) = context {
+#let notice(format: "1.", indent: 2em, hanging-indent: auto, ..children) = context {
   text(font: hei-ti)[注意事项:]
-  let indent = 2em
   set enum(numbering: format, indent: indent)
-  set par(hanging-indent: -indent - enum.body-indent - measure(format).width)
+  set par(hanging-indent: if hanging-indent == auto {
+    -indent - enum.body-indent - measure(format).width
+  } else { hanging-indent })
   for value in children.pos() [+ #par(value)]
 }
 
