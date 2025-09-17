@@ -5,8 +5,8 @@
   [#prefix#h(1em)#subject-state.get()#suffix#h(1em)第#str(arr.at(0))页（共#str(arr.at(-1))页）]
 }
 
-#let m-grid(column: 1, row: 1, inset: .8em, body: ([],)) = {
-  table(columns: column, rows: row, inset: inset, ..body,)
+#let m-grid(column: 1, row: 1, gap: 0pt, inset: .8em, body: ([],)) = {
+  table(columns: column, rows: row, gutter: gap, inset: inset, ..body,)
 }
 
 #let multi = text(maroon)[（多选）]
