@@ -50,7 +50,6 @@
   已知视风速是真风速和船风速的和向量，船风速与船行驶速度大小相等，方向相反.则真风速等级是 #paren[]
   #text-figure(
     text: choices(
-      column: 1,
       [轻风 (1.6$tilde$3.3 m/s)],
       [微风 (3.4$tilde$5.4 m/s)],
       [和风 (5.5$tilde$7.8 m/s)],
