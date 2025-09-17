@@ -1,14 +1,14 @@
 #import "const-state.typ": *
 
-#let chapter(name) = context {
+#let chapter(body) = {
   pagebreak(weak: true)
   counter("chapter").step()
   set heading(numbering: _ => counter("chapter").display("一、"))
-  place(top, hide[= #name <chapter>])
+  place(top, hide[= #body <chapter>])
 }
 
 #let title(
-  name,
+  body,
   size: 15pt,
   weight: "bold",
   font: source-han,
@@ -18,21 +18,21 @@
   bottom: 18pt,
 ) = {
   v(top)
-  align(position, text(font: font, size, weight: weight, color)[#name <title>])
+  align(position, text(font: font, size, weight: weight, color)[#body <title>])
   v(bottom)
   counter(heading).update(0)
   counter("question").update(0)
 }
 
-#let subject(name, size: 21.5pt, spacing: 1em, font: hei-ti, top: -20pt, bottom: 0pt) = {
+#let subject(body, size: 21.5pt, spacing: 1em, font: hei-ti, top: -20pt, bottom: 0pt) = {
   v(top)
   align(center, text(
     font: font,
     size: size,
-    name.text.split("").slice(1, -1).join(h(spacing)),
+    body.text.split("").slice(1, -1).join(h(spacing)),
   ))
   v(bottom)
-  subject-state.update(name.text)
+  subject-state.update(body.text)
 }
 
 #let secret(body: [绝密★启用前]) = place(top, text(font: "SimHei", body))
