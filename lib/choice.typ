@@ -10,9 +10,13 @@
   ..options,
 ) = layout(container => {
   // 使用layout获取当前父元素的宽度
+  let args-named = options.named()
+  assert(args-named.len() == 0, message: "choices no " + repr(args-named) + " parameters")
+
   let arr = options.pos()
   let choice-number = arr.len()
-  if choice-number == 0 { return }
+  assert(choice-number > 0, message: "choices must have at least one option")
+
   let max-width = 0pt
   // 拼接选项并添加标签和间距;获取选项中最长的宽度
   for index in range(choice-number) {
