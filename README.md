@@ -76,4 +76,4 @@
 + 优化 `choices` 方法；将其参数 `column` 更名为 `columns`，做到和官方的 `columns` 参数一致
 + 废弃 `inline-square` 方法，推荐使用内置的 `table` 方法
 + 修复 `color-box` 方法报错的 `bug`
-+ 优化 `secret` 方法
++ 优化 `secret` 、`zh-arabic` 方法
