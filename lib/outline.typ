@@ -37,7 +37,9 @@
 
 #let secret(body: [绝密★启用前]) = place(top, float: true, clearance: 20pt, text(font: "SimHei", body))
 
-#let exam-type(type, prefix: "试卷类型: ") = place(top + right, text(font: hei-ti)[#prefix#type])
+#let exam-type(body, prefix: "试卷类型: ") = place(top + right, text(
+  font: hei-ti,
+)[#prefix#body])
 
 #let exam-info(
   info: (

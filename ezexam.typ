@@ -38,9 +38,21 @@
   show-seal-line: true,
   seal-line-student-info: (
     姓名: underline[~~~~~~~~~~~~~],
-    准考证号: table(columns: 14, inset: .8em,[]),
-    考场号: table(columns: 2, inset: .8em,[]),
-    座位号: table(columns: 2, inset: .8em,[]),
+    准考证号: table(
+      columns: 14,
+      inset: .8em,
+      [],
+    ),
+    考场号: table(
+      columns: 2,
+      inset: .8em,
+      [],
+    ),
+    座位号: table(
+      columns: 2,
+      inset: .8em,
+      [],
+    ),
   ),
   seal-line-type: "dashed",
   seal-line-supplement: "弥封线内不得答题",
@@ -59,8 +71,8 @@
       if mode == HANDOUTS {
         _label = "1 ✏ 1"
       } else {
-        let _suffix = [试题#if mode == SOLUTION [答案]]
-        _label = zh-arabic(suffix: _suffix)
+        let _prefix = [#subject-state.get()试题#if mode == SOLUTION [答案]]
+        _label = zh-arabic(prefix: _prefix)
       }
     }
     // 如果传进来的label包含两个1,两个1中间不能是连续空格、包含数字

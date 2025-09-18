@@ -1,8 +1,8 @@
-#import "const-state.typ": subject-state
+#import "const-state.typ": subject-state, kai-ti
 // 一种页码格式: "第x页（共xx页）
 #let zh-arabic(prefix: "", suffix: "") = (..nums) => {
   let arr = nums.pos()
-  [#prefix#h(1em)#subject-state.get()#suffix#h(1em)第#str(arr.at(0))页（共#str(arr.at(-1))页）]
+  [#prefix 第#str(arr.at(0))页（共#str(arr.at(-1))页）#suffix]
 }
 
 #let multi = text(maroon)[（多选）]
