@@ -77,3 +77,4 @@
 + 废弃 `inline-square` 方法，推荐使用内置的 `table` 方法
 + 修复 `color-box` 方法报错的 `bug`
 + 优化 `secret` 、`zh-arabic` 方法
++ 优化 `question` 的编号实现方式；修改为 `setup` 方法的参数 `enum-numbering` 的默认值为 `（1.i.a）` ；
