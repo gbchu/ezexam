@@ -50,7 +50,7 @@
       weight: label-weight,
       box(
         align(right, numbering(_label, ..arr)),
-        width: 1.25em,
+        width: 1em,
       ),
     )
   })
