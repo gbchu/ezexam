@@ -1,4 +1,4 @@
-#import "@preview/ezexam:0.1.8": *
+#import "@preview/ezexam:0.1.9": *
 
 #show: setup.with(
   // paper: a3,
