@@ -108,21 +108,29 @@
 
 // 图文混排(左文右图)
 #let text-figure(
-  text: "",
-  figure,
+  figure: none,
   figure-x: 0pt,
   figure-y: 0pt,
+  style: "tf",
   top: 0pt,
   bottom: 0pt,
-) = grid(
-  columns: 2,
-  align: horizon,
-  inset: (
-    top: top,
-    bottom: bottom,
-  ),
-  text, move(dx: figure-x, dy: figure-y)[#box[#figure]],
-)
+  text,
+) = {
+  assert(figure.func() in (image, table), message: "figure must be a image or table")
+  assert(style == "tf" or style == "ft", message: "style must be 'tf' or 'ft'")
+
+  let body = (text, move(dx: figure-x, dy: figure-y)[#figure])
+  if style == "ft" { body = body.rev() }
+  grid(
+    columns: 2,
+    align: horizon,
+    inset: (
+      top: top,
+      bottom: bottom,
+    ),
+    ..body,
+  )
+}
 
 #let solution(
   body,
