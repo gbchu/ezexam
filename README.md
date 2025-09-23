@@ -53,6 +53,7 @@
 + 修复 `color-box` 方法报错的 `bug`
 + 优化 `secret` 、`zh-arabic` 方法
 + 优化 `question` 的编号实现方式；修改 `setup` 方法的参数 `enum-numbering` 的默认值为 `（1.i.a）`
++ 优化 `notice` 方法；新增参数 `indent` 、`hanging-indent`
 
 ### 0 . 1 . 9
 + 优化 `text-figure` 方法；考虑到文本内容较多，为了书写方便，将参数 `text` 修改为位置参数；新增参数 `figure` 、`style`
