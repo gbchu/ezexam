@@ -120,7 +120,7 @@
   assert(style == "tf" or style == "ft", message: "style must be 'tf' or 'ft'")
   let _columns = (1fr, measure(figure).width)
   let _gap = -figure-x + gap
-  let body = (text, pad(y: figure-y, x: figure-x, figure))
+  let body = (text, place(dy: figure-y, dx: figure-x, horizon, figure))
   if style == "ft" {
     body = body.rev()
     _columns = _columns.rev()
