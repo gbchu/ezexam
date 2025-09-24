@@ -111,23 +111,31 @@
   figure: none,
   figure-x: 0pt,
   figure-y: 0pt,
-  style: "tf",
   top: 0pt,
   bottom: 0pt,
+  gap: 0pt,
+  style: "tf",
   text,
-) = {
-  assert(figure.func() in (image, table), message: "figure must be a image or table")
+) = context {
   assert(style == "tf" or style == "ft", message: "style must be 'tf' or 'ft'")
 
-  let body = (text, move(dx: figure-x, dy: figure-y)[#figure])
-  if style == "ft" { body = body.rev() }
+  let _columns = (1fr, measure(figure).width)
+  let _gap = -figure-x + gap
+  let body = (text, place(dy: figure-y, dx: figure-x, horizon, figure))
+  if style == "ft" {
+    body = body.rev()
+    _columns = _columns.rev()
+    _gap = figure-x + gap
+  }
+  let dpar = par.leading - par.spacing
   grid(
-    columns: 2,
+    columns: _columns,
     align: horizon,
     inset: (
-      top: top,
-      bottom: bottom,
+      top: top + dpar,
+      bottom: bottom + dpar,
     ),
+    gutter: _gap,
     ..body,
   )
 }
