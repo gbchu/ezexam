@@ -2,7 +2,7 @@
 ## Introduction
 This template is primarily designed to help Chinese primary, middle and high school teachers or students in creating exams or handouts.
 
-[在线文档](https://ezexam.pages.dev/)
+[Online Documentation](https://ezexam.pages.dev/)
 
 ## Changelog
 ### 0 . 1 . 0
