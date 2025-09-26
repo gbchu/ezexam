@@ -60,7 +60,7 @@
   v(bottom)
 
   // 更新占位符上的题号
- context counter("placeholder").update(counter("question").get().first())
+  context counter("placeholder").update(counter("question").get().first())
 }
 
 #let _get-answer(body, placeholder, with-number, update) = context {
