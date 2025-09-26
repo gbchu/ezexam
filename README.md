@@ -1,11 +1,10 @@
 # `ezexam`
-## 简介
-此模板可方便中国的小学、初中、高中教师或学生排版试卷或讲义
+## Introduction
+This template is primarily designed to help Chinese primary, middle and high school teachers or students in creating exams or handouts.
 
 [在线文档](https://ezexam.pages.dev/)
 
-
-## 更新日志
+## Changelog
 ### 0 . 1 . 0
 + 初版发布
 
