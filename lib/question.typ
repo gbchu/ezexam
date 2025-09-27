@@ -205,7 +205,7 @@
 
 // 解析的分值
 #let score(points, color: maroon, score-prefix: "", score-suffix: "分") = text(color)[
-  #box(width: 1fr, repeat($dot$))#score-prefix#points#score-suffix
+  #box(width: 1fr, repeat($dot$))#score-prefix#h(2pt)#points#score-suffix
 ]
 
 #let answer(body, color: maroon) = par(text(weight: 700, color)[答案: #body])

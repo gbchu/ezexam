@@ -10,6 +10,10 @@
 #title[2025新高考I卷]
 #subject[数学]
 #secret()
+#exam-type[A]
+#scoring-box(y: .5in)
+#exam-info(info: (命题人: "张三  李四  王五", 审题: "老六教研组"))
+#exam-info()
 
 #notice(
   [答题前，请务必将自已的姓名、准考证号用0.5毫米黑色墨水的签字笔填写在试卷及答题卡的规定位置.],
@@ -132,12 +136,15 @@
 
 #question(points: 15, bottom: 2in)[
   如图所示的四棱锥 $P - A B C D$ 中，$P A perp "平面" A B C D, B C parallel A D, A B perp A D$.
-  #image("17.png", width: 30%) // 替换自己的图片
   + 证明：平面 $P A B perp "平面" P A D$
   + 若 $P A = A B = sqrt(2), A D = sqrt(3) + 1, B C = 2$，$P, B, C, D$ 在同一个球面上，设该球面的球心为 $O$.
-    + 证明：$O$ 在平面 $A B C D$上；
-    + 求直线 $A C$ 与直线 $P O$ 所成角的余弦值.
-
+    #text-figure(
+      figure: image("17.png", width: 2in),
+      figure-x: 20pt,
+       figure-y: 10pt)[
+      + 证明：$O$ 在平面 $A B C D$上；
+      + 求直线 $A C$ 与直线 $P O$ 所成角的余弦值.
+    ]
 ]
 
 #question(points: 17, bottom: 2in)[
