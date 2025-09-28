@@ -5,6 +5,11 @@
   mode: EXAM,
 )
 
+#cover(
+  title: "2025 高考真题（全国卷）",
+  subtitle: "数 学",
+  author: "gbchu",
+)
 #outline()
 #chapter[2025新高考I卷]
 #title[2025新高考I卷]
@@ -141,7 +146,8 @@
     #text-figure(
       figure: image("17.png", width: 2in),
       figure-x: 20pt,
-       figure-y: 10pt)[
+      figure-y: 10pt,
+    )[
       + 证明：$O$ 在平面 $A B C D$上；
       + 求直线 $A C$ 与直线 $P O$ 所成角的余弦值.
     ]

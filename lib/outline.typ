@@ -4,7 +4,7 @@
   pagebreak(weak: true)
   counter("chapter").step()
   set heading(numbering: _ => counter("chapter").display("一、"))
-  place(top, hide[= #body <chapter>])
+  place(hide[= #body <chapter>])
 }
 
 #let title(
@@ -130,4 +130,31 @@
   set page(margin: .5in, header: none, footer: none)
   title(name.split("").join(h(1em)), bottom: 0pt)
   _create-seal(dash: dash, supplement: supplement, info: student-info)
+}
+
+// 封面
+#let cover(
+  title: "ezexam",
+  subtitle: none,
+  author: none,
+  date: auto,
+) = {
+  set page(footer: none, header: none, columns: 1)
+  set align(center + horizon)
+  text(font: "STXingkai", size: 25pt)[#title]
+
+  if subtitle != none {
+    text(font: hei-ti, size: 22pt)[\ #subtitle]
+  }
+
+  if author != none {
+    text(font: kai-ti, size: 15pt)[\ 作者：#author]
+  }
+
+  if date != none [
+    \ #if date == auto [
+      #datetime.today().year()/#datetime.today().month()/#(
+        datetime.today().day()
+      )] else {  }
+  ]
 }

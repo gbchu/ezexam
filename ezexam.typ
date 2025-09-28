@@ -141,7 +141,6 @@
 
     // 去除第一章,因为第一章前面没有章节了
     let _ = chapter-last-page-location.remove(0)
-
     let _margin-y = page.margin * 2
     let _width = page.height - _margin-y
     if page.flipped { _width = page.width - _margin-y }
@@ -151,7 +150,7 @@
       #if chapter-location.contains(current) {
         place(
           dx: -_width - 1em,
-          dy: -2em,
+          dy: -2.4em,
         )[
           #rotate(-90deg, origin: right + bottom)[
             #_create-seal(dash: line-type, info: student-info, supplement: supplement)
@@ -188,7 +187,7 @@
     ]
   }
   set page(
-    ..paper,
+    ..a4 + paper,
     header: _header(),
     footer: _footer(page-numbering),
     background: _background(),
