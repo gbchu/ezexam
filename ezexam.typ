@@ -229,6 +229,11 @@
     }
     text(size: size, it)
   }
+
+  // 试卷模式下，书签只显示章节
+  set heading(bookmarked: false) if mode == EXAM
+  show heading.where(level: 1).and(<chapter>): set heading(bookmarked: true)
+
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)
   set table(stroke: .5pt, align: center)
   set table.cell(align: horizon)
