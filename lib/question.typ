@@ -50,7 +50,7 @@
     )
   })
 
-  v(top - padding-top)
+  v(top)
   list(
     marker: _format,
     body-indent: body-indent,
@@ -191,7 +191,7 @@
 
     // 解析题号的格式化
     #counter("explain").step()
-    #let format(..item) = context () => {
+    #let format = context () => {
       numbering("1.", ..counter("explain").get())
     }
 
