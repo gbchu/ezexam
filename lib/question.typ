@@ -50,7 +50,7 @@
     )
   })
 
-  v(top)
+  v(top - padding-top)
   list(
     marker: _format,
     body-indent: body-indent,
