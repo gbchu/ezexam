@@ -4,7 +4,7 @@
 [![Online Documentation](https://img.shields.io/badge/online-Documentation-purple?logo=readthedocs)](https://ezexam.pages.dev/)
 
 ## Introduction
-This template is primarily designed to help Chinese primary, middle and high school teachers or students in creating exams or handouts.
+This template is primarily designed to help Chinese university, primary, middle and high school teachers or students in creating exams or handouts.
 
 ## Usage
 ```typst
