@@ -31,7 +31,7 @@
       if mode-state.get() == HANDOUTS {
         _label = "【1.1.1.1.1.1】"
       } else {
-        _label = "1．"
+        _label = "1. "
       }
     }
 
