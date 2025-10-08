@@ -39,6 +39,9 @@ This template is primarily designed to help Chinese university, primary, middle 
 more details see [`Online Documentation`](https://ezexam.pages.dev/)
 
 ## Changelog
+### 0 . 2 . 2
++ 修复在web app中应用模板时,题号后的点错位问题
+
 ### 0 . 2 . 1
 + 修复试卷模式下，生成 pdf 后的书签会显示题目大标题的问题，确保只显示章节。
 + 西文字体新增 Times New Roman 字体风格；前提是安装了 STIX 2 系列字体。如未安装则默认使用 New Computer Modern Math
