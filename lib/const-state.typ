@@ -12,6 +12,7 @@
   flipped: false,
 )
 
+// #let LATIN-FONTS = "STIX Two Math"
 #let LATIN-FONTS = "New Computer Modern Math"
 #let source-han = (LATIN-FONTS, "Source Han Serif", "SimSun")
 #let hei-ti = (LATIN-FONTS, "SimHei")
