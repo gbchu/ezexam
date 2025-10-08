@@ -14,8 +14,8 @@
 
 #let LATIN-FONTS = "New Computer Modern Math"
 #let source-han = (LATIN-FONTS, "Source Han Serif", "SimSun")
-#let hei-ti = ("LATIN-FONTS", "SimHei")
-#let kai-ti = ("LATIN-FONTS", "KaiTi")
+#let hei-ti = (LATIN-FONTS, "SimHei")
+#let kai-ti = (LATIN-FONTS, "KaiTi")
 
 //"exam": 试卷模式; "handouts": 讲义模式(默认)；"solution"：解析模式
 #let EXAM = "exam"
