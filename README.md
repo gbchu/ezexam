@@ -10,6 +10,28 @@ This template is primarily designed to help Chinese university, primary, middle 
 ```typst
 #import "@preview/ezexam:0.2.1": *
 #show: setup.with(mode: EXAM, paper: a3, ...)
+#title[标题]
+
+= 选择
+#question[
+  $(1 + 5i)i$ 的虚部为 #paren[]
+  #choices([$-1$], [$0$], [$1$], [$6$])
+]
+......
+
+= 填空
+#question[
+  一个箱子里有 5 个球，分别以 1$~$5 标号，若有放回取三次，记至少取出一次的球的个数 $X$，则 $E(X) =$#fillin[].
+]
+......
+
+= 解答题
+#question(points: 15)[
+  设数列 ${a_n}$ 满足 $a_1 = 3"， "a_(n+1) / n = a_n / (n+1) + 1 / (n(n+1))$.
+  + 证明：${n a_n}$ 为等差数列；
+  + 设 $f(x) = a_1x + a_2x^2 + dots.c + a_m x^m，求 f'(-2)$.
+]
+......
 ```
 more details see [`Online Documentation`](https://ezexam.pages.dev/)
 
