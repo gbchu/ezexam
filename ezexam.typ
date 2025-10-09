@@ -14,7 +14,6 @@
   outline-page-numbering: "⚜ I ⚜",
   font-size: 11pt,
   font: latin-fonts + doc-fonts,
-  font-math: latin-fonts + doc-fonts,
   line-height: 2em,
   par-spacing: 2em,
   first-line-indent: 0em,
@@ -218,7 +217,7 @@
   set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
   show heading: it => {
     v(heading-top)
-    text(heading-color, font: text.font.slice(0, 1) + heading-font, it)
+    text(heading-color, font: text.font.slice(0, 2) + heading-font, it)
     v(heading-bottom)
   }
 
@@ -244,7 +243,7 @@
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
   show math.equation: it => {
     // features: 一些特殊符号的设置，如空集符号设置更加漂亮
-    set text(font: font-math, features: ("cv01",))
+    set text(font: font, features: ("cv01",))
     //  1. 行内样式默认块级显示样式; 2. 添加数学符号和中文之间间距
     let space = h(.25em, weak: true)
     space + math.display(it) + space

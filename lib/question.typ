@@ -82,7 +82,7 @@
   update: false,
 ) = {
   let body = _get-answer(body, placeholder, with-number, update)
-  [#if justify { h(1fr) } #box[（~~#upper($body$)~~）]]
+  [#if justify { h(1fr) } #box[（~~#upper(body)~~）]]
 }
 
 // 填空的横线
