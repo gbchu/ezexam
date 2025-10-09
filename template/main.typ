@@ -4,7 +4,7 @@
   // paper: a3,
   mode: EXAM,
   font: ROMAN,
-  font-math: STIX,
+  font-math: ROMAN,
 )
 
 #outline()

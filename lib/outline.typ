@@ -42,7 +42,7 @@
 #let exam-type(type, prefix: "试卷类型: ") = {
   context place(top + right)[
     #text(
-      font: (text.font.first(),) + hei-ti,
+      font: text.font.slice(0, 1) + hei-ti,
     )[#prefix#type]
   ]
 }
@@ -60,7 +60,7 @@
   bottom: 0pt,
 ) = context {
   assert(info.len() > 0, message: "info cannot be empty")
-  set text(font: (text.font.first(),) + hei-ti, size: size, weight: weight)
+  set text(font: text.font.slice(0, 1) + hei-ti, size: size, weight: weight)
   set align(center)
   grid(
     columns: info.len(),
