@@ -8,7 +8,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 
 ## Usage
 ```typst
-#import "@preview/ezexam:0.2.1": *
+#import "@preview/ezexam:0.2.2": *
 #show: setup.with(
   mode: EXAM,
   paper: a3,
