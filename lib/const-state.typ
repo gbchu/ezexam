@@ -17,7 +17,7 @@
 #let hei-ti = ("SimHei", "Noto Sans SC", "Noto Sans CJK SC")
 #let kai-ti = ("KaiTi",)
 
-#let ROMAN = ("Times New Roman",) + doc-fonts
+#let ROMAN = ("Times New Roman", "TeX Gyre Termes") + doc-fonts
 #let STIX = ("STIX Two Math",) + doc-fonts
 
 //"exam": 试卷模式; "handouts": 讲义模式(默认)；"solution"：解析模式
