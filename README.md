@@ -9,7 +9,13 @@ This template is primarily designed to help Chinese university, primary, middle 
 ## Usage
 ```typst
 #import "@preview/ezexam:0.2.1": *
-#show: setup.with(mode: EXAM, paper: a3, ...)
+#show: setup.with(
+  mode: EXAM,
+  paper: a3,
+  font: ROMAN,
+  ......
+)
+
 #title[XX试卷]
 
 = 选择
