@@ -40,9 +40,9 @@ more details see [`Online Documentation`](https://ezexam.pages.dev/)
 
 ## Changelog
 ### 0 . 2 . 2
-+ 修复在 typst app 中应用模板时，字体显示的问题。
++ 添加更多字体，修复在 typst app 中应用模板时，字体显示的问题。
 + 添加两个变量 `ROMAN` 和 `MROMAN`；方便修改字体为新罗马风格的字体，更加符合常见的试卷排版格式。
-+ 其它字体优化
++ 调整代码逻辑，使得在字体调整时，其它所有西文字体统一进行修改；
 
 ### 0 . 2 . 1
 + 修复试卷模式下，生成 pdf 后的书签会显示题目大标题的问题，确保只显示章节。
