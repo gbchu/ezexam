@@ -6,11 +6,6 @@
   font-math: STIX,
 )
 
-#cover(
-  title: "2025 高考真题（全国卷）",
-  subtitle: "数 学",
-  author: "gbchu",
-)
 #outline()
 #chapter[2025新高考I卷]
 #title[2025新高考I卷]
