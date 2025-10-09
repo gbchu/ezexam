@@ -12,10 +12,13 @@
   flipped: false,
 )
 
-#let LATIN-FONTS = ("STIX Two Math", "New Computer Modern Math")
-#let source-han = (..LATIN-FONTS, "Source Han Serif", "SimSun")
-#let hei-ti = (..LATIN-FONTS, "SimHei")
-#let kai-ti = (..LATIN-FONTS, "KaiTi")
+#let latin-fonts = ("New Computer Modern Math",)
+#let doc-fonts = ("Noto Serif SC", "Source Han Serif", "Noto Serif CJK SC", "SimSun")
+#let hei-ti = ("SimHei", "Noto Sans SC", "Noto Sans CJK SC")
+#let kai-ti = ("KaiTi",)
+
+#let ROMAN = ("Times New Roman",) + doc-fonts
+#let MROMAN = ("STIX Two Math",) + doc-fonts
 
 //"exam": 试卷模式; "handouts": 讲义模式(默认)；"solution"：解析模式
 #let EXAM = "exam"

@@ -37,11 +37,15 @@
   subject-state.update(body.text)
 }
 
-#let secret(body: [绝密★启用前]) = place(top, float: true, clearance: 20pt, text(font: "SimHei", body))
+#let secret(body: [绝密★启用前]) = place(top, float: true, clearance: 20pt, text(font: hei-ti, body))
 
-#let exam-type(type, prefix: "试卷类型: ") = place(top + right, text(
-  font: hei-ti,
-)[#prefix#type])
+#let exam-type(type, prefix: "试卷类型: ") = {
+  context place(top + right)[
+    #text(
+      font: (text.font.first(),) + hei-ti,
+    )[#prefix#type]
+  ]
+}
 
 #let exam-info(
   info: (
@@ -49,13 +53,14 @@
     满分: "150分",
   ),
   weight: 500,
-  font: hei-ti,
+  font: auto,
   size: 11pt,
   gap: 2em,
   top: 0pt,
   bottom: 0pt,
-) = {
+) = context {
   assert(info.len() > 0, message: "info cannot be empty")
+  set text(font: (text.font.first(),) + hei-ti, size: size, weight: weight)
   set align(center)
   grid(
     columns: info.len(),
@@ -63,7 +68,7 @@
     inset: (top: top, bottom: bottom),
     align: center + horizon,
     ..for (key, value) in info {
-      (text(size: size, font: font, weight: weight)[#key: #value],)
+      ([#key: #value],)
     }
   )
 }
@@ -155,6 +160,6 @@
     \ #if date == auto [
       #datetime.today().year()/#datetime.today().month()/#(
         datetime.today().day()
-      )] else {  }
+      )] else {}
   ]
 }

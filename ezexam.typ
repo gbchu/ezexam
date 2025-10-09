@@ -13,8 +13,8 @@
   footer-is-separate: true,
   outline-page-numbering: "⚜ I ⚜",
   font-size: 11pt,
-  font: source-han,
-  font-math: source-han,
+  font: latin-fonts + doc-fonts,
+  font-math: latin-fonts + doc-fonts,
   line-height: 2em,
   par-spacing: 2em,
   first-line-indent: 0em,
@@ -30,7 +30,7 @@
   enum-indent: 0pt,
   watermark: none,
   watermark-color: rgb("#f666"),
-  watermark-font: source-han,
+  watermark-font: latin-fonts + doc-fonts,
   watermark-size: 88pt,
   watermark-rotate: -45deg,
   show-answer: false,
@@ -218,7 +218,7 @@
   set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
   show heading: it => {
     v(heading-top)
-    text(heading-color, font: heading-font, it)
+    text(heading-color, font: (text.font.first(),) + heading-font, it)
     v(heading-bottom)
   }
 
