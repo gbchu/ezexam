@@ -3,7 +3,7 @@
   // paper: a3,
   mode: EXAM,
   font: ROMAN,
-  font-math: MROMAN
+  font-math: STIX,
 )
 
 #cover(
@@ -30,7 +30,7 @@
 
 = 单选题：本题共 8 小题，每小题 5 分，共 40 分.在每小题给出的四个选项中，只有一项是符合题目要求的.
 #question[
-  $(1 + 5i)i$ 的虚部为 #paren[]
+  $(1 + 5i)i$ 的虚部为 #paren[DF]
   #choices([$-1$], [$0$], [$1$], [$6$])
 ]
 
