@@ -35,7 +35,7 @@
       )
     } else {
       arr.at(index) = par(
-        hanging-indent: 1.5em,
+        hanging-indent: indent + body-indent + measure(numbering(label, index + 1)).width,
         h(indent) + numbering(label, index + 1) + h(body-indent) + choice,
       )
     }
