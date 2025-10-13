@@ -91,18 +91,6 @@
   _check-equation(body)
 }
 
-// 选项的括号
-#let paren(
-  body,
-  justify: false,
-  placeholder: "▴",
-  with-number: false,
-  update: false,
-) = context {
-  let body = _get-answer(body, placeholder, with-number, update)
-  [#if justify { h(1fr) }（~~#upper(body)~~）]
-}
-
 // 填空的横线
 #let fillin(
   body,
@@ -184,6 +172,18 @@
       box[#line(length: calc.fract(_ratio) * 100%)]
     }
   }
+}
+
+// 选项的括号
+#let paren(
+  body,
+  justify: false,
+  placeholder: "▴",
+  with-number: false,
+  update: false,
+) = context {
+  let body = _get-answer(body, placeholder, with-number, update)
+  [#if justify { h(1fr) }（~~#upper(body)~~）]
 }
 
 // 类似英文中的7选5题型专用语法糖
