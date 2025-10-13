@@ -1,4 +1,4 @@
-#import "const-state.typ": hei-ti, subject-state
+#import "const-state.typ": *
 
 // 封面
 #let cover(
