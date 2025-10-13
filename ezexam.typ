@@ -1,3 +1,4 @@
+#import "lib/const-state.typ": *
 #import "lib/tools.typ": *
 #import "lib/outline.typ": *
 #import "lib/choice.typ": *
@@ -5,6 +6,7 @@
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/solution.typ": *
 #import "lib/text-figure.typ": *
+#import "lib/draft.typ": draft
 
 #let setup(
   mode: HANDOUTS,
@@ -148,6 +150,7 @@
     let _width = page.height - _margin-y
     if page.flipped { _width = page.width - _margin-y }
     block(width: _width)[
+      #import "lib/draft.typ": _create-seal
       // 判断当前是在当前章节第一页还是章节最后一页
       //当前章节第一页弥封线
       #if chapter-location.contains(current) {

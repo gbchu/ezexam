@@ -1,4 +1,31 @@
-#import "const-state.typ": *
+#import "const-state.typ": hei-ti, subject-state
+
+// 封面
+#let cover(
+  title: "ezexam",
+  subtitle: none,
+  author: none,
+  date: auto,
+) = {
+  set page(footer: none, header: none, columns: 1)
+  set align(center + horizon)
+  text(font: "STXingkai", size: 25pt)[#title]
+
+  if subtitle != none {
+    text(font: hei-ti, size: 22pt)[\ #subtitle]
+  }
+
+  if author != none {
+    text(font: kai-ti, size: 15pt)[\ 作者：#author]
+  }
+
+  if date != none [
+    \ #if date == auto [
+      #datetime.today().year()/#datetime.today().month()/#(
+        datetime.today().day()
+      )] else {}
+  ]
+}
 
 #let chapter(body) = {
   pagebreak(weak: true)
@@ -31,10 +58,10 @@
   align(center, text(
     font: font,
     size: size,
-    body.text.split("").slice(1, -1).join(h(spacing)),
+    [#body].text.split("").slice(1, -1).join(h(spacing)),
   ))
   v(bottom)
-  subject-state.update(body.text)
+  subject-state.update([#body].text)
 }
 
 #let secret(body: [绝密★启用前]) = place(top, float: true, clearance: 20pt, text(font: hei-ti, body))
@@ -95,71 +122,3 @@
   for value in children.pos() [+ #par(value)]
 }
 
-#let _create-seal(
-  dash: "dashed",
-  supplement: "",
-  info: (:),
-) = {
-  assert(type(info) == dictionary, message: "expected dictionary, found " + str(type(info)))
-  set par(spacing: 10pt)
-  set text(font: hei-ti, size: 12pt)
-  set align(center)
-  set grid(columns: 2, align: horizon, gutter: .5em)
-  if supplement != "" { text(tracking: .8in, supplement) }
-  grid(
-    columns: if info.len() == 0 { 1 } else { info.len() },
-    gutter: 1em,
-    ..for (key, value) in info {
-      (
-        grid(
-          key,
-          value,
-        ),
-      )
-    }
-  )
-  line(length: 100%, stroke: (dash: dash))
-}
-
-#let draft(
-  name: "草稿纸",
-  student-info: (
-    姓名: underline[~~~~~~~~~~~~~],
-    准考证号: underline[~~~~~~~~~~~~~~~~~~~~~~~~~~],
-    考场号: underline[~~~~~~~],
-    座位号: underline[~~~~~~~],
-  ),
-  dash: "solid",
-  supplement: "",
-) = {
-  set page(margin: .5in, header: none, footer: none)
-  title(name.split("").join(h(1em)), bottom: 0pt)
-  _create-seal(dash: dash, supplement: supplement, info: student-info)
-}
-
-// 封面
-#let cover(
-  title: "ezexam",
-  subtitle: none,
-  author: none,
-  date: auto,
-) = {
-  set page(footer: none, header: none, columns: 1)
-  set align(center + horizon)
-  text(font: "STXingkai", size: 25pt)[#title]
-
-  if subtitle != none {
-    text(font: hei-ti, size: 22pt)[\ #subtitle]
-  }
-
-  if author != none {
-    text(font: kai-ti, size: 15pt)[\ 作者：#author]
-  }
-
-  if date != none [
-    \ #if date == auto [
-      #datetime.today().year()/#datetime.today().month()/#(
-        datetime.today().day()
-      )] else {}
-  ]
-}
