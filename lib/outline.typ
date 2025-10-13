@@ -23,7 +23,7 @@
     \ #if date == auto [
       #datetime.today().year()/#datetime.today().month()/#(
         datetime.today().day()
-      )] else {}
+      )]
   ]
 }
 
