@@ -37,7 +37,7 @@
 #let title(
   body,
   size: 15pt,
-  weight: "bold",
+  weight: 700,
   font: auto,
   color: black,
   position: center,
