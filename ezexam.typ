@@ -218,6 +218,7 @@
     } else { heading-numbering = "1.1.1" }
   }
   set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
+  if type(heading-font) == str { heading-font = (heading-font,) }
   show heading: it => {
     v(heading-top)
     text(heading-color, font: text.font.slice(0, 2) + heading-font, it)
