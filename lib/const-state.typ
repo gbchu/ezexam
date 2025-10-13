@@ -13,7 +13,7 @@
 )
 
 #let latin-fonts = ("New Computer Modern Math", "")
-#let doc-fonts = ("Noto Serif SC", "Noto Serif CJK SC", "SimSun")
+#let doc-fonts = latin-fonts + ("Noto Serif SC", "Noto Serif CJK SC", "SimSun")
 #let hei-ti = ("SimHei", "Noto Sans SC", "Noto Sans CJK SC")
 #let ROMAN = ("Times New Roman", "TeX Gyre Termes Math") + doc-fonts
 
