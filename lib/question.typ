@@ -147,7 +147,7 @@
 ) = {
   // 检测是否为字符串
   if (type(body) == str) {
-    panic("expected content，got " + type(body))
+    panic("expected content，got " + str(type(body)))
   }
 
   // 如果为空或全都是字符

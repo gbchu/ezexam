@@ -59,6 +59,8 @@
 ) = {
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode must be HANDOUTS or EXAM or SOLUTION")
   mode-state.update(mode)
+  if type(font) == str { font = (font,) }
+
   let _footer(label) = context {
     assert(
       type(label) in (str, function, none) or label == auto,
