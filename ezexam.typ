@@ -1,7 +1,10 @@
 #import "lib/tools.typ": *
 #import "lib/outline.typ": *
 #import "lib/choice.typ": *
-#import "lib/question.typ": answer, fillin, fillinn, paren, parenn, question, score, solution, text-figure
+#import "lib/question.typ": *
+#import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
+#import "lib/solution.typ": *
+#import "lib/text-figure.typ": *
 
 #let setup(
   mode: HANDOUTS,
@@ -11,7 +14,7 @@
   gap: 1in,
   show-gap-line: false,
   footer-is-separate: true,
-  outline-page-numbering: "⚜ I ⚜",
+  outline-page-numbering: "I",
   font: latin-fonts + doc-fonts,
   font-size: 11pt,
   line-height: 2em,
