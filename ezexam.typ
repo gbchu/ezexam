@@ -26,7 +26,7 @@
   heading-hanging-indent: auto,
   h1-size: auto,
   heading-font: hei-ti,
-  heading-color: luma(0%),
+  heading-color: black,
   heading-top: 10pt,
   heading-bottom: 15pt,
   enum-numbering: "（1.i.a）",
