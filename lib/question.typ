@@ -6,7 +6,7 @@
   indent: 0pt,
   label: auto,
   label-color: black,
-  label-weight: "regular",
+  label-weight: 400,
   with-heading-label: false,
   points: none,
   points-separate: true,
