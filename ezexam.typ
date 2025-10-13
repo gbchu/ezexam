@@ -17,7 +17,7 @@
   show-gap-line: false,
   footer-is-separate: true,
   outline-page-numbering: "I",
-  font: latin-fonts + doc-fonts,
+  font: doc-fonts,
   font-size: 11pt,
   line-height: 2em,
   par-spacing: 2em,
