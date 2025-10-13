@@ -59,7 +59,6 @@
 ) = {
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode must be HANDOUTS or EXAM or SOLUTION")
   mode-state.update(mode)
-  if type(font) == str { font = (font,) }
 
   let _footer(label) = context {
     assert(
@@ -208,6 +207,8 @@
   }
 
   set par(leading: line-height, spacing: par-spacing, first-line-indent: (amount: first-line-indent, all: true))
+
+  if type(font) == str { font = (font,) }
   set text(font: font, size: font-size)
 
   if heading-numbering == auto {
