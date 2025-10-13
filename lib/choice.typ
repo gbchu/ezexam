@@ -23,6 +23,7 @@
     // 加[] 是为了将内容转为content,有可能在使用时直接传入整数
     let choice = [#arr.at(index)]
     let _choice-width = 0pt
+    let _label = numbering(label, index + 1)
     // 选项为图片、表格的处理
     if choice.func() in (image, table) {
       // 当选项为图片时,设置百分比宽度使用mesure获取宽度时为0pt, 设置百分比宽度的处理
@@ -31,12 +32,12 @@
       }
       arr.at(index) = grid(
         columns: 2,
-        pad(left: indent, numbering(label, index + 1)), pad(left: body-indent, choice),
+        pad(left: indent, _label), pad(left: body-indent, choice),
       )
     } else {
       arr.at(index) = par(
-        hanging-indent: indent + body-indent + measure(numbering(label, index + 1)).width,
-        h(indent) + numbering(label, index + 1) + h(body-indent) + choice,
+        hanging-indent: indent + body-indent + measure(_label).width,
+        h(indent) + _label + h(body-indent) + choice,
       )
     }
 

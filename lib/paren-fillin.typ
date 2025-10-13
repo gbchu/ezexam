@@ -1,15 +1,5 @@
 #import "const-state.typ": answer-color-state, answer-state
 
-#let _get-answer(body, placeholder, with-number, update) = {
-  if answer-state.get() {
-    return text(answer-color-state.get(), body)
-  }
-  if not with-number { return placeholder }
-  counter("placeholder").step()
-  context counter("placeholder").display()
-  if update { counter("question").step() }
-}
-
 #let _FRAC = "frac"
 #let _SUM = "sum"
 #let _CASES = "cases"
@@ -91,6 +81,16 @@
   _check-equation(body)
 }
 
+#let _get-answer(body, placeholder, with-number, update) = {
+  if answer-state.get() {
+    return text(answer-color-state.get(), body)
+  }
+  if not with-number { return placeholder }
+  counter("placeholder").step()
+  context counter("placeholder").display()
+  if update { counter("question").step() }
+}
+
 // 填空的横线
 #let fillin(
   body,
@@ -108,8 +108,8 @@
   if len <= 0pt { panic("len must > 0") }
 
   let _body = _get-answer(body, placeholder, with-number, update)
-  // 需要显示答案时
-  if answer-state.get() and with-number == false {
+  // 显示答案时
+  if answer-state.get() {
     // 检测内容中是否有分数，求和，cases 这些较高的公式
     // 分别对应下划线的偏移量 8 13
     let check-result = _check-content(body)
@@ -140,7 +140,7 @@
       stroke: stroke,
     )[~#_body~]
   } else {
-    // 不显示答案时，只显示横线；根据给定的len绘制
+    // 只显示下划线；根据给定的len绘制
     // 第一行横线开始位置及长度
     let current-pos = here().position().x
     let first-line-available-space = page.width - page.margin - current-pos
