@@ -121,7 +121,7 @@
 
   let _body = _get-answer(body, placeholder, with-number, update)
   // 需要显示答案时
-  if _body != placeholder and with-number == false {
+  if answer-state.get() and with-number == false {
     // 检测内容中是否有分数，求和，cases 这些较高的公式
     // 分别对应下划线的偏移量 8 13
     let check-result = _check-content(body)
@@ -151,40 +151,38 @@
       offset: line-offset,
       stroke: stroke,
     )[~#_body~]
-
-    return
-  }
-
-  // 不显示答案时，只显示横线；根据给定的len绘制
-  // 第一行横线开始位置及长度
-  let current-pos = here().position().x
-  let first-line-available-space = page.width - page.margin - current-pos
-  // 第一行线
-  // 如果当前指定长度 < 剩余空间，则直接按照指定长度在文字后画线，否则，则需要在指定文字后先画一部分；
-  let continue-draw = true
-  set line(stroke: stroke)
-  if len <= first-line-available-space.length {
-    first-line-available-space = len
-    continue-draw = false
-  }
-
-  set box(outset: (bottom: 1.5pt)) if with-number
-  box(
-    width: first-line-available-space,
-    stroke: (bottom: stroke),
-    align(center, _body),
-  )
-
-  // 超过一行的后续横线
-  if continue-draw {
-    // 计算可以画多少完整的条数
-    let _ratio = (len - first-line-available-space).length / page.width
-    // 多条完整线
-    for _ in range(calc.floor(_ratio)) {
-      line(length: 100%)
+  } else {
+    // 不显示答案时，只显示横线；根据给定的len绘制
+    // 第一行横线开始位置及长度
+    let current-pos = here().position().x
+    let first-line-available-space = page.width - page.margin - current-pos
+    // 第一行线
+    // 如果当前指定长度 < 剩余空间，则直接按照指定长度在文字后画线，否则，则需要在指定文字后先画一部分；
+    let continue-draw = true
+    if len <= first-line-available-space.length {
+      first-line-available-space = len
+      continue-draw = false
     }
-    // 最后一行的线
-    box[#line(length: calc.fract(_ratio) * 100%)]
+
+    set box(outset: (bottom: 1.5pt)) if with-number
+    box(
+      width: first-line-available-space,
+      stroke: (bottom: stroke),
+      align(center, _body),
+    )
+
+    // 超过一行的后续横线
+    if continue-draw {
+      set line(stroke: stroke)
+      // 计算可以画多少完整的条数
+      let _ratio = (len - first-line-available-space).length / page.width
+      // 多条完整线
+      for _ in range(calc.floor(_ratio)) {
+        line(length: 100%)
+      }
+      // 最后一行的线
+      box[#line(length: calc.fract(_ratio) * 100%)]
+    }
   }
 }
 
