@@ -74,7 +74,7 @@
     let _label = label
     if label == auto {
       if mode == HANDOUTS {
-        _label = "1 ✏ 1"
+        _label = "1 / 1"
       } else {
         let _prefix = [#subject-state.get()试题#if mode == SOLUTION [答案]]
         _label = zh-arabic(prefix: _prefix)
