@@ -66,13 +66,11 @@
 
 #let secret(body: [绝密★启用前]) = place(top, float: true, clearance: 20pt, text(font: hei-ti, body))
 
-#let exam-type(type, prefix: "试卷类型: ") = {
-  context place(top + right)[
+#let exam-type(type, prefix: "试卷类型: ") = context place(top + right)[
     #text(
       font: text.font.slice(0, 2) + hei-ti,
     )[#prefix#type]
   ]
-}
 
 #let exam-info(
   info: (
