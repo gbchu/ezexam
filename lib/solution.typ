@@ -3,7 +3,7 @@
   body,
   title: none,
   title-size: 12pt,
-  title-weight: "bold",
+  title-weight: 700,
   title-color: luma(100%),
   title-bg-color: maroon,
   title-radius: 5pt,
