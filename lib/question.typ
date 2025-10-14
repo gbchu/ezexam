@@ -5,7 +5,7 @@
   body-indent: .7em,
   indent: 0pt,
   label: auto,
-  label-color: black,
+  label-color: luma(0),
   label-weight: 400,
   with-heading-label: false,
   points: none,
