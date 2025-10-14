@@ -1,3 +1,4 @@
+#import "const-state.typ": kai-ti
 // 一种页码格式: "第x页（共xx页）
 #let zh-arabic(prefix: "", suffix: "") = (..nums) => {
   let arr = nums.pos()
@@ -15,7 +16,7 @@
       dash: dash,
       paint: color,
     ),
-    text(font: "KaiTi", color, body),
+    text(font: kai-ti, color, body),
   )
   h(.8em)
 }
