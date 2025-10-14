@@ -1,87 +1,5 @@
 #import "const-state.typ": answer-color-state, answer-state
 
-/* #let _FRAC = "frac"
-#let _SUM = "sum"
-#let _CASES = "cases"
-
-#let _is-normal(body) = {
-  if body == [] or body == [ ] or body.has("text") {
-    return true
-  }
-  return false
-}
-
-#let _check-equation(body) = {
-  // 只有单独的一个公式
-  if not body.body.has("children") {
-    if body.body.func() == math.cases {
-      return _CASES
-    }
-
-    if body.body.has("base") and body.body.base.text == "∑" {
-      return _SUM
-    }
-
-    if body.body.func() == math.frac {
-      return _FRAC
-    }
-    return
-  }
-
-  if body.body.func() == math.cases {
-    return _CASES
-  }
-
-  let res = none
-  for value in body.body.children {
-    // 先检测公式中是否有CASES（最高）
-    if value.func() == math.cases {
-      return _CASES
-    }
-
-    // 检测公式中是否有SUM
-    if value.has("base") and value.base.text == "∑" {
-      res = _SUM
-      continue
-    }
-
-    // 检测公式中是否有分数
-    if value.func() == math.frac {
-      if res == _SUM { continue }
-      res = _FRAC
-    }
-  }
-  return res
-}
-
-#let _check-content(body) = {
-  // 检测是否为字符串
-  if (type(body) == str) {
-    panic("expected content，got " + str(type(body)))
-  }
-
-  // 如果为空或全都是字符
-  if _is-normal(body) { return }
-
-  // 含有公式的content检测
-  // 例如：$1/2 sum_(i=1)^n$ exexam $cases()$
-  if body.has("children") {
-    let res = for item in body.children {
-      if _is-normal(item) { continue }
-      (_check-equation(item),)
-    }
-    if res == none { return }
-    if res.contains(_CASES) { return _CASES }
-    if res.contains(_SUM) { return _SUM }
-    if res.contains(_FRAC) { return _FRAC }
-    return
-  }
-
-  // 只有一个纯公式检测；比如 $1/2 sum_(i=1)^n$
-  _check-equation(body)
-}
- */
-
 #let _get-answer(body, placeholder, with-number, update) = {
   if answer-state.get() {
     return text(answer-color-state.get(), body)
@@ -104,39 +22,18 @@
 ) = context {
   assert(type(len) == length, message: "expect length, got " + str(type(len)))
 
-  let _body = _get-answer(body, placeholder, with-number, update)
-
-  // 显示答案时
+  let result = _get-answer(body, placeholder, with-number, update)
   if answer-state.get() {
-    // 检测内容中是否有分数，求和，cases 这些较高的公式
-    // 分别对应下划线的偏移量 8 13
-    /* let check-result = _check-content(body)
-    let line-offset = offset
-    if check-result == _CASES {
-      line-offset = 16pt
-    } else if check-result == _SUM {
-      line-offset = 13pt
-    } else if check-result == _FRAC {
-      line-offset = 9pt
-    }
-
-    // 如果填写的内容包含数学公式，给数学公式添加下划线
-    show math.equation: it => box(
-      stroke: (bottom: stroke),
-      outset: (bottom: line-offset),
-      it,
-    ) */
-
     // 显示答案，但是并没有填写答案，默认显示下划线
-    if (_body.child == [] or _body.child == [ ]) {
-      _body = [~~~~#_body~~~~]
+    if (result.child == [] or result.child == [ ]) {
+      result = [~~~~#result~~~~]
     }
 
     underline(
       evade: false,
       offset: offset,
       stroke: stroke,
-      _body,
+      result,
     )
 
     return
@@ -160,7 +57,7 @@
     width: first-line-available-space,
     stroke: (bottom: stroke),
     outset: (bottom: 1.5pt),
-    align(center, _body),
+    align(center, result),
   )
 
   // 超过一行的后续横线
@@ -183,8 +80,8 @@
   with-number: false,
   update: false,
 ) = context {
-  let body = _get-answer(body, placeholder, with-number, update)
-  [#if justify { h(1fr) }（~~#upper(body)~~）]
+  let result = _get-answer(body, placeholder, with-number, update)
+  [#if justify { h(1fr) }（~~#upper(result)~~）]
 }
 
 // 类似英文中的7选5题型专用语法糖
