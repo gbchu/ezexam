@@ -13,11 +13,10 @@
 )
 
 #let latin-fonts = ("New Computer Modern Math", "")
-#let doc-fonts = latin-fonts + ("Noto Serif SC", "Noto Serif CJK SC", "SimSun")
+#let noto-serif-sc = latin-fonts + ("Noto Serif SC", "Noto Serif CJK SC", "SimSun")
 #let hei-ti = ("SimHei", "Noto Sans SC", "Noto Sans CJK SC")
-#let kai-ti = ("KaiTi",)
-#let hw-xing-kai = ("STXingkai",)
-#let ROMAN = ("Times New Roman", "TeX Gyre Termes Math") + doc-fonts
+#let kai-ti = ("STKaiti", "LXGW WenKai")
+#let ROMAN = ("Times New Roman", "TeX Gyre Termes Math") + noto-serif-sc
 
 //"exam": 试卷模式; "handouts": 讲义模式(默认)；"solution"：解析模式
 #let EXAM = "exam"
