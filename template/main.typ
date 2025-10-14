@@ -4,6 +4,7 @@
   mode: EXAM,
   // paper: a3,
   // font: ROMAN,
+  // show-answer: true
 )
 
 #outline()

@@ -10,35 +10,7 @@
   if update { counter("question").step() }
 }
 
-// 填空的横线
-#let fillin(
-  body,
-  len: 1cm,
-  placeholder: "▴",
-  with-number: false,
-  update: false,
-  stroke: .45pt + luma(0),
-  offset: 3.5pt,
-) = context {
-  assert(type(len) == length, message: "expect length, got " + str(type(len)))
-
-  let result = _get-answer(body, placeholder, with-number, update)
-  if answer-state.get() {
-    // 显示答案，但是并没有填写答案，默认显示下划线
-    if (result.child == [] or result.child == [ ]) {
-      result = [~~~~#result~~~~]
-    }
-
-    underline(
-      evade: false,
-      offset: offset,
-      stroke: stroke,
-      result,
-    )
-
-    return
-  }
-
+#let _draw-line(len, stroke, body) = {
   let _len = len.to-absolute()
   // 只显示下划线；根据给定的len绘制
   if _len <= 0pt { panic("len must > 0") }
@@ -57,7 +29,7 @@
     width: first-line-available-space,
     stroke: (bottom: stroke),
     outset: (bottom: 1.5pt),
-    align(center, result),
+    align(center, body),
   )
 
   // 超过一行的后续横线
@@ -70,6 +42,35 @@
     // 最后一行的线
     box(line(length: calc.fract(_ratio) * 100%))
   }
+}
+
+// 填空的横线
+#let fillin(
+  body,
+  len: 1cm,
+  placeholder: "▴",
+  with-number: false,
+  update: false,
+  stroke: .45pt + luma(0),
+  offset: 3.5pt,
+) = context {
+  assert(type(len) == length, message: "expect length, got " + str(type(len)))
+
+  let result = _get-answer(body, placeholder, with-number, update)
+
+  if (
+    not answer-state.get() or result.child == [] or result.child == [ ]
+  ) {
+    _draw-line(len, stroke, result)
+    return
+  }
+
+  underline(
+    evade: false,
+    offset: offset,
+    stroke: stroke,
+    result,
+  )
 }
 
 // 选项的括号
