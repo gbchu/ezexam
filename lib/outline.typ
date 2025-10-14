@@ -39,7 +39,7 @@
   size: 15pt,
   weight: 700,
   font: auto,
-  color: black,
+  color: luma(0),
   position: center,
   top: 0pt,
   bottom: 18pt,
