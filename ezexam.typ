@@ -156,11 +156,12 @@
         place(
           dx: -_width - 1em,
           dy: -2.4em,
-        )[
-          #rotate(-90deg, origin: right + bottom)[
-            #_create-seal(dash: line-type, info: student-info, supplement: supplement)
-          ]
-        ]
+          rotate(-90deg, origin: right + bottom, _create-seal(
+            dash: line-type,
+            info: student-info,
+            supplement: supplement,
+          )),
+        )
         return
       }
 
@@ -169,9 +170,10 @@
           page.height
         } else { page.width }
         // 章节最后页的弥封线
-        place(dx: _width - page.margin - 2em, dy: 2em)[
-          #rotate(90deg, origin: left + top, _create-seal(dash: line-type, supplement: supplement))
-        ]
+        place(dx: _width - page.margin - 2em, dy: 2em, rotate(90deg, origin: left + top, _create-seal(
+          dash: line-type,
+          supplement: supplement,
+        )))
       }
     ]
   }
@@ -184,12 +186,10 @@
     if watermark == none { return }
     set text(size: watermark-size, watermark-color)
     set par(leading: .5em)
-    place(horizon)[
-      #grid(
-        columns: paper.columns * (1fr,),
-        ..paper.columns * (rotate(watermark-rotate, watermark),),
-      )
-    ]
+    place(horizon, grid(
+      columns: paper.columns * (1fr,),
+      ..paper.columns * (rotate(watermark-rotate, watermark),),
+    ))
   }
   set page(
     ..a4 + paper,
