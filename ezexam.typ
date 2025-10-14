@@ -33,7 +33,7 @@
   enum-indent: 0pt,
   watermark: none,
   watermark-color: rgb("#f666"),
-  watermark-font: latin-fonts + doc-fonts,
+  watermark-font: doc-fonts,
   watermark-size: 88pt,
   watermark-rotate: -45deg,
   show-answer: false,
