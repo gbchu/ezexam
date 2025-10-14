@@ -9,7 +9,7 @@
 ) = {
   set page(footer: none, header: none, columns: 1)
   set align(center + horizon)
-  text(font: "STXingkai", size: 25pt)[#title]
+  text(font: hw-xing-kai, size: 25pt)[#title]
 
   if subtitle != none {
     text(font: hei-ti, size: 22pt)[\ #subtitle]
