@@ -102,11 +102,7 @@
   stroke: .45pt + luma(0),
   offset: 3.5pt,
 ) = context {
-  if type(len) in (ratio, relative) {
-    panic("expect length, got " + str(type(len)))
-  }
-
-  if len <= 0pt { panic("len must > 0") }
+  assert(type(len) == length, message: "expect length, got " + str(type(len)))
 
   let _body = _get-answer(body, placeholder, with-number, update)
 
@@ -133,26 +129,29 @@
 
     // 显示答案，但是并没有填写答案，默认显示下划线
     if (_body.child == [] or _body.child == [ ]) {
-      _body = [~~~#_body~~~]
+      _body = [~~~~#_body~~~~]
     }
 
     underline(
       evade: false,
       offset: offset,
       stroke: stroke,
-    )[~#_body~]
+      _body,
+    )
 
     return
   }
 
+  let _len = len.to-absolute()
   // 只显示下划线；根据给定的len绘制
+  if _len <= 0pt { panic("len must > 0") }
   // 第一行横线开始位置及长度
   let current-pos = here().position().x
   let first-line-available-space = page.width - page.margin - current-pos
   // 第一行线
   // 如果当前指定长度 < 剩余空间，则直接按照指定长度在文字后画线，否则，则需要在指定文字后先画一部分；
   let continue-draw = true
-  if len <= first-line-available-space.length {
+  if _len <= first-line-available-space.length {
     first-line-available-space = len
     continue-draw = false
   }
@@ -166,15 +165,13 @@
 
   // 超过一行的后续横线
   if continue-draw {
-    set line(stroke: stroke)
     // 计算可以画多少完整的条数
-    let _ratio = (len - first-line-available-space).length / page.width
+    let _ratio = (_len - first-line-available-space) / page.width
     // 多条完整线
-    for _ in range(calc.floor(_ratio)) {
-      line(length: 100%)
-    }
+    set line(stroke: stroke)
+    for _ in range(calc.floor(_ratio)) { line(length: 100%) }
     // 最后一行的线
-    box[#line(length: calc.fract(_ratio) * 100%)]
+    box(line(length: calc.fract(_ratio) * 100%))
   }
 }
 

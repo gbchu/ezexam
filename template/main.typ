@@ -4,7 +4,6 @@
   mode: EXAM,
   // paper: a3,
   // font: ROMAN,
-  // show-answer: true,
 )
 
 #outline()
@@ -95,7 +94,7 @@
 
 = 填空题：本题共 3 小题，每小题 5 分，共 15 分。
 #question[
-  若直线 $y = 2x + 5$ 是曲线 $y = e^x + x + a$ 的切线，则 $a =$#fillin[].
+  若直线 $y = 2x +5$ 是曲线 $y = e^x + x + a$ 的切线，则 $a =$#fillin[].
 ]
 
 #question[
