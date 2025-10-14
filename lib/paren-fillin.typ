@@ -98,7 +98,7 @@
   placeholder: "▴",
   with-number: false,
   update: false,
-  stroke: .45pt + luma (0),
+  stroke: .45pt + luma(0),
   offset: 3.5pt,
 ) = context {
   if type(len) in (ratio, relative) {
