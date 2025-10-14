@@ -66,11 +66,9 @@
 
 #let secret(body: [绝密★启用前]) = place(top, float: true, clearance: 20pt, text(font: hei-ti, body))
 
-#let exam-type(type, prefix: "试卷类型: ") = context place(top + right)[
-    #text(
-      font: text.font.slice(0, 2) + hei-ti,
-    )[#prefix#type]
-  ]
+#let exam-type(type, prefix: "试卷类型: ") = context place(top + right, text(
+  font: text.font.slice(0, 2) + hei-ti,
+)[#prefix#type])
 
 #let exam-info(
   info: (
@@ -98,18 +96,14 @@
   )
 }
 
-#let scoring-box(x: 0pt, y: 0pt) = place(dx: x, dy: y, right + top)[
-  #table(
-    columns: 2,
-    inset: 8pt,
-  )[得分][~~~~~~~~~][阅卷人]
-]
+#let scoring-box(x: 0pt, y: 0pt) = place(dx: x, dy: y, right + top, table(
+  columns: 2,
+  inset: 8pt,
+)[得分][~~~~~~~~~][阅卷人])
 
-#let score-box(x: 0pt, y: 0pt) = place(dx: x, dy: y, right + top)[
-  #table(
-    inset: 8pt,
-  )[得分][~~~~~~~~~#v(10pt)]
-]
+#let score-box(x: 0pt, y: 0pt) = place(dx: x, dy: y, right + top, table(
+  inset: 8pt,
+)[得分][~~~~~~~~~#v(10pt)])
 
 #let notice(format: "1.", indent: 2em, hanging-indent: auto, ..children) = context {
   text(font: hei-ti)[注意事项:]
