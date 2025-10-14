@@ -69,7 +69,7 @@
     evade: false,
     offset: offset,
     stroke: stroke,
-    result,
+    [~#result~],
   )
 }
 
