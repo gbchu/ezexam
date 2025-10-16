@@ -54,6 +54,7 @@ more details see [`Online Documentation`](https://ezexam.pages.dev/)
 + 修复 `choices` 某个选项有多行时，后续行的缩进和第一行不一致的bug
 + 重写 `fillin` 方法， 实现根据长度生成空线，并根据长度自动换行
 + 修复 `subject` 方法以字符串传入时的bug
++ 优化题号和题干之间的间距
 
 ### 0 . 2 . 1
 + 修复试卷模式下，生成 pdf 后的书签会显示题目大标题的问题，确保只显示章节

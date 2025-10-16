@@ -2,7 +2,7 @@
 
 #let question(
   body,
-  body-indent: 1.1em,
+  body-indent: .88em,
   indent: 0pt,
   label: auto,
   label-color: luma(0),
