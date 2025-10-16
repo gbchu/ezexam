@@ -17,7 +17,7 @@
   // 第一行横线开始位置及长度
   let page-width = page.width
   let _columns = page.columns
-  
+
   if page.flipped {
     page-width = page.height
   }
@@ -35,10 +35,9 @@
     first-line-available-space = _len
   }
 
-  set box(stroke: (bottom: stroke))
-
   let dy = -.682em
   if answer-state.get() { dy = 0pt }
+  set box(stroke: (bottom: stroke))
   box(place(dy: dy)[#box(
     width: first-line-available-space,
     outset: (bottom: offset),
@@ -48,16 +47,16 @@
   // 画完第一行线后，画一个空行
   box(width: first-line-available-space, stroke: none)
 
-  if detla-len <= 5pt { return }
-
   // 超过一行的后续横线
-  [ \ ]
-  // 计算可以画多少完整的条数
-  let _ratio = (_len - first-line-available-space) / (page.width - page.margin * 2)
-  // 多条完整线
-  for _ in range(calc.floor(_ratio)) { box(width: 100%, inset: (bottom: .682em)) }
-  // 最后一行的线
-  box(width: calc.fract(_ratio) * 100%)
+  if detla-len > 5pt {
+    [ \ ]
+    // 计算可以画多少完整的条数
+    let _ratio = (_len - first-line-available-space) / (page.width - page.margin * 2)
+    // 多条完整线
+    for _ in range(calc.floor(_ratio)) { box(width: 100%, inset: (bottom: .682em)) }
+    // 最后一行的线
+    box(width: calc.fract(_ratio) * 100%)
+  }
 }
 
 // 填空的横线

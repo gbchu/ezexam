@@ -62,6 +62,7 @@
   doc,
 ) = {
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode must be HANDOUTS or EXAM or SOLUTION")
+  assert(type(font) == array and type(heading-font) == array, message: "font must be an array, got " + str(type(font)))
   mode-state.update(mode)
 
   let _footer(label) = context {
@@ -213,7 +214,6 @@
 
   set par(leading: line-height, spacing: par-spacing, first-line-indent: (amount: first-line-indent, all: true))
 
-  if type(font) == str { font = (font,) }
   set text(font: font, size: font-size)
 
   if heading-numbering == auto {
@@ -223,13 +223,11 @@
     } else { heading-numbering = "1.1.1" }
   }
   set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
-  if type(heading-font) == str { heading-font = (heading-font,) }
   show heading: it => {
     v(heading-top)
-    text(heading-color, font: text.font.slice(0, 2) + heading-font, it)
+    text(heading-color, font: font.slice(0, 2) + heading-font, it)
     v(heading-bottom)
   }
-
   show heading.where(level: 1): it => {
     let size = h1-size
     if size == auto {
@@ -237,7 +235,6 @@
     }
     text(size: size, it)
   }
-
   // 试卷模式下，书签只显示章节
   set heading(bookmarked: false) if mode == EXAM
   show heading.where(level: 1).and(<chapter>): set heading(bookmarked: true)
@@ -257,9 +254,8 @@
     let space = h(.25em, weak: true)
     space + math.display(it) + space
   }
-
   //  π 在罗马字体下显示的样式；默认的有点丑
-  show math.pi: set text(font: font.slice(0, 2)) if font.contains("Times New Roman")
+  show math.pi: set text(font: "Times New Roman") if font.contains("Times New Roman")
   show math.parallel: "//"
 
   if show-answer {
