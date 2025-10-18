@@ -17,6 +17,7 @@
   radius: 5pt,
   bg-color: luma(100%),
   breakable: true,
+  line-height: auto,
   top: 0pt,
   bottom: 0pt,
   padding-top: 0pt,
@@ -58,7 +59,7 @@
     #let format = context () => {
       numbering("1.", ..counter("explain").get())
     }
-
+    #set par(leading: line-height) if line-height != auto
     #list(
       marker: if show-number { format } else { none },
       pad(top: padding-top, bottom: padding-bottom, text(color, body)),

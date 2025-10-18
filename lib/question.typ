@@ -12,6 +12,7 @@
   points-separate: true,
   points-prefix: "（",
   points-suffix: "分）",
+  line-height: auto,
   top: 0pt,
   bottom: 0pt,
   padding-top: 0pt,
@@ -49,6 +50,8 @@
       ),
     )
   })
+
+  set par(leading: line-height) if line-height != auto
 
   v(top - padding-top)
   list(
