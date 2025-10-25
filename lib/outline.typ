@@ -36,7 +36,7 @@
 
 #let title(
   body,
-  size: 15pt,
+  size: auto,
   weight: 700,
   font: auto,
   color: luma(0),
@@ -47,7 +47,15 @@
   v(top)
   let _font = font
   if _font == auto { _font = text.font }
-  align(position, text(font: _font, size, weight: weight, color)[#body <title>])
+  let _size = size
+  if size == auto {
+    if mode-state.get() == HANDOUTS {
+      _size = 20pt
+    } else {
+      _size = 15pt
+    }
+  }
+  align(position, text(font: _font, size: _size, weight: weight, color)[#body <title>])
   v(bottom)
   counter(heading).update(0)
   counter("question").update(0)
