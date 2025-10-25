@@ -8,7 +8,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 
 ## Usage
 ```typst
-#import "@preview/ezexam:0.2.2": *
+#import "@preview/ezexam:0.2.3": *
 #show: setup.with(
   mode: EXAM,
   paper: a3,
@@ -46,6 +46,8 @@ more details see [`Online Documentation`](https://ezexam.pages.dev/)
 ## Changelog
 ### 0 . 2 . 3
 + 为 `solution` 和 `question` 方法添加 `line-height` 参数；方便修改内容的行间距，特别是有较高的数学公式时。
++ 优化 `fillin` 方法
++ 修改 `question` 方法在 `HANDOUTS` 模式下的题号样式
 
 ### 0 . 2 . 2
 + 调整正文默认字体，由原来的 `Source Han Serif` 修改为 `Noto Serif SC` 、 `Noto Serif CJK SC` （二者效果一样，主要是后者压缩后更小，方便上传网盘进行安装）。黑体添加 `Noto Sans SC` 和 `Noto Sans CJK SC` ；修复在 typst app 中应用模板时，字体显示的问题
