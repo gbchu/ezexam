@@ -35,17 +35,19 @@
     first-line-available-space = _len
   }
 
-  let dy = -.682em
-  if answer-state.get() { dy = 0pt }
   set box(stroke: (bottom: stroke))
-  box(place(dy: dy)[#box(
-    width: first-line-available-space,
-    outset: (bottom: offset),
-    align(center, body),
-  )])
 
-  // 画完第一行线后，画一个空行
-  box(width: first-line-available-space, stroke: none)
+  if first-line-available-space > 5pt {
+    let dy = -.682em
+    if answer-state.get() { dy = 0pt }
+    box(place(dy: dy)[#box(
+      width: first-line-available-space,
+      outset: (bottom: offset),
+      align(center, body),
+    )])
+    // 画完第一行线后，画一个空行; 为了占位
+    box(width: first-line-available-space, stroke: none)
+  }
 
   // 超过一行的后续横线
   if detla-len > 5pt {
