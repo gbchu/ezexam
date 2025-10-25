@@ -1,5 +1,4 @@
 #import "const-state.typ": HANDOUTS, mode-state
-
 #let question(
   body,
   body-indent: .88em,
@@ -17,11 +16,12 @@
   bottom: 0pt,
   padding-top: 0pt,
   padding-bottom: 0pt,
-) = {
+) = context {
   // 分数设置
   assert(type(points) == int or points == none, message: "points must be a int or none")
+  let _body = body
   if points != none {
-    body = [#points-prefix#points#points-suffix #if points-separate [ \ ] #body]
+    _body = [#points-prefix#points#points-suffix #if points-separate [ \ ] #body]
   }
 
   // 格式化题号
@@ -29,36 +29,36 @@
   let _format = context counter("question").display(num => {
     let _label = label
     if label == auto {
-      if mode-state.get() == HANDOUTS {
-        _label = "1.1.1.1.1.1."
-      } else {
-        _label = "1."
-      }
+      _label = "1."
     }
 
     let arr = (num,)
     if with-heading-label {
+      _label = "1.1.1.1.1.1."
       // 去除heading label数组中的0
       arr = counter(heading).get().filter(item => item != 0) + arr
     }
     text(
       label-color,
       weight: label-weight,
-      box(
-        align(right, numbering(_label, ..arr)),
-        width: 1em,
-      ),
+      numbering(_label, ..arr),
     )
   })
 
+
   set par(leading: line-height) if line-height != auto
+
+  let _indent = indent
+  if mode-state.get() == HANDOUTS {
+    _indent -= 1em - measure(_format).width + .14em
+  }
 
   v(top - padding-top)
   list(
-    marker: _format,
+    marker: box(align(right, _format), width: 1em),
     body-indent: body-indent,
-    indent: indent,
-    pad(top: padding-top, bottom: padding-bottom, body),
+    indent: _indent,
+    pad(top: padding-top, bottom: padding-bottom, _body),
   )
   v(bottom)
 
