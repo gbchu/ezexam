@@ -56,9 +56,7 @@
 
     // 解析题号的格式化
     #counter("explain").step()
-    #let format = context () => {
-      numbering("1.", ..counter("explain").get())
-    }
+    #let format = context numbering("1.", ..counter("explain").get())
     #set par(leading: line-height) if line-height != auto
     #list(
       marker: if show-number { format } else { none },

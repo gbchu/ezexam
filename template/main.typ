@@ -177,5 +177,5 @@
 
 #solution[
   #answer[B]
-  解:
+  解: #lorem(8)#score(8)
 ]
