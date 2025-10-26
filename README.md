@@ -50,6 +50,7 @@ more details see [`Online Documentation`](https://ezexam.pages.dev/)
 + 优化 `fillin` 方法
 + 修改 `question` 方法在 `HANDOUTS` 模式下的题号样式
 + 修复 `solution` 在 Typst 的最新版 0.14.0 中题号显示的 bug
++ 优化 `paren` 方法，默认填写英文字母不再大写
 
 ### 0 . 2 . 2
 + 调整正文默认字体，由原来的 `Source Han Serif` 修改为 `Noto Serif SC` 、 `Noto Serif CJK SC` （二者效果一样，主要是后者压缩后更小，方便上传网盘进行安装）。黑体添加 `Noto Sans SC` 和 `Noto Sans CJK SC` ；修复在 typst app 中应用模板时，字体显示的问题
