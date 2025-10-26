@@ -99,7 +99,7 @@
   update: false,
 ) = context {
   let result = _get-answer(body, placeholder, with-number, update)
-  [#if justify { h(1fr) }（~~#upper(result)~~）]
+  [#if justify { h(1fr) }（~~#result~~）]
 }
 
 // 类似英文中的7选5题型专用语法糖
