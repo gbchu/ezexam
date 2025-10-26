@@ -20,7 +20,7 @@
   "SimSun",
 )
 #let hei-ti = ("SimHei", "Noto Sans SC", "Noto Sans CJK SC")
-#let kai-ti = ("STKaiti", "LXGW WenKai")
+#let kai-ti = ("STKaiti",)
 #let ROMAN = ("Times New Roman",) + noto-serif-sc.slice(1)
 
 //"exam": 试卷模式; "handouts": 讲义模式(默认)；"solution"：解析模式
