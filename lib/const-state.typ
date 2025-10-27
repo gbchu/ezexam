@@ -17,7 +17,6 @@
   "TeX Gyre Termes Math",
   "Noto Serif SC",
   "Noto Serif CJK SC",
-  "SimSun",
 )
 #let hei-ti = ("SimHei", "Noto Sans SC", "Noto Sans CJK SC")
 #let kai-ti = ("STKaiti",)
