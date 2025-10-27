@@ -3,6 +3,7 @@
   <a href="https://ezexam.pages.dev/">
     <img alt="Documentation" src="https://img.shields.io/website?down_message=offline&label=docs&up_color=007aff
   ></a>
+
   <a>
     <img alt="Typst Version" src="https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgbchu%2Fezexam%2Frefs%2Fheads%2Fmain%2Ftypst.toml&query=%24.package.version&prefix=v&logo=typst&label=package&color=239DAD"
   ></a>
