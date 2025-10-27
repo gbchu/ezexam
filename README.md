@@ -10,14 +10,8 @@
   <a href="https://typst.app/">
     <img alt="Typst App" src="https://img.shields.io/website?down_message=offline&label=typst.app&up_color=239dad&up_message=online&url=https%3A%2F%2Ftypst.app"
   ></a>
-  <a href="https://discord.gg/2uDybryKPe">
-    <img alt="Discord Server" src="https://img.shields.io/discord/1054443721975922748?color=5865F2&label=discord&labelColor=555"
-  ></a>
   <a href="https://github.com/typst/typst/blob/main/LICENSE">
     <img alt="Apache-2 License" src="https://img.shields.io/badge/license-Apache%202-brightgreen"
-  ></a>
-  <a href="https://typst.app/jobs/">
-    <img alt="Jobs at Typst" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Ftypst.app%2Fassets%2Fdata%2Fshields.json&query=%24.jobs.text&label=jobs&color=%23A561FF&cacheSeconds=1800"
   ></a>
 </p>
 
