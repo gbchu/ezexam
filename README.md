@@ -7,10 +7,9 @@
   <a href="https://typst.app/docs/">
     <img alt="Documentation" src="https://img.shields.io/website?down_message=offline&label=docs&up_color=007aff&up_message=online&url=https%3A%2F%2Ftypst.app%2Fdocs"
   ></a>
-  <a href="https://camo.githubusercontent.com/5ba5781faa4a08b156b0c918c80e48cb606c88ee83d3049b447bd0b3480bfd43/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f64796e616d69632f746f6d6c3f75726c3d68747470732533412532462532467261772e67697468756275736572636f6e74656e742e636f6d2532466762636875253246657a6578616d2532467265667325324668656164732532466d61696e25324674797073742e746f6d6c2671756572793d2532342e7061636b6167652e76657273696f6e267072656669783d76266c6f676f3d7479707374266c6162656c3d7061636b61676526636f6c6f723d323339444144">
+  <a>
     <img alt="Typst Version" src="https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgbchu%2Fezexam%2Frefs%2Fheads%2Fmain%2Ftypst.toml&query=%24.package.version&prefix=v&logo=typst&label=package&color=239DAD"
-  >
-</a>
+  ></a>
 
   <a href="https://github.com/typst/typst/blob/main/LICENSE">
     <img alt="Apache-2 License" src="https://img.shields.io/badge/license-Apache%202-brightgreen"
