@@ -1,6 +1,5 @@
 # `ezexam`
 
-<p align="center">
   <a href="https://typst.app/docs/">
     <img alt="Documentation" src="https://img.shields.io/website?down_message=offline&label=docs&up_color=007aff&up_message=online&url=https%3A%2F%2Ftypst.app%2Fdocs"
   ></a>
@@ -11,7 +10,6 @@
   <a href="https://github.com/gbchu/ezexam/blob/main/LICENSE">
     <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue"
   ></a>
-</p>
 
 ## Introduction
 This template is primarily designed to help Chinese university, primary, middle and high school teachers or students in creating exams or handouts.
