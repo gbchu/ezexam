@@ -43,8 +43,6 @@ This template is primarily designed to help Chinese university, primary, middle 
 ......
 ```
 
-more details see [`Online Documentation`](https://ezexam.pages.dev/)
-
 ## Changelog
 ### 0 . 2 . 3
 + 为 `solution` 和 `question` 方法添加 `line-height` 参数；方便修改内容的行间距，特别是有较高的数学公式时。
