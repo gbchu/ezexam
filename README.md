@@ -1,16 +1,5 @@
 # ezexam
 
-<a href="https://ezexam.pages.dev/">
-   <img alt="Documentation" src="https://img.shields.io/website?down_message=offline&label=docs&up_color=007aff&up_message=online&url=https%3A%2F%2Ftypst.app%2Fdocs"></a>
-
-  <a>
-    <img alt="Typst Version" src="https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgbchu%2Fezexam%2Frefs%2Fheads%2Fmain%2Ftypst.toml&query=%24.package.version&prefix=v&logo=typst&label=package&color=239DAD"
-  ></a>
-
-  <a href="https://github.com/gbchu/ezexam/blob/main/LICENSE">
-    <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue"
-  ></a>
-
 ![Typst Version](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgbchu%2Fezexam%2Frefs%2Fheads%2Fmain%2Ftypst.toml&query=%24.package.version&prefix=v&logo=typst&label=package&color=239DAD)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/gbchu/ezexam/blob/main/LICENSE)
 [![Online Documentation](https://img.shields.io/badge/docs-online-007aff)](https://ezexam.pages.dev/)
