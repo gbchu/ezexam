@@ -6,7 +6,7 @@
 ## Introduction
 This template is primarily designed to help Chinese university, primary, middle and high school teachers or students in creating exams or handouts.
 
-## A brief example
+## Example
 ```typst
 #import "@preview/ezexam:0.2.3": *
 #show: setup.with(
