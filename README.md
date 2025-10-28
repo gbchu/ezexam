@@ -1,12 +1,13 @@
-# `ezexam`
+# ezexam
+
 ![Typst Version](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgbchu%2Fezexam%2Frefs%2Fheads%2Fmain%2Ftypst.toml&query=%24.package.version&prefix=v&logo=typst&label=package&color=239DAD)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/gbchu/ezexam/blob/main/LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/gbchu/ezexam/blob/main/LICENSE)
+[![Online Documentation](https://img.shields.io/badge/docs-online-007aff)](https://ezexam.pages.dev/)
 
 
-## Introduction
 This template is primarily designed to help Chinese university, primary, middle and high school teachers or students in creating exams or handouts.
 
-## A brief usage
+## Example
 ```typst
 #import "@preview/ezexam:0.2.3": *
 #show: setup.with(
@@ -42,11 +43,9 @@ This template is primarily designed to help Chinese university, primary, middle 
 ......
 ```
 
-more details see [`Online Documentation`](https://ezexam.pages.dev/)
-
 ## Changelog
 ### 0 . 2 . 3
-+ 为 `solution` 和 `question` 方法添加 `line-height` 参数；方便修改内容的行间距，特别是有较高的数学公式时。
++ 为 `solution` 和 `question` 方法添加 `line-height` 参数；方便修改内容的行间距
 + 优化 `fillin` 方法
 + 修改 `question` 方法在 `HANDOUTS` 模式下的题号样式
 + 修复 `solution` 在 Typst 的最新版 0.14.0 中题号显示的 bug
