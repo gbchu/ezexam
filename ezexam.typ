@@ -1,10 +1,10 @@
 #import "lib/tools.typ": *
 #import "lib/outline.typ": *
 #import "lib/choice.typ": choices
-#import "lib/question.typ": *
+#import "lib/question.typ": question
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/solution.typ": *
-#import "lib/text-figure.typ": *
+#import "lib/text-figure.typ": text-figure
 #import "lib/draft.typ": draft
 
 #let setup(
