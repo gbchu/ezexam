@@ -46,6 +46,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 ## Changelog
 ### 0 . 2 . 4
 + 优化 `choices` 方法；新增参数 `dir` ； 该参数可在选项为图表时，修改图表和标签的排列方式。默认左右排列
++ 优化 `question` 方法；
 
 
 ### 0 . 2 . 3
