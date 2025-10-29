@@ -9,7 +9,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 
 ## Example
 ```typst
-#import "@preview/ezexam:0.2.3": *
+#import "@preview/ezexam:0.2.4": *
 #show: setup.with(
   mode: EXAM,
   paper: a3,
@@ -44,6 +44,10 @@ This template is primarily designed to help Chinese university, primary, middle 
 ```
 
 ## Changelog
+### 0 . 2 . 4
++ 优化 `choices` 方法；新增参数 `dir` ； 该参数可在选项为图表时，修改图表和标签的排列方式。默认左右排列
+
+
 ### 0 . 2 . 3
 + 为 `solution` 和 `question` 方法添加 `line-height` 参数；方便修改内容的行间距
 + 优化 `fillin` 方法
