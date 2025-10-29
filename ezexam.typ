@@ -1,6 +1,6 @@
 #import "lib/tools.typ": *
 #import "lib/outline.typ": *
-#import "lib/choice.typ": *
+#import "lib/choice.typ": choices
 #import "lib/question.typ": *
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/solution.typ": *
@@ -16,7 +16,7 @@
   show-gap-line: false,
   footer-is-separate: true,
   outline-page-numbering: "I",
-  font: noto-serif-sc,
+  font: main-font,
   font-size: 11pt,
   line-height: 2em,
   par-spacing: 2em,
@@ -33,7 +33,7 @@
   enum-indent: 0pt,
   watermark: none,
   watermark-color: rgb("#f666"),
-  watermark-font: noto-serif-sc,
+  watermark-font: main-font,
   watermark-size: 88pt,
   watermark-rotate: -45deg,
   show-answer: false,
