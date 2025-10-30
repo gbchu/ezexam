@@ -1,24 +1,24 @@
-#let _format-choice(choice, label, indent, body-indent, dir) = {
+#let _format-choice(choice, label, indent, spacing, label-postion) = {
   if choice.func() not in (image, table) {
     return par(
-      hanging-indent: indent + body-indent + measure(label).width,
-      h(indent) + label + h(body-indent) + choice,
+      hanging-indent: indent + spacing + measure(label).width,
+      h(indent) + label + h(spacing) + choice,
     )
   }
 
   // 选项为图片、表格的处理
-  if dir == "ttb" {
+  if label-postion == bottom {
     return grid(
       align: center,
       inset: (left: indent),
-      pad(bottom: body-indent, choice),
+      pad(bottom: spacing, choice),
       label,
     )
   }
 
   grid(
     columns: 2,
-    pad(left: indent, label), pad(left: body-indent, choice),
+    pad(left: indent, label), pad(left: spacing, choice),
   )
 }
 
@@ -44,11 +44,11 @@
   c-gap: 0pt,
   r-gap: 25pt,
   indent: 0pt,
-  body-indent: 5pt,
+  spacing: 5pt,
   top: 0pt,
   bottom: 0pt,
   label: "A.",
-  dir: "ltr",
+  label-postion: left,
   ..options,
 ) = layout(container => {
   // 使用layout获取当前父元素的宽度
@@ -67,8 +67,8 @@
       [#choices-arr.at(index)],
       numbering(label, index + 1),
       indent,
-      body-indent,
-      dir,
+      spacing,
+      label-postion,
     )
 
     if columns != auto { continue }
