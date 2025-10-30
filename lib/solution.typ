@@ -46,20 +46,21 @@
         title-color,
         title,
       ))
-      let _title-height = measure(title-box).height
       place(
         title-align,
         dx: title-x,
-        dy: -_inset.top - _title-height / 2 + title-y,
-      )[#title-box]
+        dy: -_inset.top - measure(title-box).height / 2 + title-y,
+        title-box,
+      )
     }
 
     // 解析题号的格式化
     #counter("explain").step()
-    #let format = context numbering("1.", ..counter("explain").get())
+    #let _marker = context numbering("1.", ..counter("explain").get())
+    #if show-number { _marker = none }
     #set par(leading: line-height) if line-height != auto
     #list(
-      marker: if show-number { format } else { none },
+      marker: _marker,
       pad(top: padding-top, bottom: padding-bottom, text(color, body)),
     )
   ]
