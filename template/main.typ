@@ -1,4 +1,5 @@
-#import "@preview/ezexam:0.2.4": *
+// #import "@preview/ezexam:0.2.4": *
+#import "/ezexam.typ": *
 
 #show: setup.with(
   mode: EXAM,
@@ -45,7 +46,7 @@
 ]
 
 #question[
-  设 $f(x)$ 是定义在 $RR$ 上且周期为 2 的偶函数，当 $2 lt.eq.slant x lt.eq.slant 3$ 时，$f(x) = 5 - 2x$，则
+  设 $f(x)$ 是定义在 $RR$ 上且周期为 2 的偶函数，当 $2 lt.slant x lt.slant 3$ 时，$f(x) = 5 - 2x$，则
   $f(-3 / 4 ) =$ #paren[]
   #choices([$-1 / 2$], [$-1 / 4$], [$1 / 4$], [$1 / 2$])
 ]
@@ -84,7 +85,7 @@
 #question[
   设抛物线 $C: y^2 = 6x$ 的焦点为 $F$，过 $F$ 的直线交 $C$ 于$A、B$，过 $F$ 且垂直于 $A B$的直线交准线 $l$:
   $y = -3 / 2x$ 于 $E$，过点$A$作准线的垂线，垂足为$D$，则 #paren[]
-  #choices([$|A D| = |A F|$], [$|A E| = |A B|$], [$|A B| gt.eq.slant 6$], [$|A E| dot |B E| gt.eq.slant 18$])
+  #choices([$|A D| = |A F|$], [$|A E| = |A B|$], [$|A B| gt.slant 6$], [$|A E| dot |B E| gt.slant 18$])
 ]
 
 #question[
@@ -123,7 +124,7 @@
   #text-figure(
     figure: table(
       columns: 4,
-      [$P(chi^2 gt.eq.slant k)$], [0.005], [0.010], [0.001],
+      [$P(chi^2 gt.slant k)$], [0.005], [0.010], [0.001],
       [$k$], [3.841], [6.635], [10.828],
     ),
   )[附：$chi^2 = n(a d - b c)^2 / ((a + b)(c + d)(a + c)(b + d))$.]
@@ -158,11 +159,11 @@
     + 设直线$O Q$ 的斜率为 $k_1$，直线 $O P$ 的斜率为 $k_2$，若 $k_1 = 3k_2$，$M$为椭圆上一点，求 $|P M|$ 的最大值.
 ]
 
-#question(points: 17, bottom: 2in)[
+#question(points: 17)[
   设函数 $f(x) = 5cos x - cos 5x$.
   + 求 $f(x)$ 在 $[0, pi / 4]$ 的最大值；
-  + 给定 $theta in (0, pi)，a$ 为实数，证明：存在 $y in [a - theta, a + theta]$，使得 $cos y lt.eq.slant cos theta$；
-  + 若存在 $phi$，使得对任意 $x$，都有 $5cos x - cos(5x + phi) lt.eq.slant b$，求 $b$ 的最小值.
+  + 给定 $theta in (0, pi)，a$ 为实数，证明：存在 $y in [a - theta, a + theta]$，使得 $cos y lt.slant cos theta$；
+  + 若存在 $phi$，使得对任意 $x$，都有 $5cos x - cos(5x + phi) lt.slant b$，求 $b$ 的最小值.
 ]
 
 
