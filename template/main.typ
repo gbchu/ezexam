@@ -1,5 +1,4 @@
-// #import "@preview/ezexam:0.2.4": *
-#import "/ezexam.typ": *
+#import "@preview/ezexam:0.2.4": *
 
 #show: setup.with(
   mode: EXAM,
@@ -54,7 +53,7 @@
 #question[
   已知视风速是真风速和船风速的和向量，船风速与船行驶速度大小相等，方向相反.则真风速等级是 #paren[]
   #text-figure(
-    figure: image("6.png", width: 1.5in), // 替换自己的图片
+    figure: image("6.png", width: 1.5in),
     figure-x: -1in,
   )[#choices(
     columns: 1,
