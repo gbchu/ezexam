@@ -1,4 +1,4 @@
-#import "const-state.typ": kai-ti
+#import "const-state.typ": hei-ti
 // 一种页码格式: "第x页（共xx页）
 #let zh-arabic(prefix: "", suffix: "") = (..nums) => {
   let arr = nums.pos()
@@ -7,19 +7,11 @@
 
 #let multi = text(maroon)[（多选）]
 
-#let color-box(body, color: blue, dash: "dotted", radius: 3pt) = {
-  box(
-    outset: (y: .35em),
-    inset: (x: .35em),
-    radius: radius,
-    stroke: (
-      thickness: .5pt,
-      dash: dash,
-      paint: color,
-    ),
-    text(font: kai-ti, color, body),
-  )
-  h(.6em, weak: true)
+#let tag(body, color: blue, font: auto, prefix: "【", suffix: "】") = context {
+  let _font = font
+  if font == auto { _font = text.font.slice(0, 1) + hei-ti }
+  text(font: _font, color)[#prefix#body#suffix]
+  h(.1em, weak: true)
 }
 
 #let underdot(body) = {

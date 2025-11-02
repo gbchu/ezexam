@@ -75,7 +75,7 @@
 
   v(top - padding-top)
   list(
-    marker: box(align(right, _marker), width: 1em),
+    marker: box(align(right, _marker), width: 1em, inset: (top: .059em)),
     body-indent: body-indent,
     indent: _indent,
     pad(top: padding-top, bottom: padding-bottom, _body),
