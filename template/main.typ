@@ -3,7 +3,7 @@
 #show: setup.with(
   mode: EXAM,
   // paper: a3,
-  font: ROMAN,
+  // font: ROMAN,
 )
 
 #outline()
@@ -169,8 +169,6 @@
 #show: setup.with(
   mode: SOLUTION,
   show-answer: true,
-  paper: a3,
-  font: ROMAN,
 )
 
 #title[参考答案]
