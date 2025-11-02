@@ -3,7 +3,7 @@
 #show: setup.with(
   mode: EXAM,
   // paper: a3,
-  // font: ROMAN,
+  font: ROMAN,
 )
 
 #outline()
@@ -170,7 +170,7 @@
   mode: SOLUTION,
   show-answer: true,
   paper: a3,
-  font: ROMAN
+  font: ROMAN,
 )
 
 #title[参考答案]

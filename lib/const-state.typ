@@ -15,9 +15,10 @@
 #let main-font = ("New Computer Modern Math", "Noto Serif SC", "Noto Serif CJK SC")
 #let hei-ti = ("SimHei", "Noto Sans SC", "Noto Sans CJK SC")
 #let kai-ti = ("STKaiti",)
-#let ROMAN = ("TeX Gyre Termes Math",) + main-font.slice(1)
+#let ROMAN = ((name: "Times New Roman", covers: "latin-in-cjk"), "TeX Gyre Termes Math") + main-font
 
-//"exam": 试卷模式; "handouts": 讲义模式(默认)；"solution"：解析模式
+
+// "exam": 试卷模式; "handouts": 讲义模式(默认)；"solution"：解析模式
 #let EXAM = "exam"
 #let HANDOUTS = "handouts"
 #let SOLUTION = "solution"
