@@ -45,8 +45,8 @@
 ]
 
 #question[
-  设 $f(x)$ 是定义在 $RR$ 上且周期为 2 的偶函数，当 $2 lt.slant x lt.slant 3$ 时，$f(x) = 5 - 2x$，则
-  $f(-3 / 4 ) =$ #paren[]
+  设 $f(x)$ 是定义在 $RR$ 上且周期为 2 的偶函数，当 $2 lt.slant x lt.slant 3$ 时，$f(x) = 5 - 2x$，则 $f(-3 / 4 ) =$
+  #paren[]
   #choices([$-1 / 2$], [$-1 / 4$], [$1 / 4$], [$1 / 2$])
 ]
 
@@ -166,7 +166,12 @@
 ]
 
 
-#show: setup.with(mode: SOLUTION, show-answer: true)
+#show: setup.with(
+  mode: SOLUTION,
+  show-answer: true,
+  paper: a3,
+  font: ROMAN
+)
 
 #title[参考答案]
 

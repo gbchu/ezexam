@@ -37,7 +37,7 @@
 
   set box(stroke: (bottom: stroke))
 
-  if first-line-available-space > 5pt {
+  if first-line-available-space > 1pt {
     let dy = -.682em
     if answer-state.get() { dy = 0pt }
     box(place(dy: dy)[#box(
@@ -45,15 +45,15 @@
       outset: (bottom: offset),
       align(center, body),
     )])
-    // 画完第一行线后，画一个空行; 为了占位
-    box(width: first-line-available-space, stroke: none)
+    // 画完第一行线后，空行占位
+    h(first-line-available-space, weak: true)
   }
 
   // 超过一行的后续横线
   if detla-len > 5pt {
-    [ \ ]
+    // [ \ ]
     // 计算可以画多少完整的条数
-    let _ratio = (_len - first-line-available-space) / (page.width - page.margin * 2)
+    let _ratio = detla-len / (page.width - page.margin * 2)
     // 多条完整线
     for _ in range(calc.floor(_ratio)) { box(width: 100%, inset: (bottom: .682em)) }
     // 最后一行的线
