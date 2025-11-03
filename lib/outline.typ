@@ -16,7 +16,7 @@
   }
 
   if author != none {
-    text(font: kai-ti, size: 15pt)[\ 作者：#author]
+    text(font: "STKaiti", size: 15pt)[\ 作者：#author]
   }
 
   if date != none [
