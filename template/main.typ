@@ -1,9 +1,9 @@
-#import "@preview/ezexam:0.2.4": *
+#import "@preview/ezexam:0.2.5": *
 
 #show: setup.with(
   mode: EXAM,
   // paper: a3,
-  // font: ROMAN,
+  // font: roman,
 )
 
 #outline()
