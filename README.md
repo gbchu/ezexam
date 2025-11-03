@@ -13,7 +13,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 #show: setup.with(
   mode: EXAM,
   paper: a3,
-  font: ROMAN
+  font: roman
 )
 
 #title[XX试卷]
