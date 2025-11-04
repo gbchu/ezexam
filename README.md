@@ -50,7 +50,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 
 ### 0 . 2 . 4
 + 优化 `choices` 方法；新增参数 `label-position` ； 该参数可在选项为图表时，修改标签的位置。默认在左侧；将参数 `body-indent` 名修改为 `sapcing` ；更加符合语境
-+ 优化 `question` 方法，修复题号偏移的 bug；修改在字体设置为 ROMAN 时，`label-weight` 失效的 bug
++ 优化 `question` 方法，修复题号偏移的 bug
 + 修复修改 `setup` 方法的 `paper` 参数时，只修改部分值报错的 bug
 + 修复在 Typst 的最新版 0.14.0 中数学字体报警告问题
 
