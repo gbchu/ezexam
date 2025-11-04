@@ -46,6 +46,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 ## Changelog
 ### 0 . 2 . 5
 + 废弃 `color-box` 方法 ；新增 `tag` 方法替代
++ 重构 `multi` 方法
 + 将 `ROMAN` 修改为 `roman`
 
 ### 0 . 2 . 4

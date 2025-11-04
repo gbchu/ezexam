@@ -5,14 +5,14 @@
   [#prefix 第#str(arr.at(0))页（共#str(arr.at(-1))页）#suffix]
 }
 
-#let multi = text(maroon)[（多选）]
-
 #let tag(body, color: blue, font: auto, prefix: "【", suffix: "】") = context {
   let _font = font
   if font == auto { _font = text.font.slice(0, 1) + hei-ti }
   text(font: _font, color)[#prefix#body#suffix]
   h(.1em, weak: true)
 }
+
+#let multi = tag.with(prefix: $circle.filled.tiny$, suffix: none, color: maroon)[多选]()
 
 #let underdot(body) = {
   assert(type(body) == str or body.func() == text, message: "expected str or text")
