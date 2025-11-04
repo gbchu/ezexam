@@ -11,8 +11,8 @@
 #title[2025新高考I卷]
 #subject[数学]
 #secret()
-#exam-type[A]
 #scoring-box(y: .5in)
+#exam-type[A]
 #exam-info(info: (命题人: "张三  李四  王五", 审题: "老六教研组"))
 #exam-info()
 
