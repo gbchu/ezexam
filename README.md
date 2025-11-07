@@ -48,6 +48,8 @@ This template is primarily designed to help Chinese university, primary, middle 
 + 废弃 `color-box` 方法 ；新增 `tag` 方法替代
 + 重构 `multi`
 + 将 `ROMAN` 修改为 `roman`
++ 修复 `text-figure` 在一页快要结束时，文字换页但图表还在上一页的 bug
++ 优化 `paren` 方法；
 
 ### 0 . 2 . 4
 + 优化 `choices` 方法；新增参数 `label-position` ； 该参数可在选项为图表时，修改标签的位置。默认在左侧；将参数 `body-indent` 名修改为 `sapcing` ；更加符合语境
