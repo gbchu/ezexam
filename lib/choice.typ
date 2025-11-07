@@ -76,6 +76,7 @@
   }
 
   v(top)
+
   grid(
     columns: _count-columns(container.width, choice-number, max-width + c-gap, columns) * (1fr,),
     column-gutter: c-gap,
