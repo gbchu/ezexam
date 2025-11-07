@@ -7,6 +7,7 @@
   bottom: 0pt,
   gap: 0pt,
   style: "tf",
+  align: top,
   text,
 ) = context {
   assert(style == "tf" or style == "ft", message: "style must be 'tf' or 'ft'")
@@ -14,7 +15,7 @@
   let _columns = (1fr, measure(figure).width)
   let _gap = -figure-x + gap
 
-  let body = (box(text), place(dy: figure-y, dx: figure-x, horizon, figure))
+  let body = (box(text), place(dx: figure-x, dy: figure-y, align, figure))
 
   if style == "ft" {
     body = body.rev()
@@ -25,7 +26,6 @@
   let dpar = par.leading - par.spacing
   grid(
     columns: _columns,
-    align: horizon,
     inset: (
       top: top + dpar,
       bottom: bottom + dpar,
