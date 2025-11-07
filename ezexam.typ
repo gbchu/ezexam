@@ -64,8 +64,8 @@
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode must be HANDOUTS or EXAM or SOLUTION")
   assert(type(font) == array and type(heading-font) == array, message: "font must be an array, got " + str(type(font)))
   mode-state.update(mode)
-
   paper = a4 + paper
+
 
   let _footer(label) = context {
     assert(
@@ -124,6 +124,8 @@
     }
     align(position, _numbering)
   }
+
+  import "lib/draft.typ": _create-seal
   let _header(
     student-info: seal-line-student-info,
     line-type: seal-line-type,
@@ -152,7 +154,6 @@
     let _width = page.height - _margin-y
     if page.flipped { _width = page.width - _margin-y }
     block(width: _width)[
-      #import "lib/draft.typ": _create-seal
       // 判断当前是在当前章节第一页还是章节最后一页
       //当前章节第一页弥封线
       #if chapter-location.contains(current) {
@@ -168,11 +169,11 @@
         return
       }
 
+      // 章节最后页的弥封线
       #if (chapter-last-page-location).contains(current) {
         _width = if page.flipped {
           page.height
         } else { page.width }
-        // 章节最后页的弥封线
         place(dx: _width - page.margin - 2em, dy: 2em, rotate(90deg, origin: left + top, _create-seal(
           dash: line-type,
           supplement: supplement,
@@ -180,6 +181,7 @@
       }
     ]
   }
+
   let _background() = {
     if paper.columns == 2 and show-gap-line {
       line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
@@ -194,6 +196,7 @@
       ..paper.columns * (rotate(watermark-rotate, watermark),),
     ))
   }
+
   set page(
     ..paper,
     header: _header(),
