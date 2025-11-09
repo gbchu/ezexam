@@ -10,25 +10,14 @@
   if update { counter("question").step() }
 }
 
-#let _draw-first-line(width, offset, body) = {
-  let dy = -.682em
-  if answer-state.get() { dy = 0pt }
-  box(
-    place(dy: dy)[
-      #box(
-        width: width,
-        outset: (bottom: offset),
-        align(center, body),
-      )],
-  )
-  // 画完第一行线后，空行占位
-  h(width, weak: true)
-}
+/* #let _draw-first-line(width, offset, body) = {
+  h(1.5pt, weak: true)
+  box(width: width - 1.5pt, outset: (bottom: offset), align(center, body))
+} */
 
 #let _draw-line(len, stroke, offset, body) = {
   let _len = len.to-absolute()
-  // 只显示下划线；根据给定的len绘制
-  if _len <= 5pt { panic("len must > 5pt") }
+  if _len < 5pt { panic("len must >= 5pt") }
   // 第一行横线开始位置及长度
   let page-width = page.width
   let _columns = page.columns
@@ -43,8 +32,6 @@
 
   let first-line-available-space = page-width - page.margin - here().position().x
 
-  set box(stroke: (bottom: stroke))
-
   // 第一行线
   // 如果当前指定长度 < 剩余空间，则直接按照指定长度在文字后画线
   let detla-len = _len - first-line-available-space
@@ -53,8 +40,11 @@
   }
 
   // 当前指定长度 > 剩余空间且剩余空间 > 2pt，在指定文字后先画一部分；
+  set box(stroke: (bottom: stroke), outset: (bottom: offset))
   if first-line-available-space > 2pt {
-    _draw-first-line(first-line-available-space, offset, body)
+    h(1.5pt, weak: true)
+    box(width: first-line-available-space - 1.5pt, align(center, body))
+    h(1.5pt, weak: true)
   }
 
 
@@ -63,9 +53,13 @@
     // 计算可以画多少完整的条数
     let _ratio = detla-len / (page.width - page.margin * 2)
     // 多条完整线
-    for _ in range(calc.floor(_ratio)) { box(width: 100%, inset: (bottom: .682em)) }
+    for _ in range(calc.floor(_ratio)) {
+      box(width: 100%, inset: (bottom: offset))
+    }
     // 最后一行的线
+
     box(width: calc.fract(_ratio) * 100%)
+    h(1.5pt, weak: true)
   }
 }
 
@@ -77,7 +71,7 @@
   with-number: false,
   update: false,
   stroke: .45pt + luma(0),
-  offset: 1.5pt,
+  offset: 3pt,
 ) = context {
   assert(type(len) == length, message: "expect length, got " + str(type(len)))
 
