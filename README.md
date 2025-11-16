@@ -49,7 +49,8 @@ This template is primarily designed to help Chinese university, primary, middle 
 + 重构 `multi`
 + 将 `ROMAN` 修改为 `roman`
 + 优化 `paren` 方法
-+ 优化 `text-figure` 方法；添加参数 `align`
++ 优化 `text-figure` 方法；修复当图文在新的一页且文本较少时，图表显示不全的 bug ；添加参数 `align`
++ 优化 `fillin` 方法，修复题号偏移的 bug
 
 ### 0 . 2 . 4
 + 优化 `choices` 方法；新增参数 `label-position` ； 该参数可在选项为图表时，修改标签的位置。默认在左侧；将参数 `body-indent` 名修改为 `sapcing` ；更加符合语境

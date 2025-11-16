@@ -12,17 +12,20 @@
 ) = context {
   assert(style == "tf" or style == "ft", message: "style must be 'tf' or 'ft'")
 
-  let _columns = (1fr, measure(figure).width)
+  let (width, height) = measure(figure)
+  let _columns = (1fr, width)
   let _gap = -figure-x + gap
+  let body = (
+    text,
+    place(dx: figure-x, dy: figure-y, align, box(height: height, figure)),
+  )
 
-  let body = (text, place(dx: figure-x, dy: figure-y, align, figure))
 
   if style == "ft" {
     body = body.rev()
     _columns = _columns.rev()
     _gap = figure-x + gap
   }
-
   grid(
     columns: _columns,
     inset: (
