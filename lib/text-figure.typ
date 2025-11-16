@@ -11,16 +11,23 @@
   text,
 ) = context {
   assert(style == "tf" or style == "ft", message: "style must be 'tf' or 'ft'")
-
   let (width, height) = measure(figure)
-  let _columns = (1fr, width)
-  let _gap = -figure-x + gap
+  let _text = text
+  // 检测是否需要换页
+  let _page-height = page.height
+  if page.flipped {
+    _page-height = page.width
+  }
+  if _page-height - page.margin - here().position().y > height {
+    _text = box(_text)
+  }
   let body = (
-    text,
+    _text,
     place(dx: figure-x, dy: figure-y, align, box(height: height, figure)),
   )
 
-
+  let _columns = (1fr, width)
+  let _gap = -figure-x + gap
   if style == "ft" {
     body = body.rev()
     _columns = _columns.rev()
