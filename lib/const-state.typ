@@ -12,8 +12,7 @@
   flipped: false,
 )
 
-// 分别设置数学字体 / windows / 在线 / mac 下的宋体
-#let main-font = ("New Computer Modern Math", "Noto Serif SC", "Noto Serif CJK SC", "Songti SC")
+#let main-font = ("New Computer Modern Math", "Noto Serif CJK SC")
 
 // 分别设置windows / 在线 / mac 下的黑体
 #let hei-ti = ("SimHei", "Noto Sans CJK SC", "Heiti SC")
