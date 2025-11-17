@@ -12,9 +12,13 @@
   flipped: false,
 )
 
-#let main-font = ("New Computer Modern Math", "Noto Serif SC", "Noto Serif CJK SC")
-#let hei-ti = ("SimHei", "Noto Sans SC", "Noto Sans CJK SC")
-#let roman = ((name: "Times New Roman", covers: regex("\d")), "TeX Gyre Termes Math") + main-font
+// 分别设置数学字体 / windows / 在线 / mac 下的宋体
+#let main-font = ("New Computer Modern Math", "Noto Serif SC", "Noto Serif CJK SC", "Songti SC")
+
+// 分别设置windows / 在线 / mac 下的黑体
+#let hei-ti = ("SimHei", "Noto Sans CJK SC", "Heiti SC")
+
+#let roman = ((name: "Times New Roman", covers: "latin-in-cjk"), "TeX Gyre Termes Math") + main-font
 
 
 // "exam": 试卷模式; "handouts": 讲义模式(默认)；"solution"：解析模式
