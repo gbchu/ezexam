@@ -48,10 +48,10 @@ This template is primarily designed to help Chinese university, primary, middle 
 + 废弃 `color-box` 方法 ；新增 `tag` 方法替代
 + 重构 `multi`
 + 将 `ROMAN` 修改为 `roman`
++ 优化字体，添加宋体-简，黑体-简，使得Mac用户本地使用时不用再去安装思源宋体和思源黑体
 + 优化 `paren` 方法
 + 优化 `text-figure` 方法；修复当图文在新的一页且文本较少时，图表显示不全的 bug ；修复当在一页的最后部分时，有部分文本留在当前页，图表也停留在当前页的 bug ，该 bug 使得图表遮挡前面的内容；添加参数 `align`
 + 优化 `fillin` 方法
-+ 调整字体
 
 ### 0 . 2 . 4
 + 优化 `choices` 方法；新增参数 `label-position` ； 该参数可在选项为图表时，修改标签的位置。默认在左侧；将参数 `body-indent` 名修改为 `sapcing` ；更加符合语境
