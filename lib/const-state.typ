@@ -13,10 +13,7 @@
 )
 
 #let main-font = ("New Computer Modern Math", "Noto Serif CJK SC")
-
-// 分别设置windows / 在线 / mac 下的黑体
 #let heiti = ("SimHei", "Noto Sans CJK SC", "Heiti SC")
-
 #let roman = ((name: "Times New Roman", covers: "latin-in-cjk"), "TeX Gyre Termes Math") + main-font
 
 
