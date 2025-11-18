@@ -12,7 +12,7 @@
   text(size: 25pt)[#title]
 
   if subtitle != none {
-    text(font: hei-ti, size: 22pt)[\ #subtitle]
+    text(font: heiti, size: 22pt)[\ #subtitle]
   }
 
   if author != none {
@@ -61,7 +61,7 @@
   counter("question").update(0)
 }
 
-#let subject(body, size: 21.5pt, spacing: 1em, font: hei-ti, top: -20pt, bottom: 0pt) = {
+#let subject(body, size: 21.5pt, spacing: 1em, font: heiti, top: -20pt, bottom: 0pt) = {
   v(top)
   align(center, text(
     font: font,
@@ -72,10 +72,10 @@
   subject-state.update([#body].text)
 }
 
-#let secret(body: [绝密★启用前]) = place(top, float: true, clearance: 20pt, text(font: hei-ti, body))
+#let secret(body: [绝密★启用前]) = place(top, float: true, clearance: 20pt, text(font: heiti, body))
 
 #let exam-type(type, prefix: "试卷类型: ") = context place(top + right, text(
-  font: text.font.slice(0, 1) + hei-ti,
+  font: text.font.slice(0, 1) + heiti,
 )[#prefix#type])
 
 #let exam-info(
@@ -91,7 +91,7 @@
   bottom: 0pt,
 ) = context {
   assert(info.len() > 0, message: "info cannot be empty")
-  set text(font: text.font.slice(0, 1) + hei-ti, size: size, weight: weight)
+  set text(font: text.font.slice(0, 1) + heiti, size: size, weight: weight)
   set align(center)
   grid(
     columns: info.len(),
@@ -114,7 +114,7 @@
 )[得分][~~~~~~~~~#v(10pt)])
 
 #let notice(format: "1.", indent: 2em, hanging-indent: auto, ..children) = context {
-  text(font: hei-ti)[注意事项:]
+  text(font: heiti)[注意事项:]
   set enum(numbering: format, indent: indent)
   set par(hanging-indent: if hanging-indent == auto {
     -indent - enum.body-indent - measure(format).width

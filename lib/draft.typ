@@ -1,4 +1,4 @@
-#import "const-state.typ":hei-ti
+#import "const-state.typ":heiti
 #let _create-seal(
   dash: "dashed",
   supplement: "",
@@ -6,7 +6,7 @@
 ) = {
   assert(type(info) == dictionary, message: "expected dictionary, found " + str(type(info)))
   set par(spacing: 10pt)
-  set text(font: hei-ti, size: 12pt)
+  set text(font: heiti, size: 12pt)
   set align(center)
   set grid(columns: 2, align: horizon, gutter: .5em)
   if supplement != "" { text(tracking: .8in, supplement) }

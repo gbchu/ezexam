@@ -1,4 +1,4 @@
-#import "const-state.typ": hei-ti
+#import "const-state.typ": heiti
 // 一种页码格式: "第x页（共xx页）
 #let zh-arabic(prefix: "", suffix: "") = (..nums) => {
   let arr = nums.pos()
@@ -7,7 +7,7 @@
 
 #let tag(body, color: blue, font: auto, prefix: "【", suffix: "】") = context {
   let _font = font
-  if font == auto { _font = text.font.slice(0, 1) + hei-ti }
+  if font == auto { _font = text.font.slice(0, 1) + heiti }
   text(font: _font, color)[#prefix#body#suffix]
   h(.1em, weak: true)
 }
