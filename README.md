@@ -50,7 +50,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 + 将 `ROMAN` 修改为 `roman`
 + 优化字体，去掉 `noto serif sc` ；黑体新增 `Heiti SC` ，修复 Mac 用户本地使用时，黑体异常的 bug
 + 优化 `paren` 方法
-+ 优化 `text-figure` 方法；修复当图文在新的一页且文本较少时，图表显示不全的 bug ；修复当在一页的最后部分时，有部分文本留在当前页，图表也停留在当前页的 bug ，该 bug 使得图表遮挡前面的内容；添加参数 `align`
++ 优化 `text-figure` 方法；修复当图文在新的一页最上面且文本较少时，图表显示不全的 bug ；修复当在一页的最后部分时，有较少部分文本留在当前页，图表也停留在当前页的 bug ，该 bug 使得图表遮挡前面的内容；添加参数 `align`
 + 优化 `fillin` 方法
 
 ### 0 . 2 . 4
