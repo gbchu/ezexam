@@ -1,5 +1,4 @@
-// #import "@preview/ezexam:0.2.5": *
-#import "/ezexam.typ": *
+#import "@preview/ezexam:0.2.5": *
 
 #show: setup.with(
   mode: EXAM,
