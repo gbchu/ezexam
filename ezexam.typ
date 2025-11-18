@@ -24,7 +24,7 @@
   heading-numbering: auto,
   heading-hanging-indent: auto,
   h1-size: auto,
-  heading-font: hei-ti,
+  heading-font: heiti,
   heading-color: luma(0),
   heading-top: 10pt,
   heading-bottom: 15pt,

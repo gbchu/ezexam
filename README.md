@@ -48,7 +48,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 + 废弃 `color-box` 方法 ；新增 `tag` 方法替代
 + 重构 `multi`
 + 将 `ROMAN` 修改为 `roman`
-+ 优化字体，添加宋体-简，黑体-简，使得Mac用户本地使用时不用再去安装思源宋体和思源黑体
++ 优化字体，去掉 `noto serif sc` ；黑体新增 `Heiti SC` ，修复 Mac 用户本地使用时，黑体异常的 bug
 + 优化 `paren` 方法
 + 优化 `text-figure` 方法；修复当图文在新的一页且文本较少时，图表显示不全的 bug ；修复当在一页的最后部分时，有部分文本留在当前页，图表也停留在当前页的 bug ，该 bug 使得图表遮挡前面的内容；添加参数 `align`
 + 优化 `fillin` 方法
