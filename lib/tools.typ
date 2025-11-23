@@ -13,21 +13,3 @@
 }
 
 #let multi = tag.with(prefix: $circle.filled.tiny$, suffix: none, color: maroon)[多选]()
-
-#let underdot(body) = {
-  assert(type(body) == str or body.func() == text, message: "expected str or text")
-
-  let _body = body
-  if type(body) == content { _body = body.text }
-
-  for value in _body {
-    box(
-      baseline: 49%,
-      grid(
-        align: center,
-        value,
-        $dot$,
-      ),
-    )
-  }
-}
