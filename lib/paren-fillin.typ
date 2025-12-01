@@ -38,7 +38,7 @@
 
   let is-new-line = false
   if first-line-available-space <= 7pt {
-    linebreak()
+    [ \ ]
     is-new-line = true
     detla-len = _len
   } else {
@@ -56,12 +56,13 @@
         #if is-new-line {
           align(center, body)
           is-new-line = false
-        }]
+          v(-offset)
+        }] + hide("")
     }
 
     // 最后一行的线
     let _last-line-len = calc.fract(_ratio)
-    box(width: _last-line-len * 100%)[#if is-new-line { align(center, body) }#hide("")]
+    box(width: _last-line-len * 100%)[#if is-new-line { align(center, body) }] + hide("")
     h(1.5pt, weak: true)
   }
 }

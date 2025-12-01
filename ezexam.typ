@@ -270,7 +270,7 @@
   show math.parallel: "//"
 
   show strong: content => {
-    show regex("\p{Hani}"): it => box(place(text("·", size: 0.8em), dx: 0.1em, dy: 0.75em) + it)
+    show regex("\p{Hani}"): it => box(place(text("·", size: 0.8em), dx: 0.45em, dy: 0.75em) + it)
     content.body
   }
 
