@@ -269,10 +269,17 @@
   }
   show math.parallel: "//"
 
+  // 中文着重号
   show strong: content => {
+<<<<<<< HEAD
     show regex("\p{Hani}"): it => box(place(text("·", size: 0.8em), dx: 0.45em, dy: 0.75em) + it)
     content.body
   }
+=======
+  show regex("\p{Hani}"): it => box(place(text("·", size: 0.8em), dx: 0.45em, dy: 0.75em) + it)
+  content.body
+}
+>>>>>>> 6b5ccd0cd937eb0693623b9546b2ac6eaa6a20c6
 
   if show-answer {
     answer-state.update(true)
