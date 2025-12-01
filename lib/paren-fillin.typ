@@ -38,7 +38,7 @@
 
   let is-new-line = false
   if first-line-available-space <= 7pt {
-    linebreak()
+    [ \ ]
     is-new-line = true
     detla-len = _len
   } else {
