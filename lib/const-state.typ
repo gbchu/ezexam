@@ -14,7 +14,7 @@
 
 #let main-font = ("New Computer Modern Math", "Noto Serif CJK SC")
 #let heiti = ("SimHei", "Noto Sans CJK SC", "Heiti SC")
-#let roman = ((name: "Times New Roman", covers: "latin-in-cjk"), "TeX Gyre Termes Math") + main-font
+#let roman = ((name: "Times New Roman", covers: regex("\w")), "TeX Gyre Termes Math") + main-font
 
 
 // "exam": 试卷模式; "handouts": 讲义模式(默认)；"solution"：解析模式
