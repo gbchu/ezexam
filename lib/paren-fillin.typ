@@ -52,17 +52,28 @@
     let _ratio = detla-len / (page.width - page.margin * 2)
     // 多条完整线
     for _ in range(calc.floor(_ratio)) {
-      box(width: 100%)[
-        #if is-new-line {
-          align(center, body)
-          is-new-line = false
-          v(-offset)
-        }] + hide("")
+      (
+        box(width: 100%)[
+          #if is-new-line {
+            align(center, body)
+            is-new-line = false
+            v(-offset)
+          }]
+          + hide("")
+      )
     }
 
     // 最后一行的线
     let _last-line-len = calc.fract(_ratio)
-    box(width: _last-line-len * 100%)[#if is-new-line { align(center, body) }] + hide("")
+    (
+      box(width: _last-line-len * 100%)[
+        #if is-new-line {
+          align(center, body)
+        }
+        #v(-offset)
+      ]
+        + hide("")
+    )
     h(1.5pt, weak: true)
   }
 }
