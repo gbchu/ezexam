@@ -21,11 +21,14 @@
     page-width = page.height
   }
 
+  let _columns = page.columns
+  let here-pos-x = here().position().x
   if _columns > 1 {
-    page-width = (page-width + columns.gutter * (_columns - 1)) / _columns
+    let one-column-width = (page-width + columns.gutter * (_columns - 1)) / _columns
+    // 当有多个列时，当前内容所在的那一列加上前面所有的列的总宽度
+    page-width = one-column-width * calc.ceil(here-pos-x / one-column-width)
   }
-
-  let first-line-available-space = page-width - page.margin - here().position().x
+  let first-line-available-space = page-width - page.margin - here-pos-x
   // 第一行线
   // 如果当前指定长度 < 剩余空间，则直接按照指定长度在文字后画线
   let detla-len = _len - first-line-available-space
