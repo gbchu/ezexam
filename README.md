@@ -9,7 +9,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 
 ## Example
 ```typst
-#import "@preview/ezexam:0.2.5": *
+#import "@preview/ezexam:0.2.6": *
 #show: setup.with(
   mode: EXAM,
   paper: a3,
@@ -44,6 +44,9 @@ This template is primarily designed to help Chinese university, primary, middle 
 ```
 
 ## Changelog
+### 0 . 2 . 6
++ 修复 `fillin` 方法在页面分栏时，不能正确换行的 bug  
+
 ### 0 . 2 . 5
 + 废弃 `color-box` 方法 ；新增 `tag` 方法替代
 + 重构 `multi`
@@ -53,7 +56,6 @@ This template is primarily designed to help Chinese university, primary, middle 
 + 优化 `text-figure` 方法；修复当图文在新的一页最上面且文本较少时，图表显示不全的 bug ；修复当在一页的最后部分时，有较少部分文本留在当前页，图表也停留在当前页的 bug ，该 bug 使得图表遮挡前面的内容；添加参数 `align`
 + 优化 `fillin` 方法，修复多行线时，线之间的间隔不等的 bug
 + 废弃 `underdot` 方法；使用新的方法实现中文着重号
-
 
 ### 0 . 2 . 4
 + 优化 `choices` 方法；新增参数 `label-position` ； 该参数可在选项为图表时，修改标签的位置。默认在左侧；将参数 `body-indent` 名修改为 `sapcing` ；更加符合语境
