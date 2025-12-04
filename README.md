@@ -9,7 +9,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 
 ## Example
 ```typst
-#import "@preview/ezexam:0.2.6": *
+#import "@preview/ezexam:0.2.7": *
 #show: setup.with(
   mode: EXAM,
   paper: a3,
@@ -44,8 +44,11 @@ This template is primarily designed to help Chinese university, primary, middle 
 ```
 
 ## Changelog
+### 0 . 2 . 7
++ 优化目录的显示效果、修复预览界面点击目录不能正确跳转的 bug
+
 ### 0 . 2 . 6
-+ 修复 `fillin` 方法在页面分栏时，不能正确换行的 bug  
++ 修复 `fillin` 方法在页面分栏时，不能正确换行的 bug
 
 ### 0 . 2 . 5
 + 废弃 `color-box` 方法 ；新增 `tag` 方法替代

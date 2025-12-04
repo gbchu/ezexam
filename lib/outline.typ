@@ -30,7 +30,7 @@
 #let chapter(body) = {
   pagebreak(weak: true)
   counter("chapter").step()
-  set heading(numbering: _ => counter("chapter").display("一、"))
+  set heading(numbering: _ => counter("chapter").display(it => box(width: .6em, align(right)[#it.~])))
   place(hide[= #body <chapter>])
 }
 
