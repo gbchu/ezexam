@@ -45,7 +45,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 
 ## Changelog
 ### 0 . 2 . 7
-+ 优化目录的显示效果、修复预览界面点击目录不能正确跳转的 bug
++ 优化目录的显示效果
 
 ### 0 . 2 . 6
 + 修复 `fillin` 方法在页面分栏时，不能正确换行的 bug
