@@ -54,7 +54,7 @@
     // 计算可以画多少完整的条数
     let _ratio = detla-len / (page.width - page.margin * 2)
     // 多条完整线
-    for _ in range(calc.floor(_ratio)) {
+    for _ in range(calc.trunc(_ratio)) {
       (
         box(width: 100%)[
           #if is-new-line {
