@@ -13,7 +13,9 @@
 #let _draw-line(len, stroke, offset, body) = {
   let _len = len.to-absolute()
   assert(_len > 4pt, message: "len must > 4pt")
-  // 第一行横线开始位置及长度
+
+  set box(stroke: (bottom: stroke), inset: (bottom: offset), outset: (bottom: offset))
+
   let page-width = page.width
   if page.flipped {
     page-width = page.height
@@ -26,56 +28,51 @@
     // 当有多个列时，当前内容所在的那一列加上前面所有的列的总宽度
     page-width = one-column-width * calc.ceil(here-pos-x / one-column-width)
   }
-  let first-line-available-space = page-width - page.margin - here-pos-x
 
   // 第一行线
   // 如果当前指定长度 < 剩余空间，则直接按照指定长度在文字后画线
-  let detla-len = _len - first-line-available-space
-  if detla-len < 0pt {
+  let first-line-available-space = page-width - page.margin - here-pos-x
+  let rest-len = _len - first-line-available-space
+  if rest-len < 0pt {
     first-line-available-space = _len
   }
-  set box(stroke: (bottom: stroke), inset: (bottom: offset), outset: (bottom: offset))
+
   let is-new-line = false
-  // 当前指定长度 > 剩余空间且剩余空间 >= 7pt，在指定文字后先画一部分；
+  // 当前指定长度 > 剩余空间且剩余空间 > 6pt，则按照当前行的剩余空间画线；
   if first-line-available-space < 8pt {
     [ \ ]
     is-new-line = true
-    detla-len = _len
+    rest-len = _len
   } else {
     let space = 1pt
     h(space, weak: true)
-    hide("") // 存在是解决当前面是中文标点时换行的问题（搞不懂为啥，猜测和符号计算方式有关）
+    // hide("") // 存在是解决当前面是中文标点时换行的问题（搞不懂为啥，猜测和符号计算方式有关）
     box(width: first-line-available-space - space, align(center, body), inset: 0pt)
     h(space, weak: true)
   }
+
   // 超过一行的后续横线
-  if detla-len > 5pt {
+  if rest-len > 5pt {
     // 计算可以画多少完整的条数
-    let _ratio = detla-len / (page.width - page.margin * 2)
+    let _ratio = rest-len / (page.width - page.margin * 2)
     // 多条完整线
     for _ in range(calc.trunc(_ratio)) {
-      (
-        box(width: 100%)[
-          #if is-new-line {
-            align(center, body)
-            is-new-line = false
-            v(-offset)
-          }]
-          + hide("")
-      )
+      box(width: 100%)[
+        #if is-new-line {
+          align(center, body)
+          is-new-line = false
+        }]
+      hide("") // 解决多条线时，最后一行线与之前的线间距不等的问题
     }
 
     // 最后一行的线
     let _last-line-len = calc.fract(_ratio)
-    (
-      box(width: _last-line-len * 100%)[
-        #if is-new-line {
-          align(center, body)
-        }
-        #v(-offset)
-      ]
-        + hide("")
-    )
+    box(width: _last-line-len * 100%)[
+      #if is-new-line {
+        align(center, body)
+      }
+    ]
+    hide("") // 解决最后一行线，在这条线之后如果加文本线的间距变大问题
     h(1.5pt, weak: true)
   }
 }
