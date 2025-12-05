@@ -46,6 +46,7 @@
     detla-len = _len
   } else {
     h(1.5pt, weak: true)
+    hide("")
     box(width: first-line-available-space - 1.5pt, align(center, body), inset: 0pt)
     h(1.5pt, weak: true)
   }
