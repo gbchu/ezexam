@@ -12,11 +12,9 @@
 
 #let _draw-line(len, stroke, offset, body) = {
   let _len = len.to-absolute()
-  if _len < 5pt { panic("len must >= 5pt") }
+  assert(_len > 4pt, message: "len must > 4pt")
   // 第一行横线开始位置及长度
   let page-width = page.width
-  let _columns = page.columns
-
   if page.flipped {
     page-width = page.height
   }
@@ -29,25 +27,26 @@
     page-width = one-column-width * calc.ceil(here-pos-x / one-column-width)
   }
   let first-line-available-space = page-width - page.margin - here-pos-x
+
   // 第一行线
   // 如果当前指定长度 < 剩余空间，则直接按照指定长度在文字后画线
   let detla-len = _len - first-line-available-space
   if detla-len < 0pt {
     first-line-available-space = _len
   }
-
-  // 当前指定长度 > 剩余空间且剩余空间 > 2pt，在指定文字后先画一部分；
   set box(stroke: (bottom: stroke), inset: (bottom: offset), outset: (bottom: offset))
-
   let is-new-line = false
-  if first-line-available-space <= 7pt {
+  // 当前指定长度 > 剩余空间且剩余空间 >= 7pt，在指定文字后先画一部分；
+  if first-line-available-space < 8pt {
     [ \ ]
     is-new-line = true
     detla-len = _len
   } else {
-    h(1.5pt, weak: true)
-    box(width: first-line-available-space - 1.5pt, align(center, body), inset: 0pt)
-    h(1.5pt, weak: true)
+    let space = 1pt
+    h(space, weak: true)
+    hide("") // 存在是解决当前面是中文标点时换行的问题（搞不懂为啥，猜测和符号计算方式有关）
+    box(width: first-line-available-space - space, align(center, body), inset: 0pt)
+    h(space, weak: true)
   }
   // 超过一行的后续横线
   if detla-len > 5pt {
