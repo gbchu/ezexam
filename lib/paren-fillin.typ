@@ -29,58 +29,60 @@
     page-width = one-column-width * calc.ceil(here-pos-x / one-column-width)
   }
 
-  // 第一行线
-  // 如果当前指定长度 < 剩余空间，则直接按照指定长度在文字后画线
   let first-line-available-space = page-width - page.margin - here-pos-x
   let rest-len = _len - first-line-available-space
-  if rest-len < 0pt {
-    first-line-available-space = _len
-  }
-
-  let is-new-line = false
-  // 当前指定长度 > 剩余空间且剩余空间 > 6pt，则按照当前行的剩余空间画线；
-  if first-line-available-space < 8pt {
+  let is-line-break = false
+  let space = 1pt
+  // 当前行剩余空间 < 10pt时，则直接换行在新的一行从头开始画
+  if first-line-available-space < 10pt {
     [ \ ]
-    is-new-line = true
+    is-line-break = true
     rest-len = _len
   } else {
-    let space = 1pt
+    // 当前指定长度 > 当前行剩余空间 >= 10pt，则按照当前行的剩余空间画线
+    first-line-available-space = 1fr
+    // 如果当前指定长度 < 剩余空间，则按照指定长度在文字后画线
+    // 不清楚为啥按照指定长度画第一行线时，在一些特殊的值下 box 会换行。明明宽度是小于可用宽度的,猜测跟精度有关
+    // 为了解决上述 bug，所以减了 text.size，确保留有足够的宽度给 box
+    if rest-len < 0pt {
+      first-line-available-space = _len - space * 2 - text.size
+    }
+    // 第一行线
     h(space, weak: true)
-    // hide("") // 存在是解决当前面是中文标点时换行的问题（搞不懂为啥，猜测和符号计算方式有关）
-    box(width: first-line-available-space - space, align(center, body), inset: 0pt)
+    box(width: first-line-available-space, inset: 0pt, align(center, body))
     h(space, weak: true)
   }
+
+  if type(first-line-available-space) == fraction [ \ ]
 
   // 超过一行的后续横线
   if rest-len > 5pt {
     // 计算可以画多少完整的条数
     let _ratio = rest-len / (page.width - page.margin * 2)
     // 多条完整线
-    for _ in range(calc.trunc(_ratio)) {
-      box(width: 100%)[
-        #if is-new-line {
+    // + "" 是为了解决多条线时，最后一行线与之前的线间距不等的问题
+    (
+      (
+        box(width: 100%)[#if is-line-break {
           align(center, body)
-          is-new-line = false
+          is-line-break = false
         }]
-      hide("") // 解决多条线时，最后一行线与之前的线间距不等的问题
-    }
+          + ""
+      )
+        * calc.trunc(_ratio)
+    )
 
     // 最后一行的线
-    let _last-line-len = calc.fract(_ratio)
-    box(width: _last-line-len * 100%)[
-      #if is-new-line {
-        align(center, body)
-      }
-    ]
-    hide("") // 解决最后一行线，在这条线之后如果加文本线的间距变大问题
-    h(1.5pt, weak: true)
+    // + "" 是为了解决最后一行线，在这条线之后如果加文本线的间距变大问题
+    box(width: calc.fract(_ratio) * 100% + space)[#if is-line-break { align(center, body) }] + ""
+    h(space, weak: true)
   }
 }
 
 // 填空的横线
 #let fillin(
   body,
-  len: 1cm,
+  len: 1.5cm,
   placeholder: "▴",
   with-number: false,
   update: false,
@@ -90,12 +92,8 @@
   assert(type(len) == length, message: "expect length, got " + str(type(len)))
 
   let result = _get-answer(body, placeholder, with-number, update)
-
-  if (
-    not answer-state.get() or result.child == [] or result.child == [ ]
-  ) {
-    _draw-line(len, stroke, offset / 2, result)
-    return
+  if not answer-state.get() or result.child in ([], [ ]) {
+    return _draw-line(len, stroke, offset / 2, result)
   }
 
   underline(
