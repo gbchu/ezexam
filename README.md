@@ -47,6 +47,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 ### 0 . 2 . 7
 + 优化目录的显示效果
 + 优化 `fillin` 方法；修改其参数 len 的默认值为 1.5cm。修复当指定长度时，某些值会导致第一行线换行的 bug
++ 调整黑体的字体顺序
 
 ### 0 . 2 . 6
 + 修复 `fillin` 方法在页面分栏时，不能正确换行的 bug
