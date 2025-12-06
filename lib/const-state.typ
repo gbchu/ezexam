@@ -13,7 +13,7 @@
 )
 
 #let main-font = ("New Computer Modern Math", "Noto Serif CJK SC")
-#let heiti = ("SimHei", "Noto Sans CJK SC", "Heiti SC")
+#let heiti = ("SimHei", "Heiti SC", "Noto Sans CJK SC")
 #let roman = ((name: "Times New Roman", covers: regex("\w")), "TeX Gyre Termes Math") + main-font
 
 
