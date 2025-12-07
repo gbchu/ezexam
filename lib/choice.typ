@@ -1,4 +1,9 @@
 #let _format-choice(choice, label, indent, spacing, label-postion) = {
+  // 为了解决数学公式在左侧加间距的问题
+  if choice.func() == math.equation or choice.has("children") and choice.children.first().func() == math.equation {
+    spacing -= .25em
+  }
+
   if choice.func() not in (image, table) {
     return par(
       hanging-indent: indent + spacing + measure(label).width,
