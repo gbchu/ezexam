@@ -2,9 +2,7 @@
 
 #let _question-points-set(points, prefix, suffix, separate, body) = {
   assert(type(points) == int or points == none, message: "points must be a int or none")
-
   if points == none { return body }
-
   [#prefix#points#suffix #if separate [ \ ] #body]
 }
 
