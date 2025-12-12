@@ -1,12 +1,11 @@
 #import "const-state.typ": HANDOUTS, mode-state
+#import "tools.typ": _trim-content-start-parbreak
 
 #let _format-question-number(label, label-color, label-weight, with-heading-label) = {
   counter("question").step()
   context counter("question").display(num => {
     let _label = label
-    if label == auto {
-      _label = "1."
-    }
+    if label == auto { _label = "1." }
 
     let arr = (num,)
     if with-heading-label {
@@ -23,15 +22,16 @@
 }
 
 #let _question-points-set(points, prefix, suffix, separate) = {
-  assert(type(points) == int or points == none, message: "points must be a int or none")
   if points == none { return }
-  [#h(-.45em, weak: true)#prefix#points#suffix #if separate [ \ ]]
+  assert(type(points) == int, message: "points be a positive integer!")
+  // -0.6em是为了抵消terms的缩进
+  [#h(-.6em, weak: true)#prefix#points#suffix #if separate [ \ ]#h(0pt, weak: true)]
 }
 
 #let question(
   body,
-  indent: 0pt,
-  body-indent: .85em,
+  indent: 0em,
+  first-line-indent: 0em,
   hanging-indent: 2em,
   label: auto,
   label-color: luma(0),
@@ -66,22 +66,15 @@
   if mode-state.get() == HANDOUTS {
     _indent -= 1em - measure(_marker).width + .14em
   }
-  let _body = body
-  // 去除body中的第一个换行
-  if body.has("children") {
-    let children = body.children
-    if children.first() == parbreak() {
-      children.remove(0)
-      _body = children.fold([], (acc, item) => acc + item)
-    }
-  }
-  _body = (box(align(right, _marker), width: 1em), _points + _body)
+
   v(top)
   terms(
-    hanging-indent: hanging-indent,
     indent: indent,
-    separator: h(body-indent, weak: true),
-    _body,
+    hanging-indent: hanging-indent,
+    (
+      box(align(right, _marker), width: 1em),
+      h(.26em) + _points + h(first-line-indent) + _trim-content-start-parbreak(body),
+    ),
   )
   v(bottom)
 

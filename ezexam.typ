@@ -1,4 +1,4 @@
-#import "lib/tools.typ": *
+#import "lib/tools.typ": multi, tag, zh-arabic
 #import "lib/outline.typ": *
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question

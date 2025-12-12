@@ -13,3 +13,14 @@
 }
 
 #let multi = tag.with(prefix: $circle.filled.tiny$, suffix: none, color: maroon)[多选]()
+
+#let _trim-content-start-parbreak(body) = {
+  if body.has("children") {
+    let children = body.children
+    if children != () and children.first() == parbreak() {
+      children.remove(0)
+      return children.fold([], (acc, item) => acc + item)
+    }
+  }
+  body
+}
