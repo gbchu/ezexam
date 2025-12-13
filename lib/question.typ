@@ -61,16 +61,14 @@
 
   set par(leading: line-height) if line-height != auto
 
-  let _indent = indent
-  if mode-state.get() == HANDOUTS {
-    _indent -= 1em - measure(_marker).width + .14em
-  }
+  let _space = .5em
+  if mode-state.get() == HANDOUTS { _space = .4em }
 
   v(top)
   terms(
     indent: indent,
     hanging-indent: hanging-indent,
-    separator: h(0.5em),
+    separator: h(_space),
     (
       box(align(right, _marker), width: 1em),
       _points + h(first-line-indent) + _trim-content-start-parbreak(body),
