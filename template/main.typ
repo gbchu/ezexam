@@ -26,7 +26,7 @@
 ]
 
 #question[
-  集合 $U = {x | x "为小于9的正整数"}$, $A = {1,3,5}$, 则 $complement_U A$ 中的元素个数为 #paren[C]
+  集合 $U = {x | x$为小于9的正整数}, $A = {1,3,5}$, 则 $complement_U A$ 中的元素个数为 #paren[C]
   #choices(0, 3, 5, 8)
 ]
 

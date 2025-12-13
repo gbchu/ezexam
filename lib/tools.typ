@@ -18,7 +18,7 @@
   if body.has("children") {
     let children = body.children
     if children != () and children.first() == parbreak() {
-      children.remove(0)
+      let _ = children.remove(0)
       return children.fold([], (acc, item) => acc + item)
     }
   }

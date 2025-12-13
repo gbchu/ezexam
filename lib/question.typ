@@ -24,8 +24,7 @@
 #let _question-points-set(points, prefix, suffix, separate) = {
   if points == none { return }
   assert(type(points) == int, message: "points be a positive integer!")
-  // -0.6em是为了抵消terms的缩进
-  [#h(-.6em, weak: true)#prefix#points#suffix #if separate [ \ ]#h(0pt, weak: true)]
+  [#prefix#points#suffix#h(0pt, weak: true)#if separate [ \ ]]
 }
 
 #let question(
@@ -71,13 +70,13 @@
   terms(
     indent: indent,
     hanging-indent: hanging-indent,
+    separator: h(0.5em),
     (
       box(align(right, _marker), width: 1em),
-      h(.26em) + _points + h(first-line-indent) + _trim-content-start-parbreak(body),
+      _points + h(first-line-indent) + _trim-content-start-parbreak(body),
     ),
   )
   v(bottom)
-
   // 更新占位符上的题号
   context counter("placeholder").update(counter("question").get().first())
 }
