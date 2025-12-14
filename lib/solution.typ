@@ -1,4 +1,5 @@
 #import "const-state.typ": answer-state
+#import "tools.typ": _trim-content-start-parbreak
 #let solution(
   body,
   title: none,
@@ -20,8 +21,6 @@
   line-height: auto,
   top: 0pt,
   bottom: 0pt,
-  padding-top: 0pt,
-  padding-bottom: 0pt,
   inset: (rest: 10pt, top: 20pt, bottom: 20pt),
   show-number: true,
 ) = context {
@@ -61,17 +60,17 @@
       _marker = context numbering("1.", ..counter("explain").get())
     }
     #set par(leading: line-height) if line-height != auto
-    #list(
-      marker: _marker,
-      pad(top: padding-top, bottom: padding-bottom, text(color, body)),
+    #terms(
+      hanging-indent: 0em,
+      separator: h(0em),
+      (
+        _marker,
+        text(color, _trim-content-start-parbreak(body)),
+      ),
     )
   ]
   v(bottom)
 }
 
 // 解析的分值
-#let score(points, color: maroon, score-prefix: "", score-suffix: "分") = text(color)[
-  #box(width: 1fr, repeat($dot$))#score-prefix#h(2pt)#points#score-suffix
-]
-
-#let answer(body, color: maroon) = par(text(weight: 700, color)[答案: #body])
+#let score(points, color: maroon, score-prefix: h(.2em), score-suffix: "分") = text(color)[#box(width: 1fr, repeat($dot$))#score-prefix#points#score-suffix]

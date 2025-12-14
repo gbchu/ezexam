@@ -162,6 +162,8 @@
 ]
 
 #show: setup.with(mode: SOLUTION, show-answer: true)
+#let answer = tag.with(prefix: "答案：", suffix: [ \ ], color: maroon)
+
 #title[参考答案]
 
 #solution(title: "解析")[
