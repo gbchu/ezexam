@@ -5,9 +5,11 @@
   }
 
   if choice.func() not in (image, table) {
-    return par(
+    return terms(
+      indent: indent,
+      separator: h(spacing, weak: true),
       hanging-indent: indent + spacing + measure(label).width,
-      h(indent) + label + h(spacing) + choice,
+      (label, choice),
     )
   }
 
