@@ -17,7 +17,7 @@
 #let _trim-content-start-parbreak(body) = {
   if body.has("children") {
     let children = body.children
-    if children != () and children.first() == parbreak() {
+    if children != () and children.first() in ([ ], parbreak()) {
       let _ = children.remove(0)
       return children.fold([], (acc, item) => acc + item)
     }
