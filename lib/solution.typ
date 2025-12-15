@@ -62,7 +62,7 @@
     #set par(leading: line-height) if line-height != auto
     #terms(
       hanging-indent: 0em,
-      separator: h(0em),
+      separator: h(.75em),
       (
         _marker,
         text(color, _trim-content-start-parbreak(body)),
@@ -73,4 +73,6 @@
 }
 
 // 解析的分值
-#let score(points, color: maroon, score-prefix: h(.2em), score-suffix: "分") = text(color)[#box(width: 1fr, repeat($dot$))#score-prefix#points#score-suffix]
+#let score(points, color: maroon, score-prefix: h(.2em), score-suffix: "分") = text(color)[#box(width: 1fr, repeat(
+    $dot$,
+  ))#score-prefix#points#score-suffix]
