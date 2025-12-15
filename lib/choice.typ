@@ -71,7 +71,7 @@
   for index in range(choice-number) {
     choices-arr.at(index) = _format-choice(
       // 加[] 是为了将内容转为content,有可能在使用时直接传入整数
-      [#choices-arr.at(index)],
+      [#h(0em, weak: true)#choices-arr.at(index)],
       numbering(label, index + 1),
       indent,
       spacing,
