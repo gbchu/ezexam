@@ -24,7 +24,7 @@
 #let _question-points-set(points, prefix, suffix, separate) = {
   if points == none { return }
   assert(type(points) == int, message: "points be a positive integer!")
-  [#h(0pt, weak: true)#prefix#points#suffix#h(0pt, weak: true)#if separate [ \ ]]
+  [#prefix#points#suffix#if separate [ \ ]]
 }
 
 #let question(
@@ -34,7 +34,7 @@
   hanging-indent: 2em,
   label: auto,
   label-color: luma(0),
-  label-weight: 400,
+  label-weight: 100,
   with-heading-label: false,
   points: none,
   points-separate: true,
@@ -47,7 +47,7 @@
   // 分数设置
   let _points = _question-points-set(
     points,
-    points-prefix,
+    h(-.5em, weak: true) + points-prefix,
     points-suffix,
     points-separate,
   )
@@ -60,15 +60,11 @@
   )
 
   set par(leading: line-height) if line-height != auto
-
-  let _space = .5em
-  if mode-state.get() == HANDOUTS { _space = .4em }
-
   v(top)
   terms(
     indent: indent,
     hanging-indent: hanging-indent,
-    separator: h(_space),
+    separator: h(.88em, weak: true),
     (
       box(align(right, _marker), width: 1em),
       _points + h(first-line-indent) + _trim-content-start-parbreak(body),
