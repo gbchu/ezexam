@@ -14,6 +14,15 @@
 
 #let multi = tag.with(prefix: $circle.filled.tiny$, suffix: none, color: maroon)[多选]()
 
+// 中文着重号
+#let underdot(body) = {
+  show strong: content => {
+    show regex("\p{Hani}"): it => box(place(text("·", size: 0.8em), dx: 0.45em, dy: 0.75em) + it)
+    content.body
+  }
+  [*#body*]
+}
+
 #let _trim-content-start-parbreak(body) = {
   if body.has("children") {
     let children = body.children
