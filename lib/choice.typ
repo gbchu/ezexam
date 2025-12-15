@@ -1,3 +1,4 @@
+#import "tools.typ": _trim-content-start-parbreak
 #let _format-choice(choice, label, indent, spacing, label-postion) = {
   // 为了解决数学公式在左侧加间距的问题
   if choice.func() == math.equation or choice.has("children") and choice.children.first().func() == math.equation {
@@ -70,8 +71,7 @@
   let max-width = 0pt
   for index in range(choice-number) {
     choices-arr.at(index) = _format-choice(
-      // 加[] 是为了将内容转为content,有可能在使用时直接传入整数
-      [#h(0em, weak: true)#choices-arr.at(index)],
+      _trim-content-start-parbreak[#choices-arr.at(index)],
       numbering(label, index + 1),
       indent,
       spacing,
