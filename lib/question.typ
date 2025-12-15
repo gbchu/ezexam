@@ -24,7 +24,7 @@
 #let _question-points-set(points, prefix, suffix, separate) = {
   if points == none { return }
   assert(type(points) == int, message: "points be a positive integer!")
-  [#prefix#points#suffix#h(0pt, weak: true)#if separate [ \ ]]
+  [#h(0pt, weak: true)#prefix#points#suffix#h(0pt, weak: true)#if separate [ \ ]]
 }
 
 #let question(
