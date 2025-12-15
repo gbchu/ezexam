@@ -10,7 +10,7 @@
       indent: indent,
       separator: h(spacing, weak: true),
       hanging-indent: indent + spacing + measure(label).width,
-      (label, choice),
+      (text(weight: 100, label), choice),
     )
   }
 
