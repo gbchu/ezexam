@@ -28,7 +28,7 @@
     let children = body.children
     if children != () and children.first() in ([ ], parbreak()) {
       let _ = children.remove(0)
-      return children.fold([], (acc, item) => acc + item)
+      return children.join()
     }
   }
   body
