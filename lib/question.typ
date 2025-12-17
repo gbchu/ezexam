@@ -21,7 +21,7 @@
   })
 }
 
-#let _question-points-set(points, prefix, suffix, separate) = {
+#let _format-question-points(points, prefix, suffix, separate) = {
   if points == none { return }
   assert(type(points) == int, message: "points be a positive integer!")
   [#prefix#points#suffix#if separate [ \ ]]
@@ -44,21 +44,18 @@
   top: 0pt,
   bottom: 0pt,
 ) = context {
-  // 分数设置
-  let _points = _question-points-set(
+  let _points = _format-question-points(
     points,
     h(-.5em, weak: true) + points-prefix,
     points-suffix,
     points-separate,
   )
-  // 格式化题号
   let _marker = _format-question-number(
     label,
     label-color,
     label-weight,
     with-heading-label,
   )
-
   set par(leading: line-height) if line-height != auto
   v(top)
   terms(
