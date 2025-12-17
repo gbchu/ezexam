@@ -9,7 +9,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 
 ## Example
 ```typst
-#import "@preview/ezexam:0.2.7": *
+#import "@preview/ezexam:0.2.8": *
 #show: setup.with(
   mode: EXAM,
   paper: a3,
