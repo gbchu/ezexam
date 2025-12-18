@@ -1,4 +1,4 @@
-#import "const-state.typ":heiti
+#import "const-state.typ": heiti
 #let _create-seal(
   dash: "dashed",
   supplement: "",
