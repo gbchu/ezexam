@@ -36,6 +36,7 @@
     stroke: (thickness: border-width, paint: border-color, dash: border-style),
     fill: bg-color,
   )[
+
     // 标题
     #if title != none {
       let title-box = box(fill: title-bg-color, inset: 6pt, radius: title-radius, text(
@@ -60,9 +61,11 @@
       _marker = context numbering("1.", ..counter("explain").get())
     }
     #set par(leading: line-height) if line-height != auto
+    #let _space = 0em
+    #if show-number { _space = .75em }
     #terms(
       hanging-indent: 0em,
-      separator: h(.75em),
+      separator: h(_space),
       (
         _marker,
         text(color, _trim-content-start-parbreak(body)),
