@@ -27,8 +27,7 @@
   if body.has("children") {
     let children = body.children
     if children != () and children.first() in ([ ], parbreak()) {
-      let _ = children.remove(0)
-      return children.join()
+      return children.slice(1).join()
     }
   }
   body
