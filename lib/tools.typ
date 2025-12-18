@@ -1,4 +1,5 @@
 #import "const-state.typ": heiti
+#import "outline.typ": title
 
 #let _create-seal(
   dash: "dashed",
