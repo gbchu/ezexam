@@ -59,15 +59,6 @@
   [#prefix 第#str(arr.at(0))页（共#str(arr.at(-1))页）#suffix]
 }
 
-// 中文着重号
-#let underdot(body) = {
-  show strong: content => {
-    show regex("\p{Hani}"): it => box(place(text("·", size: 0.8em), dx: 0.45em, dy: 0.75em) + it)
-    content.body
-  }
-  [*#body*]
-}
-
 #let tag(body, color: blue, font: auto, prefix: "【", suffix: "】") = context {
   let _font = font
   if font == auto { _font = text.font.slice(0, 1) + heiti }

@@ -1,4 +1,4 @@
-#import "lib/tools.typ": multi, tag, underdot, zh-arabic, draft
+#import "lib/tools.typ": draft, multi, tag, zh-arabic
 #import "lib/outline.typ": *
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
@@ -260,6 +260,12 @@
     it
   }
   show math.parallel: "//"
+
+  // 中文着重号
+  show strong: content => {
+    show regex("\p{Hani}"): it => box(place(text("·", size: 0.8em), dx: 0.45em, dy: 0.75em) + it)
+    content.body
+  }
 
   if show-answer {
     answer-state.update(true)
