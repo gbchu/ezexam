@@ -61,19 +61,17 @@
     let _ratio = rest-len / (page.width - page.margin * 2)
     // 多条完整线
     // + "" 是为了解决多条线时，最后一行线与之前的线间距不等的问题
-    (
-      (
-        box(width: 100%)[#if is-line-break {
-          align(center, body)
-          is-line-break = false
-        }]
-          + ""
-      )
-        * calc.trunc(_ratio)
-    )
+    for _ in range(calc.trunc(_ratio)) {
+      box(width: 100%)[#if is-line-break {
+        align(center, body)
+        is-line-break = false
+      }]
+      +""
+    }
 
     // 最后一行的线
     // + "" 是为了解决最后一行线，在这条线之后如果加文本线的间距变大问题
+
     box(width: calc.fract(_ratio) * 100% + space)[#if is-line-break { align(center, body) }] + ""
     h(space, weak: true)
   }
