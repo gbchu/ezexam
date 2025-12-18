@@ -46,7 +46,6 @@ This template is primarily designed to help Chinese university, primary, middle 
 ## Changelog
 ### 0 . 2 . 8
 + 优化 `question` 和 `solution` 方法的核心实现方法，彻底解决有较高的公式时，题号和题干对不齐的问题。删除这两个方法的 `padding-top` 和 `padding-bottom` 参数；`question` 方法新增参数 `hanging-indent` 并将参数 `body-indent` 修改为 `first-line-indent`
-+ 优化 `solution` 方法，修复不显示题号时，首行会缩进的问题
 + 优化 `choice` 方法
 + 修复 `draft` 未引入 `title` 方法的引起的报错
 + `tag` 方法新增 `weight` 参数
