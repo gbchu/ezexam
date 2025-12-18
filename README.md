@@ -50,6 +50,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 + 废弃 `answer` 方法
 + 修复 `draft` 未引入 `title` 方法的引起的报错
 + `tag` 方法新增 `weight` 参数
++ 修复 `fillin` 方法有时不显示占位符的 bug
 
 ### 0 . 2 . 7
 + 优化目录的显示效果
