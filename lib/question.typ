@@ -34,7 +34,7 @@
   hanging-indent: 2em,
   label: auto,
   label-color: luma(0),
-  label-weight: 100,
+  label-weight: 400,
   with-heading-label: false,
   points: none,
   points-separate: true,

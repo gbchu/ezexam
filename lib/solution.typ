@@ -57,7 +57,7 @@
     #counter("explain").step()
     #let _marker = none
     #if show-number {
-      _marker = context text(weight: 100, numbering("1.", ..counter("explain").get()))
+      _marker = context numbering("1.", ..counter("explain").get())
     }
     #set par(leading: line-height) if line-height != auto
     #terms(
