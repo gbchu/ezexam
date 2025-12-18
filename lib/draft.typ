@@ -1,7 +1,7 @@
 #import "const-state.typ": heiti
 #let _create-seal(
   dash: "dashed",
-  supplement: "",
+  supplement: none,
   info: (:),
 ) = {
   assert(type(info) == dictionary, message: "expected dictionary, found " + str(type(info)))
@@ -9,7 +9,7 @@
   set text(font: heiti, size: 12pt)
   set align(center)
   set grid(columns: 2, align: horizon, gutter: .5em)
-  if supplement != "" { text(tracking: .8in, supplement) }
+  if supplement != none { text(tracking: .8in, supplement) }
   grid(
     columns: if info.len() == 0 { 1 } else { info.len() },
     gutter: 1em,
@@ -34,7 +34,7 @@
     座位号: underline[~~~~~~~],
   ),
   dash: "solid",
-  supplement: "",
+  supplement: none,
 ) = {
   set page(margin: .5in, header: none, footer: none)
   title(name.split("").join(h(1em)), bottom: 0pt)
