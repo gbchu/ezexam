@@ -1,11 +1,10 @@
-#import "lib/tools.typ": multi, tag, underdot, zh-arabic
+#import "lib/tools.typ": multi, tag, underdot, zh-arabic, draft
 #import "lib/outline.typ": *
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/solution.typ": *
 #import "lib/text-figure.typ": text-figure
-#import "lib/draft.typ": draft
 
 #let setup(
   mode: HANDOUTS,
@@ -123,7 +122,7 @@
     }
     align(position, _numbering)
   }
-  import "lib/draft.typ": _create-seal
+  import "lib/tools.typ": _create-seal
   let _header(
     student-info: seal-line-student-info,
     line-type: seal-line-type,

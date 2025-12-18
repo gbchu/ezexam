@@ -1,26 +1,29 @@
 #import "const-state.typ": heiti
-// 一种页码格式: "第x页（共xx页）
-#let zh-arabic(prefix: "", suffix: "") = (..nums) => {
-  let arr = nums.pos()
-  [#prefix 第#str(arr.at(0))页（共#str(arr.at(-1))页）#suffix]
-}
 
-#let tag(body, color: blue, font: auto, prefix: "【", suffix: "】") = context {
-  let _font = font
-  if font == auto { _font = text.font.slice(0, 1) + heiti }
-  text(font: _font, color)[#prefix#body#suffix]
-  h(.1em, weak: true)
-}
-
-#let multi = tag.with(prefix: $circle.filled.tiny$, suffix: none, color: maroon)[多选]()
-
-// 中文着重号
-#let underdot(body) = {
-  show strong: content => {
-    show regex("\p{Hani}"): it => box(place(text("·", size: 0.8em), dx: 0.45em, dy: 0.75em) + it)
-    content.body
-  }
-  [*#body*]
+#let _create-seal(
+  dash: "dashed",
+  supplement: none,
+  info: (:),
+) = {
+  assert(type(info) == dictionary, message: "expected dictionary, found " + str(type(info)))
+  set par(spacing: 10pt)
+  set text(font: heiti, size: 12pt)
+  set align(center)
+  set grid(columns: 2, align: horizon, gutter: .5em)
+  if supplement != none { text(tracking: .8in, supplement) }
+  grid(
+    columns: if info.len() == 0 { 1 } else { info.len() },
+    gutter: 1em,
+    ..for (key, value) in info {
+      (
+        grid(
+          key,
+          value,
+        ),
+      )
+    }
+  )
+  line(length: 100%, stroke: (dash: dash))
 }
 
 #let _trim-content-start-parbreak(body) = {
@@ -32,3 +35,43 @@
   }
   body
 }
+
+#let draft(
+  name: "草稿纸",
+  student-info: (
+    姓名: underline[~~~~~~~~~~~~~],
+    准考证号: underline[~~~~~~~~~~~~~~~~~~~~~~~~~~],
+    考场号: underline[~~~~~~~],
+    座位号: underline[~~~~~~~],
+  ),
+  dash: "solid",
+  supplement: none,
+) = {
+  set page(margin: .5in, header: none, footer: none)
+  title(name.split("").join(h(1em)), bottom: 0pt)
+  _create-seal(dash: dash, supplement: supplement, info: student-info)
+}
+
+// 一种页码格式: "第x页（共xx页）
+#let zh-arabic(prefix: "", suffix: "") = (..nums) => {
+  let arr = nums.pos()
+  [#prefix 第#str(arr.at(0))页（共#str(arr.at(-1))页）#suffix]
+}
+
+// 中文着重号
+#let underdot(body) = {
+  show strong: content => {
+    show regex("\p{Hani}"): it => box(place(text("·", size: 0.8em), dx: 0.45em, dy: 0.75em) + it)
+    content.body
+  }
+  [*#body*]
+}
+
+#let tag(body, color: blue, font: auto, prefix: "【", suffix: "】") = context {
+  let _font = font
+  if font == auto { _font = text.font.slice(0, 1) + heiti }
+  text(font: _font, color)[#prefix#body#suffix]
+  h(.1em, weak: true)
+}
+
+#let multi = tag.with(prefix: $circle.filled.tiny$, suffix: none, color: maroon)[多选]()
