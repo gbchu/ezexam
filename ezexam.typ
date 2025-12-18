@@ -1,4 +1,4 @@
-#import "lib/tools.typ": multi, tag, zh-arabic
+#import "lib/tools.typ": multi, tag, underdot, zh-arabic
 #import "lib/outline.typ": *
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
@@ -66,7 +66,6 @@
   mode-state.update(mode)
   paper = a4 + paper
 
-
   let _footer(label) = context {
     assert(
       type(label) in (str, function, none) or label == auto,
@@ -124,7 +123,6 @@
     }
     align(position, _numbering)
   }
-
   import "lib/draft.typ": _create-seal
   let _header(
     student-info: seal-line-student-info,
@@ -181,7 +179,6 @@
       }
     ]
   }
-
   let _background() = {
     if paper.columns == 2 and show-gap-line {
       line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
@@ -196,7 +193,6 @@
       ..paper.columns * (rotate(watermark-rotate, watermark),),
     ))
   }
-
   set page(
     ..paper,
     header: _header(),
@@ -218,7 +214,6 @@
   }
 
   set par(leading: line-height, spacing: par-spacing, first-line-indent: (amount: first-line-indent, all: true))
-
   set text(font: font, size: font-size)
 
   if heading-numbering == auto {
@@ -245,8 +240,7 @@
   show heading.where(level: 1).and(<chapter>): set heading(bookmarked: true)
 
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)
-  set table(stroke: .5pt, align: center)
-  set table.cell(align: horizon)
+  set table.cell(align: horizon + center, stroke: .5pt)
 
   // 分段函数样式
   set math.cases(gap: 1em)
@@ -259,11 +253,10 @@
     let space = h(.25em, weak: true)
     space + math.display(it) + space
   }
-  //  π 在罗马字体下显示的样式；默认的有点丑
+  //  π 在类罗马字体 "TeX Gyre Termes Math" 下显示的样式；默认的有点丑
   show math.pi: it => {
-    if font.contains("TeX Gyre Termes Math") {
-      text(font: "Times New Roman", "π")
-      return
+    if "TeX Gyre Termes Math" in font {
+      return text(font: "Times New Roman", "π")
     }
     it
   }
