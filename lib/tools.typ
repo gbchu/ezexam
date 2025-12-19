@@ -30,7 +30,7 @@
 #let _trim-content-start-parbreak(body) = {
   if body.has("children") {
     let children = body.children
-    if children != () and children.first() in ([ ], parbreak()) {
+    if children != () and children.first() == parbreak() {
       return children.slice(1).join()
     }
   }

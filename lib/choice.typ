@@ -1,21 +1,24 @@
-#import "tools.typ": _trim-content-start-parbreak
-#let _format-choice(choice, label, indent, spacing, label-postion) = {
+#let _format-choice(choice, label, indent, spacing, label-position) = {
   // 为了解决数学公式在左侧加间距的问题
-  if choice.func() == math.equation or choice.has("children") and choice.children.first().func() == math.equation {
+  if choice.func() == math.equation {
     spacing -= .25em
+  } else if choice.has("children") {
+    let _children = choice.children
+    let _first = _children.first()
+    if _first.func() == math.equation or (_first == [ ] and _children.at(1).func() == math.equation) {
+      spacing -= .25em
+    }
   }
 
   if choice.func() not in (image, table) {
-    return terms(
-      indent: indent,
-      separator: h(spacing, weak: true),
+    return par(
       hanging-indent: indent + spacing + measure(label).width,
-      (label, choice),
+      h(indent) + label + h(spacing, weak: true) + choice,
     )
   }
 
   // 选项为图片、表格的处理
-  if label-postion == bottom {
+  if label-position == bottom {
     return grid(
       align: center,
       inset: (left: indent),
@@ -71,7 +74,8 @@
   let max-width = 0pt
   for index in range(choice-number) {
     choices-arr.at(index) = _format-choice(
-      _trim-content-start-parbreak[#choices-arr.at(index)],
+      // _trim-content-start-parbreak[#choices-arr.at(index)],
+      [#choices-arr.at(index)],
       numbering(label, index + 1),
       indent,
       spacing,
