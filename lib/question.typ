@@ -1,9 +1,10 @@
 #import "const-state.typ": HANDOUTS, mode-state
 #import "tools.typ": _trim-content-start-parbreak
 
-#let _format-question-number(label, label-color, label-weight, with-heading-label) = {
-  counter("question").step()
-  context counter("question").display(num => {
+#let _format-label(label, label-color, label-weight, with-heading-label) = box(width: 1em, align(right)[
+  #context counter(
+    "question",
+  ).display(num => {
     let _label = label
     if label == auto { _label = "1." }
 
@@ -19,11 +20,11 @@
       numbering(_label, ..arr),
     )
   })
-}
+])
 
-#let _format-question-points(points, prefix, suffix, separate) = {
+#let _format-points(points, prefix, suffix, separate) = {
   if points == none { return }
-  assert(type(points) == int, message: "points be a positive integer!")
+  assert(type(points) == int and points > 0, message: "points be a positive integer!")
   [#prefix#points#suffix#if separate [ \ ]]
 }
 
@@ -44,18 +45,7 @@
   top: 0pt,
   bottom: 0pt,
 ) = context {
-  let _points = _format-question-points(
-    points,
-    h(-.5em, weak: true) + points-prefix,
-    points-suffix,
-    points-separate,
-  )
-  let _marker = _format-question-number(
-    label,
-    label-color,
-    label-weight,
-    with-heading-label,
-  )
+  counter("question").step()
   set par(leading: line-height) if line-height != auto
   v(top)
   terms(
@@ -63,8 +53,20 @@
     hanging-indent: hanging-indent,
     separator: h(.88em, weak: true),
     (
-      box(align(right, _marker), width: 1em),
-      _points + h(first-line-indent) + _trim-content-start-parbreak(body),
+      _format-label(
+        label,
+        label-color,
+        label-weight,
+        with-heading-label,
+      ),
+      _format-points(
+        points,
+        h(-.5em, weak: true) + points-prefix,
+        points-suffix,
+        points-separate,
+      )
+        + h(first-line-indent, weak: true)
+        + _trim-content-start-parbreak(body),
     ),
   )
   v(bottom)

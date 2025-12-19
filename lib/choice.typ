@@ -74,7 +74,6 @@
   let max-width = 0pt
   for index in range(choice-number) {
     choices-arr.at(index) = _format-choice(
-      // _trim-content-start-parbreak[#choices-arr.at(index)],
       [#choices-arr.at(index)],
       numbering(label, index + 1),
       indent,

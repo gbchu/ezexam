@@ -68,7 +68,7 @@
   let _footer(label) = context {
     assert(
       type(label) in (str, function, none) or label == auto,
-      message: "expected str or function or none or auto, found " + str(type(label)),
+      message: "expected str, function, none, auto, found " + str(type(label)),
     )
     if label == none { return }
     let _label = label
@@ -145,11 +145,11 @@
       chapter-last-page-location = chapter-location.map(item => item - 2) + (last.first() - 1,)
     }
 
-    // 去除第一章,因为第一章前面没有章节了
-    let _ = chapter-last-page-location.remove(0)
     let _margin-y = page.margin * 2
     let _width = page.height - _margin-y
     if page.flipped { _width = page.width - _margin-y }
+    // 去除第一章,因为第一章前面没有章节了
+    let _ = chapter-last-page-location.remove(0)
     block(width: _width)[
       // 判断当前是在当前章节第一页还是章节最后一页
       //当前章节第一页弥封线
@@ -171,15 +171,19 @@
         _width = if page.flipped {
           page.height
         } else { page.width }
-        place(dx: _width - page.margin - 2em, dy: 2em, rotate(90deg, origin: left + top, _create-seal(
-          dash: line-type,
-          supplement: supplement,
-        )))
+        place(
+          dx: _width - page.margin - 2em,
+          dy: 2em,
+          rotate(90deg, origin: left + top, _create-seal(
+            dash: line-type,
+            supplement: supplement,
+          )),
+        )
       }
     ]
   }
   let _background() = {
-    if paper.columns == 2 and show-gap-line {
+    if paper.columns > 1 and show-gap-line {
       line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
     }
   }
