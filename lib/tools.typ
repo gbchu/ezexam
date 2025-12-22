@@ -59,9 +59,10 @@
   [#prefix 第#str(arr.at(0))页（共#str(arr.at(-1))页）#suffix]
 }
 
-#let tag(body, color: blue, font: auto, weight: 400, prefix: "【", suffix: "】") = context {
+#let tag(body, color: blue, font: auto, weight: 400, prefix: "【", suffix: "】", dx: -.4em) = context {
   let _font = font
   if font == auto { _font = text.font.slice(0, 1) + heiti }
+  h(dx, weak: true)
   text(font: _font, weight: weight, color)[#prefix#body#suffix]
   h(.1em, weak: true)
 }
