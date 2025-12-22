@@ -84,9 +84,8 @@
     if columns != auto { continue }
     max-width = calc.max(max-width, measure(choices-arr.at(index)).width)
   }
-
+  
   v(top)
-
   grid(
     columns: _count-columns(container.width, choice-number, max-width + c-gap, columns) * (1fr,),
     column-gutter: c-gap,
@@ -94,6 +93,7 @@
     align: horizon,
     ..choices-arr
   )
+
   v(bottom)
 })
 
