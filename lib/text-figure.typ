@@ -12,18 +12,9 @@
 ) = context {
   assert(style == "tf" or style == "ft", message: "style must be 'tf' or 'ft'")
   let (width, height) = measure(figure)
-  let _text = text
-  // 检测是否需要换页
-  let _page-height = page.height
-  if page.flipped {
-    _page-height = page.width
-  }
-  if _page-height - page.margin - here().position().y > height {
-    _text = box(_text)
-  }
   let body = (
-    _text,
-    place(dx: figure-x, dy: figure-y, align, box(height: height, figure)),
+    text,
+    place(dx: figure-x, dy: figure-y, align, box(height: height, figure)), // 使用box设置高度是为了确保有足够的高度，否则图片可能会显示不全
   )
 
   let _columns = (1fr, width)
@@ -33,6 +24,14 @@
     _columns = _columns.rev()
     _gap = figure-x + gap
   }
+
+  // 检测是否需要换页
+  let _page-height = page.height
+  if page.flipped { _page-height = page.width }
+  if _page-height - page.margin - here().position().y < height / 2 {
+    colbreak()
+  }
+
   grid(
     columns: _columns,
     inset: (
