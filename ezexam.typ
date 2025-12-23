@@ -228,7 +228,7 @@
   set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
   show heading: it => {
     v(heading-top)
-    text(heading-color, font: font.slice(0, 1) + heading-font, it)
+    text(heading-color, font: font.slice(0,-1) + heading-font, it)
     v(heading-bottom)
   }
   show heading.where(level: 1): it => {

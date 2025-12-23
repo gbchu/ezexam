@@ -61,7 +61,7 @@
 
 #let tag(body, color: blue, font: auto, weight: 400, prefix: "【", suffix: "】", dx: -.4em) = context {
   let _font = font
-  if font == auto { _font = text.font.slice(0, 1) + heiti }
+  if font == auto { _font = text.font.slice(0, -1) + heiti }
   h(dx, weak: true)
   text(font: _font, weight: weight, color)[#prefix#body#suffix]
   h(.1em, weak: true)
