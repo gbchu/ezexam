@@ -21,22 +21,20 @@
   line-height: auto,
   top: 0pt,
   bottom: 0pt,
-  inset: (rest: 10pt, top: 20pt, bottom: 20pt),
+  inset: (x: 10pt, top: 20pt, bottom: 20pt),
   show-number: true,
 ) = context {
   if not answer-state.get() { return }
   assert(type(inset) == dictionary, message: "inset must be a dictionary")
-  let _inset = (rest: 10pt, top: 20pt, bottom: 20pt) + inset
   v(top)
   block(
     width: 100%,
     breakable: breakable,
-    inset: _inset,
+    inset: (top: 20pt, bottom: 20pt) + inset,
     radius: radius,
     stroke: (thickness: border-width, paint: border-color, dash: border-style),
     fill: bg-color,
   )[
-
     // 标题
     #if title != none {
       let title-box = box(fill: title-bg-color, inset: 6pt, radius: title-radius, text(
@@ -49,16 +47,16 @@
       place(
         title-align,
         dx: title-x,
-        dy: -_inset.top - measure(title-box).height / 2 + title-y,
+        dy: -inset.top - measure(title-box).height / 2 + title-y,
         title-box,
       )
     }
 
     // 解析题号的格式化
     #counter("explain").step()
-    #let _marker = none
+    #let _label = none
     #if show-number {
-      _marker = context numbering("1.", ..counter("explain").get())
+      _label = context numbering("1.", ..counter("explain").get())
     }
     #set par(leading: line-height) if line-height != auto
     #let _space = 0em
@@ -67,7 +65,7 @@
       hanging-indent: 0em,
       separator: h(_space),
       (
-        _marker,
+        _label,
         text(color, _trim-content-start-parbreak(body)),
       ),
     )
