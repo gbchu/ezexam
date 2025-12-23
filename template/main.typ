@@ -1,6 +1,6 @@
 #import "@preview/ezexam:0.2.8": *
 
-#show: setup.with(mode: EXAM)
+#show: setup.with(mode: EXAM, font: roman)
 
 #outline()
 #chapter[2025新高考I卷]
@@ -136,9 +136,8 @@
   + 证明：平面 $P A B perp "平面" P A D$
   + 若 $P A = A B = sqrt(2), A D = sqrt(3) + 1, B C = 2$，$P, B, C, D$ 在同一个球面上，设该球面的球心为 $O$.
     #text-figure(
-      figure: image("17.png", height: 1.8in),
+      figure: image("17.png", height: 1.6in),
       figure-x: 20pt,
-      figure-y: 10pt,
     )[
       + 证明：$O$ 在平面 $A B C D$上；
       + 求直线 $A C$ 与直线 $P O$ 所成角的余弦值.
