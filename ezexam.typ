@@ -1,4 +1,4 @@
-#import "lib/tools.typ": draft, multi, tag, zh-arabic
+#import "lib/tools.typ": draft, tag, zh-arabic
 #import "lib/outline.typ": *
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
@@ -234,7 +234,7 @@
   show heading.where(level: 1): it => {
     let size = h1-size
     if size == auto {
-      if mode == HANDOUTS { size = text.size } else { size = 10.5pt }
+      if mode == HANDOUTS { size = 1em } else { size = 10.5pt }
     }
     text(size: size, it)
   }

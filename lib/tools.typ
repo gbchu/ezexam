@@ -1,6 +1,16 @@
 #import "const-state.typ": heiti
 #import "outline.typ": title
 
+#let _trim-content-start-parbreak(body) = {
+  if body.has("children") {
+    let children = body.children
+    if children != () and children.first() == parbreak() {
+      return children.slice(1).join()
+    }
+  }
+  body
+}
+
 #let _create-seal(
   dash: "dashed",
   supplement: none,
@@ -25,16 +35,6 @@
     }
   )
   line(length: 100%, stroke: (dash: dash))
-}
-
-#let _trim-content-start-parbreak(body) = {
-  if body.has("children") {
-    let children = body.children
-    if children != () and children.first() == parbreak() {
-      return children.slice(1).join()
-    }
-  }
-  body
 }
 
 #let draft(
@@ -66,5 +66,3 @@
   text(font: _font, weight: weight, color)[#prefix#body#suffix]
   h(.1em, weak: true)
 }
-
-#let multi = tag.with(prefix: $circle.filled.tiny$, suffix: none, color: maroon)[多选]()
