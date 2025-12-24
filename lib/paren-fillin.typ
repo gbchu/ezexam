@@ -100,10 +100,10 @@
   placeholder: "\u{25B2}",
   with-number: false,
   update: false,
-) = context {
-  let result = _get-answer(body, placeholder, with-number, update)
-  [#if justify { h(1fr) } else { h(0pt, weak: true) }（~~#result~~）]
-}
+) = context [
+  #if justify { h(1fr) }
+  #h(0pt, weak: true)（~~#_get-answer(body, placeholder, with-number, update)~~）
+]
 
 // 类似英文中的7选5题型专用语法糖
 #let parenn = paren.with(with-number: true, update: true)
