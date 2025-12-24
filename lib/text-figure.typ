@@ -11,7 +11,7 @@
 ) = context {
   assert(style == "tf" or style == "ft", message: "style must be 'tf' or 'ft'")
   let body = (
-    text,
+    text, // [ \ ] 是为了在当前页还有一行时，换页
     [ \ ] + box(place(dx: figure-x, dy: figure-y - par.leading * 2, figure)),
   )
 
