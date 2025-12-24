@@ -12,7 +12,7 @@
   flipped: false,
 )
 
-#let main-font = ("New Computer Modern Math", "Noto Serif CJK SC")
+// #let main-font = ("New Computer Modern Math", "Noto Serif CJK SC")
 #let heiti = ("SimHei", "Heiti SC", "Noto Sans CJK SC")
 #let roman = (
   (name: "Times New Roman", covers: regex("\w")),
