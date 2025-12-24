@@ -52,7 +52,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 + `tag` 方法新增 `weight` 和 `dx` 参数
 + 修复 `fillin` 方法有时不显示占位符的 bug
 + `roman` 添加 `TeX Gyre Termes` 字体，修复在线使用 `roman` 字体时，缺少 `Times New Roman` 字体造成的标题西文字体未正确设置的问题
-+ 废弃 `answer` 方法
++ 废弃 `answer` 方法和 `multi` 常量
 
 ### 0 . 2 . 7
 + 优化目录的显示效果

@@ -21,11 +21,9 @@
   "Noto Serif CJK SC",
 )
 
-
-// "exam": 试卷模式; "handouts": 讲义模式(默认)；"solution"：解析模式
-#let EXAM = "exam"
-#let HANDOUTS = "handouts"
-#let SOLUTION = "solution"
+#let EXAM = "exam" // 试卷模式
+#let HANDOUTS = "handouts" // 讲义模式(默认)
+#let SOLUTION = "solution" // 解析模式
 
 #let mode-state = state("mode", HANDOUTS)
 #let answer-state = state("answer", false)
