@@ -73,14 +73,13 @@
 #let fillin(
   body,
   len: 1.25cm,
-  placeholder: "▴",
+  placeholder: "\u{25B2}",
   with-number: false,
   update: false,
   stroke: .45pt + luma(0),
   offset: 3pt,
 ) = context {
   assert(type(len) == length, message: "expect length, got " + str(type(len)))
-
   let result = _get-answer(body, placeholder, with-number, update)
   if not answer-state.get() or result.child in ([], [ ]) {
     return _draw-line(len, stroke, offset / 2, result)
@@ -98,7 +97,7 @@
 #let paren(
   body,
   justify: false,
-  placeholder: "▴",
+  placeholder: "\u{25B2}",
   with-number: false,
   update: false,
 ) = context {
