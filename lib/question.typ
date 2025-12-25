@@ -39,7 +39,7 @@
   with-heading-label: false,
   points: none,
   points-separate: true,
-  points-prefix: "（",
+  points-prefix: h(-.4em, weak: true) + "（",
   points-suffix: "分）",
   line-height: auto,
   top: 0pt,
@@ -62,7 +62,7 @@
       ),
       _format-points(
         points,
-        h(-.5em, weak: true) + points-prefix,
+        points-prefix,
         points-suffix,
         points-separate,
       )
