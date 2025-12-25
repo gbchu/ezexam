@@ -1,14 +1,8 @@
+#import "tools.typ": _content-start-space
+
 #let _format-choice(choice, label, indent, spacing, label-position) = {
   // 为了解决数学公式在左侧加间距的问题
-  if choice.func() == math.equation {
-    spacing -= .25em
-  } else if choice.has("children") {
-    let _children = choice.children
-    let _first = _children.first()
-    if _first.func() == math.equation or (_first == [ ] and _children.at(1).func() == math.equation) {
-      spacing -= .25em
-    }
-  }
+  spacing -= _content-start-space(choice)
 
   if choice.func() not in (image, table) {
     return par(
@@ -84,7 +78,7 @@
     if columns != auto { continue }
     max-width = calc.max(max-width, measure(choices-arr.at(index)).width)
   }
-  
+
   v(top)
   grid(
     columns: _count-columns(container.width, choice-number, max-width + c-gap, columns) * (1fr,),
@@ -93,7 +87,6 @@
     align: horizon,
     ..choices-arr
   )
-
   v(bottom)
 })
 

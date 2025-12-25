@@ -1,5 +1,5 @@
 #import "const-state.typ": HANDOUTS, mode-state
-#import "tools.typ": _trim-content-start-parbreak
+#import "tools.typ": _content-start-space, _trim-content-start-parbreak
 
 #let _format-label(label, label-color, label-weight, with-heading-label) = box(width: 1em, align(right)[
   #context counter(
@@ -44,9 +44,10 @@
   line-height: auto,
   top: 0pt,
   bottom: 0pt,
-) = context {
+) = /* context */ {
   counter("question").step()
   set par(leading: line-height) if line-height != auto
+  first-line-indent -= _content-start-space[#body]
   v(top)
   terms(
     indent: indent,
@@ -66,7 +67,7 @@
         points-separate,
       )
         + h(first-line-indent, weak: true)
-        + _trim-content-start-parbreak(body),
+        + _trim-content-start-parbreak[#body],
     ),
   )
   v(bottom)
