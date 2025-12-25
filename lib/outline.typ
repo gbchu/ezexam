@@ -119,6 +119,6 @@
   set par(hanging-indent: if hanging-indent == auto {
     -indent - enum.body-indent - measure(format).width
   } else { hanging-indent })
-  for value in children.pos() [+ #par(value)]
+  for child in children.pos() [+ #par(child)]
 }
 
