@@ -12,8 +12,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 #import "@preview/ezexam:0.2.8": *
 #show: setup.with(
   mode: EXAM,
-  paper: a3,
-  font: roman
+  paper: a3
 )
 
 #title[XX试卷]
