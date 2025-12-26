@@ -85,7 +85,7 @@
   ),
   weight: 500,
   font: auto,
-  size: 11pt,
+  size: 1em,
   gap: 2em,
   top: 0pt,
   bottom: 0pt,
