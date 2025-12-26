@@ -3,7 +3,6 @@
 #let _format-choice(choice, label, indent, spacing, label-position) = {
   // 为了解决数学公式在左侧加间距的问题
   spacing -= _content-start-space(choice)
-
   if choice.func() not in (image, table) {
     return par(
       hanging-indent: indent + spacing + measure(label).width,
@@ -47,7 +46,7 @@
 #let choices(
   columns: auto,
   c-gap: 0pt,
-  r-gap: 25pt,
+  r-gap: 2em,
   indent: 0pt,
   spacing: 5pt,
   top: 0pt,
