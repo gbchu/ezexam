@@ -7,7 +7,6 @@
   ).display(num => {
     let _label = label
     if label == auto { _label = "1." }
-
     let arr = (num,)
     if with-heading-label {
       _label = "1.1.1.1.1.1."

@@ -55,38 +55,38 @@
   label: "A.",
   label-postion: left,
   ..options,
-) = layout(container => {
-  // 使用layout获取当前父元素的宽度
+) = {
   let args-named = options.named()
   assert(args-named.len() == 0, message: "choices no " + repr(args-named) + " parameters")
+  // 使用layout获取当前父元素的宽度
+  layout(container => {
+    let choices-arr = options.pos()
+    let choice-number = choices-arr.len()
+    assert(choice-number > 0, message: "choices must have at least one option")
+    // 拼接选项并添加标签和间距;获取选项中最长的宽度
+    let max-width = 0pt
+    for index in range(choice-number) {
+      choices-arr.at(index) = _format-choice(
+        [#choices-arr.at(index)],
+        numbering(label, index + 1),
+        indent,
+        spacing,
+        label-postion,
+      )
 
-  let choices-arr = options.pos()
-  let choice-number = choices-arr.len()
-  assert(choice-number > 0, message: "choices must have at least one option")
+      if columns != auto { continue }
+      max-width = calc.max(max-width, measure(choices-arr.at(index)).width)
+    }
 
-  // 拼接选项并添加标签和间距;获取选项中最长的宽度
-  let max-width = 0pt
-  for index in range(choice-number) {
-    choices-arr.at(index) = _format-choice(
-      [#choices-arr.at(index)],
-      numbering(label, index + 1),
-      indent,
-      spacing,
-      label-postion,
+    v(top)
+    grid(
+      columns: _count-columns(container.width, choice-number, max-width + c-gap, columns) * (1fr,),
+      column-gutter: c-gap,
+      row-gutter: r-gap,
+      align: horizon,
+      ..choices-arr
     )
-
-    if columns != auto { continue }
-    max-width = calc.max(max-width, measure(choices-arr.at(index)).width)
-  }
-
-  v(top)
-  grid(
-    columns: _count-columns(container.width, choice-number, max-width + c-gap, columns) * (1fr,),
-    column-gutter: c-gap,
-    row-gutter: r-gap,
-    align: horizon,
-    ..choices-arr
-  )
-  v(bottom)
-})
+    v(bottom)
+  })
+}
 
