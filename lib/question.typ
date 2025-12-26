@@ -51,7 +51,7 @@
   terms(
     indent: indent,
     hanging-indent: hanging-indent,
-    separator: h(.88em, weak: true),
+    separator: h(.9em, weak: true),
     (
       _format-label(
         label,

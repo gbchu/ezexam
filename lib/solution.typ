@@ -63,7 +63,7 @@
     #if show-number { _space = .75em }
     #terms(
       hanging-indent: 0em,
-      separator: h(_space),
+      separator: h(_space, weak: true),
       (
         _label,
         text(color, _trim-content-start-parbreak(body)),
