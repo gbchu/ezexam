@@ -76,7 +76,7 @@
       if mode == HANDOUTS {
         _label = "1 / 1"
       } else {
-        let _prefix = [#subject-state.get()参考#if mode == SOLUTION [答案]]
+        let _prefix = [#subject-state.get()#if mode == SOLUTION [参考答案] else [试题]]
         _label = zh-arabic(prefix: _prefix)
       }
     }
@@ -228,7 +228,7 @@
   set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
   show heading: it => {
     v(heading-top)
-    text(heading-color, font: font.slice(0,-1) + heading-font, it)
+    text(heading-color, font: font.slice(0, -1) + heading-font, it)
     v(heading-bottom)
   }
   show heading.where(level: 1): it => {
