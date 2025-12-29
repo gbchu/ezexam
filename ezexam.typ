@@ -144,12 +144,12 @@
     if page.columns == 2 and footer-is-separate {
       chapter-last-page-location = chapter-location.map(item => item - 2) + (last.first() - 1,)
     }
+    // 去除第一章,因为第一章前面没有章节了
+    let _ = chapter-last-page-location.remove(0)
 
     let _margin-y = page.margin * 2
     let _width = page.height - _margin-y
     if page.flipped { _width = page.width - _margin-y }
-    // 去除第一章,因为第一章前面没有章节了
-    let _ = chapter-last-page-location.remove(0)
     block(width: _width)[
       // 判断当前是在当前章节第一页还是章节最后一页
       //当前章节第一页弥封线
@@ -168,11 +168,10 @@
 
       // 章节最后页的弥封线
       #if (chapter-last-page-location).contains(current) {
-        _width = if page.flipped {
-          page.height
-        } else { page.width }
+        _width = page.width
+        if page.flipped { _width = page.height }
         place(
-          dx: _width - page.margin - 2em,
+          dx: _width - page.margin - 1em,
           dy: 2em,
           rotate(90deg, origin: left + top, _create-seal(
             dash: line-type,
