@@ -42,7 +42,7 @@
   color: luma(0),
   position: center,
   top: 0pt,
-  bottom: 18pt,
+  bottom: 0pt,
 ) = context {
   v(top)
   let _font = font
@@ -61,7 +61,7 @@
   counter("question").update(0)
 }
 
-#let subject(body, size: 21.5pt, spacing: 1em, font: heiti, top: -20pt, bottom: 0pt) = {
+#let subject(body, size: 21.5pt, spacing: 1em, font: heiti, top: 0pt, bottom: 0pt) = {
   v(top)
   align(center, text(
     font: font,
@@ -75,7 +75,7 @@
 #let secret(body: [绝密★启用前]) = place(top, float: true, clearance: 20pt, text(font: heiti, body))
 
 #let exam-type(type, prefix: "试卷类型: ") = context place(top + right, text(
-  font: text.font.slice(0,-1) + heiti,
+  font: text.font.slice(0, -1) + heiti,
 )[#prefix#type])
 
 #let exam-info(
@@ -91,7 +91,7 @@
   bottom: 0pt,
 ) = context {
   assert(info.len() > 0, message: "info cannot be empty")
-  set text(font: text.font.slice(0,-1) + heiti, size: size, weight: weight)
+  set text(font: text.font.slice(0, -1) + heiti, size: size, weight: weight)
   set align(center)
   grid(
     columns: info.len(),
