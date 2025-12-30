@@ -44,7 +44,6 @@
   top: 0pt,
   bottom: 0pt,
 ) = context {
-  v(top)
   let _font = font
   if _font == auto { _font = text.font }
   let _size = size
@@ -55,6 +54,7 @@
       _size = 15pt
     }
   }
+  v(top)
   align(position, text(font: _font, size: _size, weight: weight, color)[#body <title>])
   v(bottom)
   counter(heading).update(0)
