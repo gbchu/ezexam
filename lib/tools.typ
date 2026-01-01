@@ -1,36 +1,32 @@
 #import "const-state.typ": heiti
 #import "outline.typ": title
-
+#let _special-char = "《（【"
 // 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
 #let _math-or-special-char(body) = {
   if body.func() == math.equation { return "math" }
-  if body.has("text") and body.text.starts-with(regex("[《（【]")) { return "char" }
+  if body.has("text") and body.text.first() in _special-char { "char" }
 }
 
 #let _check-content-starts-with(body) = {
   if body.has("children") {
     let children = body.children
-    if children == () { return }
-    let first-child = children.first()
-    if first-child == [ ] {
-      return _math-or-special-char(children.at(1))
-    }
-    return _math-or-special-char(first-child)
+    if children.len() == 0 { return }
+    body = children.first()
+    if body == [ ] { body = children.at(1) }
   }
-
   _math-or-special-char(body)
 }
 
 #let _content-start-space(body) = {
   if _check-content-starts-with(body) == "math" { return .25em }
   if _check-content-starts-with(body) == "char" { return .4em }
-  return 0em
+  0em
 }
 
 #let _trim-content-start-parbreak(body) = {
   if body.has("children") {
     let children = body.children
-    if children != () and children.first() == parbreak() {
+    if children.len() > 0 and children.first() == parbreak() {
       return children.slice(1).join()
     }
   }
