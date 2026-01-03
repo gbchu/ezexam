@@ -64,7 +64,6 @@
   assert(type(font) == array and type(heading-font) == array, message: "font must be an array, got " + str(type(font)))
   mode-state.update(mode)
   paper = a4 + paper
-
   let _footer(label) = context {
     assert(
       type(label) in (str, function, none) or label == auto,
@@ -167,7 +166,7 @@
       }
 
       // 章节最后页的弥封线
-      #if (chapter-last-page-location).contains(current) {
+      #if chapter-last-page-location.contains(current) {
         _width = page.width
         if page.flipped { _width = page.height }
         place(
