@@ -123,8 +123,7 @@
   import "lib/tools.typ": _create-seal
   show <title>: it => {
     it
-    if not show-seal-line { return }
-    seal-line-page-state.update(pre => pre + counter(page).at(it.location()))
+    if show-seal-line { seal-line-page-state.update(pre => pre + counter(page).at(it.location())) }
   }
 
   let _header(
