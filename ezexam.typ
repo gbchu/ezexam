@@ -135,7 +135,6 @@
     // 是否显示弥封线，如果当前页面有<title>,则显示弥封线,并在该章节最后一页的右侧也设置弥封线
     // 加dedup是为了去除在solution中使用title时，seal-line-page-state.final()最后会重复的问题
     let chapter-location = seal-line-page-state.final().dedup()
-    if chapter-location.len() == 0 { return }
     let current = counter(page).get().first()
     let last = counter(page).final()
 
