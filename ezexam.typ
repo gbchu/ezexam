@@ -127,8 +127,7 @@
     supplement: seal-line-supplement,
   ) = context {
     if mode != EXAM or not show-seal-line { return }
-    // 根据页码决定是否显示弥封线
-    // 如果当前页面有<title>,则显示弥封线,并在该章节最后一页的右侧也设置弥封线
+    // 是否显示弥封线，如果当前页面有<title>,则显示弥封线,并在该章节最后一页的右侧也设置弥封线
     let chapter-location = for value in query(<title>) {
       counter(page).at(value.location())
     }
