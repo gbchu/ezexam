@@ -62,7 +62,7 @@
   doc,
 ) = {
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode must be HANDOUTS or EXAM or SOLUTION")
-  assert(type(font) == array and type(heading-font) == array, message: "font must be an array, got " + str(type(font)))
+  assert(type(font) == array and type(heading-font) == array, message: "font must be an array")
   mode-state.update(mode)
   paper = a4 + paper
   let _footer(label) = context {
