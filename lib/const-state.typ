@@ -29,3 +29,4 @@
 #let answer-state = state("answer", false)
 #let answer-color-state = state("answer-color", blue)
 #let subject-state = state("subject", "")
+#let seal-line-page-state = state("seal-line", ())

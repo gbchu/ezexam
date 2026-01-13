@@ -121,6 +121,12 @@
     align(position, _numbering)
   }
   import "lib/tools.typ": _create-seal
+  show <title>: it => {
+    it
+    if not show-seal-line { return }
+    seal-line-page-state.update(pre => pre + counter(page).at(it.location()))
+  }
+
   let _header(
     student-info: seal-line-student-info,
     line-type: seal-line-type,
@@ -128,11 +134,9 @@
   ) = context {
     if mode != EXAM or not show-seal-line { return }
     // 是否显示弥封线，如果当前页面有<title>,则显示弥封线,并在该章节最后一页的右侧也设置弥封线
-    let chapter-location = for value in query(<title>) {
-      counter(page).at(value.location())
-    }
-
-    if chapter-location == none or chapter-location.len() == 0 { return }
+    // 加dedup是为了去除在solution中使用title时，seal-line-page-state.final()最后会重复的问题
+    let chapter-location = seal-line-page-state.final().dedup()
+    if chapter-location.len() == 0 { return }
     let current = counter(page).get().first()
     let last = counter(page).final()
 
@@ -150,7 +154,7 @@
     block(width: _width)[
       // 判断当前是在当前章节第一页还是章节最后一页
       //当前章节第一页弥封线
-      #if chapter-location.contains(current) {
+      #if current in chapter-location {
         place(
           dx: -_width - 1em,
           dy: -2.4em,
@@ -164,7 +168,7 @@
       }
 
       // 章节最后页的弥封线
-      #if chapter-last-page-location.contains(current) {
+      #if current in chapter-last-page-location {
         _width = page.width
         if page.flipped { _width = page.height }
         place(
