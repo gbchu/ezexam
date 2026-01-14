@@ -121,11 +121,6 @@
     align(position, _numbering)
   }
   import "lib/tools.typ": _create-seal
-  show <title>: it => {
-    it
-    if show-seal-line { seal-line-page-state.update(pre => pre + counter(page).at(it.location())) }
-  }
-
   let _header(
     student-info: seal-line-student-info,
     line-type: seal-line-type,
@@ -133,18 +128,18 @@
   ) = context {
     if mode != EXAM or not show-seal-line { return }
     // 是否显示弥封线，如果当前页面有<title>,则显示弥封线,并在该章节最后一页的右侧也设置弥封线
-    // 加dedup是为了去除在solution中使用title时，seal-line-page-state.final()最后会重复的问题
-    let chapter-location = seal-line-page-state.final().dedup()
+    let chapter-first-pages = seal-line-page-state.final()
+    // 判断当前页面是否是章节第一页还是最后一页
+    let is-chapter-first-page = false
+    let is-chapter-last-page = false
     let current = counter(page).get().first()
-    let last = counter(page).final()
-
-    // 获取上一章最后一页的页码,给最后一页加上弥封线
-    let chapter-last-page-location = chapter-location.map(item => item - 1) + last
-    if page.columns == 2 and footer-is-separate {
-      chapter-last-page-location = chapter-location.map(item => item - 2) + (last.first() - 1,)
+    let last = counter(page).final().first()
+    for first-page in chapter-first-pages {
+      if current == first-page { is-chapter-first-page = true }
+      if current in (first-page - page.columns, last, last - 1) {
+        is-chapter-last-page = true
+      }
     }
-    // 去除第一章,因为第一章前面没有章节了
-    let _ = chapter-last-page-location.remove(0)
 
     let _margin-y = page.margin * 2
     let _width = page.height - _margin-y
@@ -152,7 +147,7 @@
     block(width: _width)[
       // 判断当前是在当前章节第一页还是章节最后一页
       //当前章节第一页弥封线
-      #if current in chapter-location {
+      #if is-chapter-first-page {
         place(
           dx: -_width - 1em,
           dy: -2.4em,
@@ -166,7 +161,7 @@
       }
 
       // 章节最后页的弥封线
-      #if current in chapter-last-page-location {
+      #if is-chapter-last-page {
         _width = page.width
         if page.flipped { _width = page.height }
         place(
