@@ -136,7 +136,7 @@
     let last = counter(page).final().first()
     for first-page in chapter-first-pages {
       if current == first-page { is-chapter-first-page = true }
-      if current in (first-page - page.columns, last) or page.flipped and current == last - 1 {
+      if current in (first-page - page.columns, last) or footer-is-separate and current == last - 1 {
         is-chapter-last-page = true
       }
     }
