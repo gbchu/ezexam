@@ -121,3 +121,12 @@
   for child in children.pos() [+ #par(child)]
 }
 
+#let solution-block(page-resume: true, body) = context {
+  if answer-state.get() {
+    pagebreak(weak: true)
+    mode-state.update(SOLUTION)
+    set page(header: none)
+    // if not page-resume { counter(page).update(1) }
+    body
+  }
+}
