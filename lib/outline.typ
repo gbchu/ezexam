@@ -52,7 +52,7 @@
     if mode-state.get() == HANDOUTS { _size = 20pt }
   }
   v(top)
-  align(position, text(font: _font, size: _size, weight: weight, color)[#body <title>])
+  align(position, text(font: _font, size: _size, weight: weight, color, body))
   v(bottom)
   counter(heading).update(0)
   counter("question").update(0)
