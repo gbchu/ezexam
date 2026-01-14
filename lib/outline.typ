@@ -56,6 +56,8 @@
   v(bottom)
   counter(heading).update(0)
   counter("question").update(0)
+  let here = here()
+  seal-line-page-state.update(pre => pre + counter(page).at(here))
 }
 
 #let subject(body, size: 21.5pt, spacing: 1em, font: heiti, top: 0pt, bottom: 0pt) = {
