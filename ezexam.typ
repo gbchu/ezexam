@@ -75,7 +75,7 @@
     if label == auto {
       _label = "1 / 1"
       if mode != HANDOUTS {
-        _label = zh-arabic(prefix: [#subject-state.get()#if mode == SOLUTION [参考答案] else [试题]])
+        _label = zh-arabic(prefix: [#subject-state.get()#if mode-state.get() == SOLUTION [参考答案] else [试题]])
       }
     }
     // 如果传进来的label包含两个1,两个1中间不能是连续空格、包含数字
