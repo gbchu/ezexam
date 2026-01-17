@@ -1,9 +1,9 @@
-#import "lib/tools.typ": draft, tag, zh-arabic
+#import "lib/tools.typ": tag, zh-arabic
 #import "lib/outline.typ": *
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
-#import "lib/solution.typ": *
+#import "lib/solution.typ": score, solution, solution-block
 #import "lib/text-figure.typ": text-figure
 
 #let setup(
@@ -64,11 +64,72 @@
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode expected HANDOUTS, EXAM, SOLUTION")
   assert(type(font) == array and type(heading-font) == array, message: "font must be an array")
   mode-state.update(mode)
+  pre-mode-state.update(mode)
   paper = a4 + paper
+
+  import "lib/tools.typ": _create-seal
+  let _header(
+    student-info: seal-line-student-info,
+    line-type: seal-line-type,
+    supplement: seal-line-supplement,
+  ) = context {
+    // 根据当前章节的第一页和最后一页，判断添加弥封线
+    if mode != EXAM or not show-seal-line { return }
+    let chapter-first-pages = seal-line-page-state.final()
+    chapter-first-pages.last().push(counter(page).final().first())
+    // 如果当前页不是标题页，减去1
+    let current = counter(page).get().first()
+    let chapter-index = counter("chapter").get().first()
+    if chapter-index >= chapter-first-pages.len() { return }
+    if current != chapter-first-pages.at(chapter-index).first() {
+      chapter-index -= 1
+    }
+
+    let chapter-first-last-arr = chapter-first-pages.at(chapter-index)
+
+    let width = page.height
+    if page.flipped { width = page.width }
+    let margin = page.margin
+    width -= margin * 2
+    block(width: width)[
+      //当前章节第一页弥封线
+      #if current == chapter-first-last-arr.first() {
+        place(
+          dx: -width + 1em - margin,
+          dy: 2em,
+          rotate(-90deg, origin: right + top, _create-seal(
+            dash: line-type,
+            info: student-info,
+            supplement: supplement,
+          )),
+        )
+        return
+      }
+      // 章节最后页的弥封线
+
+      #if current + page.columns - 1 == chapter-first-last-arr.last() {
+        width = page.width
+        if page.flipped { width = page.height }
+
+        place(
+          dx: width - 1em - margin,
+          dy: 2em,
+          rotate(90deg, origin: left + top, _create-seal(
+            dash: line-type,
+            supplement: supplement,
+          )),
+        )
+      }
+    ]
+  }
+  // 页码的正则：包含两个1,两个1中间不能是连续空格、包含数字
+  // 支持双：阿拉伯数字、小写、大写罗马，带圈数字页码
+  let _reg = "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$|^\D*①\D*[^\d\s]\D*①\D*$|^\D*⓵\D*[^\d\s]\D*⓵\D*$"
+  let _matcher = regex(_reg)
   let _footer(label) = context {
     assert(
       type(label) in (str, function, none) or label == auto,
-      message: "page-numbering expected str, function, none, auto, found " + str(type(label)),
+      message: "page-numbering expected str, function, none, auto",
     )
     if label == none { return }
     let _label = label
@@ -78,17 +139,11 @@
         _label = zh-arabic(prefix: [#subject-state.get()#if mode-state.get() == SOLUTION [参考答案] else [试题]])
       }
     }
-    // 如果传进来的label包含两个1,两个1中间不能是连续空格、包含数字
-    // 支持双：阿拉伯数字、小写、大写罗马，带圈数字页码
-    let reg-1 = "^[\D]*1[\D]*[^\d\s]+[\D]*1[\D]*$"
-    let reg-i = reg-1.replace("1", "i")
-    let reg-I = reg-1.replace("1", "I")
-    let reg-circled-number = reg-1.replace("1", "①")
-    let reg-circled-number2 = reg-1.replace("1", "⓵")
-    let reg = reg-1 + "|" + reg-i + "|" + reg-I + "|" + reg-circled-number + "|" + reg-circled-number2
-
+/*     let seal-line-index = counter("chapter").get().first() - 1
+    let page-first-last = seal-line-page-state.final()
+    let page-resume = page-resume-state.get() */
     let current = counter(page).get()
-    if (type(_label) == str and regex(reg) in _label) or (type(_label) == function) {
+    if (type(_label) == str and _matcher in _label) or (type(_label) == function) {
       current += counter(page).final()
     }
 
@@ -120,61 +175,7 @@
     }
     align(position, _numbering)
   }
-  import "lib/tools.typ": _create-seal
-  let _header(
-    student-info: seal-line-student-info,
-    line-type: seal-line-type,
-    supplement: seal-line-supplement,
-  ) = context {
-    if mode != EXAM or not show-seal-line { return }
-    // 是否显示弥封线，如果当前页面有<title>,则显示弥封线,并在该章节最后一页的右侧也设置弥封线
-    let chapter-first-pages = seal-line-page-state.final()
-    // 判断当前页面是否是章节第一页还是最后一页
-    let is-chapter-first-page = false
-    let is-chapter-last-page = false
-    let current = counter(page).get().first()
-    let last = counter(page).final().first()
-    for first-page in chapter-first-pages {
-      if current == first-page { is-chapter-first-page = true }
-      if current in (first-page - page.columns, last) or footer-is-separate and current == last - 1 {
-        is-chapter-last-page = true
-      }
-    }
 
-    let _margin-y = page.margin * 2
-    let _width = page.height - _margin-y
-    if page.flipped { _width = page.width - _margin-y }
-    block(width: _width)[
-      // 判断当前是在当前章节第一页还是章节最后一页
-      //当前章节第一页弥封线
-      #if is-chapter-first-page {
-        place(
-          dx: -_width - 1em,
-          dy: -2.4em,
-          rotate(-90deg, origin: right + bottom, _create-seal(
-            dash: line-type,
-            info: student-info,
-            supplement: supplement,
-          )),
-        )
-        return
-      }
-
-      // 章节最后页的弥封线
-      #if is-chapter-last-page {
-        _width = page.width
-        if page.flipped { _width = page.height }
-        place(
-          dx: _width - page.margin - 1em,
-          dy: 2em,
-          rotate(90deg, origin: left + top, _create-seal(
-            dash: line-type,
-            supplement: supplement,
-          )),
-        )
-      }
-    ]
-  }
   let _background() = {
     if paper.columns > 1 and show-gap-line {
       line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
@@ -189,6 +190,7 @@
       ..paper.columns * (rotate(watermark-rotate, watermark),),
     ))
   }
+
   set page(
     ..paper,
     header: _header(),
@@ -197,7 +199,6 @@
     foreground: _foreground(),
   )
   set columns(gutter: gap)
-
   set outline(
     target: if mode == EXAM { <chapter> } else { heading },
     title: text(size: 15pt)[目#h(1em)录],

@@ -47,17 +47,26 @@
   let _font = font
   if _font == auto { _font = text.font }
   let _size = size
+  let mode = mode-state.get()
   if size == auto {
     _size = 15pt
-    if mode-state.get() == HANDOUTS { _size = 20pt }
+    if mode == HANDOUTS { _size = 20pt }
   }
   v(top)
   align(position, text(font: _font, size: _size, weight: weight, color, body))
   v(bottom)
   counter(heading).update(0)
   counter("question").update(0)
-  let here = here()
-  seal-line-page-state.update(pre => pre + counter(page).at(here))
+  if mode == HANDOUTS { return }
+  let here-page-count = counter(page).at(here())
+  let seal-line-index = counter("chapter").get().first() - 2
+  seal-line-page-state.update(pre => {
+    if pre.len() != 0 and pre.at(seal-line-index).len() < 2 {
+      pre.at(seal-line-index).push(here-page-count.last() - 1)
+    }
+    if mode != SOLUTION { pre.push(here-page-count) }
+    pre
+  })
 }
 
 #let subject(body, size: 21.5pt, spacing: 1em, font: heiti, top: 0pt, bottom: 0pt) = {
@@ -121,12 +130,35 @@
   for child in children.pos() [+ #par(child)]
 }
 
-#let solution-block(page-resume: true, body) = context {
-  if answer-state.get() {
-    pagebreak(weak: true)
-    mode-state.update(SOLUTION)
-    set page(header: none)
-    // if not page-resume { counter(page).update(1) }
-    body
-  }
+#let draft(
+  name: "草稿纸",
+  student-info: (
+    姓名: underline[~~~~~~~~~~~~~],
+    准考证号: underline[~~~~~~~~~~~~~~~~~~~~~~~~~~],
+    考场号: underline[~~~~~~~],
+    座位号: underline[~~~~~~~],
+  ),
+  dash: "solid",
+  supplement: none,
+) = {
+  set page(margin: .5in, header: none, footer: none)
+  title(name.split("").join(h(1em)), bottom: 0pt)
+  import "tools.typ": _create-seal
+  _create-seal(dash: dash, supplement: supplement, info: student-info)
 }
+
+//  页码重置
+/* #let page-reset(num) = context {
+  let seal-line-index = counter("chapter").get().first() - 1
+  let here-page-count = counter(page).at(here())
+  let mode = mode-state.get()
+  seal-line-page-state.update(pre => {
+    if pre.len() != 0 {
+      pre.at(seal-line-index).push(here-page-count.last() - 1)
+    }
+    if mode != SOLUTION { pre.push(here-page-count) }
+    pre
+  })
+  page-resume-state.update(false)
+  counter(page).update(num)
+} */

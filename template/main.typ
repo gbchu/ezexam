@@ -1,6 +1,5 @@
 #import "@preview/ezexam:0.2.8": *
-
-#show: setup.with(mode: EXAM, show-answer: true, paper: a3)
+#show: setup.with(mode: EXAM)
 
 #outline()
 #chapter[2025新高考I卷]
@@ -162,7 +161,8 @@
 ]
 
 #let answer = tag.with(prefix: "答案：", suffix: [ \ ], color: maroon)
-#solution-block[
+#solution-block(page-resume: false)[
+  // #page-reset(1)
   #title[参考答案]
 
   #solution(title: "解析")[

@@ -1,5 +1,4 @@
 #import "const-state.typ": heiti
-#import "outline.typ": title
 #let _special-char = "《（【"
 // 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
 #let _math-or-special-char(body) = {
@@ -57,22 +56,6 @@
     }
   )
   line(length: 100%, stroke: (dash: dash))
-}
-
-#let draft(
-  name: "草稿纸",
-  student-info: (
-    姓名: underline[~~~~~~~~~~~~~],
-    准考证号: underline[~~~~~~~~~~~~~~~~~~~~~~~~~~],
-    考场号: underline[~~~~~~~],
-    座位号: underline[~~~~~~~],
-  ),
-  dash: "solid",
-  supplement: none,
-) = {
-  set page(margin: .5in, header: none, footer: none)
-  title(name.split("").join(h(1em)), bottom: 0pt)
-  _create-seal(dash: dash, supplement: supplement, info: student-info)
 }
 
 // 一种页码格式: "第x页（共xx页）

@@ -26,7 +26,10 @@
 #let SOLUTION = "solution" // 解析模式
 
 #let mode-state = state("mode", HANDOUTS)
+#let pre-mode-state = state("pre-mode", HANDOUTS)
 #let answer-state = state("answer", false)
 #let answer-color-state = state("answer-color", blue)
-#let subject-state = state("subject", "")
+#let subject-state = state("subject", none)
+
 #let seal-line-page-state = state("seal-line", ())
+#let page-resume-state = state("page-resume", true)

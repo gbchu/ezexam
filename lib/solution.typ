@@ -1,4 +1,4 @@
-#import "const-state.typ": answer-state
+#import "const-state.typ": SOLUTION, answer-state, mode-state, pre-mode-state
 #import "tools.typ": _trim-content-start-parbreak
 #let solution(
   body,
@@ -77,3 +77,15 @@
 #let score(points, color: maroon, score-prefix: h(.2em), score-suffix: "分") = text(color)[#box(width: 1fr, repeat(
     $dot$,
   ))#score-prefix#points#score-suffix]
+
+#let solution-block(page-resume: true, body) = context {
+  if answer-state.get() {
+    pagebreak(weak: true)
+    mode-state.update(SOLUTION)
+    set page(header: none)
+    body
+  }
+  // 恢复到原来的模式
+  mode-state.update(pre-mode-state.final())
+}
+
