@@ -130,22 +130,6 @@
   for child in children.pos() [+ #par(child)]
 }
 
-#let draft(
-  name: "草稿纸",
-  student-info: (
-    姓名: underline[~~~~~~~~~~~~~],
-    准考证号: underline[~~~~~~~~~~~~~~~~~~~~~~~~~~],
-    考场号: underline[~~~~~~~],
-    座位号: underline[~~~~~~~],
-  ),
-  dash: "solid",
-  supplement: none,
-) = {
-  set page(margin: .5in, header: none, footer: none)
-  title(name.split("").join(h(1em)), bottom: 0pt)
-  import "tools.typ": _create-seal
-  _create-seal(dash: dash, supplement: supplement, info: student-info)
-}
 
 //  页码重置
 /* #let page-reset(num) = context {
