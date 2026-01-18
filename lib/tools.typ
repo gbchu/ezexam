@@ -1,4 +1,4 @@
-#import "const-state.typ": heiti
+#import "const-state.typ": EXAM, heiti, mode-state, seal-line-page-state
 #let _special-char = "《（【"
 // 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
 #let _math-or-special-char(body) = {
@@ -32,6 +32,7 @@
   body
 }
 
+// 弥封线
 #let _create-seal(
   dash: "dashed",
   supplement: none,
@@ -56,6 +57,70 @@
     }
   )
   line(length: 100%, stroke: (dash: dash))
+}
+
+#let _seal-line(
+  student-info,
+  line-type,
+  supplement,
+) = context {
+  // 根据当前章节的第一页和最后一页，判断添加弥封线
+  let chapter-first-pages = seal-line-page-state.final()
+  chapter-first-pages.last().push(counter(page).final().first())
+  // 如果当前页不是标题页，减去1
+  let current = counter(page).get().first()
+  let chapter-index = counter("chapter").get().first() - 1
+  let chapter-first-last-arr = chapter-first-pages.at(chapter-index)
+
+  let width = page.height
+  if page.flipped {
+    width = page.width
+    if footer-is-separate {
+      current -= 1
+    }
+  }
+  let margin = page.margin
+  width -= margin * 2
+
+  place(float: true, bottom, dy: -margin)[
+    #block(width: width)[
+      //当前章节第一页弥封线
+      #if current == chapter-first-last-arr.first() {
+        move(dx: -1em, rotate(-90deg, origin: left + bottom, _create-seal(
+          dash: line-type,
+          info: student-info,
+          supplement: supplement,
+        )))
+        return
+      }
+      // 章节最后页的弥封线
+      #if current + page.columns - 1 == chapter-first-last-arr.last() {
+        width = page.width
+        if page.flipped { width = page.height }
+        move(dx: -margin - 100% + width - 3.6em, rotate(90deg, origin: right + bottom, _create-seal(
+          dash: line-type,
+          supplement: supplement,
+        )))
+      }
+    ]
+  ]
+}
+
+// 草稿纸
+#let draft(
+  name: "草稿纸",
+  student-info: (
+    姓名: underline[~~~~~~~~~~~~~],
+    准考证号: underline[~~~~~~~~~~~~~~~~~~~~~~~~~~],
+    考场号: underline[~~~~~~~],
+    座位号: underline[~~~~~~~],
+  ),
+  dash: "solid",
+  supplement: none,
+) = {
+  set page(margin: .5in, header: none, footer: none)
+  title(name.split("").join(h(1em)), bottom: 0pt)
+  _create-seal(dash: dash, supplement: supplement, info: student-info)
 }
 
 // 一种页码格式: "第x页（共xx页）

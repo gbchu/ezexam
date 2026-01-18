@@ -1,5 +1,5 @@
 #import "@preview/ezexam:0.2.8": *
-#show: setup.with(mode: EXAM)
+#show: setup.with(mode: EXAM, show-answer: true /*  , paper: a3 */)
 
 #outline()
 #chapter[2025新高考I卷]
