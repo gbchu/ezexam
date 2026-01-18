@@ -1,4 +1,4 @@
-#import "lib/tools.typ": tag, zh-arabic
+#import "lib/tools.typ": draft, tag, zh-arabic
 #import "lib/outline.typ": *
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
@@ -66,66 +66,11 @@
   mode-state.update(mode)
   pre-mode-state.update(mode)
   paper = a4 + paper
-
-  import "lib/tools.typ": _create-seal
-  let _header(
-    student-info: seal-line-student-info,
-    line-type: seal-line-type,
-    supplement: seal-line-supplement,
-  ) = context {
-    // 根据当前章节的第一页和最后一页，判断添加弥封线
-    if mode != EXAM or not show-seal-line { return }
-    let chapter-first-pages = seal-line-page-state.final()
-    chapter-first-pages.last().push(counter(page).final().first())
-    // 如果当前页不是标题页，减去1
-    let current = counter(page).get().first()
-    let chapter-index = counter("chapter").get().first()
-    if chapter-index >= chapter-first-pages.len() { return }
-    if current != chapter-first-pages.at(chapter-index).first() {
-      chapter-index -= 1
-    }
-
-    let chapter-first-last-arr = chapter-first-pages.at(chapter-index)
-
-    let width = page.height
-    if page.flipped { width = page.width }
-    let margin = page.margin
-    width -= margin * 2
-    block(width: width)[
-      //当前章节第一页弥封线
-      #if current == chapter-first-last-arr.first() {
-        place(
-          dx: -width + 1em - margin,
-          dy: 2em,
-          rotate(-90deg, origin: right + top, _create-seal(
-            dash: line-type,
-            info: student-info,
-            supplement: supplement,
-          )),
-        )
-        return
-      }
-      // 章节最后页的弥封线
-
-      #if current + page.columns - 1 == chapter-first-last-arr.last() {
-        width = page.width
-        if page.flipped { width = page.height }
-
-        place(
-          dx: width - 1em - margin,
-          dy: 2em,
-          rotate(90deg, origin: left + top, _create-seal(
-            dash: line-type,
-            supplement: supplement,
-          )),
-        )
-      }
-    ]
-  }
   // 页码的正则：包含两个1,两个1中间不能是连续空格、包含数字
   // 支持双：阿拉伯数字、小写、大写罗马，带圈数字页码
   let _reg = "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$|^\D*①\D*[^\d\s]\D*①\D*$|^\D*⓵\D*[^\d\s]\D*⓵\D*$"
   let _matcher = regex(_reg)
+  import "lib/tools.typ": _seal-line
   let _footer(label) = context {
     assert(
       type(label) in (str, function, none) or label == auto,
@@ -139,9 +84,6 @@
         _label = zh-arabic(prefix: [#subject-state.get()#if mode-state.get() == SOLUTION [参考答案] else [试题]])
       }
     }
-/*     let seal-line-index = counter("chapter").get().first() - 1
-    let page-first-last = seal-line-page-state.final()
-    let page-resume = page-resume-state.get() */
     let current = counter(page).get()
     if (type(_label) == str and _matcher in _label) or (type(_label) == function) {
       current += counter(page).final()
@@ -161,21 +103,23 @@
         numbering(_label, ..current),
       )
       counter(page).step()
-      return
-    }
-
-    // 页面的页脚是未分离, 则让奇数页在右侧，偶数页在左侧
-    let position = page-align
-    if not footer-is-separate {
-      if calc.odd(current.first()) {
-        position = right
-      } else {
+    } else {
+      // 页面的页脚是未分离, 则让奇数页在右侧，偶数页在左侧
+      let position = page-align
+      if not footer-is-separate {
         position = left
+        if calc.odd(current.first()) { position = right }
       }
+      align(position, _numbering)
     }
-    align(position, _numbering)
-  }
 
+    if mode-state.get() != EXAM or not show-seal-line { return }
+    _seal-line(
+      seal-line-student-info,
+      seal-line-type,
+      seal-line-supplement,
+    )
+  }
   let _background() = {
     if paper.columns > 1 and show-gap-line {
       line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
@@ -193,7 +137,6 @@
 
   set page(
     ..paper,
-    header: _header(),
     footer: _footer(page-numbering),
     background: _background(),
     foreground: _foreground(),
@@ -201,13 +144,13 @@
   set columns(gutter: gap)
   set outline(
     target: if mode == EXAM { <chapter> } else { heading },
-    title: text(size: 15pt)[目#h(1em)录],
+    title: text(size: 1.5em)[目#h(1em)录],
   )
   show outline: it => {
-    set page(header: none, footer: _footer(outline-page-numbering))
+    set page(footer: _footer(outline-page-numbering))
     align(center, it)
     pagebreak(weak: true)
-    counter(page).update(1) // 正文页码从1开始
+    counter(page).update(1)
   }
 
   set par(leading: line-height, spacing: par-spacing, first-line-indent: (amount: first-line-indent, all: true))
@@ -251,7 +194,7 @@
     let space = h(.25em, weak: true)
     space + math.display(it) + space
   }
-  //  π 在类罗马字体 "TeX Gyre Termes Math" 下显示的样式；默认的有点丑
+  //  π 在 "TeX Gyre Termes Math" 下显示的样式；默认的丑
   show math.pi: it => {
     if "TeX Gyre Termes Math" in font {
       return text(font: "Times New Roman", "π")
