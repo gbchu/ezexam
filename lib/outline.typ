@@ -1,4 +1,5 @@
 #import "const-state.typ": *
+#import "tools.typ": _trim-content-start-parbreak
 
 // 封面
 #let cover(
@@ -44,10 +45,11 @@
   top: 0pt,
   bottom: 0pt,
 ) = context {
+  let mode = mode-state.get()
+  if mode == SOLUTION and not answer-state.get() { return }
   let _font = font
   if _font == auto { _font = text.font }
   let _size = size
-  let mode = mode-state.get()
   if size == auto {
     _size = 15pt
     if mode == HANDOUTS { _size = 20pt }
@@ -57,14 +59,17 @@
   v(bottom)
   counter(heading).update(0)
   counter("question").update(0)
+
+  // 收集章节的第一页和最后一页
   if mode == HANDOUTS { return }
-  let here-page-count = counter(page).at(here())
-  let seal-line-index = counter("chapter").get().first() - 2
+  let here-page = counter(page).get()
+  // -1 0 1 ...
+  let chapter-index = counter("chapter").get().first() - 2
   seal-line-page-state.update(pre => {
-    if pre.len() != 0 and pre.at(seal-line-index).len() < 2 {
-      pre.at(seal-line-index).push(here-page-count.last() - 1)
+    if pre != () and pre.at(chapter-index).len() == 1 {
+      pre.at(chapter-index).push(here-page.first() - 1)
     }
-    if mode != SOLUTION { pre.push(here-page-count) }
+    if mode == EXAM { pre.push(here-page) }
     pre
   })
 }
@@ -130,19 +135,91 @@
   for child in children.pos() [+ #par(child)]
 }
 
+#let solution-block(name: "参考答案", next-mode: EXAM, body) = {
+  pagebreak(weak: true)
+  mode-state.update(SOLUTION)
+  title(name)
+  body
+  // 恢复到原来的模式
+  pagebreak(weak: true)
+  mode-state.update(next-mode)
+}
 
-//  页码重置
-/* #let page-reset(num) = context {
-  let seal-line-index = counter("chapter").get().first() - 1
-  let here-page-count = counter(page).at(here())
-  let mode = mode-state.get()
-  seal-line-page-state.update(pre => {
-    if pre.len() != 0 {
-      pre.at(seal-line-index).push(here-page-count.last() - 1)
+#let solution(
+  body,
+  title: none,
+  title-size: 12pt,
+  title-weight: 700,
+  title-color: luma(100%),
+  title-bg-color: maroon,
+  title-radius: 5pt,
+  title-align: top + center,
+  title-x: 0pt,
+  title-y: 0pt,
+  border-style: "dashed",
+  border-width: .5pt,
+  border-color: maroon,
+  color: blue,
+  radius: 5pt,
+  bg-color: luma(100%),
+  breakable: true,
+  line-height: auto,
+  top: 0pt,
+  bottom: 0pt,
+  inset: (x: 10pt, top: 20pt, bottom: 20pt),
+  show-number: true,
+) = context {
+  if not answer-state.get() { return }
+  assert(type(inset) == dictionary, message: "inset must be a dictionary")
+  v(top)
+  block(
+    width: 100%,
+    breakable: breakable,
+    inset: (top: 20pt, bottom: 20pt) + inset,
+    radius: radius,
+    stroke: (thickness: border-width, paint: border-color, dash: border-style),
+    fill: bg-color,
+  )[
+    // 标题
+    #if title != none {
+      let title-box = box(fill: title-bg-color, inset: 6pt, radius: title-radius, text(
+        size: title-size,
+        weight: title-weight,
+        tracking: 3pt,
+        title-color,
+        title,
+      ))
+      place(
+        title-align,
+        dx: title-x,
+        dy: -inset.top - measure(title-box).height / 2 + title-y,
+        title-box,
+      )
     }
-    if mode != SOLUTION { pre.push(here-page-count) }
-    pre
-  })
-  page-resume-state.update(false)
-  counter(page).update(num)
-} */
+
+    // 解析题号的格式化
+    #counter("explain").step()
+    #let _label = none
+    #if show-number {
+      _label = context numbering("1.", ..counter("explain").get())
+    }
+    #set par(leading: line-height) if line-height != auto
+    #let _space = 0em
+    #if show-number { _space = .75em }
+    #terms(
+      hanging-indent: 0em,
+      separator: h(_space, weak: true),
+      (
+        _label,
+        text(color, _trim-content-start-parbreak(body)),
+      ),
+    )
+  ]
+  v(bottom)
+}
+
+// 解析的分值
+#let score(points, color: maroon, score-prefix: h(.2em), score-suffix: "分") = text(color)[#box(width: 1fr, repeat(
+    $dot$,
+  ))#score-prefix#points#score-suffix]
+
