@@ -129,7 +129,7 @@
 // 一种页码格式: "第x页（共xx页）
 #let zh-arabic(prefix: "", suffix: "") = (..nums) => {
   let arr = nums.pos()
-  [#prefix 第#str(arr.at(0))页（共#str(arr.at(-1))页）#suffix]
+  [#prefix 第#arr.first()页（共#arr.last()页）#suffix]
 }
 
 #let tag(body, color: blue, font: auto, weight: 400, prefix: "【", suffix: "】", x: -.4em) = context {
