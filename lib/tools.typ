@@ -66,12 +66,10 @@
   current-page,
 ) = context {
   // 根据当前章节的第一页和最后一页，判断添加弥封线
-  let chapter-first-pages = seal-line-page-state.final()
-  chapter-first-pages.last().push(counter(page).final().first())
-  // 如果当前页不是标题页，减去1
-  let current = current-page.first()
+  let chapter-first-last-pages = seal-line-page-state.final()
+  chapter-first-last-pages.last().push(..counter(page).final())
   let chapter-index = counter("chapter").get().first() - 1
-  let chapter-first-last-arr = chapter-first-pages.at(chapter-index)
+  let chapter-first-last = chapter-first-last-pages.at(chapter-index)
 
   let width = page.height
   if page.flipped {
@@ -86,7 +84,7 @@
   place(float: true, bottom, dy: -margin, dx: -1em)[
     #block(width: width)[
       //当前章节第一页弥封线
-      #if current == chapter-first-last-arr.first() {
+      #if current-page == chapter-first-last.first() {
         rotate(-90deg, origin: left + bottom, _create-seal(
           dash: line-type,
           info: student-info,
@@ -95,7 +93,7 @@
         return
       }
       // 章节最后页的弥封线
-      #if current + page.columns - 1 == chapter-first-last-arr.last() {
+      #if current-page + page.columns - 1 == chapter-first-last.last() {
         width = page.width
         if page.flipped { width = page.height }
         move(

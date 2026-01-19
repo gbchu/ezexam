@@ -119,7 +119,7 @@
       seal-line-student-info,
       seal-line-type,
       seal-line-supplement,
-      current,
+      current.first(),
     )
   }
   let _background() = {
