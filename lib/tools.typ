@@ -63,12 +63,13 @@
   student-info,
   line-type,
   supplement,
+  current-page,
 ) = context {
   // 根据当前章节的第一页和最后一页，判断添加弥封线
   let chapter-first-pages = seal-line-page-state.final()
   chapter-first-pages.last().push(counter(page).final().first())
   // 如果当前页不是标题页，减去1
-  let current = counter(page).get().first()
+  let current = current-page.first()
   let chapter-index = counter("chapter").get().first() - 1
   let chapter-first-last-arr = chapter-first-pages.at(chapter-index)
 
