@@ -24,11 +24,11 @@
 #let EXAM = "exam" // 试卷模式
 #let HANDOUTS = "handouts" // 讲义模式(默认)
 #let SOLUTION = "solution" // 解析模式
-
 #let mode-state = state("mode", HANDOUTS)
-#let pre-mode-state = state("pre-mode", HANDOUTS)
+
 #let answer-state = state("answer", false)
 #let answer-color-state = state("answer-color", blue)
+
 #let subject-state = state("subject", none)
 
 #let seal-line-page-state = state("seal-line", ())
