@@ -1,10 +1,8 @@
-#import "lib/tools.typ": draft, tag, zh-arabic
+#import "lib/tools.typ": draft, tag, text-figure, zh-arabic
 #import "lib/outline.typ": *
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
-#import "lib/solution.typ": score, solution, solution-block
-#import "lib/text-figure.typ": text-figure
 
 #let setup(
   mode: HANDOUTS,
@@ -64,14 +62,13 @@
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode expected HANDOUTS, EXAM, SOLUTION")
   assert(type(font) == array and type(heading-font) == array, message: "font must be an array")
   mode-state.update(mode)
-  pre-mode-state.update(mode)
   paper = a4 + paper
   // 页码的正则：包含两个1,两个1中间不能是连续空格、包含数字
   // 支持双：阿拉伯数字、小写、大写罗马，带圈数字页码
   let _reg = "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$|^\D*①\D*[^\d\s]\D*①\D*$|^\D*⓵\D*[^\d\s]\D*⓵\D*$"
   let _matcher = regex(_reg)
   import "lib/tools.typ": _seal-line
-  let _footer(label) = context {
+  let _footer(label, hide-seal-line: false) = context {
     assert(
       type(label) in (str, function, none) or label == auto,
       message: "page-numbering expected str, function, none, auto",
@@ -114,12 +111,13 @@
       align(position, _numbering)
     }
 
-    if _mode != EXAM or not show-seal-line { return }
+    if _mode != EXAM or not show-seal-line or hide-seal-line { return }
     _seal-line(
       seal-line-student-info,
       seal-line-type,
       seal-line-supplement,
       current.first(),
+      footer-is-separate,
     )
   }
   let _background() = {
@@ -149,7 +147,7 @@
     title: text(size: 1.5em)[目#h(1em)录],
   )
   show outline: it => {
-    set page(footer: _footer(outline-page-numbering))
+    set page(footer: _footer(outline-page-numbering, hide-seal-line: true))
     align(center, it)
     pagebreak(weak: true)
     counter(page).update(1)
