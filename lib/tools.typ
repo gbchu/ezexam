@@ -98,6 +98,7 @@
         width = page.width
         if page.flipped { width = page.height }
         move(
+          // 2.6em为弥封线的高度
           dx: -margin - 100% + width - 2.6em,
           rotate(90deg, origin: right + bottom, _create-seal(
             dash: line-type,
