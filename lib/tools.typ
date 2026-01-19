@@ -64,7 +64,8 @@
   line-type,
   supplement,
   current-page,
-) = context {
+  footer-is-separate,
+) = {
   // 根据当前章节的第一页和最后一页，判断添加弥封线
   let chapter-first-last-pages = seal-line-page-state.final()
   chapter-first-last-pages.last().push(..counter(page).final())
@@ -75,7 +76,7 @@
   if page.flipped {
     width = page.width
     if footer-is-separate {
-      current -= 1
+      current-page -= 1
     }
   }
   let margin = page.margin
@@ -138,4 +139,40 @@
   h(x, weak: true)
   text(font: _font, weight: weight, color)[#prefix#body#suffix]
   h(.1em, weak: true)
+}
+
+// 图文混排
+#let text-figure(
+  figure: none,
+  figure-x: 0pt,
+  figure-y: 0pt,
+  top: 0pt,
+  bottom: 0pt,
+  gap: 0pt,
+  style: "tf",
+  text,
+) = context {
+  assert(style == "tf" or style == "ft", message: "style must be 'tf' or 'ft'")
+  let body = (
+    text, // [ \ ] 是为了在当前页还有一行时，换页
+    [ \ ] + box(place(dx: figure-x, dy: figure-y - par.leading * 2, figure)),
+  )
+
+  let _columns = (1fr, measure(figure).width)
+  let _gap = -figure-x + gap
+  if style == "ft" {
+    body = body.rev()
+    _columns = _columns.rev()
+    _gap = figure-x + gap
+  }
+
+  grid(
+    columns: _columns,
+    inset: (
+      top: top,
+      bottom: bottom,
+    ),
+    gutter: _gap,
+    ..body,
+  )
 }
