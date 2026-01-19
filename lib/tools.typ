@@ -82,25 +82,28 @@
   let margin = page.margin
   width -= margin * 2
 
-  place(float: true, bottom, dy: -margin)[
+  place(float: true, bottom, dy: -margin, dx: -1em)[
     #block(width: width)[
       //当前章节第一页弥封线
       #if current == chapter-first-last-arr.first() {
-        move(dx: -1em, rotate(-90deg, origin: left + bottom, _create-seal(
+        rotate(-90deg, origin: left + bottom, _create-seal(
           dash: line-type,
           info: student-info,
           supplement: supplement,
-        )))
+        ))
         return
       }
       // 章节最后页的弥封线
       #if current + page.columns - 1 == chapter-first-last-arr.last() {
         width = page.width
         if page.flipped { width = page.height }
-        move(dx: -margin - 100% + width - 3.6em, rotate(90deg, origin: right + bottom, _create-seal(
-          dash: line-type,
-          supplement: supplement,
-        )))
+        move(
+          dx: -margin - 100% + width - 2.6em,
+          rotate(90deg, origin: right + bottom, _create-seal(
+            dash: line-type,
+            supplement: supplement,
+          )),
+        )
       }
     ]
   ]
