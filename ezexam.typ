@@ -77,11 +77,12 @@
       message: "page-numbering expected str, function, none, auto",
     )
     if label == none { return }
+    let _mode = mode-state.get()
     let _label = label
     if label == auto {
       _label = "1 / 1"
       if mode != HANDOUTS {
-        _label = zh-arabic(prefix: [#subject-state.get()#if mode-state.get() == SOLUTION [参考答案] else [试题]])
+        _label = zh-arabic(prefix: [#subject-state.get()#if _mode == SOLUTION [参考答案] else [试题]])
       }
     }
     let current = counter(page).get()
@@ -113,11 +114,12 @@
       align(position, _numbering)
     }
 
-    if mode-state.get() != EXAM or not show-seal-line { return }
+    if _mode != EXAM or not show-seal-line { return }
     _seal-line(
       seal-line-student-info,
       seal-line-type,
       seal-line-supplement,
+      current,
     )
   }
   let _background() = {
