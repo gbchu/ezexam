@@ -65,14 +65,15 @@
   supplement,
   current-page,
   footer-is-separate,
-) = {
+) = context {
   // 根据当前章节的第一页和最后一页，判断添加弥封线
   let chapter-first-last-pages = seal-line-page-state.final()
   if chapter-first-last-pages.last().len() == 1 {
     chapter-first-last-pages.last().push(..counter(page).final())
   }
-  let (first, last) = chapter-first-last-pages.at(counter("chapter").get().first() - 1)
 
+  let (first, last) = chapter-first-last-pages.at(counter("chapter").get().first() - 1)
+  let current-page = current-page
   let width = page.height
   if page.flipped {
     width = page.width
@@ -96,8 +97,7 @@
       }
       // 章节最后页的弥封线
       #if current-page + page.columns - 1 == last {
-        width = page.width
-        if page.flipped { width = page.height }
+        width = if page.flipped { page.height } else { page.width }
         move(
           // 2.6em为弥封线的高度
           dx: -margin - 100% + width - 2.6em,
