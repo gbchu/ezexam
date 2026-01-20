@@ -78,7 +78,7 @@
     let _label = label
     if label == auto {
       _label = "1 / 1"
-      if _mode == EXAM {
+      if _mode != HANDOUTS {
         _label = zh-arabic(prefix: [#subject-state.get()#if _mode == SOLUTION [参考答案] else [试题]])
       }
     }
