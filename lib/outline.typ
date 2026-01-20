@@ -82,11 +82,12 @@
   subject-state.update([#body].text)
 }
 
-#let secret(body: [绝密★启用前]) = place(top, float: true, clearance: 20pt, text(font: heiti, body))
+#let secret(body: "绝密★启用前") = place(top, float: true, clearance: 20pt, text(font: heiti, body))
 
 #let exam-type(type, prefix: "试卷类型: ") = context place(top + right, text(
   font: text.font.slice(0, -1) + heiti,
-)[#prefix#type])
+  prefix + type,
+))
 
 #let exam-info(
   info: (
@@ -201,12 +202,12 @@
     // 解析题号的格式化
     #counter("explain").step()
     #let _label = none
+    #let _space = 0em
     #if show-number {
       _label = context numbering("1.", ..counter("explain").get())
+      _space = .75em
     }
     #set par(leading: line-height) if line-height != auto
-    #let _space = 0em
-    #if show-number { _space = .75em }
     #terms(
       hanging-indent: 0em,
       separator: h(_space, weak: true),
@@ -223,4 +224,3 @@
 #let score(points, color: maroon, score-prefix: h(.2em), score-suffix: "分") = text(color)[#box(width: 1fr, repeat(
     $dot$,
   ))#score-prefix#points#score-suffix]
-
