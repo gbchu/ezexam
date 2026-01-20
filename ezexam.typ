@@ -78,7 +78,7 @@
     let _label = label
     if label == auto {
       _label = "1 / 1"
-      if mode != HANDOUTS {
+      if _mode == EXAM {
         _label = zh-arabic(prefix: [#subject-state.get()#if _mode == SOLUTION [参考答案] else [试题]])
       }
     }
@@ -88,7 +88,6 @@
     }
 
     let _numbering = numbering(_label, ..current)
-
     // 处于分栏下且左右页脚分离
     if page.columns == 2 and footer-is-separate {
       current.at(0) += 1
