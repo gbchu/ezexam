@@ -11,19 +11,18 @@
   }
 
   // 选项为图片、表格的处理
+  set grid(inset: (left: indent), align: center)
   if label-position == bottom {
-    return grid(
-      align: center,
-      inset: (left: indent),
+    grid(
       pad(bottom: spacing, choice),
       label,
     )
+  } else {
+    grid(
+      columns: 2,
+      label, pad(left: spacing, choice),
+    )
   }
-
-  grid(
-    columns: 2,
-    pad(left: indent, label), pad(left: spacing, choice),
-  )
 }
 
 #let _count-columns(container-width, choice-number, max-choice-width, columns) = {
