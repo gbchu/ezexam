@@ -44,8 +44,9 @@ This template is primarily designed to help Chinese university, primary, middle 
 
 ## Changelog
 ### 0 . 2 . 9
-+ 优化弥封线的实现方式，提高性能
++ 修改弥封线的实现方式，提高性能
 + 修改解析模式实现方式，新增 `solution-block` 方法
++ 优化代码
 
 ### 0 . 2 . 8
 + 更改 `question` 和 `solution` 方法的核心实现，彻底解决有较高的公式时，题号和题干对不齐的问题。删除这两个方法的 `padding-top` 和 `padding-bottom` 参数；`question` 方法新增参数 `hanging-indent` 并将参数 `body-indent` 修改为 `first-line-indent`
