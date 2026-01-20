@@ -45,15 +45,12 @@
   top: 0pt,
   bottom: 0pt,
 ) = context {
+  let _font = if font == auto { text.font } else { font }
   let mode = mode-state.get()
-  if mode == SOLUTION and not answer-state.get() { return }
-  let _font = font
-  if _font == auto { _font = text.font }
-  let _size = size
-  if size == auto {
-    _size = 15pt
-    if mode == HANDOUTS { _size = 20pt }
-  }
+  let _size = if size == auto {
+    15pt
+    if mode == HANDOUTS { 20pt }
+  } else { size }
   v(top)
   align(position, text(font: _font, size: _size, weight: weight, color, body))
   v(bottom)
@@ -135,14 +132,18 @@
   for child in children.pos() [+ #par(child)]
 }
 
-#let solution-block(name: "参考答案", next-mode: EXAM, body) = {
-  pagebreak(weak: true)
-  mode-state.update(SOLUTION)
-  title(name)
-  body
-  // 恢复到原来的模式
-  pagebreak(weak: true)
-  mode-state.update(next-mode)
+#let solution-block(name: "参考答案", body) = context {
+  if answer-state.get() {
+    let pre-mode = mode-state.get()
+    let set-mode(_mode) = mode-state.update(_mode)
+    pagebreak(weak: true)
+    set-mode(SOLUTION)
+    title(name)
+    body
+    // 恢复到原来的模式
+    pagebreak(weak: true)
+    set-mode(pre-mode)
+  }
 }
 
 #let solution(
