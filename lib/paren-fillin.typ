@@ -16,8 +16,7 @@
 
   set box(stroke: (bottom: stroke), inset: (bottom: offset), outset: (bottom: offset))
 
-  let page-width = page.width
-  if page.flipped { page-width = page.height }
+  let page-width = if page.flipped { page.height } else { page.width }
   let _columns = page.columns
   let here-pos-x = here().position().x
   if _columns > 1 {
@@ -79,7 +78,7 @@
   stroke: .45pt + luma(0),
   offset: 3pt,
 ) = context {
-  assert(type(len) == length, message: "expect length, got " + str(type(len)))
+  assert(type(len) == length, message: "expect length, found " + str(type(len)))
   let result = _get-answer(body, placeholder, with-number, update)
   if not answer-state.get() or result.child in ([], [ ]) {
     return _draw-line(len, stroke, offset / 2, result)

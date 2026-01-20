@@ -123,7 +123,7 @@
   dash: "solid",
   supplement: none,
 ) = {
-  set page(margin: .5in, header: none, footer: none)
+  set page(margin: .5in, footer: none)
   title(name.split("").join(h(1em)), bottom: 0pt)
   _create-seal(dash: dash, supplement: supplement, info: student-info)
 }
@@ -135,10 +135,9 @@
 }
 
 #let tag(body, color: blue, font: auto, weight: 400, prefix: "【", suffix: "】", x: -.4em) = context {
-  let _font = font
-  if font == auto { _font = text.font.slice(0, -1) + heiti }
+  let _font = if font == auto { text.font.slice(0, -1) + heiti } else { font }
   h(x, weak: true)
-  text(font: _font, weight: weight, color)[#prefix#body#suffix]
+  text(font: _font, weight: weight, color, prefix + body + suffix)
   h(.1em, weak: true)
 }
 
