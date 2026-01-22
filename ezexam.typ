@@ -1,4 +1,4 @@
-#import "lib/tools.typ": draft, tag, text-figure, zh-arabic
+#import "lib/tools.typ": draft, page-restart, tag, text-figure, zh-arabic
 #import "lib/outline.typ": *
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
@@ -68,6 +68,7 @@
   let _reg = "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$|^\D*①\D*[^\d\s]\D*①\D*$|^\D*⓵\D*[^\d\s]\D*⓵\D*$"
   let _matcher = regex(_reg)
   import "lib/tools.typ": _seal-line
+
   let _footer(label, hide-seal-line: false) = context {
     assert(
       type(label) in (str, function, none) or label == auto,
@@ -82,15 +83,21 @@
         _label = zh-arabic(prefix: [#subject-state.get()#if _mode == SOLUTION [参考答案] else [试题]])
       }
     }
+
     let current = counter(page).get()
-    if (type(_label) == str and _matcher in _label) or (type(_label) == function) {
-      current += counter(page).final()
+    let final = counter(page).final()
+
+    let chapter-first-last-pages = chapter-pages-state.final()
+    if chapter-first-last-pages.last().len() == 1 {
+      chapter-first-last-pages.last() += (..final * 2,)
     }
+    let (first, last, ..total-pages) = chapter-first-last-pages.at(counter("title").get().first() - 1)
+    if (type(_label) == function or _matcher in _label) { current += total-pages }
 
     let _numbering = numbering(_label, ..current)
     // 处于分栏下且左右页脚分离
     if page.columns == 2 and footer-is-separate {
-      current.at(0) += 1
+      current.first() += 1
       grid(
         columns: (1fr, 1fr),
         align: center + horizon,
@@ -104,8 +111,7 @@
       // 页面的页脚是未分离, 则让奇数页在右侧，偶数页在左侧
       let position = page-align
       if not footer-is-separate {
-        position = left
-        if calc.odd(current.first()) { position = right }
+        position = if calc.odd(current.first()) { right } else { left }
       }
       align(position, _numbering)
     }
@@ -115,8 +121,10 @@
       seal-line-student-info,
       seal-line-type,
       seal-line-supplement,
-      current.first(),
       footer-is-separate,
+      current.first(),
+      first,
+      last,
     )
   }
   let _background() = {
