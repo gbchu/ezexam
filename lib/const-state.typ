@@ -30,6 +30,6 @@
 #let answer-color-state = state("answer-color", blue)
 
 #let subject-state = state("subject", none)
-
-#let seal-line-page-state = state("seal-line", ())
-#let page-resume-state = state("page-resume", true)
+// 章节的第一页、最后一页、总页码
+#let chapter-pages-state = state("chapter-pages", ())
+#let page-restart-state = state("page-restart", 0)
