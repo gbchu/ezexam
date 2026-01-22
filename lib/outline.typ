@@ -45,12 +45,12 @@
   top: 0pt,
   bottom: 0pt,
 ) = context {
-  let _font = if font == auto { text.font } else { font }
   let mode = mode-state.get()
+  let _font = if font == auto { text.font } else { font }
   let _size = if size == auto {
-    15pt
-    if mode == HANDOUTS { 20pt }
+    if mode == HANDOUTS { 20pt } else { 15pt }
   } else { size }
+
   v(top)
   align(position, text(font: _font, size: _size, weight: weight, color, body))
   v(bottom)
@@ -58,15 +58,18 @@
   counter("question").update(0)
 
   // 收集章节的第一页和最后一页
-  if mode == HANDOUTS { return }
+  counter("title").step()
   let here-page = counter(page).get()
+  let final-page = counter(page).final()
   // -1 0 1 ...
-  let chapter-index = counter("chapter").get().first() - 2
-  seal-line-page-state.update(pre => {
+  let chapter-index = counter("title").get().first() - 1
+  let chapter-final = counter("title").final().first()
+  let page-restart = page-restart-state.get()
+  chapter-pages-state.update(pre => {
     if pre != () and pre.at(chapter-index).len() == 1 {
-      pre.at(chapter-index).push(here-page.first() - 1)
+      pre.at(chapter-index) += (here-page.first() - 1, ..final-page)
     }
-    if mode == EXAM { pre.push(here-page) }
+    pre.push(here-page)
     pre
   })
 }
@@ -133,18 +136,19 @@
   for child in children.pos() [+ #par(child)]
 }
 
-#let solution-block(name: "参考答案", body) = context {
-  if answer-state.get() {
-    let pre-mode = mode-state.get()
-    let set-mode(_mode) = mode-state.update(_mode)
-    pagebreak(weak: true)
-    set-mode(SOLUTION)
-    title(name)
-    body
-    // 恢复到原来的模式
-    pagebreak(weak: true)
-    set-mode(pre-mode)
-  }
+#let solution-block(name: "参考答案", body, show-answer: true) = context {
+  if not show-answer { return }
+  let pre-mode = mode-state.get()
+  let set-mode(_mode) = mode-state.update(_mode)
+  let chapter-index = counter("title").get().first() - 1
+  let chapter-final = counter("title").final().first()
+  pagebreak(weak: true)
+  set-mode(SOLUTION)
+  title(name)
+  body
+  // 恢复到原来的模式
+  pagebreak(weak: true)
+  set-mode(pre-mode)
 }
 
 #let solution(
