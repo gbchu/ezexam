@@ -1,4 +1,4 @@
-#import "const-state.typ": EXAM, heiti, mode-state, seal-line-page-state
+#import "const-state.typ": EXAM, chapter-pages-state, heiti, mode-state, page-restart-state
 #let _special-char = "《（【"
 // 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
 #let _math-or-special-char(body) = {
@@ -63,16 +63,12 @@
   student-info,
   line-type,
   supplement,
-  current-page,
   footer-is-separate,
-) = context {
+  current-page,
+  first,
+  last,
+) = /* context */ {
   // 根据当前章节的第一页和最后一页，判断添加弥封线
-  let chapter-first-last-pages = seal-line-page-state.final()
-  if chapter-first-last-pages.last().len() == 1 {
-    chapter-first-last-pages.last().push(..counter(page).final())
-  }
-
-  let (first, last) = chapter-first-last-pages.at(counter("chapter").get().first() - 1)
   let current-page = current-page
   let width = page.height
   if page.flipped {
@@ -175,4 +171,27 @@
     gutter: _gap,
     ..body,
   )
+}
+
+#let page-restart(num) = context {
+  assert(type(num) == int, message: "num expected integer")
+  pagebreak(weak: true)
+  let chapter-index = counter("title").get().first() - 1
+  let chapter-final = counter("title").final().first() - 1
+  if chapter-index < 0 or chapter-index == chapter-final { return } // 处于目录页或最后一页时，不重新开始页码
+  let current = counter(page).get().first() - 1
+  let final-page = counter(page).final()
+  let page-restart = page-restart-state.get()
+  first-last-pages-state.update(pre => {
+    if pre.at(chapter-index).len() == 1 {
+      pre.at(chapter-index) += (current, ..final-page)
+    }
+    // 如果重新开始页码，则将之前的页码总数更新到当前页码 - 1
+    for index in range(page-restart, chapter-index + 1) {
+      pre.at(index).last() = current
+    }
+    pre
+  })
+  page-restart-state.update(chapter-index + 1)
+  counter(page).update(num)
 }
