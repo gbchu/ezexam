@@ -45,10 +45,9 @@
   top: 0pt,
   bottom: 0pt,
 ) = context {
-  let mode = mode-state.get()
   let _font = if font == auto { text.font } else { font }
   let _size = if size == auto {
-    if mode == HANDOUTS { 20pt } else { 15pt }
+    if mode-state.get() == HANDOUTS { 20pt } else { 15pt }
   } else { size }
 
   v(top)
@@ -58,20 +57,22 @@
   counter("question").update(0)
 
   // 收集章节的第一页和最后一页
-  counter("title").step()
-  let here-page = counter(page).get()
-  let final-page = counter(page).final()
-  // -1 0 1 ...
-  let chapter-index = counter("title").get().first() - 1
-  let chapter-final = counter("title").final().first()
-  let page-restart = page-restart-state.get()
-  chapter-pages-state.update(pre => {
-    if pre != () and pre.at(chapter-index).len() == 1 {
-      pre.at(chapter-index) += (here-page.first() - 1, ..final-page)
-    }
-    pre.push(here-page)
-    pre
-  })
+  context {
+    counter("title").step()
+    let here-page = counter(page).get()
+    let final-page = counter(page).final()
+    // -1 0 1 ...
+    let chapter-index = counter("title").get().first() - 1
+    let chapter-final = counter("title").final().first()
+    let page-restart = page-restart-state.get()
+    chapter-pages-state.update(pre => {
+      if pre != () and pre.at(chapter-index).len() == 1 {
+        pre.at(chapter-index) += (here-page.first() - 1, ..final-page)
+      }
+      pre.push(here-page)
+      pre
+    })
+  }
 }
 
 #let subject(body, size: 21.5pt, spacing: 1em, font: heiti, top: 0pt, bottom: 0pt) = {
@@ -136,8 +137,8 @@
   for child in children.pos() [+ #par(child)]
 }
 
-#let solution-block(name: "参考答案", body, show-answer: true) = context {
-  if not show-answer { return }
+#let solution-block(name: "参考答案", body) = context {
+  if not answer-state.get() { return }
   let pre-mode = mode-state.get()
   let set-mode(_mode) = mode-state.update(_mode)
   let chapter-index = counter("title").get().first() - 1
