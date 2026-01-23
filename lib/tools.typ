@@ -67,7 +67,7 @@
   current-page,
   first,
   last,
-) = /* context */ {
+) = {
   // 根据当前章节的第一页和最后一页，判断添加弥封线
   let current-page = current-page
   let width = page.height
@@ -133,7 +133,7 @@
 #let tag(body, color: blue, font: auto, weight: 400, prefix: "【", suffix: "】", x: -.4em) = context {
   let _font = if font == auto { text.font.slice(0, -1) + heiti } else { font }
   h(x, weak: true)
-  text(font: _font, weight: weight, color, prefix + body + suffix)
+  text(font: _font, weight: weight, color)[#prefix#body#suffix]
   h(.1em, weak: true)
 }
 
