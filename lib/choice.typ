@@ -51,7 +51,7 @@
   top: 0pt,
   bottom: 0pt,
   label: "A.",
-  label-postion: left,
+  label-position: left,
   ..options,
 ) = {
   let args-named = options.named()
@@ -69,7 +69,7 @@
         numbering(label, index + 1),
         indent,
         spacing,
-        label-postion,
+        label-position,
       )
 
       if columns != auto { continue }
