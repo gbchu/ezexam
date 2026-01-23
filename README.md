@@ -46,7 +46,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 ### 0 . 2 . 9
 + 修改弥封线的实现方式，提高性能
 + 修改解析模式实现方式，新增 `solution-block` 方法
-+ 新增 `page-restart` 方法，该方法可以将新的章节指定页码开始
++ 新增 `page-restart` 方法，该方法可以设置新的章节从指定页码开始
 + 优化代码
 
 ### 0 . 2 . 8
