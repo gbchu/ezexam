@@ -173,7 +173,7 @@
   )
 }
 
-#let page-restart(num) = context {
+#let page-restart(num: 1) = context {
   assert(type(num) == int, message: "num expected integer")
   pagebreak(weak: true)
   let chapter-index = counter("title").get().first() - 1
