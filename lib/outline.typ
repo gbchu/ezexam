@@ -3,7 +3,7 @@
 
 // 封面
 #let cover(
-  title: "ezexam",
+  title: EXAM,
   subtitle: none,
   author: none,
   date: auto,
@@ -176,7 +176,7 @@
   show-number: true,
 ) = context {
   if not answer-state.get() { return }
-  assert(type(inset) == dictionary, message: "inset must be a dictionary")
+  assert(type(inset) == dictionary, message: "inset expected dictionary, found " + str(type(inset)))
   v(top)
   block(
     width: 100%,

@@ -60,7 +60,10 @@
   doc,
 ) = {
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode expected HANDOUTS, EXAM, SOLUTION")
-  assert(type(font) == array and type(heading-font) == array, message: "font must be an array")
+  assert(
+    type(font) == array and type(heading-font) == array,
+    message: "font must be an array, found " + repr(type(font)),
+  )
   mode-state.update(mode)
   paper = a4 + paper
   // 页码的正则：包含两个1,两个1中间不能是连续空格、包含数字
@@ -72,7 +75,7 @@
   let _footer(label, hide-seal-line: false) = context {
     assert(
       type(label) in (str, function, none) or label == auto,
-      message: "page-numbering expected str, function, none, auto",
+      message: "page-numbering expected str, function, none, auto, found" + str(type(label)),
     )
     if label == none { return }
     let _mode = mode-state.get()
