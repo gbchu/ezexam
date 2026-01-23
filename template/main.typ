@@ -1,5 +1,5 @@
-#import "@preview/ezexam:0.2.8": *
-#show: setup.with(mode: EXAM, show-answer: true /*  , paper: a3 */)
+#import "@preview/ezexam:0.2.9": *
+#show: setup.with(mode: EXAM, show-answer: true, paper: a3)
 
 #outline()
 #chapter[2025新高考I卷]
@@ -153,6 +153,7 @@
     + 设直线$O Q$ 的斜率为 $k_1$，直线 $O P$ 的斜率为 $k_2$，若 $k_1 = 3k_2$，$M$为椭圆上一点，求 $|P M|$ 的最大值.
 ]
 
+
 #question(points: 17)[
   设函数 $f(x) = 5cos x - cos 5x$.
   + 求 $f(x)$ 在 $[0, pi / 4]$ 的最大值；
@@ -160,10 +161,8 @@
   + 若存在 $phi$，使得对任意 $x$，都有 $5cos x - cos(5x + phi) lt.slant b$，求 $b$ 的最小值.
 ]
 
-#let answer = tag.with(prefix: "答案：", suffix: [ \ ], color: maroon)
-#solution-block(page-resume: false)[
-  // #page-reset(1)
-  #title[参考答案]
+#solution-block[
+  #let answer = tag.with(prefix: "答案：", suffix: [ \ ], color: maroon)
 
   #solution(title: "解析")[
     #answer[A]
@@ -174,5 +173,6 @@
     #answer[B]
     解: #lorem(8)#score(8)
   ]
+
 ]
 
