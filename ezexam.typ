@@ -91,6 +91,8 @@
     let final = counter(page).final()
 
     let chapter-first-last-pages = chapter-pages-state.final()
+    // 没有添加任何标题时，默认添加一个页码，否则没有添加页码时会报错
+    if chapter-first-last-pages == () { chapter-first-last-pages.push((1, ..final * 2)) }
     if chapter-first-last-pages.last().len() == 1 {
       chapter-first-last-pages.last() += (..final * 2,)
     }
