@@ -1,4 +1,4 @@
-#import "const-state.typ": EXAM, chapter-pages-state, heiti, mode-state, page-restart-state
+#import "const-state.typ": EXAM, chapter-pages-state, heiti, mode-state
 #let _special-char = "《（【"
 // 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
 #let _math-or-special-char(body) = {
@@ -182,7 +182,7 @@
   let current = counter(page).get().first() - 1
   let final-page = counter(page).final()
   let page-restart = page-restart-state.get()
-  first-last-pages-state.update(pre => {
+  chapter-pages-state.update(pre => {
     if pre.at(chapter-index).len() == 1 {
       pre.at(chapter-index) += (current, ..final-page)
     }
