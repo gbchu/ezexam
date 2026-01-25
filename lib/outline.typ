@@ -8,9 +8,9 @@
   author: none,
   date: auto,
 ) = {
-  set page(footer: none, header: none, columns: 1)
+  set page(footer: none, columns: 1)
   set align(center + horizon)
-  text(size: 25pt)[#title]
+  text(size: 25pt, title)
 
   if subtitle != none {
     text(font: heiti, size: 22pt)[\ #subtitle]
@@ -21,10 +21,7 @@
   }
 
   if date != none [
-    \ #if date == auto [
-      #datetime.today().year()/#datetime.today().month()/#(
-        datetime.today().day()
-      )]
+    \ #if date == auto { datetime.today().display("[year]年[month]月[day]日") }
   ]
 }
 
@@ -229,3 +226,5 @@
 #let score(points, color: maroon, score-prefix: h(.2em), score-suffix: "分") = text(color)[#box(width: 1fr, repeat(
     $dot$,
   ))#score-prefix#points#score-suffix]
+
+
