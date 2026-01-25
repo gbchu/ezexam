@@ -17,12 +17,10 @@
   }
 
   if author != none {
-    text(font: "STKaiti", size: 15pt)[\ 作者：#author]
+    text(font: "STKaiti", size: 15pt)[\ 作者：#author \ ]
   }
 
-  if date != none [
-    \ #if date == auto { datetime.today().display("[year]年[month]月[day]日") }
-  ]
+  if date == auto { datetime.today().display("[year]年[month]月[day]日") } else { date }
 }
 
 #let chapter(body) = {
