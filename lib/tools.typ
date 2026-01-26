@@ -37,9 +37,10 @@
   dash: "dashed",
   supplement: none,
   info: (:),
+  par-spacing: 10pt,
 ) = {
   assert(type(info) == dictionary, message: "expected dictionary, found " + str(type(info)))
-  set par(spacing: 10pt)
+  set par(spacing: par-spacing)
   set text(font: heiti, size: 12pt)
   set align(center)
   set grid(columns: 2, align: horizon, gutter: .5em)
@@ -79,7 +80,7 @@
   }
   let margin = page.margin
 
-  place(float: true, bottom, dy: -margin, dx: -1em)[
+  place(bottom, dy: -margin, dx: -1em)[
     #block(width: width - margin * 2)[
       //当前章节第一页弥封线
       #if current-page == first {
@@ -98,6 +99,7 @@
           rotate(90deg, origin: right + bottom, _create-seal(
             dash: line-type,
             supplement: supplement,
+            par-spacing: 20pt,
           )),
         )
       }
