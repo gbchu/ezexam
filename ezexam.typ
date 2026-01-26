@@ -176,6 +176,7 @@
   }
   set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
   show heading: it => {
+    set par(leading: 1.3em)
     v(heading-top)
     text(heading-color, font: font.slice(0, -1) + heading-font, it)
     v(heading-bottom)
