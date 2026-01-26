@@ -57,6 +57,7 @@
   ),
   seal-line-type: "dashed",
   seal-line-supplement: "弥封线内不得答题",
+  seal-line-decorate: none,
   doc,
 ) = {
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode expected HANDOUTS, EXAM, SOLUTION")
@@ -130,6 +131,7 @@
       current.first(),
       first,
       last,
+      seal-line-decorate,
     )
   }
   let _background() = {
