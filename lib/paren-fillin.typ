@@ -71,7 +71,7 @@
 // 填空的横线
 #let fillin(
   body,
-  len: 1.25cm,
+  len: 27.5pt,
   placeholder: "\u{25B2}",
   with-number: false,
   update: false,
