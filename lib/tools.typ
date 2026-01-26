@@ -78,10 +78,9 @@
     }
   }
   let margin = page.margin
-  width -= margin * 2
 
   place(float: true, bottom, dy: -margin, dx: -1em)[
-    #block(width: width)[
+    #block(width: width - margin * 2)[
       //当前章节第一页弥封线
       #if current-page == first {
         rotate(-90deg, origin: left + bottom, _create-seal(
@@ -95,8 +94,7 @@
       #if current-page + page.columns - 1 == last {
         width = if page.flipped { page.height } else { page.width }
         move(
-          // 2.6em为弥封线的高度
-          dx: -margin - 100% + width - 2.6em,
+          dx: width - margin * 2 - 100% + 2em,
           rotate(90deg, origin: right + bottom, _create-seal(
             dash: line-type,
             supplement: supplement,
