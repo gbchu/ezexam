@@ -42,7 +42,7 @@
 ) = context {
   let _font = if font == auto { text.font } else { font }
   let _size = if size == auto {
-    if mode-state.get() == HANDOUTS { 20pt } else { 15pt }
+    if mode-state.get() == HANDOUTS { 20pt } else { 16pt }
   } else { size }
 
   v(top)
@@ -81,7 +81,7 @@
   subject-state.update([#body].text)
 }
 
-#let secret(body: "绝密★启用前") = place(top, float: true, clearance: 20pt, text(font: heiti, body))
+#let secret(body: "绝密★启用前") = place(top, float: true, clearance: 1.5em, text(font: heiti, body, size: 10.5pt))
 
 #let exam-type(type, prefix: "试卷类型: ") = context place(top + right, text(
   font: text.font.slice(0, -1) + heiti,
