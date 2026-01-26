@@ -33,7 +33,7 @@
 #let title(
   body,
   size: auto,
-  weight: 700,
+  weight: 400,
   font: auto,
   color: luma(0),
   position: center,
@@ -41,12 +41,12 @@
   bottom: 0pt,
 ) = context {
   let _font = if font == auto { text.font } else { font }
+  let mode = mode-state.get()
   let _size = if size == auto {
-    if mode-state.get() == HANDOUTS { 20pt } else { 16pt }
+    if mode == HANDOUTS { 20pt } else { 16pt }
   } else { size }
-
   v(top)
-  align(position, text(font: _font, size: _size, weight: weight, color, body))
+  align(position, text(font: _font, size: _size, weight: weight + if mode != EXAM { 300 }, color, body))
   v(bottom)
   counter(heading).update(0)
   counter("question").update(0)
@@ -126,9 +126,12 @@
 #let notice(label: "1.", indent: 2em, hanging-indent: auto, ..children) = context {
   text(font: heiti)[注意事项:]
   set enum(numbering: label, indent: indent)
-  set par(hanging-indent: if hanging-indent == auto {
-    -indent - enum.body-indent - measure(label).width
-  } else { hanging-indent })
+  set par(
+    hanging-indent: if hanging-indent == auto {
+      -indent - enum.body-indent - measure(label).width
+    } else { hanging-indent },
+    leading: 1.3em,
+  )
   for child in children.pos() [+ #par(child)]
 }
 
