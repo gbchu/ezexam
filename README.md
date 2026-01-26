@@ -19,7 +19,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 
 = 选择
 #question[
-  $(1 + 5i)i$ 的虚部为 #paren[]
+  $(1 + 5"i")"i"$ 的虚部为 #paren[]
   #choices(-1, 0, 1, 6)
 ]
 
