@@ -49,6 +49,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 + 新增 `page-restart` 方法，该方法可以设置新的章节从指定页码开始
 + 修复 `cover` 方法，手动添加日期时不显示的 bug
 + 调整 `fillin` 方法的参数 `len` 的默认值为 27.5pt
++ 调整 `title` 方法的参数 `weight` 在 EXAM 模式下的默认值为 400
 + 优化代码
 
 ### 0 . 2 . 8
