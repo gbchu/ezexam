@@ -172,29 +172,30 @@
   set text(font: font, size: font-size)
 
   if heading-numbering == auto {
+    heading-numbering = "1.1.1.1.1  "
     if mode in (EXAM, SOLUTION) {
       heading-numbering = (..item) => numbering("一、", ..item) + h(-0.3em)
       heading-hanging-indent = 2em
-    } else { heading-numbering = "1.1.1.1.1 " }
+    }
   }
   set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
   show heading: it => {
+    let size = h1-size
+    if size == auto {
+      size = 10.5pt
+      if mode == HANDOUTS { size = 1em }
+    }
+    set text(size: size) if it.level == 1
     set par(leading: 1.3em)
     v(heading-top)
     text(heading-color, font: font.slice(0, -1) + heading-font, it)
     v(heading-bottom)
     if not resume { counter("question").update(0) }
   }
-  show heading.where(level: 1): it => {
-    let size = h1-size
-    if size == auto {
-      if mode == HANDOUTS { size = 1em } else { size = 10.5pt }
-    }
-    text(size: size, it)
-  }
+
   // 试卷模式下，书签只显示章节
   set heading(bookmarked: false) if mode == EXAM
-  show heading.where(level: 1).and(<chapter>): set heading(bookmarked: true)
+  show <chapter>: set heading(bookmarked: true)
 
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)
   set table.cell(align: horizon + center, stroke: .5pt)
