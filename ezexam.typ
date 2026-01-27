@@ -7,7 +7,7 @@
 #let setup(
   mode: HANDOUTS,
   paper: a4,
-  page-numbering: auto,
+  page-numbering: "1 / 1",
   page-align: center,
   gap: 1in,
   show-gap-line: false,
@@ -75,18 +75,15 @@
 
   let _footer(label, hide-seal-line: false) = context {
     assert(
-      type(label) in (str, function, none) or label == auto,
-      message: "page-numbering expected str, function, none, auto, found" + str(type(label)),
+      type(label) in (str, function, none),
+      message: "page-numbering expected str, function, none found" + str(type(label)),
     )
     if label == none { return }
     let _mode = mode-state.get()
     let _label = label
-    if label == auto {
-      _label = "1 / 1"
       if _mode != HANDOUTS {
         _label = zh-arabic(prefix: [#subject-state.get()#if _mode == SOLUTION [参考答案] else [试题]])
       }
-    }
 
     let current = counter(page).get()
     let final = counter(page).final()
