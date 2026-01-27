@@ -7,7 +7,7 @@
 #let setup(
   mode: HANDOUTS,
   paper: a4,
-  page-numbering: "1 / 1",
+  page-numbering: auto,
   page-align: center,
   gap: 1in,
   show-gap-line: false,
@@ -63,7 +63,7 @@
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode expected HANDOUTS, EXAM, SOLUTION")
   assert(
     type(font) == array and type(heading-font) == array,
-    message: "font must be an array"
+    message: "font must be an array",
   )
   mode-state.update(mode)
   paper = a4 + paper
@@ -80,10 +80,12 @@
     )
     if label == none { return }
     let _mode = mode-state.get()
-    let _label = label
+    if label == auto {
+      _label = "1 / 1"
       if _mode != HANDOUTS {
         _label = zh-arabic(prefix: [#subject-state.get()#if _mode == SOLUTION [参考答案] else [试题]])
       }
+    }
 
     let current = counter(page).get()
     let final = counter(page).final()
