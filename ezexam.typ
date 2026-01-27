@@ -76,7 +76,7 @@
   let _footer(label, hide-seal-line: false) = context {
     assert(
       type(label) in (str, function, none) or label == auto,
-      message: "page-numbering expected str, function, none found" + str(type(label)),
+      message: "page-numbering expected str, function, none found " + str(type(label)),
     )
     if label == none { return }
     let _mode = mode-state.get()
@@ -98,6 +98,7 @@
       chapter-first-last-pages.last() += (..final * 2,)
     }
     let (first, last, ..total-pages) = chapter-first-last-pages.at(counter("title").get().first() - 1)
+
     if (type(_label) == function or _matcher in _label) { current += total-pages }
 
     let _numbering = numbering(_label, ..current)

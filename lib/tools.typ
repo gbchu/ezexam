@@ -38,7 +38,7 @@
   supplement: none,
   info: (:),
   par-spacing: 10pt,
-  decorate: none,
+  decoration: none,
 ) = {
   assert(type(info) == dictionary, message: "expected dictionary, found " + str(type(info)))
   set par(spacing: par-spacing)
@@ -58,12 +58,12 @@
       )
     }
   )
-  if decorate == none {
+  if decoration == none {
     line(length: 100%, stroke: (dash: dash))
   } else {
     assert(
-      decorate in ("text", "circle", "circle-text"),
-      message: "seal-line-decorate expected \"text\", \"circle\", \"circle-text\" ",
+      decoration in ("text", "circle", "circle-text"),
+      message: "seal-line-decoration expected \"text\", \"circle\", \"circle-text\" ",
     )
     set circle(width: 1.25em, stroke: .5pt)
     let data = (
@@ -77,7 +77,7 @@
       "text": ("弥", "封", "线", none),
     )
 
-    let seal-line = (4 * (line(length: 100%, stroke: (dash: dash)),)).zip(data.at(decorate)).flatten().slice(0, -1)
+    let seal-line = (4 * (line(length: 100%, stroke: (dash: dash)),)).zip(data.at(decoration)).flatten().slice(0, -1)
     grid(
       columns: seal-line.len(),
       align: horizon,
@@ -94,7 +94,7 @@
   current-page,
   first,
   last,
-  seal-decorate,
+  seal-decoration,
 ) = {
   // 根据当前章节的第一页和最后一页，判断添加弥封线
   let current-page = current-page
@@ -115,7 +115,7 @@
           dash: line-type,
           info: student-info,
           supplement: supplement,
-          decorate: seal-decorate,
+          decoration: seal-decoration,
         ))
         return
       }
@@ -128,7 +128,7 @@
             dash: line-type,
             supplement: supplement,
             par-spacing: 20pt,
-            decorate: seal-decorate,
+            decoration: seal-decoration,
           )),
         )
       }
