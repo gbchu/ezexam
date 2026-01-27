@@ -75,11 +75,12 @@
 
   let _footer(label, hide-seal-line: false) = context {
     assert(
-      type(label) in (str, function, none),
+      type(label) in (str, function, none) or label == auto,
       message: "page-numbering expected str, function, none found" + str(type(label)),
     )
     if label == none { return }
     let _mode = mode-state.get()
+    let _label = label
     if label == auto {
       _label = "1 / 1"
       if _mode != HANDOUTS {
