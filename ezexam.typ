@@ -17,6 +17,7 @@
   font-size: 11pt,
   line-height: 2em,
   par-spacing: 2em,
+  par-justify: false,
   first-line-indent: 0em,
   heading-numbering: auto,
   heading-hanging-indent: auto,
@@ -168,7 +169,12 @@
     counter(page).update(1)
   }
 
-  set par(leading: line-height, spacing: par-spacing, first-line-indent: (amount: first-line-indent, all: true))
+  set par(
+    leading: line-height,
+    spacing: par-spacing,
+    first-line-indent: (amount: first-line-indent, all: true),
+    justify: par-justify,
+  )
   set text(font: font, size: font-size)
 
   if heading-numbering == auto {
@@ -205,8 +211,7 @@
   // 显示方程编号
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
   show math.equation: it => {
-    // features: 一些特殊符号的设置，如空集符号设置更加漂亮
-    set text(font: font, features: ("cv01",))
+    set text(font: font /* features: ("cv01",) */)
     //  1. 行内样式默认块级显示样式; 2. 添加数学符号和中文之间间距
     let space = h(.25em, weak: true)
     space + math.display(it) + space
