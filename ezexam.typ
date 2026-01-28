@@ -206,7 +206,7 @@
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
   show math.equation: it => {
     // features: 一些特殊符号的设置，如空集符号设置更加漂亮
-    set text(features: ("cv01",))
+    set text(font: font, features: ("cv01",))
     //  1. 行内样式默认块级显示样式; 2. 添加数学符号和中文之间间距
     let space = h(.25em, weak: true)
     space + math.display(it) + space
