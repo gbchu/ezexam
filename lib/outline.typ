@@ -180,7 +180,7 @@
   block(
     width: 100%,
     breakable: breakable,
-    inset: (top: 20pt, bottom: 20pt) + inset,
+    inset: (x: 10pt, top: 20pt, bottom: 20pt) + inset,
     radius: radius,
     stroke: (thickness: border-width, paint: border-color, dash: border-style),
     fill: bg-color,
