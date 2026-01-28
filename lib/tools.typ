@@ -159,11 +159,18 @@
   [#prefix\第#arr.first()页（共#arr.last()页）#suffix]
 }
 
-#let tag(body, color: blue, font: auto, weight: 400, prefix: "【", suffix: "】", x: -.4em) = context {
+#let tag(
+  body,
+  color: blue,
+  font: auto,
+  weight: 400,
+  prefix: h(-.4em, weak: true) + "【",
+  suffix: "】",
+  x: -.4em,
+) = context {
   let _font = if font == auto { text.font.slice(0, -1) + heiti } else { font }
-  h(x, weak: true)
   text(font: _font, weight: weight, color)[#prefix#body#suffix]
-  h(.1em, weak: true)
+  h(0em, weak: true)
 }
 
 // 图文混排
