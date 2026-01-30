@@ -1,5 +1,10 @@
 #import "@preview/ezexam:0.2.9": *
-#show: setup.with(mode: EXAM, show-answer: true, paper: a3)
+
+#show: setup.with(
+  mode: EXAM,
+  show-answer: true,
+  paper: a3,
+)
 
 #outline()
 #chapter[2025新高考I卷]
@@ -20,7 +25,7 @@
 
 = 单选题：本题共 8 小题，每小题 5 分，共 40 分。在每小题给出的四个选项中，只有一项是符合题目要求的。
 #question[
-  $(1 + 5i)i$ 的虚部为 #paren[C]
+  $(1 + 5"i")"i"$ 的虚部为 #paren[C]
   #choices(-1, 0, 1, 6)
 ]
 
@@ -102,7 +107,7 @@
 ]
 
 = 解答题：本题共 5 小题，共 77 分.解答应写出文字说明、证明过程或演算步骤。
-#question(points: 13, bottom: 2in)[
+#question(points: 13, bottom: 1in)[
   为研究某疾病与超声波检查结果的关系，从做过超声波检查的人群中随机调查了1000人，得到如下的列联表：
   #align(center)[
     #table(
@@ -131,25 +136,24 @@
   + 设 $f(x) = a_1x + a_2x^2 + dots.c + a_m x^m，求 f'(-2)$.
 ]
 
-#question(points: 15, bottom: 2in)[
+#question(points: 15, bottom: 1in)[
   如图所示的四棱锥 $P - A B C D$ 中，$P A perp "平面" A B C D, B C parallel A D, A B perp A D$.
   + 证明：平面 $P A B perp "平面" P A D$
   + 若 $P A = A B = sqrt(2), A D = sqrt(3) + 1, B C = 2$，$P, B, C, D$ 在同一个球面上，设该球面的球心为 $O$.
     #text-figure(
       figure: image("17.png", height: 1.6in),
-      figure-x: 20pt,
     )[
       + 证明：$O$ 在平面 $A B C D$上；
       + 求直线 $A C$ 与直线 $P O$ 所成角的余弦值.
     ]
 ]
 
-#question(points: 17, bottom: 2in)[
-  设椭圆 $C: x^2 / a^2 + y^2 / b^2 = 1 (a > b > 0)$，记 $A$为椭圆下端点，$B$ 为右端点，$|A B| = sqrt(10)$，且椭圆 $C$
+#question(points: 17, bottom: 1in)[
+  设椭圆 $C: x^2 / a^2 + y^2 / b^2 = 1 (a > b > 0)$，记 $A$为椭圆下端点，$B$ 为右端点，$|A B|= sqrt(10)$，且椭圆 $C$
   的离心率为 $(2sqrt(2)) / 3$.
   + 求椭圆的标准方程；
   + 设点 $P(m, n)$.
-    + 若 $P$ 不在 $y$ 轴上，设 $R$ 是射线 $A P$ 上一点，$|A R| dot |A P| = 3$，用 $m, n$ 表示点 $RR$ 的坐标；
+    + 若 $P$ 不在 $y$ 轴上，设 $R$ 是射线 $A P$ 上一点，$|A R| dot |A P| = 3$，用 $m, n$ 表示点 $R$ 的坐标；
     + 设直线$O Q$ 的斜率为 $k_1$，直线 $O P$ 的斜率为 $k_2$，若 $k_1 = 3k_2$，$M$为椭圆上一点，求 $|P M|$ 的最大值.
 ]
 
@@ -163,7 +167,6 @@
 
 #solution-block[
   #let answer = tag.with(prefix: "答案：", suffix: [ \ ], color: maroon)
-
   #solution(title: "解析")[
     #answer[A]
     解: #lorem(6)#score(6)
