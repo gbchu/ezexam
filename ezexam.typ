@@ -211,7 +211,7 @@
   // 显示方程编号
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
   show math.equation: it => {
-    set text(font: font /* features: ("cv01",) */)
+    set text(font: font, features: ("cv01",))
     //  1. 行内样式默认块级显示样式; 2. 添加数学符号和中文之间间距
     let space = h(.25em, weak: true)
     space + math.display(it) + space
