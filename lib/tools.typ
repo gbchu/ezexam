@@ -165,8 +165,7 @@
   font: auto,
   weight: 400,
   prefix: h(-.4em, weak: true) + "【",
-  suffix: "】",
-  x: -.4em,
+  suffix: "】"
 ) = context {
   let _font = if font == auto { text.font.slice(0, -1) + heiti } else { font }
   text(font: _font, weight: weight, color)[#prefix#body#suffix]
