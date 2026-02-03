@@ -62,23 +62,28 @@
   doc,
 ) = {
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode expected HANDOUTS, EXAM, SOLUTION")
+  mode-state.update(mode)
+  paper = a4 + paper
+
   assert(
     type(font) == array and type(heading-font) == array,
     message: "font must be an array",
   )
-  mode-state.update(mode)
-  paper = a4 + paper
+
+  assert(
+    (type(page-numbering), type(outline-page-numbering)).all(item => (
+      item in (str, function, none, type(auto))
+    )),
+    message: "page numbering expected str, function, none",
+  )
+
   // 页码的正则：包含两个1,两个1中间不能是连续空格、包含数字
   // 支持双：阿拉伯数字、小写、大写罗马，带圈数字页码
   let _reg = "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$|^\D*①\D*[^\d\s]\D*①\D*$|^\D*⓵\D*[^\d\s]\D*⓵\D*$"
   let _matcher = regex(_reg)
   import "lib/tools.typ": _seal-line
 
-  let _footer(label, hide-seal-line: false) = context {
-    assert(
-      type(label) in (str, function, none) or label == auto,
-      message: "page-numbering expected str, function, none found " + str(type(label)),
-    )
+  let _footer(label) = context {
     if label == none { return }
     let _mode = mode-state.get()
     let _label = label
@@ -91,7 +96,6 @@
 
     let current = counter(page).get()
     let final = counter(page).final()
-
     let chapter-first-last-pages = chapter-pages-state.final()
     // 没有添加任何标题时，默认添加一个页码，否则没有添加页码时会报错
     if chapter-first-last-pages == () { chapter-first-last-pages.push((1, ..final * 2)) }
@@ -124,7 +128,7 @@
       align(position, _numbering)
     }
 
-    if _mode != EXAM or not show-seal-line or hide-seal-line { return }
+    if _mode != EXAM or not show-seal-line { return }
     _seal-line(
       seal-line-student-info,
       seal-line-type,
@@ -136,11 +140,13 @@
       seal-line-decoration,
     )
   }
+
   let _background() = {
     if paper.columns > 1 and show-gap-line {
       line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
     }
   }
+
   let _foreground() = {
     if watermark == none { return }
     set text(size: watermark-size, watermark-color)
@@ -158,12 +164,13 @@
     foreground: _foreground(),
   )
   set columns(gutter: gap)
+
   set outline(
     target: if mode == EXAM { <chapter> } else { heading },
     title: text(size: 1.5em)[目#h(1em)录],
   )
   show outline: it => {
-    set page(footer: _footer(outline-page-numbering, hide-seal-line: true))
+    set page(footer: _footer(outline-page-numbering))
     align(center, it)
     pagebreak(weak: true)
     counter(page).update(1)
@@ -184,7 +191,15 @@
       heading-hanging-indent = 2em
     }
   }
-  set heading(numbering: heading-numbering, hanging-indent: heading-hanging-indent)
+  set heading(
+    numbering: heading-numbering,
+    hanging-indent: heading-hanging-indent,
+    bookmarked: if mode == EXAM {
+      false
+    } else { auto },
+  )
+  // 试卷模式下，书签只显示章节
+  show <chapter>: set heading(bookmarked: true)
   show heading: it => {
     let size = h1-size
     if size == auto {
@@ -199,10 +214,6 @@
     if not resume { counter("question").update(0) }
   }
 
-  // 试卷模式下，书签只显示章节
-  set heading(bookmarked: false) if mode == EXAM
-  show <chapter>: set heading(bookmarked: true)
-
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)
   set table.cell(align: horizon + center, stroke: .5pt)
 
@@ -210,15 +221,17 @@
   set math.cases(gap: 1em)
   // 显示方程编号
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
+  let space = h(.25em, weak: true)
+
   show math.equation: it => {
     set text(font: font)
     //  1. 行内样式默认块级显示样式; 2. 添加数学符号和中文之间间距
-    let space = h(.25em, weak: true)
     space + math.display(it) + space
   }
   //  π 在 "TeX Gyre Termes Math" 下显示的样式；默认的丑
+  let has-termes-math = "TeX Gyre Termes Math" in font
   show math.pi: it => {
-    if "TeX Gyre Termes Math" in font {
+    if has-termes-math {
       return text(font: "Times New Roman", "π")
     }
     it
