@@ -97,7 +97,6 @@
   seal-decoration,
 ) = {
   // 根据当前章节的第一页和最后一页，判断添加弥封线
-  let current-page = current-page
   let width = page.height
   if page.flipped {
     width = page.width
@@ -165,7 +164,7 @@
   font: auto,
   weight: 400,
   prefix: h(-.4em, weak: true) + "【",
-  suffix: "】"
+  suffix: "】",
 ) = context {
   let _font = if font == auto { text.font.slice(0, -1) + heiti } else { font }
   text(font: _font, weight: weight, color)[#prefix#body#suffix]
