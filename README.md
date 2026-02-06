@@ -51,7 +51,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 + 修改 `fillin` 方法的参数 `len` 的默认值为 27.5pt
 + 修改 `title` 方法的参数 `weight` 在 EXAM 模式下的默认值为 400
 + 新增 `page-restart` 方法，该方法可以设置新的章节从指定页码开始
-+ `setup` 方法新增参数 `seal-line-decoration` ，该参数可以为弥封线添加额外的装饰；添加 `par-justify` 参数
++ `setup` 方法新增参数 `seal-line-decoration` ，该参数可以为弥封线添加额外的装饰；新增参数 `par-justify`
 + 删除 `tag` 方法的参数 `x` ，并调整其参数 `prefix` 的默认值
 + 优化水印，分割线，弥封线的实现，提高性能
 
