@@ -45,7 +45,7 @@ This template is primarily designed to help Chinese university, primary, middle 
 ## Changelog
 ### 0 . 2 . 9
 + 修复 `cover` 方法，手动添加日期时不显示的 bug
-+ 修复 `solution` 方法，设置 `inset` 时，如果没有设置左右边距，导致左右边距实效的 bug
++ 修复 `solution` 方法，设置 `inset` 时，如果没有设置左右边距，导致左右边距失效的 bug
 + 修改解析模式实现方式，新增 `solution-block` 方法
 + 修改 `draft` 方法的参数 `dash` 名为 `line-type`
 + 修改 `fillin` 方法的参数 `len` 的默认值为 27.5pt
