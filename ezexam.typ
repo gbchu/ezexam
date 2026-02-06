@@ -88,8 +88,9 @@
 
   paper = a4 + paper
   let paper-columns = paper.columns
+  let margin = paper.margin
   let gap-line = if paper-columns > 1 and show-gap-line {
-    line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
+    line(angle: 90deg, length: 100% - margin * 2, stroke: .5pt)
   }
 
   watermark = if watermark != none {
@@ -137,8 +138,8 @@
   }
 
   let is-odd-r-even-l = page-align == "odd-r-even-l"
-  let footer-is-separate = paper.columns == 2 and footer-is-separate and not is-odd-r-even-l
-  let margin = paper.margin
+  let footer-is-separate = paper-columns == 2 and footer-is-separate and not is-odd-r-even-l
+  
   let flipped = paper.flipped
 
   let _footer(label, label-is-current-total-format: false) = {
