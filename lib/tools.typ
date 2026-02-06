@@ -32,13 +32,13 @@
   body
 }
 
-// 弥封线
+// 生成弥封线
 #let _create-seal(
-  dash: "dashed",
-  supplement: none,
   info: (:),
-  par-spacing: 10pt,
+  line-type: "dashed",
   decoration: none,
+  supplement: none,
+  par-spacing: 10pt,
 ) = {
   assert(type(info) == dictionary, message: "expected dictionary, found " + str(type(info)))
   set par(spacing: par-spacing)
@@ -59,80 +59,27 @@
     }
   )
   if decoration == none {
-    line(length: 100%, stroke: (dash: dash))
+    line(length: 100%, stroke: (dash: line-type))
   } else {
     assert(
-      decoration in ("text", "circle", "circle-text"),
-      message: "seal-line-decoration expected \"text\", \"circle\", \"circle-text\" ",
+      decoration in ("text", "circle"),
+      message: "seal-line-decoration expected \"text\", \"circle\" ",
     )
-    set circle(width: 1.25em, stroke: .5pt)
     let data = (
-      "circle": 4 * (circle(),),
-      "circle-text": (
-        circle[弥],
-        circle[封],
-        circle[线],
-        none,
-      ),
+      "circle": 4 * (circle(width: 1.25em, stroke: .5pt),),
       "text": ("弥", "封", "线", none),
     )
 
-    let seal-line = (4 * (line(length: 100%, stroke: (dash: dash)),)).zip(data.at(decoration)).flatten().slice(0, -1)
+    let seal-line = (4 * (line(length: 100%, stroke: (dash: line-type)),))
+      .zip(data.at(decoration))
+      .flatten()
+      .slice(0, -1)
     grid(
       columns: seal-line.len(),
       align: horizon,
       ..seal-line,
     )
   }
-}
-
-#let _seal-line(
-  student-info,
-  line-type,
-  supplement,
-  footer-is-separate,
-  current-page,
-  first,
-  last,
-  seal-decoration,
-) = {
-  // 根据当前章节的第一页和最后一页，判断添加弥封线
-  let width = page.height
-  if page.flipped {
-    width = page.width
-    if footer-is-separate {
-      current-page -= 1
-    }
-  }
-  let margin = page.margin
-
-  place(bottom, dy: -margin, dx: -1em)[
-    #block(width: width - margin * 2)[
-      //当前章节第一页弥封线
-      #if current-page == first {
-        rotate(-90deg, origin: left + bottom, _create-seal(
-          dash: line-type,
-          info: student-info,
-          supplement: supplement,
-          decoration: seal-decoration,
-        ))
-        return
-      }
-      // 章节最后页的弥封线
-      #if current-page + page.columns - 1 == last {
-        width = if page.flipped { page.height } else { page.width }
-        move(
-          dx: width - margin * 2 - 100% + 2em,
-          rotate(90deg, origin: right + bottom, _create-seal(
-            dash: line-type,
-            supplement: supplement,
-            par-spacing: 20pt,
-            decoration: seal-decoration,
-          )),
-        )
-      }
-    ]
-  ]
 }
 
 // 草稿纸
@@ -144,12 +91,12 @@
     考场号: underline[~~~~~~~],
     座位号: underline[~~~~~~~],
   ),
-  dash: "solid",
+  line-type: "solid",
   supplement: none,
 ) = {
   set page(margin: .5in, footer: none)
   title(name.split("").join(h(1em)), bottom: 0pt)
-  _create-seal(dash: dash, supplement: supplement, info: student-info)
+  _create-seal(line-type: line-type, supplement: supplement, info: student-info)
 }
 
 // 一种页码格式: "第x页（共xx页）
