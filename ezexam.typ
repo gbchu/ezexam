@@ -139,7 +139,7 @@
 
   let is-odd-r-even-l = page-align == "odd-r-even-l"
   let footer-is-separate = paper-columns == 2 and footer-is-separate and not is-odd-r-even-l
-  
+
   let flipped = paper.flipped
 
   let _footer(label, label-is-current-total-format: false) = {
