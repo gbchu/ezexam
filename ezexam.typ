@@ -260,8 +260,9 @@
   }
   show heading: it => {
     set par(leading: 1.3em)
+    set text(size: h1-size) if it.level == 1
     v(heading-top)
-    text(heading-color, font: font.slice(0, -1) + heading-font, size: if it.level == 1 { h1-size }, it)
+    text(heading-color, font: font.slice(0, -1) + heading-font, it)
     v(heading-bottom)
     if not resume { counter("question").update(0) }
   }
