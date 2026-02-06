@@ -63,37 +63,86 @@
 ) = {
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode expected HANDOUTS, EXAM, SOLUTION")
   mode-state.update(mode)
-  paper = a4 + paper
 
   assert(
     type(font) == array and type(heading-font) == array,
     message: "font must be an array",
   )
 
+  // 为页码添加在不同模式下的默认值
+  if page-numbering == auto {
+    page-numbering = "1 / 1"
+    if mode != HANDOUTS {
+      page-numbering = zh-arabic(prefix: context [#subject-state.get()#if (
+          mode-state.get() == SOLUTION
+        ) [参考答案] else [试题]])
+    }
+  }
+
   assert(
     (type(page-numbering), type(outline-page-numbering)).all(item => (
-      item in (str, function, none, type(auto))
+      item in (str, function, type(none))
     )),
     message: "page numbering expected str, function, none",
   )
 
+  paper = a4 + paper
+  let paper-columns = paper.columns
+  let gap-line = if paper-columns > 1 and show-gap-line {
+    line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
+  }
+
+  watermark = if watermark != none {
+    place(horizon)[
+      #set par(leading: .5em)
+      #set text(size: watermark-size, watermark-color)
+      #grid(
+        columns: paper-columns * (1fr,),
+        ..paper-columns * (rotate(watermark-rotate, watermark),),
+      )
+    ]
+  }
+
   // 页码的正则：包含两个1,两个1中间不能是连续空格、包含数字
   // 支持双：阿拉伯数字、小写、大写罗马，带圈数字页码
-  let _reg = "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$|^\D*①\D*[^\d\s]\D*①\D*$|^\D*⓵\D*[^\d\s]\D*⓵\D*$"
-  let _matcher = regex(_reg)
-  import "lib/tools.typ": _seal-line
+  let matcher = regex(
+    "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$|^\D*①\D*[^\d\s]\D*①\D*$|^\D*⓵\D*[^\d\s]\D*⓵\D*$",
+  )
 
-  let _footer(label) = context {
+  // 检测页码是否按照 1 / 1 的格式显示
+  let is-match = (
+    type(page-numbering) == function
+      or (
+        page-numbering != none and matcher in page-numbering
+      )
+  )
+
+  let seal = if mode == EXAM and show-seal-line {
+    import "lib/tools.typ": _create-seal
+    let base-seal-line = (
+      line-type: seal-line-type,
+      decoration: seal-line-decoration,
+      supplement: seal-line-supplement,
+    )
+    (
+      rotate(-90deg, origin: left + bottom, _create-seal(
+        ..base-seal-line,
+        info: seal-line-student-info,
+      )),
+      rotate(90deg, origin: right + bottom, _create-seal(
+        ..base-seal-line,
+        par-spacing: 20pt,
+      )),
+    )
+  }
+
+  let is-odd-r-even-l = page-align == "odd-r-even-l"
+  let footer-is-separate = paper.columns == 2 and footer-is-separate and not is-odd-r-even-l
+  let margin = paper.margin
+  let flipped = paper.flipped
+
+  let _footer(label, label-is-current-total-format: false) = {
     if label == none { return }
-    let _mode = mode-state.get()
-    let _label = label
-    if label == auto {
-      _label = "1 / 1"
-      if _mode != HANDOUTS {
-        _label = zh-arabic(prefix: [#subject-state.get()#if _mode == SOLUTION [参考答案] else [试题]])
-      }
-    }
-
     let current = counter(page).get()
     let final = counter(page).final()
     let chapter-first-last-pages = chapter-pages-state.final()
@@ -104,11 +153,11 @@
     }
     let (first, last, ..total-pages) = chapter-first-last-pages.at(counter("title").get().first() - 1)
 
-    if (type(_label) == function or _matcher in _label) { current += total-pages }
+    if label-is-current-total-format { current += total-pages }
 
-    let _numbering = numbering(_label, ..current)
+    let _numbering = numbering(label, ..current)
     // 处于分栏下且左右页脚分离
-    if page.columns == 2 and footer-is-separate {
+    if footer-is-separate {
       current.first() += 1
       grid(
         columns: (1fr, 1fr),
@@ -116,52 +165,57 @@
         // 左页码
         _numbering,
         // 右页码
-        numbering(_label, ..current),
+        numbering(label, ..current),
       )
       counter(page).step()
     } else {
       // 页面的页脚是未分离, 则让奇数页在右侧，偶数页在左侧
-      let position = page-align
-      if not footer-is-separate {
-        position = if calc.odd(current.first()) { right } else { left }
+      let page-align = page-align
+      if is-odd-r-even-l {
+        page-align = if calc.odd(current.first()) { right } else { left }
       }
-      align(position, _numbering)
+      align(page-align, _numbering)
     }
 
-    if _mode != EXAM or not show-seal-line { return }
-    _seal-line(
-      seal-line-student-info,
-      seal-line-type,
-      seal-line-supplement,
-      footer-is-separate,
-      current.first(),
-      first,
-      last,
-      seal-line-decoration,
-    )
-  }
+    // 添加弥封线
+    if mode-state.get() == EXAM and seal != none {
+      let current-page = current.first()
+      let width = page.height
+      if flipped {
+        width = page.width
+        if footer-is-separate { current-page -= 1 }
+      }
 
-  let _background() = {
-    if paper.columns > 1 and show-gap-line {
-      line(angle: 90deg, length: 100% - paper.margin * 2, stroke: .5pt)
+      place(
+        bottom,
+        dx: -1em,
+        dy: -margin,
+        block(width: width - margin * 2)[
+          //当前章节第一页弥封线
+          #if current-page == first {
+            seal.first()
+            return
+          }
+          // 章节最后页的弥封线
+          #if current-page + if footer-is-separate { paper.columns - 1 } == last {
+            move(
+              dx: if flipped { page.height } else { page.width } - margin * 2 - 100% + 2em,
+              seal.last(),
+            )
+          }
+        ],
+      )
     }
-  }
-
-  let _foreground() = {
-    if watermark == none { return }
-    set text(size: watermark-size, watermark-color)
-    set par(leading: .5em)
-    place(horizon, grid(
-      columns: paper.columns * (1fr,),
-      ..paper.columns * (rotate(watermark-rotate, watermark),),
-    ))
   }
 
   set page(
     ..paper,
-    footer: _footer(page-numbering),
-    background: _background(),
-    foreground: _foreground(),
+    background: gap-line,
+    foreground: watermark,
+    footer: context _footer(
+      page-numbering,
+      label-is-current-total-format: is-match,
+    ),
   )
   set columns(gutter: gap)
 
@@ -200,16 +254,14 @@
   )
   // 试卷模式下，书签只显示章节
   show <chapter>: set heading(bookmarked: true)
+  if h1-size == auto {
+    h1-size = 10.5pt
+    if mode == HANDOUTS { h1-size = 1em }
+  }
   show heading: it => {
-    let size = h1-size
-    if size == auto {
-      size = 10.5pt
-      if mode == HANDOUTS { size = 1em }
-    }
-    set text(size: size) if it.level == 1
     set par(leading: 1.3em)
     v(heading-top)
-    text(heading-color, font: font.slice(0, -1) + heading-font, it)
+    text(heading-color, font: font.slice(0, -1) + heading-font, size: if it.level == 1 { h1-size }, it)
     v(heading-bottom)
     if not resume { counter("question").update(0) }
   }
@@ -223,19 +275,18 @@
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
   let space = h(.25em, weak: true)
 
+  //  1. 行内样式默认块级显示样式; 2. 添加数学符号和中文之间间距
   show math.equation: it => {
     set text(font: font)
-    //  1. 行内样式默认块级显示样式; 2. 添加数学符号和中文之间间距
     space + math.display(it) + space
   }
   //  π 在 "TeX Gyre Termes Math" 下显示的样式；默认的丑
-  let has-termes-math = "TeX Gyre Termes Math" in font
-  show math.pi: it => {
-    if has-termes-math {
-      return text(font: "Times New Roman", "π")
-    }
-    it
+  let pi = if "TeX Gyre Termes Math" in font {
+    text(font: "Times New Roman", "π")
+  } else {
+    math.pi
   }
+  show math.pi: pi
   show math.parallel: "//"
   // 空集符号更好看
   show math.emptyset: set text(font: "New Computer Modern Math", features: ("cv01",))
