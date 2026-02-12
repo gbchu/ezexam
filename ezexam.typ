@@ -276,12 +276,7 @@
   // 显示方程编号
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
   let space = h(.25em, weak: true)
-
-  //  1. 行内样式默认块级显示样式; 2. 添加数学符号和中文之间间距
-  show math.equation: it => {
-    set text(font: font)
-    space + math.display(it) + space
-  }
+  show math.equation: it => space + math.display(text(font: font, it)) + space
   //  π 在 "TeX Gyre Termes Math" 下显示的样式；默认的丑
   let pi = if "TeX Gyre Termes Math" in font {
     text(font: "Times New Roman", "π")
