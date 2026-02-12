@@ -89,6 +89,7 @@
   paper = a4 + paper
   let paper-columns = paper.columns
   let margin = paper.margin
+
   let gap-line = if paper-columns > 1 and show-gap-line {
     line(angle: 90deg, length: 100% - margin * 2, stroke: .5pt)
   }
@@ -110,7 +111,6 @@
     "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$|^\D*①\D*[^\d\s]\D*①\D*$|^\D*⓵\D*[^\d\s]\D*⓵\D*$",
   )
 
-  // 检测页码是否按照 1 / 1 的格式显示
   let is-match = (
     type(page-numbering) == function
       or (
@@ -138,7 +138,7 @@
   }
 
   let is-odd-r-even-l = page-align == "odd-r-even-l"
-  let footer-is-separate = paper-columns == 2 and footer-is-separate and not is-odd-r-even-l
+  footer-is-separate = paper-columns == 2 and footer-is-separate and not is-odd-r-even-l
 
   let flipped = paper.flipped
 
@@ -171,11 +171,12 @@
       counter(page).step()
     } else {
       // 页面的页脚是未分离, 则让奇数页在右侧，偶数页在左侧
-      let page-align = page-align
-      if is-odd-r-even-l {
-        page-align = if calc.odd(current.first()) { right } else { left }
-      }
-      align(page-align, _numbering)
+      align(
+        if is-odd-r-even-l {
+          if calc.odd(current.first()) { right } else { left }
+        } else { page-align },
+        _numbering,
+      )
     }
 
     // 添加弥封线
