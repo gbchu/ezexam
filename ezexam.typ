@@ -73,16 +73,16 @@
   if page-numbering == auto {
     page-numbering = "1 / 1"
     if mode != HANDOUTS {
-      page-numbering = zh-arabic(prefix: context [#subject-state.get()#if (
-          mode-state.get() == SOLUTION
-        ) [参考答案] else [试题]])
+      let prefix = context {
+        subject-state.get()
+        if (mode-state.get() == SOLUTION) [参考答案] else [试题]
+      }
+      page-numbering = zh-arabic(prefix: prefix)
     }
   }
 
   assert(
-    (type(page-numbering), type(outline-page-numbering)).all(item => (
-      item in (str, function, type(none))
-    )),
+    (type(page-numbering), type(outline-page-numbering)).all(item => item in (str, function, type(none))),
     message: "page numbering expected str, function, none",
   )
 
