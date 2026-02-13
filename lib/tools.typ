@@ -100,7 +100,7 @@
 }
 
 // 一种页码格式: "第x页（共xx页）
-#let zh-arabic(prefix: "", suffix: "") = (..nums) => {
+#let zh-arabic(prefix: none, suffix: none) = (..nums) => {
   let arr = nums.pos()
   [#prefix\第#arr.first()页（共#arr.last()页）#suffix]
 }
