@@ -12,18 +12,17 @@
   flipped: false,
 )
 
-// #let main-font = ("New Computer Modern Math", "Noto Serif CJK SC")
-#let heiti = ("SimHei", "Heiti SC", "Noto Sans CJK SC")
 #let roman = (
-  (name: "Times New Roman", covers: regex("\w")),
-  (name: "TeX Gyre Termes", covers: regex("\w")),
-  "TeX Gyre Termes Math",
-  "Noto Serif CJK SC",
+  (name: "Times New Roman", covers: regex("\w")), // 西文字体
+  (name: "TeX Gyre Termes", covers: regex("\w")), //无 Times New Roman 字体时使用
+  "TeX Gyre Termes Math", // 数学字体
+  "Noto Serif CJK SC", // 正文字体
 )
+#let heiti = ("SimHei", "Heiti SC", "Noto Sans CJK SC")
 
-#let EXAM = "exam" // 试卷模式
-#let HANDOUTS = "handouts" // 讲义模式(默认)
-#let SOLUTION = "solution" // 解析模式
+#let EXAM = "exam"
+#let HANDOUTS = "handouts"
+#let SOLUTION = "solution"
 #let mode-state = state("mode", HANDOUTS)
 
 #let answer-state = state("answer", false)
@@ -31,6 +30,5 @@
 
 #let subject-state = state("subject", none)
 
-// 章节的第一页、最后一页、总页码
-#let chapter-pages-state = state("chapter-pages", ())
+#let chapter-pages-state = state("chapter-pages", ()) // 章节的第一页、最后一页、总页码
 #let page-restart-state = state("page-restart", 0)
