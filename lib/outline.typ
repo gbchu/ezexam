@@ -40,13 +40,20 @@
   top: 0pt,
   bottom: 0pt,
 ) = context {
-  let _font = if font == auto { text.font } else { font }
   let mode = mode-state.get()
-  let _size = if size == auto {
-    if mode == HANDOUTS { 20pt } else { 16pt }
-  } else { size }
   v(top)
-  align(position, text(font: _font, size: _size, weight: weight + if mode != EXAM { 300 }, color, body))
+  align(
+    position,
+    text(
+      weight: weight + if mode != EXAM { 300 },
+      font: if font == auto { text.font } else { font },
+      size: if size == auto {
+        if mode == HANDOUTS { 20pt } else { 16pt }
+      } else { size },
+      color,
+      body,
+    ),
+  )
   v(bottom)
   counter(heading).update(0)
   counter("question").update(0)
@@ -54,17 +61,16 @@
   // 收集章节的第一页和最后一页
   context {
     counter("title").step()
-    let here-page = counter(page).get()
+    let current-page = counter(page).get()
     let final-page = counter(page).final()
     // -1 0 1 ...
-    let chapter-index = counter("title").get().first() - 1
-    let chapter-final = counter("title").final().first()
-    let page-restart = page-restart-state.get()
+    let current-chapter = counter("title").get().first()
+    let final-chapter = counter("title").final().first()
     chapter-pages-state.update(pre => {
-      if pre != () and pre.at(chapter-index).len() == 1 {
-        pre.at(chapter-index) += (here-page.first() - 1, ..final-page)
+      if pre != () and pre.at(current-chapter - 1).len() == 1 {
+        pre.at(current-chapter - 1) += (current-page.first() - 1, ..final-page)
       }
-      pre.push(here-page)
+      pre.push(current-page)
       pre
     })
   }
