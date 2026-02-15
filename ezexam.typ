@@ -63,6 +63,7 @@
 ) = {
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode expected HANDOUTS, EXAM, SOLUTION")
   mode-state.update(mode)
+  pre-mode-state.update(mode)
 
   assert(
     type(font) == array and type(heading-font) == array,
@@ -243,7 +244,7 @@
   set text(font: font, size: font-size)
 
   if heading-numbering == auto {
-    heading-numbering = "1.1.1.1.1  "
+    heading-numbering = "1.1.1.1.1."
     if mode in (EXAM, SOLUTION) {
       heading-numbering = (..item) => numbering("一、", ..item) + h(-0.3em)
       heading-hanging-indent = 2em
@@ -266,7 +267,7 @@
     set par(leading: 1.3em)
     set text(size: h1-size) if it.level == 1
     v(heading-top)
-    text(heading-color, font: font.slice(0, -1) + heading-font, it)
+    text(heading-color, font: heading-font + text.font, it)
     v(heading-bottom)
     if not resume { counter("question").update(0) }
   }
