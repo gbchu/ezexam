@@ -14,16 +14,22 @@
 
 #let roman = (
   (name: "Times New Roman", covers: regex("\w")), // 西文字体
-  (name: "TeX Gyre Termes", covers: regex("\w")), //无 Times New Roman 字体时使用
+  (name: "TeX Gyre Termes", covers: regex("\w")), // 无 Times New Roman 字体时使用
   "TeX Gyre Termes Math", // 数学字体
-  "Noto Serif CJK SC", // 正文字体
+  "Songti SC",
+  "Noto Serif CJK SC",
 )
-#let heiti = ("SimHei", "Heiti SC", "Noto Sans CJK SC")
+
+#let heiti = (
+  (name: "SimHei", covers: regex("[^a-zA-Z0-9]")),
+  (name: "Noto Sans CJK SC", covers: regex("[^a-zA-Z0-9]")),
+)
 
 #let EXAM = "exam"
 #let HANDOUTS = "handouts"
 #let SOLUTION = "solution"
 #let mode-state = state("mode", HANDOUTS)
+#let pre-mode-state = state("pre-mode", HANDOUTS)
 
 #let answer-state = state("answer", false)
 #let answer-color-state = state("answer-color", blue)
