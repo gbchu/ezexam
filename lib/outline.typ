@@ -59,21 +59,19 @@
   counter("question").update(0)
 
   // 收集章节的第一页和最后一页
-  context {
-    counter("title").step()
-    let current-page = counter(page).get()
-    let final-page = counter(page).final()
-    // -1 0 1 ...
-    let current-chapter = counter("title").get().first()
-    let final-chapter = counter("title").final().first()
-    chapter-pages-state.update(pre => {
-      if pre != () and pre.at(current-chapter - 1).len() == 1 {
-        pre.at(current-chapter - 1) += (current-page.first() - 1, ..final-page)
-      }
-      pre.push(current-page)
-      pre
-    })
-  }
+  counter("title").step()
+  let current-page = counter(page).get()
+  let final-page = counter(page).final()
+  // -1 0 1 ...
+  let current-chapter = counter("title").get().first()
+  let final-chapter = counter("title").final().first()
+  chapter-pages-state.update(pre => {
+    if pre != () and pre.at(current-chapter - 1).len() == 1 {
+      pre.at(current-chapter - 1) += (current-page.first() - 1, ..final-page)
+    }
+    pre.push(current-page)
+    pre
+  })
 }
 
 #let subject(body, size: 21.5pt, spacing: 1em, font: heiti, top: 0pt, bottom: 0pt) = {
@@ -90,7 +88,7 @@
 #let secret(body: "绝密★启用前") = place(top, float: true, clearance: 1.5em, text(font: heiti, body, size: 10.5pt))
 
 #let exam-type(type, prefix: "试卷类型: ") = context place(top + right, text(
-  font: text.font.slice(0, -1) + heiti,
+  font: heiti + text.font,
   prefix + type,
 ))
 
@@ -107,7 +105,7 @@
   bottom: 0pt,
 ) = context {
   assert(info.len() > 0, message: "info cannot be empty")
-  set text(font: text.font.slice(0, -1) + heiti, size: size, weight: weight)
+  set text(font: heiti + text.font, size: size, weight: weight)
   set align(center)
   grid(
     columns: info.len(),
@@ -143,17 +141,14 @@
 
 #let solution-block(name: "参考答案", body) = context {
   if not answer-state.get() { return }
-  let pre-mode = mode-state.get()
   let set-mode(_mode) = mode-state.update(_mode)
-  let chapter-index = counter("title").get().first() - 1
-  let chapter-final = counter("title").final().first()
+  counter("explain").update(0) // 解析题号从 1 开始重新编号
   pagebreak(weak: true)
   set-mode(SOLUTION)
   title(name)
   body
-  // 恢复到原来的模式
   pagebreak(weak: true)
-  set-mode(pre-mode)
+  set-mode(pre-mode-state.get())
 }
 
 #let solution(
