@@ -15,7 +15,7 @@ This template can help Chinese university, primary, middle and high school teach
   paper: a3
 )
 
-#title[XX试卷]
+#title[xx期末考试]
 
 = 选择
 #question[
