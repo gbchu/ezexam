@@ -57,23 +57,21 @@
   v(bottom)
   counter(heading).update(0)
   counter("question").update(0)
+  counter("title").step()
 
   // 收集章节的第一页和最后一页
-  counter("title").step()
-  context {
-    let current-page = counter(page).get()
-    let final-page = counter(page).final()
-    // -1 0 1 ...
-    let current-chapter-index = counter("title").get().first() - 2
-    let final-chapter = counter("title").final().first()
-    chapter-pages-state.update(pre => {
-      if pre != () and pre.at(current-chapter-index).len() == 1 {
-        pre.at(current-chapter-index) += (current-page.first() - 1, ..final-page)
-      }
-      pre.push(current-page)
-      pre
-    })
-  }
+  let current-page = counter(page).get()
+  let final-page = counter(page).final()
+  let current-chapter = counter("title").get().first()
+  let final-chapter = counter("title").final().first()
+  chapter-pages-state.update(pre => {
+    let _last-index = pre.len() - 1 // 当前章节索引
+    if pre != () and pre.at(_last-index).len() == 1 {
+      pre.at(_last-index) += (current-page.first() - 1, ..final-page)
+    }
+    pre.push(current-page)
+    pre
+  })
 }
 
 #let subject(body, size: 21.5pt, spacing: 1em, font: heiti, top: 0pt, bottom: 0pt) = {
