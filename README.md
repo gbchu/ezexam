@@ -5,7 +5,7 @@
 [![Online Documentation](https://img.shields.io/badge/docs-online-007aff)](https://ezexam.pages.dev/)
 
 
-This template is primarily designed to help Chinese university, primary, middle and high school teachers or students in creating exams or handouts.
+This template can help Chinese university, primary, middle and high school teachers or students in creating exam or handouts.
 
 ## Example
 ```typst
@@ -15,7 +15,7 @@ This template is primarily designed to help Chinese university, primary, middle 
   paper: a3
 )
 
-#title[XX试卷]
+#title[xx期末考试]
 
 = 选择
 #question[
