@@ -62,7 +62,6 @@
   // 收集章节的第一页和最后一页
   let current-page = counter(page).get()
   let final-page = counter(page).final()
-  let current-chapter = counter("title").get().first()
   let final-chapter = counter("title").final().first()
   chapter-pages-state.update(pre => {
     let _last-index = pre.len() - 1 // 当前章节索引
