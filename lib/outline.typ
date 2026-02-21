@@ -60,18 +60,20 @@
 
   // 收集章节的第一页和最后一页
   counter("title").step()
-  let current-page = counter(page).get()
-  let final-page = counter(page).final()
-  // -1 0 1 ...
-  let current-chapter-index = counter("title").get().first() - 1
-  let final-chapter = counter("title").final().first()
-  chapter-pages-state.update(pre => {
-    if pre != () and pre.at(current-chapter-index).len() == 1 {
-      pre.at(current-chapter-index) += (current-page.first() - 1, ..final-page)
-    }
-    pre.push(current-page)
-    pre
-  })
+  context {
+    let current-page = counter(page).get()
+    let final-page = counter(page).final()
+    // -1 0 1 ...
+    let current-chapter-index = counter("title").get().first() - 2
+    let final-chapter = counter("title").final().first()
+    chapter-pages-state.update(pre => {
+      if pre != () and pre.at(current-chapter-index).len() == 1 {
+        pre.at(current-chapter-index) += (current-page.first() - 1, ..final-page)
+      }
+      pre.push(current-page)
+      pre
+    })
+  }
 }
 
 #let subject(body, size: 21.5pt, spacing: 1em, font: heiti, top: 0pt, bottom: 0pt) = {
