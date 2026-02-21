@@ -63,11 +63,11 @@
   let current-page = counter(page).get()
   let final-page = counter(page).final()
   // -1 0 1 ...
-  let current-chapter = counter("title").get().first()
+  let current-chapter-index = counter("title").get().first() - 1
   let final-chapter = counter("title").final().first()
   chapter-pages-state.update(pre => {
-    if pre != () and pre.at(current-chapter - 1).len() == 1 {
-      pre.at(current-chapter - 1) += (current-page.first() - 1, ..final-page)
+    if pre != () and pre.at(current-chapter-index).len() == 1 {
+      pre.at(current-chapter-index) += (current-page.first() - 1, ..final-page)
     }
     pre.push(current-page)
     pre
