@@ -64,9 +64,8 @@
   let final-page = counter(page).final()
   let final-chapter = counter("title").final().first()
   chapter-pages-state.update(pre => {
-    let _last-index = pre.len() - 1 // 当前章节索引
-    if pre != () and pre.at(_last-index).len() == 1 {
-      pre.at(_last-index) += (current-page.first() - 1, ..final-page)
+    if pre != () and pre.last().len() == 1 {
+      pre.last() += (current-page.first() - 1, ..final-page)
     }
     pre.push(current-page)
     pre
