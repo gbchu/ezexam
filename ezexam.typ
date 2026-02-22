@@ -293,8 +293,9 @@
   show math.emptyset: set text(font: "New Computer Modern Math", features: ("cv01",))
 
   // 中文着重号
+  let han-zi = regex("\p{Hani}")
   show strong: content => {
-    show regex("\p{Hani}"): it => box(place(text("·", size: 0.8em), dx: 0.45em, dy: 0.75em) + it)
+    show han-zi: it => box(place(text("·", size: 0.8em), dx: 0.45em, dy: 0.75em) + it)
     content.body
   }
 
