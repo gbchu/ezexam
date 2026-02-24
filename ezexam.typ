@@ -275,7 +275,6 @@
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)
   set table.cell(align: horizon + center, stroke: .5pt)
 
- 
   set math.cases(gap: 1em)
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
   let space = h(.25em, weak: true)
