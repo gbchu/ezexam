@@ -139,6 +139,7 @@
 
 #let solution-block(name: "参考答案", body) = context {
   if not answer-state.get() { return }
+  let pre-mode = mode-state.get()
   let set-mode(_mode) = mode-state.update(_mode)
   counter("explain").update(0) // 解析题号从 1 开始重新编号
   pagebreak(weak: true)
@@ -146,7 +147,7 @@
   title(name)
   body
   pagebreak(weak: true)
-  set-mode(pre-mode-state.get())
+  set-mode(pre-mode)
 }
 
 #let solution(

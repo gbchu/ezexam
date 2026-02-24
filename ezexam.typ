@@ -63,7 +63,6 @@
 ) = {
   assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode expected HANDOUTS, EXAM, SOLUTION")
   mode-state.update(mode)
-  pre-mode-state.update(mode)
 
   assert(
     type(font) == array and type(heading-font) == array,

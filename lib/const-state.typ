@@ -29,7 +29,6 @@
 #let HANDOUTS = "handouts"
 #let SOLUTION = "solution"
 #let mode-state = state("mode", HANDOUTS)
-#let pre-mode-state = state("pre-mode", HANDOUTS)
 
 #let answer-state = state("answer", false)
 #let answer-color-state = state("answer-color", blue)
