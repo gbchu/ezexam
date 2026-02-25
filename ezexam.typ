@@ -292,7 +292,7 @@
   // 中文着重号
   let han-zi = regex("\p{Hani}")
   show strong: content => {
-    show han-zi: it => box(place(text("·", size: 0.8em), dx: 0.45em, dy: 0.75em) + it)
+    show han-zi: it => box(place(text("·", size: .8em), dx: .45em, dy: .75em) + it)
     content.body
   }
 
