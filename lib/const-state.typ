@@ -16,7 +16,6 @@
   (name: "Times New Roman", covers: regex("\w")), // 西文字体
   (name: "TeX Gyre Termes", covers: regex("\w")), // 无 Times New Roman 字体时使用
   "TeX Gyre Termes Math", // 数学字体
-  "Songti SC",
   "Noto Serif CJK SC",
 )
 
