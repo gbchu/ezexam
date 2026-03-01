@@ -53,9 +53,10 @@ This template can help Chinese university, primary, middle and high school teach
 + `setup` 方法
   + 新增参数 `seal-line-decoration` ，该参数可以为弥封线添加额外的装饰
   + 新增参数 `par-justify`
-  + 为参数 `page-align` 新增可选值 `odd-r-even-l` 
+  + 为参数 `page-align` 新增可选值 `odd-r-even-l`
 + 删除 `tag` 方法的参数 `x` ，并调整其参数 `prefix` 的默认值
 + 优化水印，分割线，弥封线的实现，提高性能
++ 修改开源许可为 GPL-3.0
 
 ### 0 . 2 . 8
 + 更改 `question` 和 `solution` 方法的核心实现，彻底解决有较高的公式时，题号和题干对不齐的问题。删除这两个方法的 `padding-top` 和 `padding-bottom` 参数；`question` 方法新增参数 `hanging-indent` 并将参数 `body-indent` 修改为 `first-line-indent`
