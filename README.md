@@ -1,7 +1,7 @@
 # ezexam
 
 ![Typst Version](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgbchu%2Fezexam%2Frefs%2Fheads%2Fmain%2Ftypst.toml&query=%24.package.version&prefix=v&logo=typst&label=package&color=239DAD)
-[![Online Documentation](https://img.shields.io/badge/docs-online-007aff)](https://ezexam.pages.dev/)
+![Online Documentation](https://img.shields.io/badge/docs-online-007aff)](https://ezexam.pages.dev/)
 
 
 This template can help Chinese university, primary, middle and high school teachers or students in creating exam or handouts.
