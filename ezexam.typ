@@ -279,11 +279,7 @@
   let space = h(.25em, weak: true)
   show math.equation: it => space + math.display(text(font: font, it)) + space
   //  π 在 "TeX Gyre Termes Math" 下显示的样式；默认的丑
-  let pi = if "TeX Gyre Termes Math" in font {
-    text(font: "Times New Roman", "π")
-  } else {
-    math.pi
-  }
+  let pi = if "TeX Gyre Termes Math" in font [π] else [\u{03C0}]
   show math.pi: pi
   show math.parallel: "//"
   // 空集符号更好看
