@@ -5,9 +5,10 @@
   "question",
 ).display(num => {
   let _label = label
+  let mode = mode-state.get()
   if label == auto {
     _label = "1."
-    if mode-state.get() == HANDOUTS and with-heading-label {
+    if mode == HANDOUTS and with-heading-label {
       _label = "1.1.1.1.1.1."
     }
   }
@@ -23,7 +24,7 @@
     numbering(_label, ..arr),
   )
 
-  if mode-state.get() == HANDOUTS { return result }
+  if mode == HANDOUTS { return result }
   box(width: 1em, align(right, result))
 })
 
