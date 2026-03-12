@@ -66,7 +66,7 @@
 
   assert(
     type(font) == array and type(heading-font) == array,
-    message: "font must be an array",
+    message: "font expected array",
   )
 
   // 为页码添加在不同模式下的默认值
