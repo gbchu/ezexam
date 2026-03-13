@@ -154,7 +154,7 @@
       // 最后一章只有首页的页码，最后一页的页码没有，需要把最后一页也添加进去
       chapter-first-last-pages.last() += (..final * 2,)
     }
-    let (first, last, ..total-pages) = chapter-first-last-pages.at(counter("title").get().first() - 1)
+    let (first, last, ..total-pages) = chapter-first-last-pages.at(counter(TITLE).get().first() - 1)
 
     if label-is-current-total-format { current += total-pages }
 
@@ -268,7 +268,7 @@
     v(heading-top)
     text(heading-color, font: heading-font + text.font, it)
     v(heading-bottom)
-    if not resume { counter("question").update(0) }
+    if not resume { counter(QUESTION).update(0) }
   }
 
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)

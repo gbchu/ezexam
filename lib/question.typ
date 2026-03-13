@@ -1,9 +1,7 @@
-#import "const-state.typ": HANDOUTS, mode-state
+#import "const-state.typ": HANDOUTS, PLACEHOLDER, QUESTION, mode-state
 #import "tools.typ": _content-start-space, _trim-content-start-parbreak
 
-#let _format-label(label, label-color, label-weight, with-heading-label) = context counter(
-  "question",
-).display(num => {
+#let _format-label(label, label-color, label-weight, with-heading-label) = context counter(QUESTION).display(num => {
   let _label = label
   let mode = mode-state.get()
   if label == auto {
@@ -51,7 +49,7 @@
   top: 0pt,
   bottom: 0pt,
 ) = context {
-  counter("question").step()
+  counter(QUESTION).step()
   set par(leading: line-height) if line-height != auto
   let _label = _format-label(
     label,
@@ -81,5 +79,5 @@
   )
   v(bottom)
   // 更新占位符上的题号
-  context counter("placeholder").update(counter("question").get().first())
+  context counter(PLACEHOLDER).update(counter(QUESTION).get().first())
 }

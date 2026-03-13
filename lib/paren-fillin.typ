@@ -1,13 +1,13 @@
-#import "const-state.typ": answer-color-state, answer-state
+#import "const-state.typ": PLACEHOLDER, QUESTION, answer-color-state, answer-state
 
 #let _get-answer(body, placeholder, with-number, update) = {
   if answer-state.get() {
     return text(answer-color-state.get(), body)
   }
   if not with-number { return placeholder }
-  counter("placeholder").step()
-  context counter("placeholder").display()
-  if update { counter("question").step() }
+  counter(PLACEHOLDER).step()
+  context counter(PLACEHOLDER).display()
+  if update { counter(QUESTION).step() }
 }
 
 #let _draw-line(len, stroke, offset, body) = {
@@ -68,11 +68,12 @@
   }
 }
 
+#let PLACEHOLDER_DEFAULT-VALUE = "\u{25B2}" // 默认占位符为一个黑色实心三角形
 // 填空的横线
 #let fillin(
   body,
   len: 27.5pt,
-  placeholder: "\u{25B2}",
+  placeholder: PLACEHOLDER_DEFAULT-VALUE,
   with-number: false,
   update: false,
   stroke: .45pt + luma(0),
@@ -96,7 +97,7 @@
 #let paren(
   body,
   justify: false,
-  placeholder: "\u{25B2}",
+  placeholder: PLACEHOLDER_DEFAULT-VALUE,
   with-number: false,
   update: false,
 ) = context [

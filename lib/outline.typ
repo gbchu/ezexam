@@ -17,7 +17,7 @@
   }
 
   if author != none {
-    text(font: "STKaiti", size: 15pt)[\ 作者：#author \ ]
+    text(font: kaiti, size: 15pt)[\ 作者：#author \ ]
   }
 
   if date == auto { datetime.today().display("[year]年[month]月[day]日") } else { date }
@@ -25,8 +25,8 @@
 
 #let chapter(body) = {
   pagebreak(weak: true)
-  counter("chapter").step()
-  set heading(numbering: _ => counter("chapter").display(it => box(width: .6em, align(right)[#it.~])))
+  counter(CHAPTER).step()
+  set heading(numbering: _ => counter(CHAPTER).display(it => box(width: .6em, align(right)[#it.~])))
   place(hide[= #body <chapter>])
 }
 
@@ -56,13 +56,13 @@
   )
   v(bottom)
   counter(heading).update(0)
-  counter("question").update(0)
-  counter("title").step()
+  counter(QUESTION).update(0)
+  counter(TITLE).step()
 
   // 收集章节的第一页和最后一页
   let current-page = counter(page).get()
   let final-page = counter(page).final()
-  let final-chapter = counter("title").final().first()
+  let final-chapter = counter(TITLE).final().first()
   chapter-pages-state.update(pre => {
     if pre != () and pre.last().len() == 1 {
       pre.last() += (current-page.first() - 1, ..final-page)
@@ -141,7 +141,7 @@
   if not answer-state.get() { return }
   let pre-mode = mode-state.get()
   let set-mode(_mode) = mode-state.update(_mode)
-  counter("explain").update(0) // 解析题号从 1 开始重新编号
+  counter(EXPLAIN).update(0) // 解析题号从 1 开始重新编号
   pagebreak(weak: true)
   set-mode(SOLUTION)
   title(name)
@@ -203,11 +203,11 @@
     }
 
     // 解析题号的格式化
-    #counter("explain").step()
+    #counter(EXPLAIN).step()
     #let _label = none
     #let _space = 0em
     #if show-number {
-      _label = context numbering("1.", ..counter("explain").get())
+      _label = context numbering("1.", ..counter(EXPLAIN).get())
       _space = .75em
     }
     #set par(leading: line-height) if line-height != auto

@@ -1,9 +1,11 @@
-#import "const-state.typ": EXAM, chapter-pages-state, heiti, mode-state, page-restart-state
-#let _special-char = "《（【"
+#import "const-state.typ": EXAM, TITLE, chapter-pages-state, heiti, mode-state, page-restart-state
+#let _SPECIAL-CHAR = "《（【"
+#let _MATH = "math"
+#let _CHAR = "char"
 // 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
 #let _math-or-special-char(body) = {
-  if body.func() == math.equation { return "math" }
-  if body.has("text") and body.text.first() in _special-char { "char" }
+  if body.func() == math.equation { return _MATH }
+  if body.has("text") and body.text.first() in _SPECIAL-CHAR { _CHAR }
 }
 
 #let _check-content-starts-with(body) = {
@@ -17,8 +19,8 @@
 }
 
 #let _content-start-space(body) = {
-  if _check-content-starts-with(body) == "math" { return .25em }
-  if _check-content-starts-with(body) == "char" { return .4em }
+  if _check-content-starts-with(body) == _MATH { return .25em }
+  if _check-content-starts-with(body) == _CHAR { return .4em }
   0em
 }
 
@@ -119,6 +121,8 @@
 }
 
 // 图文混排
+#let _TEXT-LEFT-FIGURE-RIGHT = "tf"
+#let _FIGURE-LEFT-TEXT-RIGHT = "ft"
 #let text-figure(
   figure: none,
   figure-x: 0pt,
@@ -126,10 +130,13 @@
   top: 0pt,
   bottom: 0pt,
   gap: 0pt,
-  style: "tf",
+  style: _TEXT-LEFT-FIGURE-RIGHT,
   text,
 ) = context {
-  assert(style == "tf" or style == "ft", message: "style expected 'tf', 'ft'")
+  assert(
+    style in (_TEXT-LEFT-FIGURE-RIGHT, _FIGURE-LEFT-TEXT-RIGHT),
+    message: "style expected" + _TEXT-LEFT-FIGURE-RIGHT + "or" + _FIGURE-LEFT-TEXT-RIGHT,
+  )
   let body = (
     text, // [ \ ] 是为了在当前页还有一行时，换页
     [ \ ] + box(place(dx: figure-x, dy: figure-y - par.leading * 2, figure)),
@@ -137,7 +144,7 @@
 
   let _columns = (1fr, measure(figure).width)
   let _gap = -figure-x + gap
-  if style == "ft" {
+  if style == _FIGURE-LEFT-TEXT-RIGHT {
     body = body.rev()
     _columns = _columns.rev()
     _gap = figure-x + gap
@@ -157,8 +164,8 @@
 #let page-restart(num: 1) = context {
   assert(type(num) == int, message: "num expected integer")
   pagebreak(weak: true)
-  let chapter-index = counter("title").get().first() - 1
-  let chapter-final = counter("title").final().first() - 1
+  let chapter-index = counter(TITLE).get().first() - 1
+  let chapter-final = counter(TITLE).final().first() - 1
   if chapter-index < 0 or chapter-index == chapter-final { return } // 处于目录页或最后一页时，不重新开始页码
   let current = counter(page).get().first() - 1
   let final-page = counter(page).final()
