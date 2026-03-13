@@ -24,15 +24,22 @@
   (name: "Noto Sans CJK SC", covers: regex("[^a-zA-Z0-9]")),
 )
 
+#let kaiti = "STKaiti"
+
 #let EXAM = "exam"
 #let HANDOUTS = "handouts"
 #let SOLUTION = "solution"
-#let mode-state = state("mode", HANDOUTS)
 
+// counter
+#let CHAPTER = "chapter"
+#let TITLE = "title"
+#let QUESTION = "question"
+#let EXPLAIN = "explain"
+#let PLACEHOLDER = "placeholder"
+
+#let mode-state = state("mode", HANDOUTS)
 #let answer-state = state("answer", false)
 #let answer-color-state = state("answer-color", blue)
-
 #let subject-state = state("subject", none)
-
 #let chapter-pages-state = state("chapter-pages", ()) // 章节的第一页、最后一页、总页码
 #let page-restart-state = state("page-restart", 0)
