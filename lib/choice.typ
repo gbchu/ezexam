@@ -1,5 +1,7 @@
 #import "tools.typ": _content-start-space
 
+#let _CHOICE_MIN_GAP = .15in
+
 #let _format-choice(choice, label, indent, spacing, label-position) = {
   // 为了解决数学公式在左侧加间距的问题
   spacing -= _content-start-space(choice)
@@ -31,12 +33,10 @@
     columns = 4
     // 排成1行,选项之间的间距
     let choice-gap = container-width / choice-number - max-choice-width
-    let min-gap = 0.15in
-    if choice-gap < min-gap {
+    if choice-gap < _CHOICE_MIN_GAP {
       columns = 2
       // 排成2行,选项之间的间距
-      choice-gap = choice-gap * 2 + max-choice-width
-      if choice-gap < min-gap { columns = 1 }
+      if choice-gap * 2 + max-choice-width < _CHOICE_MIN_GAP { columns = 1 }
     }
   }
   columns
