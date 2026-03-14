@@ -44,7 +44,7 @@
 ) = {
   assert(type(info) == dictionary, message: "expected dictionary, found " + str(type(info)))
   set par(spacing: par-spacing)
-  set text(font: heiti, size: 12pt)
+  set text(font: heiti, 12pt)
   set align(center)
   set grid(columns: 2, align: horizon, gutter: .5em)
   if supplement != none { text(tracking: .8in, supplement) }

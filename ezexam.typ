@@ -97,7 +97,7 @@
   watermark = if watermark != none {
     place(horizon)[
       #set par(leading: .5em)
-      #set text(size: watermark-size, watermark-color)
+      #set text(watermark-size, watermark-color)
       #grid(
         columns: paper-columns * (1fr,),
         ..paper-columns * (rotate(watermark-rotate, watermark),),
@@ -225,7 +225,7 @@
 
   set outline(
     target: if mode == EXAM { <chapter> } else { heading },
-    title: text(size: 1.5em)[目#h(1em)录],
+    title: text(1.5em)[目#h(1em)录],
   )
   show outline: it => {
     set page(footer: _footer(outline-page-numbering))
@@ -240,7 +240,7 @@
     first-line-indent: (amount: first-line-indent, all: true),
     justify: par-justify,
   )
-  set text(font: font, size: font-size)
+  set text(font: font, font-size)
 
   if heading-numbering == auto {
     heading-numbering = "1.1.1.1.1."
@@ -264,7 +264,7 @@
   }
   show heading: it => {
     set par(leading: 1.3em)
-    set text(size: h1-size) if it.level == 1
+    set text(h1-size) if it.level == 1
     v(heading-top)
     text(heading-color, font: heading-font + text.font, it)
     v(heading-bottom)
@@ -280,15 +280,15 @@
   show math.equation: it => space + math.display(text(font: font, it)) + space
   //  π 在 "TeX Gyre Termes Math" 下显示的样式；默认的丑
   let pi = if "TeX Gyre Termes Math" in font [π] else [\u{03C0}]
-  show math.pi: pi
-  show math.parallel: "//"
+  show "\u{03C0}": pi
+  show "\u{2225}": "//"
   // 空集符号更好看
-  show math.emptyset: set text(font: "New Computer Modern Math", features: ("cv01",))
+  show "\u{2205}": set text(font: "New Computer Modern Math", features: ("cv01",))
 
   // 中文着重号
   let han-zi = regex("\p{Hani}")
   show strong: content => {
-    show han-zi: it => box(place(text("·", size: .8em), dx: .45em, dy: .75em) + it)
+    show han-zi: it => box(place(text("·", .8em), dx: .45em, dy: .75em) + it)
     content.body
   }
 

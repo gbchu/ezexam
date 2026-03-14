@@ -10,14 +10,14 @@
 ) = {
   set page(footer: none, columns: 1)
   set align(center + horizon)
-  text(size: 25pt, title)
+  text(25pt, title)
 
   if subtitle != none {
-    text(font: heiti, size: 22pt)[\ #subtitle]
+    text(font: heiti, 22pt)[\ #subtitle]
   }
 
   if author != none {
-    text(font: kaiti, size: 15pt)[\ 作者：#author \ ]
+    text(font: kaiti, 15pt)[\ 作者：#author \ ]
   }
 
   if date == auto { datetime.today().display("[year]年[month]月[day]日") } else { date }
@@ -47,7 +47,7 @@
     text(
       weight: weight + if mode != EXAM { 300 },
       font: if font == auto { text.font } else { font },
-      size: if size == auto {
+      if size == auto {
         if mode == HANDOUTS { 20pt } else { 16pt }
       } else { size },
       color,
@@ -76,14 +76,14 @@
   v(top)
   align(center, text(
     font: font,
-    size: size,
+    size,
     [#body].text.split("").slice(1, -1).join(h(spacing)),
   ))
   v(bottom)
   subject-state.update([#body].text)
 }
 
-#let secret(body: "绝密★启用前") = place(top, float: true, clearance: 1.5em, text(font: heiti, body, size: 10.5pt))
+#let secret(body: "绝密★启用前") = place(top, float: true, clearance: 1.5em, text(font: heiti, body, 10.5pt))
 
 #let exam-type(type, prefix: "试卷类型: ") = context place(top + right, text(
   font: heiti + text.font,
@@ -103,7 +103,7 @@
   bottom: 0pt,
 ) = context {
   assert(info.len() > 0, message: "info cannot be empty")
-  set text(font: heiti + text.font, size: size, weight: weight)
+  set text(font: heiti + text.font, size, weight: weight)
   set align(center)
   grid(
     columns: info.len(),
@@ -188,7 +188,7 @@
     // 标题
     #if title != none {
       let title-box = box(fill: title-bg-color, inset: 6pt, radius: title-radius, text(
-        size: title-size,
+        title-size,
         weight: title-weight,
         tracking: 3pt,
         title-color,
