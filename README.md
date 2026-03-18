@@ -42,6 +42,14 @@ This template can help Chinese university, primary, middle and high school teach
 ```
 
 ## Changelog
+### 0 . 3 . 0
+
++ `question` 方法，添加新特性，该特性可以让题目被引用，默认生成的 label 为当前题目所处的位次（[#5](https://github.com/gbchu/ezexam/issues/5)）
+  + 新增参数 `ref-on` ，该参数设置是否开启自动生成可被引用的 label，默认为 `false`
+  + 新增参数 `supplement` ，该参数设置引用的前缀，默认为 `none`
++ `setup` 方法新增参数 `ref-color` ，该参数设置引用的颜色
++ 优化代码
+
 ### 0 . 2 . 9
 + 修复 `cover` 方法，手动添加日期时不显示的 bug
 + 修复 `solution` 方法，设置 `inset` 时，如果没有设置左右边距，导致左右边距失效的 bug
@@ -67,7 +75,7 @@ This template can help Chinese university, primary, middle and high school teach
 + 修复 `fillin` 方法有时不显示占位符的 bug
 + 将默认字体修改为 `roman` ，并添加 `TeX Gyre Termes` 字体，修复在线使用 `roman` 字体时，缺少 `Times New Roman` 字体造成的标题西文字体未正确设置的问题
 + 修改 `title` 方法的 `bottom` 参数和`subject` 方法的 `top` 参数的默认值为 0pt
-+ `setup` 方法新增参数 `resume`
++ `setup` 方法新增参数 `resume` ，该参数可以在同一个文档中重置题号（[#2](https://github.com/gbchu/ezexam/issues/2)）
 + 废弃 `answer` 方法和 `multi` 常量
 
 ### 0 . 2 . 7
@@ -161,7 +169,7 @@ This template can help Chinese university, primary, middle and high school teach
 ### 0 . 1 . 3
 + 优化 `choices` 方法
 + 将 `question` 方法的参数名 `points-separate-par` 修改为 `points-separate`
-+ 增加英文完型填空、7选5题型的支持，让 `paren` 和 `fillin` 方法可以使用题号作为占位符。使用详情查看 [`paren`](https://ezexam.pages.dev/reference/paren) 和 [`fillin`](https://ezexam.pages.dev/reference/fillin) 方法
++ 增加英文完型填空、7选5题型的支持，让 `paren` 和 `fillin` 方法可以使用题号作为占位符。（[#1](https://github.com/gbchu/ezexam/issues/1)）使用详情查看 [`paren`](https://ezexam.pages.dev/reference/paren) 和 [`fillin`](https://ezexam.pages.dev/reference/fillin) 方法
 + `setup` 方法新增参数 `heading-numbering`，`heading-hanging-indent`，`enum-spacing`，`enum-indent` 提供更多自定义设置
 + 修复 `question` 个数超过9个时，内容对不齐的问题
 
