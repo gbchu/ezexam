@@ -100,9 +100,9 @@
   placeholder: PLACEHOLDER_DEFAULT-VALUE,
   with-number: false,
   update: false,
-) = context [
+) = [
   #if justify { h(1fr) }
-  #h(0pt, weak: true)（~~#_get-answer(body, placeholder, with-number, update)~~）
+  #h(0pt, weak: true)（~~#context _get-answer(body, placeholder, with-number, update)~~）
 ]
 
 // 类似英文中的7选5题型专用语法糖
