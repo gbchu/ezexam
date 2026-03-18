@@ -38,7 +38,7 @@
   first-line-indent: 0em,
   hanging-indent: auto,
   label: auto,
-  label-color: luma(0),
+  label-color: black,
   label-weight: 400,
   with-heading-label: false,
   points: none,
@@ -48,6 +48,8 @@
   line-height: auto,
   top: 0pt,
   bottom: 0pt,
+  ref-on: false,
+  supplement: none,
 ) = context {
   counter(QUESTION).step()
   set par(leading: line-height) if line-height != auto
@@ -61,22 +63,25 @@
   if hanging-indent == auto { _hanging-indent = measure(_label).width + 1em }
 
   v(top)
-  terms(
-    indent: indent,
-    hanging-indent: _hanging-indent,
-    separator: h(.9em, weak: true),
-    (
-      _label,
-      _format-points(
-        points,
-        points-prefix,
-        points-suffix,
-        points-separate,
+  [#figure(supplement: supplement, kind: QUESTION)[
+      #terms(
+        indent: indent,
+        hanging-indent: _hanging-indent,
+        separator: h(.9em, weak: true),
+        (
+          _label,
+          _format-points(
+            points,
+            points-prefix,
+            points-suffix,
+            points-separate,
+          )
+            + h(first-line-indent - _content-start-space[#body], weak: true)
+            + _trim-content-start-parbreak[#body],
+        ),
       )
-        + h(first-line-indent - _content-start-space[#body], weak: true)
-        + _trim-content-start-parbreak[#body],
-    ),
-  )
+    ]#if ref-on { std.label(supplement + str(counter(figure.where(kind: QUESTION)).get().first() + 1)) }]
+
   v(bottom)
   // 更新占位符上的题号
   context counter(PLACEHOLDER).update(counter(QUESTION).get().first())
