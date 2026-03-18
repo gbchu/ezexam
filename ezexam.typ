@@ -23,12 +23,13 @@
   heading-hanging-indent: auto,
   h1-size: auto,
   heading-font: heiti,
-  heading-color: luma(0),
+  heading-color: black,
   heading-top: 10pt,
   heading-bottom: 15pt,
   enum-numbering: "（1.i.a）",
   enum-spacing: 2em,
   enum-indent: 0pt,
+  ref-color: rgb("#0a6e96"),
   resume: true,
   watermark: none,
   watermark-color: rgb("#f666"),
@@ -273,6 +274,12 @@
 
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)
   set table.cell(align: horizon + center, stroke: .5pt)
+
+  show ref: set text(ref-color)
+  show figure.where(kind: QUESTION): it => {
+    set block(breakable: true)
+    align(left, it)
+  }
 
   set math.cases(gap: 1em)
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
