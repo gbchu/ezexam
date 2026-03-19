@@ -43,10 +43,11 @@ This template can help Chinese university, primary, middle and high school teach
 
 ## Changelog
 ### 0 . 3 . 0
-+ `question` 方法，添加新特性，该特性可以让题目被引用，默认生成的 label 为当前题目所处的位次（[#5](https://github.com/gbchu/ezexam/issues/5)）
++ `question` 方法，添加新特性，该特性可以让题目被引用，默认生成的 label 为当前章节-题号的形式（[#5](https://github.com/gbchu/ezexam/issues/5)）
   + 新增参数 `ref-on` ，该参数设置是否开启自动生成可被引用的 label，默认为 `false`
   + 新增参数 `supplement` ，该参数设置引用的前缀，默认为 `none`
 + `setup` 方法新增参数 `ref-color` ，该参数设置引用的颜色
++ 导出自定义计数器，方便自定义
 + 优化代码
 
 ### 0 . 2 . 9
