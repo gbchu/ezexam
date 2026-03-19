@@ -1,13 +1,14 @@
-#import "const-state.typ": PLACEHOLDER, QUESTION, answer-color-state, answer-state
+#import "state.typ": answer-color-state, answer-state
+#import "counter.typ": counter-placeholder, counter-question
 
 #let _get-answer(body, placeholder, with-number, update) = {
   if answer-state.get() {
     return text(answer-color-state.get(), body)
   }
   if not with-number { return placeholder }
-  counter(PLACEHOLDER).step()
-  context counter(PLACEHOLDER).display()
-  if update { counter(QUESTION).step() }
+  counter-placeholder.step()
+  context counter-placeholder.display()
+  if update { counter-question.step() }
 }
 
 #let _draw-line(len, stroke, offset, body) = {
