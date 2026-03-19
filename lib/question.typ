@@ -1,7 +1,9 @@
-#import "const-state.typ": HANDOUTS, PLACEHOLDER, QUESTION, mode-state
+#import "const.typ": HANDOUTS
+#import "state.typ": mode-state
+#import "counter.typ": counter-placeholder, counter-question
 #import "tools.typ": _content-start-space, _trim-content-start-parbreak
 
-#let _format-label(label, label-color, label-weight, with-heading-label) = context counter(QUESTION).display(num => {
+#let _format-label(label, label-color, label-weight, with-heading-label) = context counter-question.display(num => {
   let _label = label
   let mode = mode-state.get()
   if label == auto {
@@ -51,7 +53,7 @@
   ref-on: false,
   supplement: none,
 ) = context {
-  counter(QUESTION).step()
+  counter-question.step()
   set par(leading: line-height) if line-height != auto
   let _label = _format-label(
     label,
@@ -63,7 +65,7 @@
   if hanging-indent == auto { _hanging-indent = measure(_label).width + 1em }
 
   v(top)
-  [#figure(supplement: supplement, kind: QUESTION)[
+  [#figure(supplement: supplement, kind: "question")[
       #terms(
         indent: indent,
         hanging-indent: _hanging-indent,
@@ -80,9 +82,9 @@
             + _trim-content-start-parbreak[#body],
         ),
       )
-    ]#if ref-on { std.label(supplement + str(counter(figure.where(kind: QUESTION)).get().first() + 1)) }]
+    ]#if ref-on { std.label(supplement + str(counter(figure.where(kind: "question")).get().first() + 1)) }]
 
   v(bottom)
   // 更新占位符上的题号
-  context counter(PLACEHOLDER).update(counter(QUESTION).get().first())
+  context counter-placeholder.update(counter-question.get().first())
 }

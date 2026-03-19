@@ -1,8 +1,15 @@
+#import "lib/const.typ": *
+#import "lib/state.typ": *
+#import "lib/counter.typ": *
+#import "lib/config.typ": a3, a4, heiti, kaiti, roman
 #import "lib/tools.typ": draft, page-restart, tag, text-figure, zh-arabic
-#import "lib/outline.typ": *
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
+#import "lib/outline.typ": (
+  chapter, cover, exam-info, exam-type, notice, score, score-box, scoring-box, secret, solution, solution-block,
+  subject, title,
+)
 
 #let setup(
   mode: HANDOUTS,
@@ -155,7 +162,7 @@
       // 最后一章只有首页的页码，最后一页的页码没有，需要把最后一页也添加进去
       chapter-first-last-pages.last() += (..final * 2,)
     }
-    let (first, last, ..total-pages) = chapter-first-last-pages.at(counter(TITLE).get().first() - 1)
+    let (first, last, ..total-pages) = chapter-first-last-pages.at(counter-title.get().first() - 1)
 
     if label-is-current-total-format { current += total-pages }
 
@@ -276,7 +283,7 @@
   set table.cell(align: horizon + center, stroke: .5pt)
 
   show ref: set text(ref-color)
-  show figure.where(kind: QUESTION): it => {
+  show figure.where(kind: "question"): it => {
     set block(breakable: true)
     align(left, it)
   }
