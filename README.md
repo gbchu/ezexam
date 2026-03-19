@@ -47,7 +47,7 @@ This template can help Chinese university, primary, middle and high school teach
   + 新增参数 `ref-on` ，该参数设置是否开启自动生成可被引用的 label，默认为 `false`
   + 新增参数 `supplement` ，该参数设置引用的前缀，默认为 `none`
 + `setup` 方法新增参数 `ref-color` ，该参数设置引用的颜色
-+ 导出自定义计数器，方便自定义
++ 导出章节，标题，题号计数器
 + 优化代码
 
 ### 0 . 2 . 9
