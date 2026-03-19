@@ -1,4 +1,7 @@
-#import "const-state.typ": EXAM, TITLE, chapter-pages-state, heiti, mode-state, page-restart-state
+#import "const.typ": EXAM
+#import "config.typ": heiti
+#import "counter.typ": counter-title
+#import "state.typ": chapter-pages-state, mode-state, page-restart-state
 #let _SPECIAL-CHAR = "《（【"
 #let _MATH = "math"
 #let _CHAR = "char"
@@ -164,8 +167,8 @@
 #let page-restart(num: 1) = context {
   assert(type(num) == int, message: "num expected integer")
   pagebreak(weak: true)
-  let chapter-index = counter(TITLE).get().first() - 1
-  let chapter-final = counter(TITLE).final().first() - 1
+  let chapter-index = counter-title.get().first() - 1
+  let chapter-final = counter-title.final().first() - 1
   if chapter-index < 0 or chapter-index == chapter-final { return } // 处于目录页或最后一页时，不重新开始页码
   let current = counter(page).get().first() - 1
   let final-page = counter(page).final()
