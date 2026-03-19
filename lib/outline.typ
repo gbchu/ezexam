@@ -85,7 +85,7 @@
 
 #let secret(body: "绝密★启用前") = place(top, float: true, clearance: 1.5em, text(font: heiti, body, 10.5pt))
 
-#let exam-type(type, prefix: "试卷类型: ") = context place(top + right, text(
+#let exam-type(type, prefix: "试卷类型：") = context place(top + right, text(
   font: heiti + text.font,
   prefix + type,
 ))
@@ -111,7 +111,7 @@
     inset: (top: top, bottom: bottom),
     align: center + horizon,
     ..for (key, value) in info {
-      ([#key: #value],)
+      ([#key：#value],)
     }
   )
 }
@@ -126,7 +126,7 @@
 )[得分][~~~~~~~~~#v(10pt)])
 
 #let notice(label: "1.", indent: 2em, hanging-indent: auto, ..children) = context {
-  text(font: heiti)[注意事项:]
+  text(font: heiti)[注意事项：]
   set enum(numbering: label, indent: indent)
   set par(
     hanging-indent: if hanging-indent == auto {
