@@ -2,7 +2,7 @@
 #import "const.typ": EXAM, HANDOUTS, SOLUTION
 #import "state.typ": answer-state, chapter-pages-state, mode-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
-#import "tools.typ": _trim-content-start-parbreak
+#import "tools.typ": _trim-content-start-parbreak, _create-seal
 
 // 封面
 #let cover(
@@ -231,4 +231,19 @@
     $dot$,
   ))#score-prefix#points#score-suffix]
 
-
+// 草稿纸
+#let draft(
+  name: "草稿纸",
+  student-info: (
+    姓名: underline[~~~~~~~~~~~~~],
+    准考证号: underline[~~~~~~~~~~~~~~~~~~~~~~~~~~],
+    考场号: underline[~~~~~~~],
+    座位号: underline[~~~~~~~],
+  ),
+  line-type: "solid",
+  supplement: none,
+) = {
+  set page(margin: .5in, footer: none)
+  title(name.split("").join(h(1em)), bottom: 0pt)
+  _create-seal(line-type: line-type, supplement: supplement, info: student-info)
+}
