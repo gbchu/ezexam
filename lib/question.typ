@@ -1,6 +1,6 @@
-#import "const.typ": HANDOUTS
 #import "state.typ": mode-state
-#import "counter.typ": counter-placeholder, counter-question
+#import "const.typ": HANDOUTS, QUESTION
+#import "counter.typ": counter-chapter, counter-placeholder, counter-question
 #import "tools.typ": _content-start-space, _trim-content-start-parbreak
 
 #let _format-label(label, label-color, label-weight, with-heading-label) = context counter-question.display(num => {
@@ -34,6 +34,17 @@
   [#prefix#points#suffix#if separate [ \ ]]
 }
 
+#let _ref-label(with-heading-label, supplement) = {
+  let q-num = str(counter-question.get().first() + 1) // 题号
+  if with-heading-label {
+    let heading-label = counter(heading).get().filter(item => item != 0).map(str)
+    if heading-label != () { q-num = (..heading-label, q-num).join(".") }
+  }
+  let chapter = counter-chapter.get().first()
+  if chapter == 0 { chapter = "1" }
+  label(supplement + str(chapter) + "-" + q-num)
+}
+
 #let question(
   body,
   indent: 0em,
@@ -53,7 +64,6 @@
   ref-on: false,
   supplement: none,
 ) = context {
-  counter-question.step()
   set par(leading: line-height) if line-height != auto
   let _label = _format-label(
     label,
@@ -65,7 +75,7 @@
   if hanging-indent == auto { _hanging-indent = measure(_label).width + 1em }
 
   v(top)
-  [#figure(supplement: supplement, kind: "question")[
+  [#figure(supplement: supplement, kind: QUESTION)[
       #terms(
         indent: indent,
         hanging-indent: _hanging-indent,
@@ -82,9 +92,10 @@
             + _trim-content-start-parbreak[#body],
         ),
       )
-    ]#if ref-on { std.label(supplement + str(counter(figure.where(kind: "question")).get().first() + 1)) }]
-
+    ]
+    #if ref-on { _ref-label(with-heading-label, supplement) }
+  ]
   v(bottom)
   // 更新占位符上的题号
-  context counter-placeholder.update(counter-question.get().first())
+  context counter-placeholder.update(..counter-question.get())
 }
