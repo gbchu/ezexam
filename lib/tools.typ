@@ -2,39 +2,35 @@
 #import "config.typ": heiti
 #import "counter.typ": counter-title
 #import "state.typ": chapter-pages-state, mode-state, page-restart-state
+
 #let _SPECIAL-CHAR = "《（【"
 #let _MATH = "math"
 #let _CHAR = "char"
-// 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
-#let _math-or-special-char(body) = {
-  if body.func() == math.equation { return _MATH }
-  if body.has("text") and body.text.first() in _SPECIAL-CHAR { _CHAR }
-}
+#let _PAR_BREAK = "parbreak"
 
-#let _check-content-starts-with(body) = {
+#let _content-starts-with(body) = {
   if body.has("children") {
     let children = body.children
     if children.len() == 0 { return }
     body = children.first()
+    // 如果有类似 [   $1$] 这样的情况时，判断下一个节点 $1$，即可以忽略前面的空。
     if body == [ ] { body = children.at(1) }
   }
-  _math-or-special-char(body)
+
+  if body.func() == math.equation { return _MATH }
+  if body.has("text") and body.text.first() in _SPECIAL-CHAR { return _CHAR }
+  if body == parbreak() { _PAR_BREAK }
 }
 
+// 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
 #let _content-start-space(body) = {
-  if _check-content-starts-with(body) == _MATH { return .25em }
-  if _check-content-starts-with(body) == _CHAR { return .4em }
-  0em
+  let result = _content-starts-with(body)
+  if result == _MATH { .25em } else if result == _CHAR { .4em } else { 0em }
 }
 
 #let _trim-content-start-parbreak(body) = {
-  if body.has("children") {
-    let children = body.children
-    if children.len() > 0 and children.first() == parbreak() {
-      return children.slice(1).join()
-    }
-  }
-  body
+  if _content-starts-with(body) != _PAR_BREAK or body == parbreak() { return body }
+  body.children.slice(1).join()
 }
 
 // 生成弥封线
@@ -85,23 +81,6 @@
       ..seal-line,
     )
   }
-}
-
-// 草稿纸
-#let draft(
-  name: "草稿纸",
-  student-info: (
-    姓名: underline[~~~~~~~~~~~~~],
-    准考证号: underline[~~~~~~~~~~~~~~~~~~~~~~~~~~],
-    考场号: underline[~~~~~~~],
-    座位号: underline[~~~~~~~],
-  ),
-  line-type: "solid",
-  supplement: none,
-) = {
-  set page(margin: .5in, footer: none)
-  title(name.split("").join(h(1em)), bottom: 0pt)
-  _create-seal(line-type: line-type, supplement: supplement, info: student-info)
 }
 
 // 一种页码格式: "第x页（共xx页）
