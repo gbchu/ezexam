@@ -20,8 +20,8 @@
 )
 
 #let heiti = (
-  (name: "SimHei", covers: regex("[^a-zA-Z0-9]")),
-  (name: "Noto Sans CJK SC", covers: regex("[^a-zA-Z0-9]")),
+  (name: "SimHei", covers: regex("[^a-zA-Z0-9，。、；：？！\"\"''（）【】《》〈〉…—·]")),
+  (name: "Noto Sans CJK SC", covers: regex("[^a-zA-Z0-9，。、；：？！\"\"''（）【】《》〈〉…—·]")),
 )
 
 #let kaiti = "STKaiti"
