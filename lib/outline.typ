@@ -1,4 +1,7 @@
-#import "const-state.typ": *
+#import "config.typ": heiti, kaiti
+#import "const.typ": EXAM, HANDOUTS, SOLUTION
+#import "state.typ": answer-state, chapter-pages-state, mode-state, subject-state
+#import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
 #import "tools.typ": _trim-content-start-parbreak
 
 // 封面
@@ -17,16 +20,16 @@
   }
 
   if author != none {
-    text(font: kaiti, 15pt)[\ 作者：#author \ ]
+    text(font: kaiti, 15pt)[\ 作者：#author]
   }
 
-  if date == auto { datetime.today().display("[year]年[month]月[day]日") } else { date }
+  if date == auto [\ #datetime.today().display("[year]年[month]月[day]日")] else [\ #date]
 }
 
 #let chapter(body) = {
   pagebreak(weak: true)
-  counter(CHAPTER).step()
-  set heading(numbering: _ => counter(CHAPTER).display(it => box(width: .6em, align(right)[#it.~])))
+  counter-chapter.step()
+  set heading(numbering: _ => counter-chapter.display(it => box(width: .6em, align(right)[#it.~])))
   place(hide[= #body <chapter>])
 }
 
@@ -56,13 +59,13 @@
   )
   v(bottom)
   counter(heading).update(0)
-  counter(QUESTION).update(0)
-  counter(TITLE).step()
+  counter-question.update(0)
+  counter-title.step()
 
   // 收集章节的第一页和最后一页
   let current-page = counter(page).get()
   let final-page = counter(page).final()
-  let final-chapter = counter(TITLE).final().first()
+  let final-chapter = counter-title.final().first()
   chapter-pages-state.update(pre => {
     if pre != () and pre.last().len() == 1 {
       pre.last() += (current-page.first() - 1, ..final-page)
@@ -141,7 +144,7 @@
   if not answer-state.get() { return }
   let pre-mode = mode-state.get()
   let set-mode(_mode) = mode-state.update(_mode)
-  counter(EXPLAIN).update(0) // 解析题号从 1 开始重新编号
+  counter-explain.update(0) // 解析题号从 1 开始重新编号
   pagebreak(weak: true)
   set-mode(SOLUTION)
   title(name)
@@ -203,11 +206,11 @@
     }
 
     // 解析题号的格式化
-    #counter(EXPLAIN).step()
+    #counter-explain.step()
     #let _label = none
     #let _space = 0em
     #if show-number {
-      _label = context numbering("1.", ..counter(EXPLAIN).get())
+      _label = context numbering("1.", ..counter-explain.get())
       _space = .75em
     }
     #set par(leading: line-height) if line-height != auto
