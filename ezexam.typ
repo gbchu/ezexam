@@ -1,13 +1,13 @@
-#import "lib/const.typ": *
 #import "lib/state.typ": *
-#import "lib/counter.typ": *
+#import "lib/const.typ": EXAM, HANDOUTS, ODD_RIGHT_EVEN_LEFT
+#import "lib/counter.typ": counter-chapter, counter-question, counter-title
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman
-#import "lib/tools.typ": draft, page-restart, tag, text-figure, zh-arabic
+#import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/outline.typ": (
-  chapter, cover, exam-info, exam-type, notice, score, score-box, scoring-box, secret, solution, solution-block,
+  chapter, cover, draft, exam-info, exam-type, notice, score, score-box, scoring-box, secret, solution, solution-block,
   subject, title,
 )
 
@@ -69,7 +69,7 @@
   seal-line-supplement: "弥封线内不得答题",
   doc,
 ) = {
-  assert(mode in (HANDOUTS, EXAM, SOLUTION), message: "mode expected HANDOUTS, EXAM, SOLUTION")
+  assert(mode in (HANDOUTS, EXAM), message: "mode expected HANDOUTS, EXAM")
   mode-state.update(mode)
 
   assert(
@@ -83,6 +83,7 @@
     if mode != HANDOUTS {
       let prefix = context {
         subject-state.get()
+        import "lib/const.typ": SOLUTION
         if (mode-state.get() == SOLUTION) [参考答案] else [试题]
       }
       page-numbering = zh-arabic(prefix: prefix)
@@ -145,7 +146,7 @@
     )
   }
 
-  let is-odd-r-even-l = page-align == "odd-r-even-l"
+  let is-odd-r-even-l = page-align == ODD_RIGHT_EVEN_LEFT
   footer-is-separate = paper-columns == 2 and footer-is-separate and not is-odd-r-even-l
 
   let flipped = paper.flipped
@@ -252,7 +253,7 @@
 
   if heading-numbering == auto {
     heading-numbering = "1.1.1.1.1."
-    if mode in (EXAM, SOLUTION) {
+    if mode == EXAM {
       heading-numbering = (..item) => numbering("一、", ..item) + h(-0.3em)
       heading-hanging-indent = 2em
     }
@@ -276,14 +277,15 @@
     v(heading-top)
     text(heading-color, font: heading-font + text.font, it)
     v(heading-bottom)
-    if not resume { counter(QUESTION).update(0) }
+    if not resume { counter-question.update(0) }
   }
 
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)
   set table.cell(align: horizon + center, stroke: .5pt)
 
   show ref: set text(ref-color)
-  show figure.where(kind: "question"): it => {
+  import "lib/const.typ": QUESTION
+  show figure.where(kind: QUESTION): it => {
     set block(breakable: true)
     align(left, it)
   }
