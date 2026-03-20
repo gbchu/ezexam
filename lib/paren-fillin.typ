@@ -69,12 +69,11 @@
   }
 }
 
-#let PLACEHOLDER_DEFAULT-VALUE = "\u{25B2}" // 默认占位符为一个黑色实心三角形
 // 填空的横线
 #let fillin(
   body,
   len: 27.5pt,
-  placeholder: PLACEHOLDER_DEFAULT-VALUE,
+  placeholder: "▲",
   with-number: false,
   update: false,
   stroke: .45pt + luma(0),
@@ -98,7 +97,7 @@
 #let paren(
   body,
   justify: false,
-  placeholder: PLACEHOLDER_DEFAULT-VALUE,
+  placeholder: "▲",
   with-number: false,
   update: false,
 ) = [
