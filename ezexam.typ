@@ -151,7 +151,7 @@
 
   let flipped = paper.flipped
 
-  let _footer(label, label-is-current-total-format: false) = {
+  let _footer(label, label-is-current-total-format: false, is-outline-page: false) = {
     if label == none { return }
     let current = counter(page).get()
     let final = counter(page).final()
@@ -191,7 +191,7 @@
     }
 
     // 添加弥封线
-    if mode-state.get() == EXAM and seal != none {
+    if mode-state.get() == EXAM and seal != none and not is-outline-page {
       let current-page = current.first()
       let width = page.height
       if flipped {
@@ -237,7 +237,7 @@
     title: text(1.5em)[目#h(1em)录],
   )
   show outline: it => {
-    set page(footer: _footer(outline-page-numbering))
+    set page(footer: _footer(outline-page-numbering, is-outline-page: true))
     align(center, it)
     pagebreak(weak: true)
     counter(page).update(1)
