@@ -62,15 +62,10 @@
   if decoration == none {
     line(length: 100%, stroke: (dash: line-type))
   } else {
-    assert(
-      decoration in ("text", "circle"),
-      message: "seal-line-decoration expected \"text\", \"circle\" ",
-    )
     let data = (
       "circle": 4 * (circle(width: 1.25em, stroke: .5pt),),
       "text": ("弥", "封", "线", none),
     )
-
     let seal-line = (4 * (line(length: 100%, stroke: (dash: line-type)),))
       .zip(data.at(decoration))
       .flatten()
@@ -165,4 +160,3 @@
   page-restart-state.update(chapter-index + 1)
   counter(page).update(num)
 }
-

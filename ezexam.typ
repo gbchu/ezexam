@@ -129,6 +129,10 @@
 
   let seal = if mode == EXAM and show-seal-line {
     import "lib/tools.typ": _create-seal
+    assert(
+      seal-line-decoration in ("text", "circle", none),
+      message: "seal-line-decoration expected \"text\", \"circle\", none",
+    )
     let base-seal-line = (
       line-type: seal-line-type,
       decoration: seal-line-decoration,
