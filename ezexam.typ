@@ -302,7 +302,7 @@
   let pi = if "TeX Gyre Termes Math" in font [π] else [\u{03C0}]
   show "\u{03C0}": pi
   show "\u{2225}": "//"
-  // 空集符号更好看
+  // 空集符号
   show "\u{2205}": set text(font: "New Computer Modern Math", features: ("cv01",))
 
   // 中文着重号
