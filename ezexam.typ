@@ -1,5 +1,5 @@
 #import "lib/state.typ": *
-#import "lib/const.typ": EXAM, HANDOUTS, ODD_RIGHT_EVEN_LEFT
+#import "lib/const.typ": EXAM, HANDOUTS
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman
 #import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
@@ -146,7 +146,7 @@
     )
   }
 
-  let is-odd-r-even-l = page-align == ODD_RIGHT_EVEN_LEFT
+  let is-odd-r-even-l = page-align == "odd-r-even-l"
   footer-is-separate = paper-columns == 2 and footer-is-separate and not is-odd-r-even-l
 
   let flipped = paper.flipped
