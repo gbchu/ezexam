@@ -48,6 +48,7 @@ This template can help Chinese university, primary, middle and high school teach
   + 新增参数 `supplement` ，该参数设置引用的前缀，默认为 `none`
 + `setup` 方法新增参数 `ref-color` ，该参数设置引用的颜色
 + 导出章节，标题，题号计数器
++ 修复 `EXAM` 下，不显示答案时，目录页显示弥封线的 bug
 + 优化代码
 
 ### 0 . 2 . 9
