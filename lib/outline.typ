@@ -2,11 +2,11 @@
 #import "const.typ": EXAM, HANDOUTS, SOLUTION
 #import "state.typ": answer-state, chapter-pages-state, mode-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
-#import "tools.typ": _trim-content-start-parbreak, _create-seal
+#import "tools.typ": _create-seal, _trim-content-start-parbreak
 
 // 封面
 #let cover(
-  title: EXAM,
+  title: "ezexam",
   subtitle: none,
   author: none,
   date: auto,
