@@ -298,7 +298,7 @@
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
   let space = h(.25em, weak: true)
   show math.equation: it => space + math.display(text(font: font, it)) + space
-  //  π 在 "TeX Gyre Termes Math" 下显示的样式；默认的丑
+  //  π 在 "TeX Gyre Termes Math" 下显示的样式
   let pi = if "TeX Gyre Termes Math" in font [π] else [\u{03C0}]
   show "\u{03C0}": pi
   show "\u{2225}": "//"
