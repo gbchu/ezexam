@@ -44,14 +44,13 @@
   bottom: 0pt,
 ) = context {
   let mode = mode-state.get()
-  let _wieght = if weight == auto {
-    if mode == EXAM { 400 } else { 700 }
-  } else { weight }
   v(top)
   align(
     position,
     text(
-      weight: _wieght,
+      weight: if weight == auto {
+        if mode == EXAM { 400 } else { 700 }
+      } else { weight },
       font: if font == auto { text.font } else { font },
       if size == auto {
         if mode == HANDOUTS { 20pt } else { 16pt }
