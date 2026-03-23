@@ -45,8 +45,8 @@
 ) = context {
   let mode = mode-state.get()
   let _wieght = if weight == auto {
-    if mode == EXAM { 400 } else { 400 }
-  }
+    if mode == EXAM { 400 } else { 700 }
+  } else { weight }
   v(top)
   align(
     position,
