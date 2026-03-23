@@ -36,6 +36,9 @@
   enum-numbering: "（1.i.a）",
   enum-spacing: 2em,
   enum-indent: 0pt,
+  list-marker: ([•], [‣], [–]),
+  list-spacing: auto,
+  list-indent: 0pt,
   ref-color: rgb("#0a6e96"),
   resume: true,
   watermark: none,
@@ -284,6 +287,7 @@
   }
 
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)
+  set list(marker: list-marker, spacing: enum-spacing, indent: enum-indent)
   set table.cell(align: horizon + center, stroke: .5pt)
   set underline(offset: .25em)
 
