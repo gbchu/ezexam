@@ -285,6 +285,7 @@
 
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)
   set table.cell(align: horizon + center, stroke: .5pt)
+  set underline(offset: .25em)
 
   show ref: set text(ref-color)
   import "lib/const.typ": QUESTION
@@ -298,7 +299,7 @@
   let space = h(.25em, weak: true)
   show math.equation: it => space + math.display(text(font: font, it)) + space
   //  π 在 "TeX Gyre Termes Math" 下显示的样式
-  let pi = if "TeX Gyre Termes Math" in font [π] else [\u{03C0}]
+  let pi = if font == roman [π] else [\u{03C0}]
   show "\u{03C0}": pi
   show "\u{2225}": "//"
   // 空集符号
