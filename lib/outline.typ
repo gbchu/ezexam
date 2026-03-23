@@ -36,7 +36,7 @@
 #let title(
   body,
   size: auto,
-  weight: 400,
+  weight: auto,
   font: auto,
   color: black,
   position: center,
@@ -44,11 +44,14 @@
   bottom: 0pt,
 ) = context {
   let mode = mode-state.get()
+  let _wieght = if weight == auto {
+    if mode == EXAM { 400 } else { 400 }
+  }
   v(top)
   align(
     position,
     text(
-      weight: weight + if mode != EXAM { 300 },
+      weight: _wieght,
       font: if font == auto { text.font } else { font },
       if size == auto {
         if mode == HANDOUTS { 20pt } else { 16pt }
