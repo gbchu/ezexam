@@ -80,13 +80,12 @@
   // 为页码添加在不同模式下的默认值
   if page-numbering == auto {
     page-numbering = "1 / 1"
-    if mode != HANDOUTS {
-      let prefix = context {
+    if mode == EXAM {
+      page-numbering = zh-arabic(prefix: context {
         subject-state.get()
         import "lib/const.typ": SOLUTION
         if (mode-state.get() == SOLUTION) [参考答案] else [试题]
-      }
-      page-numbering = zh-arabic(prefix: prefix)
+      })
     }
   }
 
