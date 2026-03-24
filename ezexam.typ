@@ -300,8 +300,9 @@
 
   set math.cases(gap: 1em)
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
+  show math.equation: set text(font: font)
   let space = h(.25em, weak: true)
-  show math.equation: it => space + math.display(text(font: font, it)) + space
+  show math.equation.where(block: false): it => space + math.display(it) + space
   //  π 在 "TeX Gyre Termes Math" 下显示的样式
   let pi = if font == roman [π] else [\u{03C0}]
   show "\u{03C0}": pi
