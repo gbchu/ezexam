@@ -46,9 +46,16 @@ This template can help Chinese university, primary, middle and high school teach
 + `question` 方法，添加新特性，该特性可以让题目被引用，默认生成的 label 为当前章节-题号的形式（[#5](https://github.com/gbchu/ezexam/issues/5)）
   + 新增参数 `ref-on` ，该参数设置是否开启自动生成可被引用的 label，默认为 `false`
   + 新增参数 `supplement` ，该参数设置引用的前缀，默认为 `none`
-+ `setup` 方法新增参数 `ref-color` ，该参数设置引用的颜色
++ `setup` 方法
+  + 新增参数 `ref-color` ，该参数设置引用的颜色
+  + 新增参数 `list-marker` ，该参数设置列表前标记样式
+  + 新增参数 `list-spacing` ，该参数设置列表项之间的间距
+  + 新增参数 `list-indent` ，该参数设置列表项的缩进
 + 导出章节，标题，题号计数器
 + 修复 `EXAM` 下，不显示答案时，目录页显示弥封线的 bug
++ 修复下划线错乱的 bug （[#6](https://github.com/gbchu/ezexam/issues/6)）
++ 修复行间公式上下间距过大的问题 （[#6](https://github.com/gbchu/ezexam/issues/6)）
++ 添加对问题题干，选项内容以行间公式开头时的处理
 + 优化代码
 
 ### 0 . 2 . 9
