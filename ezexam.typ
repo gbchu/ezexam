@@ -287,7 +287,7 @@
   }
 
   set enum(numbering: enum-numbering, spacing: enum-spacing, indent: enum-indent)
-  set list(marker: list-marker, spacing: enum-spacing, indent: enum-indent)
+  set list(marker: list-marker, spacing: list-spacing, indent: list-indent)
   set table.cell(align: horizon + center, stroke: .5pt)
   set underline(offset: .25em)
 
