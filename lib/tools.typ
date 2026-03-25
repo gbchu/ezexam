@@ -4,33 +4,39 @@
 #import "state.typ": chapter-pages-state, mode-state, page-restart-state
 
 #let _SPECIAL-CHAR = "《（【"
-#let _MATH = "math"
+#let _INLINE_MATH = "inline-math"
+#let _BLOCK_MATH = "block-math"
 #let _CHAR = "char"
-#let _PAR_BREAK = "parbreak"
 
-#let _content-starts-with(body) = {
+#let _is_empty(body) = body in ([ ], parbreak(), [], none)
+
+// 去除content开头的空行，换行
+#let _trim-content(body) = {
+  if _is_empty(body) { return }
   if body.has("children") {
     let children = body.children
-    if children.len() == 0 { return }
-    body = children.first()
-    // 如果有类似 [   $1$] 这样的情况时，判断下一个节点 $1$，即可以忽略前面的空。
-    if body == [ ] { body = children.at(1) }
+    if _is_empty(children.first()) { return children.slice(1).join() }
   }
+  body
+}
 
-  if body.func() == math.equation { return _MATH }
+#let _content-starts-with(body) = {
+  if _is_empty(body) { return }
+  if body.has("children") { body = body.children.first() }
+  if body.func() == math.equation {
+    if body.block { return _BLOCK_MATH }
+    return _INLINE_MATH
+  }
   if body.has("text") and body.text.first() in _SPECIAL-CHAR { return _CHAR }
-  if body == parbreak() { _PAR_BREAK }
 }
 
 // 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
-#let _content-start-space(body) = {
+#let _modify-space(body) = {
   let result = _content-starts-with(body)
-  if result == _MATH { .25em } else if result == _CHAR { .4em } else { 0em }
-}
-
-#let _trim-content-start-parbreak(body) = {
-  if _content-starts-with(body) != _PAR_BREAK or body == parbreak() { return body }
-  body.children.slice(1).join()
+  if result == _INLINE_MATH { return .25em }
+  if result == _CHAR { return .4em }
+  if result == _BLOCK_MATH { return }
+  0em
 }
 
 // 生成弥封线
