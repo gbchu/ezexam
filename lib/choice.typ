@@ -1,10 +1,12 @@
-#import "tools.typ": _content-start-space
+#import "tools.typ": _modify-space, _trim-content
 
 #let _CHOICE_MIN_GAP = .15in
 
 #let _format-choice(choice, label, indent, spacing, label-position) = {
   // 为了解决数学公式在左侧加间距的问题
-  spacing -= _content-start-space(choice)
+  let modeify-space = _modify-space(choice)
+  if modeify-space == none { panic("Block-level mathematical formulas are not allowed at the beginning!") }
+  spacing -= modeify-space
   if choice.func() not in (image, table) {
     return par(
       hanging-indent: indent + spacing + measure(label).width,
@@ -65,7 +67,7 @@
     let max-width = 0pt
     for index in range(choice-number) {
       choices-arr.at(index) = _format-choice(
-        [#choices-arr.at(index)],
+        _trim-content[#choices-arr.at(index)],
         numbering(label, index + 1),
         indent,
         spacing,
