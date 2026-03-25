@@ -295,7 +295,7 @@
   import "lib/const.typ": QUESTION
   show figure.where(kind: QUESTION): it => {
     set block(breakable: true)
-    align(left, it)
+    align(left, it.body)
   }
 
   set math.cases(gap: 1em)
