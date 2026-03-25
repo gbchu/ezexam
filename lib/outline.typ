@@ -2,7 +2,7 @@
 #import "const.typ": EXAM, HANDOUTS, SOLUTION
 #import "state.typ": answer-state, chapter-pages-state, mode-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
-#import "tools.typ": _create-seal, _trim-content-start-parbreak
+#import "tools.typ": _create-seal, _trim-content
 
 // 封面
 #let cover(
@@ -221,7 +221,7 @@
       separator: h(_space, weak: true),
       (
         _label,
-        text(color, _trim-content-start-parbreak(body)),
+        text(color, _trim-content(body)),
       ),
     )
   ]
