@@ -49,7 +49,7 @@
   body,
   indent: 0em,
   first-line-indent: 0em,
-  hanging-indent: auto,
+  hanging-indent: 2em,
   label: auto,
   label-color: black,
   label-weight: 400,
@@ -65,8 +65,6 @@
   supplement: none,
 ) = {
   set par(leading: line-height) if line-height != auto
-  if hanging-indent == auto { hanging-indent = 2em }
-
   let _label = _format-label(
     label,
     label-color,
