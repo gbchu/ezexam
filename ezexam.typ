@@ -260,7 +260,7 @@
   if heading-numbering == auto {
     heading-numbering = "1.1.1.1.1."
     if mode == EXAM {
-      heading-numbering = (..item) => numbering("一、", ..item) + h(-0.3em)
+      heading-numbering = (..item) => numbering("一、", ..item) + h(-.3em)
       heading-hanging-indent = 2em
     }
   }
