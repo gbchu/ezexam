@@ -274,7 +274,7 @@
   // 试卷模式下，书签只显示章节
   show <chapter>: set heading(bookmarked: true)
   if h1-size == auto {
-    h1-size = 10.5pt
+    h1-size = font-size
     if mode == HANDOUTS { h1-size = 1em }
   }
   show heading: it => {
