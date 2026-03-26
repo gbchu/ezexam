@@ -55,6 +55,7 @@ This template can help Chinese university, primary, middle and high school teach
 + 修复 `EXAM` 下，不显示答案时，目录页显示弥封线的 bug
 + 修复从 0.2.8 开始更换字体导致的下划线错乱的 bug （[#6](https://github.com/gbchu/ezexam/issues/6)）
 + 修复行间公式上下间距过大的问题 （[#6](https://github.com/gbchu/ezexam/issues/6)）
++ 修复在 `question` 方法中，手动换行时，新的行和第一行对不齐的bug （[#6](https://github.com/gbchu/ezexam/issues/6)）
 + 添加对问题题干，选项内容以行间公式开头时的处理
 + 优化代码
 
