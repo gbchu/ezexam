@@ -34,7 +34,7 @@
 #let _modify-space(body) = {
   let result = _content-starts-with(body)
   if result == _INLINE_MATH { return .25em }
-  if result == _CHAR { return .4em }
+  if result == _CHAR { return .45em }
   if result == _BLOCK_MATH { return }
   0em
 }
