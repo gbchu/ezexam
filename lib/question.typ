@@ -56,23 +56,23 @@
   with-heading-label: false,
   points: none,
   points-separate: true,
-  points-prefix: h(-0.45em, weak: true) + "（",
+  points-prefix: h(-.45em, weak: true) + "（",
   points-suffix: "分）",
   line-height: auto,
   top: 0pt,
   bottom: 0pt,
   ref-on: false,
   supplement: none,
-) = context {
+) = {
   set par(leading: line-height) if line-height != auto
+  if hanging-indent == auto { hanging-indent = 2em }
+
   let _label = _format-label(
     label,
     label-color,
     label-weight,
     with-heading-label,
   )
-  let _hanging-indent = hanging-indent
-  if hanging-indent == auto { _hanging-indent = measure(_label).width + 1em }
 
   v(top)
   [#figure(supplement: supplement, kind: QUESTION)[
@@ -81,8 +81,8 @@
       #if modeify-space == none { panic("Block-level mathematical formulas are not allowed at the beginning!") }
       #terms(
         indent: indent,
-        hanging-indent: _hanging-indent,
-        separator: h(.9em, weak: true),
+        hanging-indent: hanging-indent,
+        separator: h(1em, weak: true),
         (
           _label,
           _format-points(
