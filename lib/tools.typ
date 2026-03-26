@@ -8,11 +8,11 @@
 #let _BLOCK_MATH = "block-math"
 #let _CHAR = "char"
 
-#let _is_empty(body) = body in ([ ], parbreak(), [], none)
+#let _is_empty(body) = body in ([ ], parbreak(), [])
 
 // 去除content开头的空行，换行
 #let _trim-content(body) = {
-  if _is_empty(body) { return }
+  if _is_empty(body) { return body }
   if body.has("children") {
     let children = body.children
     if _is_empty(children.first()) { return children.slice(1).join() }
@@ -37,6 +37,26 @@
   if result == _CHAR { return .45em }
   if result == _BLOCK_MATH { return }
   0em
+}
+
+// 去除数学公式在 question 方法中，换行后以数学公式开头时，最左侧加间距的问题
+// typst留下的坑
+#let _trim-math-start-spacing(body) = {
+  body = _trim-content(body)
+  if not body.has("children") { return body }
+
+  let children = body.children
+  if parbreak() not in children { return body }
+
+  for (index, child) in children.enumerate() {
+    index += 1
+    if index == children.len() { break }
+    if child == parbreak() and children.at(index).func() == math.equation {
+      children.at(index) = h(-.25em) + children.at(index)
+    }
+  }
+
+  children.join()
 }
 
 // 生成弥封线
