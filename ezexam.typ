@@ -307,7 +307,7 @@
   //  π 在 "TeX Gyre Termes Math" 下显示的样式
   let pi = if font == roman [π] else [\u{03C0}]
   show "\u{03C0}": pi
-  show "\u{2225}": "//"
+  show "\u{2225}": [#space\/\/#space]
   // 空集符号
   show "\u{2205}": set text(font: "New Computer Modern Math", features: ("cv01",))
 
@@ -325,3 +325,4 @@
 
   doc
 }
+
