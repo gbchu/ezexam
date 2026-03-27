@@ -3,9 +3,6 @@
 #import "counter.typ": counter-title
 #import "state.typ": chapter-pages-state, mode-state, page-restart-state
 
-#let _SPECIAL-CHAR = "《（【"
-#let _SPECIAL-CHAR-SPACE = .45em
-
 #let _is_empty(body) = body in ([ ], parbreak(), [])
 
 // 去除content开头的空行，换行
@@ -18,6 +15,8 @@
   body
 }
 
+#let _SPECIAL-CHAR = "《（【"
+#let _SPECIAL-CHAR-SPACE = .45em
 // 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
 #let _modify-space(body) = {
   if _is_empty(body) { return }
@@ -38,16 +37,7 @@
 
   let children = body.children
   if parbreak() not in children { return body }
-
-  for (index, child) in children.enumerate() {
-    index += 1
-    if index == children.len() { break }
-    if child == parbreak() and children.at(index).func() == math.equation {
-      children.at(index) = h(-INLINE-MATH-SPACE) + children.at(index)
-    }
-  }
-
-  children.join()
+  children.map(child => if child == parbreak() [ \ ] else { child }).join()
 }
 
 // 生成弥封线
