@@ -1,12 +1,10 @@
-#import "const.typ": EXAM
+#import "const.typ": EXAM, INLINE-MATH-SPACE
 #import "config.typ": heiti
 #import "counter.typ": counter-title
 #import "state.typ": chapter-pages-state, mode-state, page-restart-state
 
 #let _SPECIAL-CHAR = "《（【"
-#let _INLINE_MATH = "inline-math"
-#let _BLOCK_MATH = "block-math"
-#let _CHAR = "char"
+#let _SPECIAL-CHAR-SPACE = .45em
 
 #let _is_empty(body) = body in ([ ], parbreak(), [])
 
@@ -20,22 +18,15 @@
   body
 }
 
-#let _content-starts-with(body) = {
+// 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
+#let _modify-space(body) = {
   if _is_empty(body) { return }
   if body.has("children") { body = body.children.first() }
   if body.func() == math.equation {
-    if body.block { return _BLOCK_MATH }
-    return _INLINE_MATH
+    if body.block { return }
+    return INLINE-MATH-SPACE
   }
-  if body.has("text") and body.text.first() in _SPECIAL-CHAR { return _CHAR }
-}
-
-// 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
-#let _modify-space(body) = {
-  let result = _content-starts-with(body)
-  if result == _INLINE_MATH { return .25em }
-  if result == _CHAR { return .45em }
-  if result == _BLOCK_MATH { return }
+  if body.has("text") and body.text.first() in _SPECIAL-CHAR { return _SPECIAL-CHAR-SPACE }
   0em
 }
 
@@ -52,7 +43,7 @@
     index += 1
     if index == children.len() { break }
     if child == parbreak() and children.at(index).func() == math.equation {
-      children.at(index) = h(-.25em) + children.at(index)
+      children.at(index) = h(-INLINE-MATH-SPACE) + children.at(index)
     }
   }
 
@@ -115,7 +106,7 @@
   color: blue,
   font: auto,
   weight: 400,
-  prefix: h(-.4em, weak: true) + "【",
+  prefix: h(-_SPECIAL-CHAR-SPACE, weak: true) + "【",
   suffix: "】",
 ) = context {
   let _font = if font == auto { heiti + text.font } else { font }
