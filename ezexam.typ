@@ -304,15 +304,13 @@
   import "lib/const.typ": INLINE-MATH-SPACE
   let space = h(INLINE-MATH-SPACE, weak: true)
   show math.equation.where(block: false): it => space + math.display(it) + space
-  //  π 在 "TeX Gyre Termes Math" 下显示的样式
-  let pi = if font == roman [π] else [\u{03C0}]
-  show "\u{03C0}": pi
-  show "\u{2225}": [#space\/\/#space]
-  // 空集符号
-  show "\u{2205}": set text(font: "New Computer Modern Math", features: ("cv01",))
+  let pi = if font == roman { "" + [_π_] } else [\u{03c0}]
+  show "π": pi
+  show "∥": [#space\/\/#space]
+  show "∅": set text(font: "New Computer Modern Math", features: ("cv01",))
 
   // 中文着重号
-  let han-zi = regex("\p{Hani}")
+  let han-zi = regex("\p{Han}")
   show strong: content => {
     show han-zi: it => box(place(text("·", .8em), dx: .45em, dy: .75em) + it)
     content.body
