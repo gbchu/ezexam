@@ -306,7 +306,7 @@
   show math.equation.where(block: false): it => space + math.display(it) + space
   let pi = if font == roman { "" + [_π_] } else [\u{03c0}]
   show "π": pi
-  show "∥": [#space\/\/#space]
+  show "∥": [#space\//#space]
   show "∅": set text(font: "New Computer Modern Math", features: ("cv01",))
 
   // 中文着重号
