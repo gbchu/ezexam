@@ -46,15 +46,16 @@
   line-type: "dashed",
   decoration: none,
   supplement: none,
-  par-spacing: 10pt,
-) = {
-  assert(type(info) == dictionary, message: "expected dictionary, found " + str(type(info)))
-  set par(spacing: par-spacing)
-  set text(font: heiti, 12pt)
-  set align(center)
-  set grid(columns: 2, align: horizon, gutter: .5em)
-  if supplement != none { text(tracking: .8in, supplement) }
-  grid(
+  rotate-deg: 0deg,
+  rotate-origin: center + horizon,
+) = rotate(rotate-deg, origin: rotate-origin)[
+  #assert(type(info) == dictionary, message: "expected dictionary, found " + str(type(info)))
+  #set par(spacing: 10pt)
+  #set text(font: heiti, 12pt)
+  #set align(center)
+  #set grid(columns: 2, align: horizon, gutter: .5em)
+  #if supplement != none { text(tracking: .8in, supplement) }
+  #grid(
     columns: if info.len() == 0 { 1 } else { info.len() },
     gutter: 1em,
     ..for (key, value) in info {
@@ -66,7 +67,7 @@
       )
     }
   )
-  if decoration == none {
+  #if decoration == none {
     line(length: 100%, stroke: (dash: line-type))
   } else {
     let data = (
@@ -83,7 +84,7 @@
       ..seal-line,
     )
   }
-}
+]
 
 // 一种页码格式: "第x页（共xx页）
 #let zh-arabic(prefix: none, suffix: none) = (..nums) => {
@@ -100,8 +101,7 @@
   suffix: "】",
 ) = context {
   let _font = if font == auto { heiti + text.font } else { font }
-  text(font: _font, weight: weight, color)[#prefix#body#suffix]
-  h(0em, weak: true)
+  text(font: _font, weight: weight, color)[#prefix#body#suffix#h(0em, weak: true)]
 }
 
 // 图文混排
