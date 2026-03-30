@@ -53,13 +53,13 @@ This template can help Chinese university, primary, middle and high school teach
   + 新增参数 `list-indent` ，该参数设置列表项的缩进
   + 新增参数 `seal-line-scope` ，该参数设置弥封线的作用域
 + 导出章节，标题，题号计数器
++ 添加对问题题干，选项内容以行间公式开头时的处理
 + 修复 `EXAM` 下，不显示答案时，目录页显示弥封线的 bug
 + 修复从 0.2.8 开始更换字体导致的下划线错乱的 bug （[#6](https://github.com/gbchu/ezexam/issues/6)）
 + 修复行间公式上下间距过大的问题 （[#6](https://github.com/gbchu/ezexam/issues/6)）
 + 修复在 `question` 方法中，手动换行时，新的行和第一行对不齐的 bug （[#6](https://github.com/gbchu/ezexam/issues/6)）
 + 修复平行线在左侧为数字时，数字和平行线间没有间距的 bug
 + 修复 pi 在罗马字体下显示不正确的 bug 及其左侧为数字时，数字和 pi 之间有间距的 bug
-+ 添加对问题题干，选项内容以行间公式开头时的处理
 + 优化代码
 
 ### 0 . 2 . 9
