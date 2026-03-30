@@ -75,7 +75,7 @@
   [#figure(supplement: supplement, kind: QUESTION)[
       #let body = _trim-math-start-spacing[#body]
       #let modeify-space = _modify-space(body)
-      #if modeify-space == none { panic("Block-level mathematical formulas are not allowed at the beginning!") }
+      #if modeify-space == none { panic("Block-level formulas are not allowed at the beginning!") }
       #terms(
         indent: indent,
         hanging-indent: hanging-indent,
