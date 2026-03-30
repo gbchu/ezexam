@@ -23,7 +23,7 @@
     weight: label-weight,
     numbering(_label, ..arr),
   )
-
+  if mode == HANDOUTS { return result }
   box(width: 1em, align(right, result))
 })
 
@@ -48,7 +48,7 @@
   body,
   indent: 0em,
   first-line-indent: 0em,
-  hanging-indent: 2em,
+  hanging-indent: auto,
   label: auto,
   label-color: black,
   label-weight: 400,
@@ -63,13 +63,14 @@
   ref-on: false,
   supplement: none,
 ) = {
-  set par(leading: line-height) if line-height != auto
   let _label = _format-label(
     label,
     label-color,
     label-weight,
     with-heading-label,
   )
+  let _hanging-indent = if hanging-indent == auto { measure(_label).width + 1em } else { hanging-indent }
+  set par(leading: line-height) if line-height != auto
 
   v(top)
   [#figure(supplement: supplement, kind: QUESTION)[
@@ -78,7 +79,7 @@
       #if modeify-space == none { panic("Block-level formulas are not allowed at the beginning!") }
       #terms(
         indent: indent,
-        hanging-indent: hanging-indent,
+        hanging-indent: _hanging-indent,
         separator: h(1em, weak: true),
         (
           _label,
