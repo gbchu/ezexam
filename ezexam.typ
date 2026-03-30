@@ -130,25 +130,22 @@
   )
 
   let seal = if mode == EXAM and show-seal-line {
-    import "lib/tools.typ": _create-seal
     assert(
       seal-line-decoration in ("text", "circle", none),
       message: "seal-line-decoration expected \"text\", \"circle\", none",
     )
-    let base-seal-line = (
+    import "lib/tools.typ": _create-seal
+    _create-seal = _create-seal.with(
       line-type: seal-line-type,
       decoration: seal-line-decoration,
       supplement: seal-line-supplement,
+      rotate-deg: -90deg,
+      rotate-origin: left + bottom,
     )
     (
-      rotate(-90deg, origin: left + bottom, _create-seal(
-        ..base-seal-line,
-        info: seal-line-student-info,
-      )),
-      rotate(90deg, origin: right + bottom, _create-seal(
-        ..base-seal-line,
-        par-spacing: 20pt,
-      )),
+      first: _create-seal(info: seal-line-student-info),
+      left: _create-seal(),
+      right: _create-seal(rotate-deg: 90deg, rotate-origin: right + bottom),
     )
   }
 
@@ -212,14 +209,14 @@
         block(width: width - margin * 2)[
           //当前章节第一页弥封线
           #if current-page == first {
-            seal.first()
+            seal.first
             return
           }
           // 章节最后页的弥封线
-          #if current-page + if footer-is-separate { paper.columns - 1 } == last {
+           #if current-page + if footer-is-separate { paper.columns - 1 } == last {
             move(
               dx: if flipped { page.height } else { page.width } - margin * 2 - 100% + 2em,
-              seal.last(),
+              seal.right,
             )
           }
         ],
