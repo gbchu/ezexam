@@ -60,7 +60,6 @@ This template can help Chinese university, primary, middle and high school teach
 + 修复在 `question` 方法中，手动换行时，新的行和第一行对不齐的 bug （[#6](https://github.com/gbchu/ezexam/issues/6)）
 + 修复平行线在左侧为数字时，数字和平行线间没有间距的 bug
 + 修复 pi 在罗马字体下显示不正确的 bug 及其左侧为数字时，数字和 pi 之间有间距的 bug
-+ 优化讲义模式下题号的显示效果
 
 ### 0 . 2 . 9
 + 修复 `cover` 方法，手动添加日期时不显示的 bug
