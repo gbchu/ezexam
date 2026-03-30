@@ -1,4 +1,4 @@
-#import "const.typ": EXAM, INLINE-MATH-SPACE
+#import "const.typ": EXAM, INLINE_MATH_SPACE
 #import "config.typ": heiti
 #import "counter.typ": counter-title
 #import "state.typ": chapter-pages-state, mode-state, page-restart-state
@@ -23,7 +23,7 @@
   if body.has("children") { body = body.children.first() }
   if body.func() == math.equation {
     if body.block { return }
-    return INLINE-MATH-SPACE
+    return INLINE_MATH_SPACE
   }
   if body.has("text") and body.text.first() in _SPECIAL-CHAR { return _SPECIAL-CHAR-SPACE }
   0em

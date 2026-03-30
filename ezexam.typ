@@ -320,8 +320,8 @@
   set math.cases(gap: 1em)
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
   show math.equation: set text(font: font)
-  import "lib/const.typ": INLINE-MATH-SPACE
-  let space = h(INLINE-MATH-SPACE, weak: true)
+  import "lib/const.typ": INLINE_MATH_SPACE
+  let space = h(INLINE_MATH_SPACE, weak: true)
   show math.equation.where(block: false): it => space + math.display(it) + space
   let pi = if font == roman { "" + [_π_] } else [\u{03c0}]
   show "π": pi
