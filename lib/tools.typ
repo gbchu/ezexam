@@ -105,8 +105,8 @@
 }
 
 // 图文混排
-#let _TEXT-LEFT-FIGURE-RIGHT = "tf"
-#let _FIGURE-LEFT-TEXT-RIGHT = "ft"
+#let _TEXT_LEFT_FIGURE_RIGHT = "tf"
+#let _FIGURE_LEFT_TEXT_RIGHT = "ft"
 #let text-figure(
   figure: none,
   figure-x: 0pt,
@@ -114,12 +114,12 @@
   top: 0pt,
   bottom: 0pt,
   gap: 0pt,
-  style: _TEXT-LEFT-FIGURE-RIGHT,
+  style: _TEXT_LEFT_FIGURE_RIGHT,
   text,
 ) = context {
   assert(
-    style in (_TEXT-LEFT-FIGURE-RIGHT, _FIGURE-LEFT-TEXT-RIGHT),
-    message: "style expected" + _TEXT-LEFT-FIGURE-RIGHT + "or" + _FIGURE-LEFT-TEXT-RIGHT,
+    style in (_TEXT_LEFT_FIGURE_RIGHT, _FIGURE_LEFT_TEXT_RIGHT),
+    message: "style expected " + _TEXT_LEFT_FIGURE_RIGHT + ", " + _FIGURE_LEFT_TEXT_RIGHT,
   )
   let body = (
     text, // [ \ ] 是为了在当前页还有一行时，换页
@@ -128,7 +128,7 @@
 
   let _columns = (1fr, measure(figure).width)
   let _gap = -figure-x + gap
-  if style == _FIGURE-LEFT-TEXT-RIGHT {
+  if style == _FIGURE_LEFT_TEXT_RIGHT {
     body = body.rev()
     _columns = _columns.rev()
     _gap = figure-x + gap
