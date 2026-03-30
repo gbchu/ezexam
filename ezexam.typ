@@ -1,5 +1,5 @@
 #import "lib/state.typ": *
-#import "lib/const.typ": EXAM, HANDOUTS
+#import "lib/const.typ": EVERY_PAGE, EXAM, FIRST_PAGE, HANDOUTS, ODD_PAGE
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman
 #import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
@@ -70,9 +70,10 @@
   seal-line-type: "dashed",
   seal-line-decoration: none,
   seal-line-supplement: "弥封线内不得答题",
+  seal-line-scope: EVERY_PAGE,
   doc,
 ) = {
-  assert(mode in (HANDOUTS, EXAM), message: "mode expected HANDOUTS, EXAM")
+  assert(mode in (HANDOUTS, EXAM), message: "mode expected " + HANDOUTS + ", " + EXAM)
   mode-state.update(mode)
 
   assert(
@@ -129,10 +130,14 @@
       )
   )
 
-  let seal = if mode == EXAM and show-seal-line {
+  let seal-line = if mode == EXAM and show-seal-line {
+    assert(
+      seal-line-scope in (EVERY_PAGE, FIRST_PAGE, ODD_PAGE),
+      message: "seal-line-scope expected " + EVERY_PAGE + ", " + FIRST_PAGE + ", " + ODD_PAGE,
+    )
     assert(
       seal-line-decoration in ("text", "circle", none),
-      message: "seal-line-decoration expected \"text\", \"circle\", none",
+      message: "seal-line-decoration expected 'text', 'circle', none",
     )
     import "lib/tools.typ": _create-seal
     _create-seal = _create-seal.with(
@@ -142,11 +147,14 @@
       rotate-deg: -90deg,
       rotate-origin: left + bottom,
     )
-    (
-      first: _create-seal(info: seal-line-student-info),
-      left: _create-seal(),
-      right: _create-seal(rotate-deg: 90deg, rotate-origin: right + bottom),
-    )
+    let seal = (first: _create-seal(info: seal-line-student-info))
+    if seal-line-scope != FIRST_PAGE {
+      seal.insert("left", _create-seal())
+      if seal-line-scope == EVERY_PAGE {
+        seal.insert("right", _create-seal(rotate-deg: 90deg, rotate-origin: right + bottom))
+      }
+    }
+    seal
   }
 
   let is-odd-r-even-l = page-align == "odd-r-even-l"
@@ -194,7 +202,7 @@
     }
 
     // 添加弥封线
-    if mode-state.get() == EXAM and seal != none and not is-outline-page {
+    if mode-state.get() == EXAM and seal-line != none and not is-outline-page {
       let current-page = current.first()
       let width = page.height
       if flipped {
@@ -209,16 +217,30 @@
         block(width: width - margin * 2)[
           //当前章节第一页弥封线
           #if current-page == first {
-            seal.first
+            seal-line.first
             return
           }
-          // 章节最后页的弥封线
-           #if current-page + if footer-is-separate { paper.columns - 1 } == last {
-            move(
-              dx: if flipped { page.height } else { page.width } - margin * 2 - 100% + 2em,
-              seal.right,
-            )
+
+          #if seal-line-scope == FIRST_PAGE { return }
+
+          // 其它页码是否加弥封线的算法
+          #(current-page -= first - 1) // 在组多套试卷时，重新把页码按照1，2，3，4... 重新计算
+          // 分页时，一页纸页码增加 2
+          #if flipped and footer-is-separate {
+            current-page = calc.ceil(current-page / 2)
           }
+
+          #if calc.odd(current-page) {
+            seal-line.left
+            return
+          }
+
+          #if seal-line-scope == ODD_PAGE { return }
+
+          #move(
+            dx: if flipped { page.height } else { page.width } - margin * 2 - 100% + 2em,
+            seal-line.right,
+          )
         ],
       )
     }
