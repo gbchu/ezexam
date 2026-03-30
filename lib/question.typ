@@ -24,7 +24,6 @@
     numbering(_label, ..arr),
   )
 
-  if mode == HANDOUTS { return result }
   box(width: 1em, align(right, result))
 })
 
