@@ -19,7 +19,7 @@
   "Noto Serif CJK SC",
 )
 
-#let _heiti-regex = regex("[^a-zA-Z0-9，。、；：？！\"\"''（）【】《》〈〉…—·]")
+#let _heiti-regex = regex("[^a-zA-Z0-9，。、；：？！\"\"''（）《》〈〉…—·]")
 #let heiti = (
   (name: "SimHei", covers: _heiti-regex),
   (name: "Noto Sans CJK SC", covers: _heiti-regex),
