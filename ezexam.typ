@@ -165,18 +165,15 @@
   let _footer(label, label-is-current-total-format: false, is-outline-page: false) = {
     if label == none { return }
     let current = counter(page).get()
-    let final = counter(page).final()
+    let final = counter(page).final().last()
     let chapter-first-last-pages = chapter-pages-state.final()
-    // 没有添加任何标题时，默认添加一个页码，否则没有添加页码时会报错
-    if chapter-first-last-pages == () {
-      chapter-first-last-pages.push((1, ..final * 2))
-    } else {
-      // 最后一章只有首页的页码，最后一页的页码没有，需要把最后一页也添加进去
-      chapter-first-last-pages.last() += (..final * 2,)
-    }
-    let (first, last, ..total-pages) = chapter-first-last-pages.at(counter-title.get().first() - 1)
+    let (first-page, last-page, total-page) = chapter-first-last-pages.at(counter-title.get().first() - 1, default: (
+      first-page: 1,
+      last-page: final,
+      total-page: final,
+    ))
 
-    if label-is-current-total-format { current += total-pages }
+    if label-is-current-total-format { current.push(total-page) }
 
     let _numbering = numbering(label, ..current)
     // 处于分栏下且左右页脚分离
@@ -216,7 +213,7 @@
         dy: -margin,
         block(width: width - margin * 2)[
           //当前章节第一页弥封线
-          #if current-page == first {
+          #if current-page == first-page {
             seal-line.first
             return
           }
@@ -224,7 +221,7 @@
           #if seal-line-scope == FIRST_PAGE { return }
 
           // 其它页码是否加弥封线的算法
-          #(current-page -= first - 1) // 在组多套试卷时，重新把页码按照1，2，3，4... 重新计算
+          #(current-page -= first-page - 1) // 在组多套试卷时，重新把页码按照1，2，3，4... 重新计算
           // 分页时，一页纸页码增加 2
           #if flipped and footer-is-separate {
             current-page = calc.ceil(current-page / 2)
