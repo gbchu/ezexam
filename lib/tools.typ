@@ -152,15 +152,11 @@
   let chapter-final = counter-title.final().first() - 1
   if chapter-index < 0 or chapter-index == chapter-final { return } // 处于目录页或最后一页时，不重新开始页码
   let current = counter(page).get().first() - 1
-  let final-page = counter(page).final()
   let page-restart = page-restart-state.get()
+  // 如果重新开始页码，则将之前的页码总数更新到当前页码 - 1
   chapter-pages-state.update(pre => {
-    if pre.at(chapter-index).len() == 1 {
-      pre.at(chapter-index) += (current, ..final-page)
-    }
-    // 如果重新开始页码，则将之前的页码总数更新到当前页码 - 1
     for index in range(page-restart, chapter-index + 1) {
-      pre.at(index).last() = current
+      pre.at(index).total-page = current
     }
     pre
   })
