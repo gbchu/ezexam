@@ -1,10 +1,10 @@
-// #import "@preview/ezexam:0.2.9": *
-#import "/ezexam.typ": *
+#import "@preview/ezexam:0.3.0": *
 
 #show: setup.with(
   mode: EXAM,
   show-answer: true,
   paper: a3,
+  par-justify: true,
 )
 
 #outline()
@@ -37,7 +37,7 @@
 
 #question[
   若双曲线 $C$ 的虚轴长为实轴长的 $sqrt(7)$ 倍，则 $C$ 的离心率为 #paren[D]
-  #choices([$sqrt(2)$], [$2$], [$sqrt(7)$], [$2sqrt(2)$])
+  #choices([$sqrt(2)$], 2, [$sqrt(7)$], [$2sqrt(2)$])
 ]
 
 #question[
@@ -76,7 +76,7 @@
   #choices([$x > y > z$], [$x > z > y$], [$y > x > z$], [$y > z > x$])
 ]
 
-= 多选题：本题共 3 小题，每小题 6 分，共 18 分.在每小题给出的选项中，有多项符合题目要求。全部选对的得 6 分，部分选对的得部分分，有选错的得 0 分。
+= 多选题：本题共 3 小题，每小题 6 分，共 18 分。在每小题给出的选项中，有多项符合题目要求。全部选对的得 6 分，部分选对的得部分分，有选错的得 0 分。
 #question[
   在正三棱柱 $A B C-A_1B_1C_1$ 中，$D$ 为 $B C$ 中点，则 #paren[BD]
   #choices([$A D perp A_1C$], [$B_1C perp "平面" A A_1D$], [$C C_1 parallel "平面" A A_1D$], [$A D parallel A_1B_1$])
