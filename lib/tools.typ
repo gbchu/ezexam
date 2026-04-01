@@ -19,7 +19,7 @@
 #let _SPECIAL-CHAR-SPACE = .45em
 // 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
 #let _modify-space(body) = {
-  if _is_empty(body) { return }
+  if _is_empty(body) { return 0em }
   if body.has("children") { body = body.children.first() }
   if body.func() == math.equation {
     if body.block { return }
