@@ -166,12 +166,16 @@
     if label == none { return }
     let current = counter(page).get()
     let final = counter(page).final().last()
-    let chapter-first-last-pages = chapter-pages-state.final()
-    let (first-page, last-page, total-page) = chapter-first-last-pages.at(counter-title.get().first() - 1, default: (
-      first-page: 1,
-      last-page: final,
-      total-page: final,
-    ))
+    let (first-page, last-page, total-page) = chapter-pages-state
+      .final()
+      .at(
+        counter-title.get().first() - 1,
+        default: (
+          first-page: 1,
+          last-page: final,
+          total-page: final,
+        ),
+      )
 
     if label-is-current-total-format { current.push(total-page) }
 
