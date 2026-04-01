@@ -19,6 +19,8 @@
 
   let page-width = if page.flipped { page.height } else { page.width }
   let _columns = page.columns
+  let _margin = page.margin
+  if _margin == auto { _margin = 1in }
   let here-pos-x = here().position().x
   if _columns > 1 {
     let one-column-width = (page-width + columns.gutter * (_columns - 1)) / _columns
@@ -26,7 +28,7 @@
     page-width = one-column-width * calc.ceil(here-pos-x / one-column-width)
   }
 
-  let first-line-available-space = page-width - page.margin - here-pos-x
+  let first-line-available-space = page-width - _margin - here-pos-x
   let rest-len = _len - first-line-available-space
   let is-line-break = false
   let _space = 1pt
@@ -49,7 +51,7 @@
   // 超过一行的后续横线
   if rest-len > 5pt {
     // 计算可以画多少完整的条数
-    let _ratio = rest-len / (page.width - page.margin * 2)
+    let _ratio = rest-len / (page.width - _margin * 2)
     // 多条完整线
     // + "" 是为了解决多条线时，最后一行线与之前的线间距不等的问题
     for _ in range(calc.trunc(_ratio)) {
