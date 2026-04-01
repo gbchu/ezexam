@@ -42,6 +42,10 @@ This template can help Chinese university, primary, middle and high school teach
 ```
 
 ## Changelog
+### 0 . 3 . 1
++ 修复题号重置后，自动生成的引用标签重复出现的 bug （[#7](https://github.com/gbchu/ezexam/issues/7)）
++ 调整引用标签的显示效果，保持和引用显示一致，并在 `question` 方法中，新增参数 `show-ref-prefix` ，该参数设置引用标签时是否显示前缀
+
 ### 0 . 3 . 0
 + `question` 方法，添加新特性，该特性可以让题目被引用，默认生成的 label 为当前章节-题号的形式（[#5](https://github.com/gbchu/ezexam/issues/5)）
   + 新增参数 `ref-on` ，该参数设置是否开启自动生成可被引用的 label
