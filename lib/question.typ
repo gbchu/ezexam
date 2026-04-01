@@ -33,15 +33,11 @@
   [#prefix#points#suffix#if separate [ \ ]]
 }
 
-#let _ref-label(with-heading-label, supplement) = {
-  let q-num = str(counter-question.get().first() + 1) // 题号
-  if with-heading-label {
-    let heading-label = counter(heading).get().filter(item => item != 0).map(str)
-    if heading-label != () { q-num = (..heading-label, q-num).join(".") }
-  }
+#let _format-ref-prefix() = {
   let chapter = counter-chapter.get().first()
   if chapter == 0 { chapter = "1" }
-  label(supplement + str(chapter) + "-" + q-num)
+  let heading-label = counter(heading).get().filter(item => item != 0)
+  str(chapter) + if heading-label != () { "-" + heading-label.map(str).join(".") } + "-"
 }
 
 #let question(
@@ -61,25 +57,33 @@
   top: 0pt,
   bottom: 0pt,
   ref-on: false,
+  show-ref-prefix: true,
   supplement: none,
-) = context{
+) = context {
+  assert(supplement != auto, message: "supplement expected none, str, content, function")
   let _label = _format-label(
     label,
     label-color,
     label-weight,
     with-heading-label,
   )
-  let _hanging-indent = if hanging-indent == auto { measure(_label).width + 1em } else { hanging-indent }
   set par(leading: line-height) if line-height != auto
-
+  let _ref-prefix = none
   v(top)
-  [#figure(supplement: supplement, kind: QUESTION)[
+  [#figure(
+      supplement: if ref-on {
+        _ref-prefix = _format-ref-prefix()
+        supplement + if show-ref-prefix [#_ref-prefix.replace("-", " - ")#h(-.25em, weak: true)]
+        _ref-prefix = std.label(_ref-prefix + str(counter-question.get().first() + 1))
+      },
+      kind: QUESTION,
+    )[
       #let body = _trim-math-start-spacing[#body]
       #let modeify-space = _modify-space(body)
       #if modeify-space == none { panic("Block-level formulas are not allowed at the beginning!") }
       #terms(
         indent: indent,
-        hanging-indent: _hanging-indent,
+        hanging-indent: if hanging-indent == auto { measure(_label).width + 1em } else { hanging-indent },
         separator: h(1em, weak: true),
         (
           _label,
@@ -94,7 +98,7 @@
         ),
       )
     ]
-    #if ref-on { _ref-label(with-heading-label, supplement) }
+    #_ref-prefix
   ]
   v(bottom)
   // 更新占位符上的题号
