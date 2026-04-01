@@ -31,6 +31,8 @@
   counter-chapter.step()
   set heading(numbering: _ => counter-chapter.display(it => box(width: .6em, align(right)[#it.~])))
   place(hide[= #body <chapter>])
+  counter(heading).update(0)
+  counter-question.update(0)
 }
 
 #let title(
