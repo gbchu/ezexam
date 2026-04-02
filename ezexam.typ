@@ -260,11 +260,13 @@
 
   set outline(
     target: if mode == EXAM { <chapter> } else { heading },
-    title: text(1.5em)[目#h(1em)录],
+    title: text(1.5em)[#h(1fr)目#h(1em)录#h(1fr)],
   )
+
   show outline: it => {
     set page(footer: _footer(outline-page-numbering, is-outline-page: true))
-    align(center, it)
+    set par(justify: true)
+    it
     pagebreak(weak: true)
     counter(page).update(1)
   }
