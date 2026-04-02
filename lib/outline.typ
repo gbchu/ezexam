@@ -42,6 +42,7 @@
   font: auto,
   color: black,
   position: center,
+  spacing: 0em,
   top: 0pt,
   bottom: 0pt,
 ) = context {
@@ -50,6 +51,7 @@
   align(
     position,
     text(
+      tracking: spacing,
       weight: if weight == auto {
         if mode == EXAM { 400 } else { 700 }
       } else { weight },
@@ -72,34 +74,26 @@
   let final-chapter = counter-title.final().first()
   chapter-pages-state.update(pre => {
     if pre != () { pre.last().insert("last-page", current-page - 1) }
-    pre.push((first-page: current-page, last-page: final-page, total-page: final-page))
-    pre
+    pre + ((first-page: current-page, last-page: final-page, total-page: final-page),)
   })
 }
 
 #let subject(body, size: 21.5pt, spacing: 1em, font: heiti, top: 0pt, bottom: 0pt) = {
   v(top)
-  align(center, text(
-    font: font,
-    size,
-    [#body].text.split("").slice(1, -1).join(h(spacing)),
-  ))
+  align(center, text(tracking: spacing, font: font, size)[#body])
   v(bottom)
-  subject-state.update([#body].text)
+  subject-state.update(body)
 }
 
-#let secret(body: "绝密★启用前") = place(top, float: true, clearance: 1.5em, text(font: heiti, body, 10.5pt))
+#let secret(body: "绝密★启用前") = place(top, float: true, clearance: 1.5em, text(font: heiti, 10.5pt, body))
 
-#let exam-type(type, prefix: "试卷类型：") = context place(top + right, text(
+#let exam-type(prefix: "试卷类型：", type) = context place(top + right, text(
   font: heiti + text.font,
   prefix + type,
 ))
 
 #let exam-info(
-  info: (
-    时间: "120分钟",
-    满分: "150分",
-  ),
+  info: (时间: "120分钟", 满分: "150分"),
   weight: 500,
   font: auto,
   size: 1em,
@@ -115,20 +109,16 @@
     gutter: gap,
     inset: (top: top, bottom: bottom),
     align: center + horizon,
-    ..for (key, value) in info {
-      ([#key：#value],)
-    }
+    ..for (key, value) in info { ([#key：#value],) }
   )
 }
 
-#let scoring-box(x: 0pt, y: 0pt) = place(dx: x, dy: y, right + top, table(
+#let score-box(x: 0pt, y: 0pt, show-rater: true) = place(dx: x, dy: y, right + top, table(
   columns: 2,
   inset: 8pt,
-)[得分][~~~~~~~~~][阅卷人])
-
-#let score-box(x: 0pt, y: 0pt) = place(dx: x, dy: y, right + top, table(
-  inset: 8pt,
-)[得分][~~~~~~~~~#v(10pt)])
+  [得分],
+  ..if show-rater { ([~~~~~~~~~], [阅卷人]) } else { ([~~~~~~~~~#v(10pt)],) },
+))
 
 #let notice(label: "1.", indent: 2em, hanging-indent: auto, ..children) = context {
   text(font: heiti)[注意事项：]
@@ -166,9 +156,7 @@
   title-align: top + center,
   title-x: 0pt,
   title-y: 0pt,
-  border-style: "dashed",
-  border-width: .5pt,
-  border-color: maroon,
+  border-stroke: (thickness: .5pt, paint: maroon, dash: "dashed"),
   color: blue,
   radius: 5pt,
   bg-color: white,
@@ -187,9 +175,10 @@
     breakable: breakable,
     inset: (x: 10pt, top: 20pt, bottom: 20pt) + inset,
     radius: radius,
-    stroke: (thickness: border-width, paint: border-color, dash: border-style),
+    stroke: border-stroke,
     fill: bg-color,
   )[
+    #set par(leading: line-height) if line-height != auto
     // 标题
     #if title != none {
       let title-box = box(fill: title-bg-color, inset: 6pt, radius: title-radius, text(
@@ -215,14 +204,10 @@
       _label = context numbering("1.", ..counter-explain.get())
       _space = .75em
     }
-    #set par(leading: line-height) if line-height != auto
     #terms(
       hanging-indent: 0em,
       separator: h(_space, weak: true),
-      (
-        _label,
-        text(color, _trim-content(body)),
-      ),
+      (_label, text(color, _trim-content(body))),
     )
   ]
   v(bottom)
@@ -231,6 +216,7 @@
 // 解析的分值
 #let score(points, color: maroon, score-prefix: h(.2em), score-suffix: "分") = text(color)[#box(width: 1fr, repeat(
     $dot$,
+    gap: .15em,
   ))#score-prefix#points#score-suffix]
 
 // 草稿纸
@@ -246,6 +232,6 @@
   supplement: none,
 ) = {
   set page(margin: .5in, footer: none)
-  title(name.split("").join(h(1em)), bottom: 0pt)
+  title(spacing: 1em, bottom: 0pt, name)
   _create-seal(line-type: line-type, supplement: supplement, info: student-info)
 }
