@@ -75,12 +75,7 @@
 ) = {
   assert(mode in (HANDOUTS, EXAM), message: "mode expected " + HANDOUTS + ", " + EXAM)
   mode-state.update(mode)
-
-  assert(
-    type(font) == array and type(heading-font) == array,
-    message: "font expected array",
-  )
-
+  assert(type(font) == array and type(heading-font) == array, message: "font expected array")
   // 为页码添加在不同模式下的默认值
   if page-numbering == auto {
     page-numbering = "1 / 1"
@@ -97,36 +92,15 @@
     (page-numbering, outline-page-numbering).all(item => type(item) in (str, function, type(none))),
     message: "page numbering expected str, function, none",
   )
-
-  paper = a4 + paper
-  let paper-columns = paper.columns
-  let margin = paper.margin
-
-  let gap-line = if paper-columns > 1 and show-gap-line {
-    line(angle: 90deg, length: 100% - margin * 2, stroke: .5pt)
-  }
-
-  watermark = if watermark != none {
-    place(horizon)[
-      #set par(leading: .5em)
-      #set text(watermark-size, watermark-color, font: watermark-font)
-      #grid(
-        columns: paper-columns * (1fr,),
-        ..paper-columns * (rotate(watermark-rotate, watermark),),
-      )
-    ]
-  }
-
-  // 页码的正则：包含两个1,两个1中间不能是连续空格、包含数字
-  // 支持双：阿拉伯数字、小写、大写罗马，带圈数字页码
-  let matcher = regex(
-    "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$|^\D*①\D*[^\d\s]\D*①\D*$|^\D*⓵\D*[^\d\s]\D*⓵\D*$",
-  )
-
+  // 除目录页的页码检测：包含两个1,两个1中间不能是连续空格、包含数字
   let is-match = (
-    type(page-numbering) == function
+    [#page-numbering].func() == [#zh-arabic].func()
       or (
-        page-numbering != none and matcher in page-numbering
+        type(page-numbering) == str
+          and regex(
+            "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$|^\D*①\D*[^\d\s]\D*①\D*$|^\D*⓵\D*[^\d\s]\D*⓵\D*$",
+          )
+            in page-numbering
       )
   )
 
@@ -157,14 +131,15 @@
     seal
   }
 
+  paper = a4 + paper
+  let paper-columns = paper.columns
+  let margin = paper.margin
+  let flipped = paper.flipped
   let is-odd-r-even-l = page-align == "odd-r-even-l"
   footer-is-separate = paper-columns == 2 and footer-is-separate and not is-odd-r-even-l
 
-  let flipped = paper.flipped
-
-  let _footer(label, label-is-current-total-format: false, is-outline-page: false) = {
-    if label == none { return }
-    let current = counter(page).get()
+  let _footer(page-format, page-is-current-total-format: false, is-outline-page: false) = {
+    if page-format == none { return }
     let final = counter(page).final().last()
     let (first-page, last-page, total-page) = chapter-pages-state
       .final()
@@ -177,9 +152,8 @@
         ),
       )
 
-    if label-is-current-total-format { current.push(total-page) }
-
-    let _numbering = numbering(label, ..current)
+    let current = counter(page).get()
+    let _numbering = numbering(page-format, ..current)
     // 处于分栏下且左右页脚分离
     if footer-is-separate {
       current.first() += 1
@@ -189,7 +163,7 @@
         // 左页码
         _numbering,
         // 右页码
-        numbering(label, ..current),
+        numbering(page-format, ..current),
       )
       counter(page).step()
     } else {
@@ -247,13 +221,28 @@
     }
   }
 
+  let gap-line = if paper-columns > 1 and show-gap-line {
+    line(angle: 90deg, length: 100% - margin * 2, stroke: .5pt)
+  }
+
+  watermark = if watermark != none {
+    place(horizon)[
+      #set par(leading: .5em)
+      #set text(watermark-size, watermark-color, font: watermark-font)
+      #grid(
+        columns: paper-columns * (1fr,),
+        ..paper-columns * (rotate(watermark-rotate, watermark),),
+      )
+    ]
+  }
+
   set page(
     ..paper,
     background: gap-line,
     foreground: watermark,
     footer: context _footer(
       page-numbering,
-      label-is-current-total-format: is-match,
+      page-is-current-total-format: is-match,
     ),
   )
   set columns(gutter: gap)
