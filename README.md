@@ -43,10 +43,15 @@ This template can help Chinese university, primary, middle and high school teach
 
 ## Changelog
 ### 0 . 3 . 1
-+ 修复题号重置后，自动生成的引用标签重复出现的 bug （[#7](https://github.com/gbchu/ezexam/issues/7)）
-+ 修复 `question` 方法当值为空时，报错信息不正确的 bug
-+ 修复水印不能调整字体的 bug
++ 修复题号重置后，自动生成的引用标签重复出现的问题 （[#7](https://github.com/gbchu/ezexam/issues/7)）
++ 重新为 `chapter` 添加重置题号，小节计数器操作，防止未引入 `title` 方法造成引用的标签错误 （[#7](https://github.com/gbchu/ezexam/issues/7)）
++ 修复 `question` 方法当值为空时，报错信息不正确
++ 修复水印不能调整字体的问题
++ 修复 `subject` 方法传入 integer 报错
 + 调整引用标签的显示效果，保持和引用显示一致，并在 `question` 方法中，新增参数 `show-ref-prefix` ，该参数设置引用标签时是否显示前缀
++ `title` 方法新增参数 `spacing` ，该参数设置标题文字间的间距
++ 精简 `solution` 方法边框参数，合并为 `border-stroke`
++ 废弃 `scoring-box` 方法，将其与 `score-box` 方法合并，并为其添加参数 `show-rater`
 + 优化目录显示效果
 
 ### 0 . 3 . 0
