@@ -1,10 +1,9 @@
-#import "@preview/ezexam:0.3.0": *
+#import "@preview/ezexam:0.3.1": *
 
 #show: setup.with(
   mode: EXAM,
-  show-answer: true,
   paper: a3,
-  par-justify: true,
+  show-answer: true,
 )
 
 #outline()
