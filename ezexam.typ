@@ -7,7 +7,7 @@
 #import "lib/question.typ": question
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/outline.typ": (
-  chapter, cover, draft, exam-info, exam-type, notice, score, score-box, scoring-box, secret, solution, solution-block,
+  chapter, cover, draft, exam-info, exam-type, notice, score, score-box, secret, solution, solution-block,
   subject, title,
 )
 
@@ -81,8 +81,8 @@
     page-numbering = "1 / 1"
     if mode == EXAM {
       page-numbering = zh-arabic(prefix: context {
-        subject-state.get()
         import "lib/const.typ": SOLUTION
+        [#subject-state.get()]
         if (mode-state.get() == SOLUTION) [参考答案] else [试题]
       })
     }
