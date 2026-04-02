@@ -45,6 +45,7 @@ This template can help Chinese university, primary, middle and high school teach
 ### 0 . 3 . 1
 + 修复题号重置后，自动生成的引用标签重复出现的 bug （[#7](https://github.com/gbchu/ezexam/issues/7)）
 + 修复 `question` 方法当值为空时，报错信息不正确的 bug
++ 修复水印不能调整字体的 bug
 + 调整引用标签的显示效果，保持和引用显示一致，并在 `question` 方法中，新增参数 `show-ref-prefix` ，该参数设置引用标签时是否显示前缀
 
 ### 0 . 3 . 0
