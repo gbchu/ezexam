@@ -153,6 +153,7 @@
       )
 
     let current = counter(page).get()
+    if page-is-current-total-format { current.push(total-page) }
     let _numbering = numbering(page-format, ..current)
     // 处于分栏下且左右页脚分离
     if footer-is-separate {
