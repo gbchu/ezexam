@@ -109,7 +109,7 @@
   watermark = if watermark != none {
     place(horizon)[
       #set par(leading: .5em)
-      #set text(watermark-size, watermark-color)
+      #set text(watermark-size, watermark-color, font: watermark-font)
       #grid(
         columns: paper-columns * (1fr,),
         ..paper-columns * (rotate(watermark-rotate, watermark),),
