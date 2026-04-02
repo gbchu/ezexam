@@ -94,7 +94,7 @@
   }
 
   assert(
-    (type(page-numbering), type(outline-page-numbering)).all(item => item in (str, function, type(none))),
+    (page-numbering, outline-page-numbering).all(item => type(item) in (str, function, type(none))),
     message: "page numbering expected str, function, none",
   )
 
