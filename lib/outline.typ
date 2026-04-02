@@ -29,7 +29,7 @@
 #let chapter(body) = {
   pagebreak(weak: true)
   counter-chapter.step()
-  set heading(numbering: _ => counter-chapter.display(it => box(width: .6em, align(right)[#it.~])))
+  set heading(numbering: _ => counter-chapter.display(num => box(width: 1em, align(right)[#num.~])))
   place(hide[= #body <chapter>])
   counter(heading).update(0)
   counter-question.update(0)
