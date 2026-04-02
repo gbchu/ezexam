@@ -71,7 +71,6 @@
   // 收集章节的第一页和最后一页
   let current-page = counter(page).get().first()
   let final-page = counter(page).final().first()
-  let final-chapter = counter-title.final().first()
   chapter-pages-state.update(pre => {
     if pre != () { pre.last().insert("last-page", current-page - 1) }
     pre + ((first-page: current-page, last-page: final-page, total-page: final-page),)
