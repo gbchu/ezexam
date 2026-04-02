@@ -2,9 +2,7 @@
 #import "counter.typ": counter-placeholder, counter-question
 
 #let _get-answer(body, placeholder, with-number, update) = {
-  if answer-state.get() {
-    return text(answer-color-state.get(), body)
-  }
+  if answer-state.get() { return text(answer-color-state.get(), body) }
   if not with-number { return placeholder }
   counter-placeholder.step()
   context counter-placeholder.display()
@@ -12,10 +10,9 @@
 }
 
 #let _draw-line(len, stroke, offset, body) = {
+  assert(type(len) == length, message: "expect length, found " + str(type(len)))
   let _len = len.to-absolute()
   assert(_len > 4pt, message: "len must > 4pt")
-
-  set box(stroke: (bottom: stroke), inset: (bottom: offset), outset: (bottom: offset))
 
   let page-width = if page.flipped { page.height } else { page.width }
   let _columns = page.columns
@@ -32,6 +29,7 @@
   let rest-len = _len - first-line-available-space
   let is-line-break = false
   let _space = 1pt
+  set box(stroke: (bottom: stroke), inset: (bottom: offset), outset: (bottom: offset))
   // 当前行剩余空间 < 10pt 时，则直接换行在新的一行从头开始画
   if first-line-available-space < 10pt {
     [ \ ]
@@ -52,15 +50,13 @@
   if rest-len > 5pt {
     // 计算可以画多少完整的条数
     let _ratio = rest-len / (page.width - _margin * 2)
-    // 多条完整线
-    // + "" 是为了解决多条线时，最后一行线与之前的线间距不等的问题
     for _ in range(calc.trunc(_ratio)) {
       (
         box(width: 100%)[#if is-line-break {
           align(center, body)
           is-line-break = false
         }]
-          + ""
+          + "" // + "" 是为了解决多条线时，最后一行线与之前的线间距不等的问题
       )
     }
 
@@ -78,14 +74,11 @@
   placeholder: "▲",
   with-number: false,
   update: false,
-  stroke: .45pt + luma(0),
+  stroke: .45pt + black,
   offset: 3pt,
 ) = context {
-  assert(type(len) == length, message: "expect length, found " + str(type(len)))
   let result = _get-answer(body, placeholder, with-number, update)
-  if not answer-state.get() or result.child in ([], [ ]) {
-    return _draw-line(len, stroke, offset / 2, result)
-  }
+  if not answer-state.get() or result.child in ([], [ ]) { return _draw-line(len, stroke, offset / 2, result) }
 
   underline(
     evade: false,
