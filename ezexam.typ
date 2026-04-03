@@ -7,8 +7,8 @@
 #import "lib/question.typ": question
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/outline.typ": (
-  chapter, cover, draft, exam-info, exam-type, notice, score, score-box, secret, solution, solution-block,
-  subject, title,
+  chapter, cover, draft, exam-info, exam-type, notice, score, score-box, secret, solution, solution-block, subject,
+  title,
 )
 
 #let setup(
@@ -259,6 +259,13 @@
     it
     pagebreak(weak: true)
     counter(page).update(1)
+  }
+  // 讲义模式下的章节目录样式
+  show outline.entry.where(level: 1): it => {
+    if mode-state.get() == HANDOUTS and it.element.bookmarked != auto {
+      return text(weight: 700, it)
+    }
+    it
   }
 
   set par(
