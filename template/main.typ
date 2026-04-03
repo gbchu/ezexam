@@ -4,6 +4,7 @@
   mode: EXAM,
   paper: a3,
   show-answer: true,
+  par-justify: true,
 )
 
 #outline()
