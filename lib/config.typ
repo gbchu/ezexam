@@ -14,13 +14,12 @@
 
 #let roman-font = (
   (name: "Times New Roman", covers: regex("\w")), // 西文字体
-  (name: "TeX Gyre Termes Math", covers: regex("[^𝑗𝑓𝜋∅/]")),
-  "XITS Math",
+  (name: "TeX Gyre Termes Math", covers: regex("[^𝑗𝑓𝑧𝜋∅/]")),
+  "STIX Two Math",
   "Noto Serif CJK SC",
 )
 
 #let ncm-font = (
-  "New Computer Modern",
   "New Computer Modern Math",
   "Noto Serif CJK SC",
 )
