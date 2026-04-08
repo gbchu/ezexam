@@ -14,9 +14,8 @@
 
 #let roman-font = (
   (name: "Times New Roman", covers: regex("\w")), // 西文字体
-  (name: "TeX Gyre Termes", covers: regex("\w")),
-  (name: "STIX Two Math", covers: regex("[𝑗𝑓𝑧𝜋/∅±]")),
-  "TeX Gyre Termes Math",
+  (name: "TeX Gyre Termes Math", covers: regex("[^𝑗𝑓𝜋∅/]")),
+  "XITS Math",
   "Noto Serif CJK SC",
 )
 
