@@ -8,7 +8,7 @@ This template can help Chinese university, primary, middle and high school teach
 
 ## Example
 ```typst
-#import "@preview/ezexam:0.3.1": *
+#import "@preview/ezexam:0.3.2": *
 #show: setup.with(
   mode: EXAM,
   paper: a3
@@ -42,6 +42,11 @@ This template can help Chinese university, primary, middle and high school teach
 ```
 
 ## Changelog
+### 0 . 3 . 2
++ 新增字体常量 `ncm-font` ，方便修改为 New Computer Modern 系列样式字体
++ `roman` 重命名为 `roman-font`， 并调整该字体下 𝑗𝑓𝑧𝜋/⟂∅()± 的样式
+
+
 ### 0 . 3 . 1
 + 修复题号重置后，自动生成的引用标签重复出现的问题 （[#7](https://github.com/gbchu/ezexam/issues/7)）
 + 重新为 `chapter` 添加重置题号，小节计数器操作，防止未引入 `title` 方法造成引用的标签错误 （[#7](https://github.com/gbchu/ezexam/issues/7)）
