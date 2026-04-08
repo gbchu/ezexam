@@ -1,7 +1,7 @@
 #import "lib/state.typ": *
 #import "lib/const.typ": EVERY_PAGE, EXAM, FIRST_PAGE, HANDOUTS, ODD_PAGE
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
-#import "lib/config.typ": a3, a4, heiti, kaiti, roman
+#import "lib/config.typ": a3, a4, heiti, kaiti, doc-font
 #import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
@@ -20,7 +20,7 @@
   show-gap-line: false,
   footer-is-separate: true,
   outline-page-numbering: "I",
-  font: roman,
+  font: doc-font,
   font-size: 11pt,
   line-height: 2em,
   par-spacing: 2em,
@@ -43,7 +43,7 @@
   resume: true,
   watermark: none,
   watermark-color: rgb("#f666"),
-  watermark-font: roman,
+  watermark-font: doc-font,
   watermark-size: 88pt,
   watermark-rotate: -45deg,
   show-answer: false,
@@ -323,10 +323,7 @@
   import "lib/const.typ": INLINE_MATH_SPACE
   let space = h(INLINE_MATH_SPACE, weak: true)
   show math.equation.where(block: false): it => space + math.display(it) + space
-  let pi = if font == roman { "" + [_π_] } else [\u{03c0}]
-  show "π": pi
   show "∥": [#space\//#space]
-  show "∅": set text(font: "New Computer Modern Math", features: ("cv01",))
 
   // 中文着重号
   let han-zi = regex("\p{Han}")
