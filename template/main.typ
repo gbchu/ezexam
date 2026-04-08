@@ -1,4 +1,4 @@
-#import "@preview/ezexam:0.3.1": *
+#import "@preview/ezexam:0.3.2": *
 
 #show: setup.with(
   mode: EXAM,
@@ -46,7 +46,7 @@
 ]
 
 #question[
-  设 $f(x)$ 是定义在 $RR$ 上且周期为 2 的偶函数，当 $2 lt.slant x lt.slant 3$ 时，$f(x) = 5 - 2x$，则 $f(-3 / 4 ) =$
+  设 $f(x)$ 是定义在 $R$ 上且周期为 2 的偶函数，当 $2 lt.slant x lt.slant 3$ 时，$f(x) = 5 - 2x$，则 $f(-3 / 4 ) =$
   #paren[A]
   #choices([$-1 / 2$], [$-1 / 4$], [$1 / 4$], [$1 / 2$])
 ]
@@ -120,7 +120,6 @@
   ]
   + 记超声波检查结果不正常者患有该疾病的概率为$p$，求$p$的估计值；
   + 根据小概率值$alpha=0.001$的独立性检验，分析超声波检查结果是否与患该疾病有关.
-
   #text-figure(
     top: 10pt,
     figure: table(
@@ -128,7 +127,7 @@
       [$P(chi^2 gt.slant k)$], [0.005], [0.010], [0.001],
       [$k$], [3.841], [6.635], [10.828],
     ),
-  )[附：$chi^2 = n(a d - b c)^2 / ((a + b)(c + d)(a + c)(b + d))$.]
+  )[附：$chi^2 = n(a d - b c)^2 / ((a + b)(c + d)(a + c)(b + d))$]
 ]
 
 #question(points: 15, bottom: 1in)[
