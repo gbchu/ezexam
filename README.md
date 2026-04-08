@@ -44,7 +44,7 @@ This template can help Chinese university, primary, middle and high school teach
 ## Changelog
 ### 0 . 3 . 2
 + 新增字体常量 `ncm-font` ，方便修改为 New Computer Modern 系列样式字体
-+ `roman` 重命名为 `roman-font`， 并调整该字体下 𝑗𝑓𝑧𝜋/⟂∅()± 的样式
++ `roman` 重命名为 `roman-font`， 并调整该字体下 𝑗𝑓𝑧𝜋/∅± 的样式
 
 
 ### 0 . 3 . 1
