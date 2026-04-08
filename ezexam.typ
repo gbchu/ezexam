@@ -1,7 +1,7 @@
 #import "lib/state.typ": *
 #import "lib/const.typ": EVERY_PAGE, EXAM, FIRST_PAGE, HANDOUTS, ODD_PAGE
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
-#import "lib/config.typ": a3, a4, heiti, kaiti, doc-font
+#import "lib/config.typ": a3, a4, heiti, kaiti, roman-font, ncm-font
 #import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
@@ -20,7 +20,7 @@
   show-gap-line: false,
   footer-is-separate: true,
   outline-page-numbering: "I",
-  font: doc-font,
+  font: roman-font,
   font-size: 11pt,
   line-height: 2em,
   par-spacing: 2em,
@@ -43,7 +43,7 @@
   resume: true,
   watermark: none,
   watermark-color: rgb("#f666"),
-  watermark-font: doc-font,
+  watermark-font: roman-font,
   watermark-size: 88pt,
   watermark-rotate: -45deg,
   show-answer: false,

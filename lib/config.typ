@@ -12,10 +12,17 @@
   flipped: false,
 )
 
-#let doc-font = (
+#let roman-font = (
   (name: "Times New Roman", covers: regex("\w")), // 西文字体
+  (name: "TeX Gyre Termes", covers: regex("\w")),
   (name: "STIX Two Math", covers: regex("[𝑗𝑓𝑧𝜋/⟂∅()±]")),
   "TeX Gyre Termes Math",
+  "Noto Serif CJK SC",
+)
+
+#let ncm-font = (
+  "New Computer Modern",
+  "New Computer Modern Math",
   "Noto Serif CJK SC",
 )
 
