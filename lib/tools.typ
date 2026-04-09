@@ -3,21 +3,31 @@
 #import "counter.typ": counter-title
 #import "state.typ": chapter-pages-state, mode-state, page-restart-state
 
+
+#let _SPECIAL-CHAR = "《（【"
+// 以特殊字符开头的行，使用box包裹该字符
+#let format-special-char(body) = {
+  if body.has("text") and body.text.first() in _SPECIAL-CHAR {
+    return box(body.text.first()) + body.text.slice(3)
+  }
+  body
+}
+
 #let _is_empty(body) = body in ([ ], parbreak(), [])
 
 // 去除content开头的空行，换行
 #let _trim-content(body) = {
   if _is_empty(body) { return body }
   if body.has("children") {
-    let children = body.children
-    if _is_empty(children.first()) { return children.slice(1).join() }
+    body = body.children
+    if _is_empty(body.first()) { body = body.slice(1) }
+    body.first() = format-special-char(body.first())
+    return body.join()
   }
-  body
+  format-special-char(body)
 }
 
-#let _SPECIAL-CHAR = "《（【"
-#let _SPECIAL-CHAR-SPACE = .45em
-// 为了解决数学公式、特殊字符在最左侧没有内容时加间距的问题
+// 为了解决数学公式在最左侧没有内容时加间距的问题
 #let _modify-space(body) = {
   if _is_empty(body) { return 0em }
   if body.has("children") { body = body.children.first() }
@@ -25,7 +35,6 @@
     if body.block { return }
     return INLINE_MATH_SPACE
   }
-  if body.has("text") and body.text.first() in _SPECIAL-CHAR { return _SPECIAL-CHAR-SPACE }
   0em
 }
 
@@ -97,13 +106,13 @@
   color: blue,
   font: auto,
   weight: 400,
-  prefix: h(-_SPECIAL-CHAR-SPACE) + "【",
+  prefix: "【",
   suffix: "】",
-) = box[
-  #context {
-    text(font: if font == auto { heiti + text.font } else { font }, weight: weight, color)[#prefix#body#suffix#h( 0em,weak: true,)]
-  }
-]
+) = context {
+  text(font: if font == auto { heiti + text.font } else { font }, weight: weight, color)[#box(prefix)#body#box(
+      suffix,
+    )#h(.5em, weak: true)]
+}
 
 // 图文混排
 #let _TEXT_LEFT_FIGURE_RIGHT = "tf"
