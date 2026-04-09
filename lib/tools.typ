@@ -31,11 +31,9 @@
 #let _modify-space(body) = {
   if _is_empty(body) { return 0em }
   if body.has("children") { body = body.children.first() }
-  if body.func() == math.equation {
-    if body.block { return }
-    return INLINE_MATH_SPACE
-  }
-  0em
+  if body.func() != math.equation { return 0em }
+  if body.block { return }
+  INLINE_MATH_SPACE
 }
 
 // 去除数学公式在 question 方法中，换行后以数学公式开头时，最左侧加间距的问题
