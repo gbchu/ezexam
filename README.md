@@ -44,7 +44,6 @@ This template can help Chinese university, primary, middle and high school teach
 ## Changelog
 ### 0 . 3 . 2
 + ⚠️ 破坏性更新，修改字体，`roman` 重命名为 `roman-font`， 并调整 𝑗𝑓𝑧𝜋∅/ 的字体为 `STIX Two Math` ，修复𝑗𝑓加绝对值后，左侧绝对值的线被遮挡的问题
-+ 新增字体常量 `ncm-font` ，方便修改为 New Computer Modern 系列样式字体
 
 
 ### 0 . 3 . 1

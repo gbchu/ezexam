@@ -1,7 +1,7 @@
 #import "lib/state.typ": *
 #import "lib/const.typ": EVERY_PAGE, EXAM, FIRST_PAGE, HANDOUTS, ODD_PAGE
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
-#import "lib/config.typ": a3, a4, heiti, kaiti, ncm-font, roman-font
+#import "lib/config.typ": a3, a4, heiti, kaiti, roman-font
 #import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
