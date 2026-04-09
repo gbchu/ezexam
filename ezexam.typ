@@ -24,7 +24,7 @@
   font-size: 11pt,
   line-height: 2em,
   par-spacing: 2em,
-  par-justify: false,
+  par-justify: true,
   first-line-indent: 0em,
   heading-numbering: auto,
   heading-hanging-indent: auto,
