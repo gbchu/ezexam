@@ -13,7 +13,7 @@
 #let _format-points(points, prefix, suffix, separate) = {
   if points == none { return }
   assert(type(points) == int and points > 0, message: "points expected positive integer!")
-  [#prefix#points#suffix#if separate [ \ ]]
+  [#box(prefix)#points#suffix#if separate [ \ ]]
 }
 
 #let _format-ref-prefix() = {
@@ -34,7 +34,7 @@
   with-heading-label: false,
   points: none,
   points-separate: true,
-  points-prefix: h(-.45em, weak: true) + "（",
+  points-prefix: "（",
   points-suffix: "分）",
   line-height: auto,
   top: 0pt,
