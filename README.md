@@ -46,6 +46,7 @@ This template can help Chinese university, primary, middle and high school teach
 + ⚠️ 破坏性更新，修改字体，`roman` 重命名为 `roman-font`， 并调整 𝑗𝑓𝑧𝜋∅±/ 的字体为 `STIX Two Math` ，修复𝑗𝑓加绝对值后，左侧绝对值的线被遮挡的问题
 + 修复 `tag` 方法，当 `par-justify` 的值设置为 true 时，对不齐的问题
 + 修改 `setup` 的参数 `par-justify` 的默认值为 true
++ 调整 `question` 方法的参数 `points-prefix` 默认值
 
 ### 0 . 3 . 1
 + 修复题号重置后，自动生成的引用标签重复出现的问题 （[#7](https://github.com/gbchu/ezexam/issues/7)）
