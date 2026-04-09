@@ -97,12 +97,13 @@
   color: blue,
   font: auto,
   weight: 400,
-  prefix: h(-_SPECIAL-CHAR-SPACE, weak: true) + "【",
+  prefix: h(-_SPECIAL-CHAR-SPACE) + "【",
   suffix: "】",
-) = context {
-  let _font = if font == auto { heiti + text.font } else { font }
-  text(font: _font, weight: weight, color)[#prefix#body#suffix#h(0em, weak: true)]
-}
+) = box[
+  #context {
+    text(font: if font == auto { heiti + text.font } else { font }, weight: weight, color)[#prefix#body#suffix#h( 0em,weak: true,)]
+  }
+]
 
 // 图文混排
 #let _TEXT_LEFT_FIGURE_RIGHT = "tf"
