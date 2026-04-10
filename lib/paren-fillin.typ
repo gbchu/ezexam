@@ -16,8 +16,6 @@
 
   let page-width = if page.flipped { page.height } else { page.width }
   let _columns = page.columns
-  let _margin = page.margin
-  if _margin == auto { _margin = 1in }
   let here-pos-x = here().position().x
   if _columns > 1 {
     let one-column-width = (page-width + columns.gutter * (_columns - 1)) / _columns
@@ -25,24 +23,24 @@
     page-width = one-column-width * calc.ceil(here-pos-x / one-column-width)
   }
 
+  let _margin = page.margin
+  if _margin == auto { _margin = 1in }
   let first-line-available-space = page-width - _margin - here-pos-x
   let rest-len = _len - first-line-available-space
   let is-line-break = false
   let _space = 1pt
   set box(stroke: (bottom: stroke), inset: (bottom: offset), outset: (bottom: offset))
-  // 当前行剩余空间 < 10pt 时，则直接换行在新的一行从头开始画
-  if first-line-available-space < 10pt {
-    [ \ ]
+  // 当前行剩余空间 < 1em 时，则直接换行在新的一行从头开始画
+  if first-line-available-space < 1em.to-absolute() {
     is-line-break = true
     rest-len = _len
   } else {
-    // 当前指定长度 > 当前行剩余空间 >= 10pt，则按照当前行的剩余空间画线
     // 如果当前指定长度 < 剩余空间，则按照指定长度在文字后画线
     if rest-len < 0pt { first-line-available-space = _len }
     // 第一行线
     h(_space, weak: true)
+    hide("") // 解决相邻的左侧为中文标点符号时，第一行线换行问题
     box(width: first-line-available-space - _space, inset: 0pt, align(center, body))
-    box() // 解决第一行线换行问题
     h(_space, weak: true)
   }
 
