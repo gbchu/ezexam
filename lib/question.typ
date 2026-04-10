@@ -1,7 +1,7 @@
 #import "state.typ": mode-state
 #import "const.typ": HANDOUTS, QUESTION
 #import "counter.typ": counter-chapter, counter-placeholder, counter-question
-#import "tools.typ": _modify-space, _trim-math-start-spacing
+#import "tools.typ": _format-content
 
 #let _format-label(label, label-color, label-weight, with-heading-label) = context counter-question.display(num => {
   let numbers = if with-heading-label { counter(heading).get().filter(item => item != 0) } + (num,)
@@ -56,9 +56,6 @@
       },
       kind: QUESTION,
     )[
-      #let body = _trim-math-start-spacing[#body]
-      #let modeify-space = _modify-space(body)
-      #if modeify-space == none { panic("Block-level formulas are not allowed at the beginning!") }
       #terms(
         indent: indent,
         hanging-indent: if hanging-indent == auto { measure(_label).width + 1em } else { hanging-indent },
@@ -66,8 +63,8 @@
         (
           _label,
           _format-points(points, points-prefix, points-suffix, points-separate)
-            + h(first-line-indent - modeify-space, weak: true)
-            + body,
+            + h(first-line-indent, weak: true)
+            + _format-content[#body],
         ),
       )
     ]
