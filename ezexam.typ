@@ -320,8 +320,7 @@
   set math.cases(gap: 1em)
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
   show math.equation: set text(font: font)
-  import "lib/const.typ": INLINE_MATH_SPACE
-  let space = h(INLINE_MATH_SPACE, weak: true)
+  let space = h(.25em, weak: true)
   show math.equation.where(block: false): it => space + math.display(it) + space
   show "∥": [#space\//#space]
 
