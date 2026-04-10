@@ -1,47 +1,42 @@
-#import "const.typ": EXAM, INLINE_MATH_SPACE
+#import "const.typ": EXAM
 #import "config.typ": heiti
 #import "counter.typ": counter-title
 #import "state.typ": chapter-pages-state, mode-state, page-restart-state
 
 
 #let _SPECIAL-CHAR = "《（【"
-// 以特殊字符开头的行，使用box包裹该字符
-#let format-special-char(body) = {
-  if body.has("text") and body.text.first() in _SPECIAL-CHAR {
-    return box(body.text.first()) + body.text.slice(3)
+// 以特殊字符，数学公式开头的行，使用box包裹该字符（除掉左侧加的间距）
+#let _boxed-content(body) = {
+  if body.func() == math.equation {
+    assert(not body.block, message: "Block-level formulas are not allowed at the beginning!")
+    return box(body)
+  }
+
+  if body.has("text") {
+    let text = body.text
+    let first = text.first()
+    if first in _SPECIAL-CHAR { return box(first) + text.slice(first.len()) }
   }
   body
 }
 
 #let _is_empty(body) = body in ([ ], parbreak(), [])
 
-// 去除content开头的空行，换行
 #let _trim-content(body) = {
   if _is_empty(body) { return body }
   if body.has("children") {
     body = body.children
-    if _is_empty(body.first()) { body = body.slice(1) }
-    body.first() = format-special-char(body.first())
+    if _is_empty(body.first()) { body = body.slice(1) } // 去除开头的空行，换行
+    body.first() = _boxed-content(body.first())
     return body.join()
   }
-  format-special-char(body)
+  _boxed-content(body)
 }
 
-// 为了解决数学公式在最左侧没有内容时加间距的问题
-#let _modify-space(body) = {
-  if _is_empty(body) { return 0em }
-  if body.has("children") { body = body.children.first() }
-  if body.func() != math.equation { return 0em }
-  if body.block { return }
-  INLINE_MATH_SPACE
-}
-
-// 去除数学公式在 question 方法中，换行后以数学公式开头时，最左侧加间距的问题
-// typst留下的坑
-#let _trim-math-start-spacing(body) = {
+// 去除数学公式在 question 方法中，换行后以数学公式开头时，最左侧加间距的问题(typst留下的坑)
+#let _format-content(body) = {
   body = _trim-content(body)
   if not body.has("children") { return body }
-
   let children = body.children
   if parbreak() not in children { return body }
   children.map(child => if child == parbreak() [ \ ] else { child }).join()
