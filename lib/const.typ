@@ -8,4 +8,4 @@
 #let ODD_PAGE = "odd-page"
 
 // figure kind
-#let QUESTION = "question"
+#let _QUESTION = "question"

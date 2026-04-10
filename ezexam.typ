@@ -310,8 +310,8 @@
   set underline(offset: .25em)
 
   show ref: set text(ref-color)
-  import "lib/const.typ": QUESTION
-  show figure.where(kind: QUESTION): it => {
+  import "lib/const.typ": _QUESTION
+  show figure.where(kind: _QUESTION): it => {
     set block(breakable: true)
     align(left, it.body)
   }

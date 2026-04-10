@@ -1,5 +1,5 @@
 #import "state.typ": mode-state
-#import "const.typ": HANDOUTS, QUESTION
+#import "const.typ": HANDOUTS, _QUESTION
 #import "counter.typ": counter-chapter, counter-placeholder, counter-question
 #import "tools.typ": _format-content
 
@@ -54,7 +54,7 @@
         supplement + if show-ref-prefix [#_ref-prefix.replace("-", " - ")#h(-.25em, weak: true)]
         _ref-prefix = std.label(_ref-prefix + str(counter-question.get().first() + 1))
       },
-      kind: QUESTION,
+      kind: _QUESTION,
     )[
       #terms(
         indent: indent,
