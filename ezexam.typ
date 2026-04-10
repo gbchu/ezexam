@@ -81,9 +81,8 @@
     page-numbering = "1 / 1"
     if mode == EXAM {
       page-numbering = zh-arabic(prefix: context {
-        import "lib/const.typ": SOLUTION
         [#subject-state.get()]
-        if (mode-state.get() == SOLUTION) [参考答案] else [试题]
+        if (mode-state.get() == none) [参考答案] else [试题]
       })
     }
   }

@@ -1,5 +1,5 @@
 #import "config.typ": heiti, kaiti
-#import "const.typ": EXAM, HANDOUTS, SOLUTION
+#import "const.typ": EXAM, HANDOUTS
 #import "state.typ": answer-state, chapter-pages-state, mode-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
 #import "tools.typ": _create-seal, _trim-content
@@ -137,7 +137,7 @@
   let set-mode(_mode) = mode-state.update(_mode)
   counter-explain.update(0) // 解析题号从 1 开始重新编号
   pagebreak(weak: true)
-  set-mode(SOLUTION)
+  set-mode(none)
   title(name)
   body
   pagebreak(weak: true)
