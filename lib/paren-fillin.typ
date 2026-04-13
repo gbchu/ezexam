@@ -1,5 +1,6 @@
 #import "state.typ": answer-color-state, answer-state
 #import "counter.typ": counter-placeholder, counter-question
+#import "tools.typ": _is_empty
 
 #let _get-answer(body, placeholder, with-number, update) = {
   if answer-state.get() { return text(answer-color-state.get(), body) }
@@ -28,8 +29,10 @@
   let first-line-available-space = page-width - _margin - here-pos-x
   let rest-len = _len - first-line-available-space
   let is-line-break = false
-  let _space = 1pt
+  let _space = if here-pos-x == _margin { 0pt } else { 1pt }
   set box(stroke: (bottom: stroke), inset: (bottom: offset), outset: (bottom: offset))
+
+  h(_space, weak: true)
   // 当前行剩余空间 < 1em 时，则直接换行在新的一行从头开始画
   if first-line-available-space < 1em.to-absolute() {
     is-line-break = true
@@ -37,32 +40,28 @@
   } else {
     // 如果当前指定长度 < 剩余空间，则按照指定长度在文字后画线
     if rest-len < 0pt { first-line-available-space = _len }
-    // 第一行线
-    h(_space, weak: true)
-    hide("") // 解决相邻的左侧为中文标点符号时，第一行线换行问题
-    box(width: first-line-available-space - _space, inset: 0pt, align(center, body))
-    h(_space, weak: true)
+    sym.zws // 解决左侧为中文标点时，导致换行问题
+    // 当前行的线
+    box(width: first-line-available-space - _space, align(center, body))
   }
 
-  // 超过一行的后续横线
+  // 不在当前行的横线
   if rest-len > 5pt {
-    // 计算可以画多少完整的条数
+    // 完整的条数
     let _ratio = rest-len / (page.width - _margin * 2)
-    for _ in range(calc.trunc(_ratio)) {
-      (
-        box(width: 100%)[#if is-line-break {
+    (
+      box(width: 100%)[#if is-line-break {
           align(center, body)
           is-line-break = false
-        }]
-          + "" // + "" 是为了解决多条线时，最后一行线与之前的线间距不等的问题
-      )
-    }
+        } else { sym.zws }
+      ]
+        * calc.trunc(_ratio)
+    )
 
     // 最后一行的线
-    // + "" 是为了解决最后一行线，在这条线之后如果加文本线的间距变大问题
-    box(width: calc.fract(_ratio) * 100%)[#if is-line-break { align(center, body) }] + ""
-    h(_space, weak: true)
+    box(width: calc.fract(_ratio) * 100%)[#if is-line-break { align(center, body) } else { sym.zws }]
   }
+  h(_space, weak: true)
 }
 
 // 填空的横线
@@ -76,8 +75,9 @@
   offset: 3pt,
 ) = context {
   let result = _get-answer(body, placeholder, with-number, update)
-  if not answer-state.get() or result.child in ([], [ ]) { return _draw-line(len, stroke, offset / 2, result) }
-
+  if result == placeholder or _is_empty(result.child) {
+    return _draw-line(len, stroke, offset / 2, result)
+  }
   underline(
     evade: false,
     offset: offset,
