@@ -6,6 +6,7 @@
 #import "lib/choice.typ": choices
 #import "lib/question.typ": question
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
+#import "lib/section.typ": q-count, section-pts, set-default-pts, single-pts, total-pts
 #import "lib/outline.typ": (
   chapter, cover, draft, exam-info, exam-type, notice, score, score-box, secret, solution, solution-block, subject,
   title,

@@ -1,5 +1,6 @@
 #import "config.typ": heiti, kaiti
 #import "const.typ": EXAM, HANDOUTS
+#import "section.typ": total-pts
 #import "state.typ": answer-state, chapter-pages-state, mode-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
 #import "tools.typ": _create-seal, _trim-content
@@ -92,7 +93,7 @@
 ))
 
 #let exam-info(
-  info: (时间: "120分钟", 满分: "150分"),
+  info: auto,
   weight: 500,
   font: auto,
   size: 1em,
@@ -100,6 +101,7 @@
   top: 0pt,
   bottom: 0pt,
 ) = context {
+  let info = if info == auto { (时间: [120分钟], 满分: [#total-pts 分]) } else { info }
   assert(info.len() > 0, message: "info cannot be empty")
   set text(font: heiti + text.font, size, weight: weight)
   set align(center)

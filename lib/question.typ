@@ -1,4 +1,4 @@
-#import "state.typ": mode-state
+#import "state.typ": current-section-state, mode-state, section-data-state
 #import "const.typ": HANDOUTS, _QUESTION
 #import "counter.typ": counter-chapter, counter-placeholder, counter-question
 #import "tools.typ": _format-content
@@ -73,4 +73,25 @@
   v(bottom)
   // 更新占位符上的题号
   context counter-placeholder.update(..counter-question.get())
+  // 注册题目，统计分数
+  {
+    let section-idx = current-section-state.get()
+    if section-idx >= 0 {
+      let section-data = section-data-state.get()
+      if section-idx < section-data.len() {
+        let section = section-data.at(section-idx)
+        let effective-pts = if points != none {
+          points
+        } else if section.default-pts != none {
+          section.default-pts
+        } else {
+          0
+        }
+        section-data-state.update(data => {
+          data.at(section-idx).questions.push(effective-pts)
+          data
+        })
+      }
+    }
+  }
 }
