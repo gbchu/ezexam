@@ -11,7 +11,12 @@
 }
 
 #let _draw-line(len, stroke, offset, body) = {
-  assert(type(len) == length, message: "expect length, found " + str(type(len)))
+  assert(type(len) == length or len == 1fr, message: "expect length, 1fr")
+  set box(stroke: (bottom: stroke), inset: (bottom: offset), outset: (bottom: offset))
+  if len == 1fr {
+    box(width: len, align(center, body)) + [ \ ]
+    return
+  }
   let _len = len.to-absolute()
   assert(_len > 4pt, message: "len must > 4pt")
 
@@ -29,39 +34,37 @@
   let first-line-available-space = page-width - _margin - here-pos-x
   let rest-len = _len - first-line-available-space
   let is-line-break = false
-  let _space = if here-pos-x == _margin { 0pt } else { 1pt }
-  set box(stroke: (bottom: stroke), inset: (bottom: offset), outset: (bottom: offset))
-
-  h(_space, weak: true)
   // 当前行剩余空间 < 1em 时，则直接换行在新的一行从头开始画
   if first-line-available-space < 1em.to-absolute() {
+    [ \ ]
     is-line-break = true
     rest-len = _len
   } else {
-    // 如果当前指定长度 < 剩余空间，则按照指定长度在文字后画线
-    if rest-len < 0pt { first-line-available-space = _len }
-    sym.zws // 解决左侧为中文标点时，导致换行问题
     // 当前行的线
-    box(width: first-line-available-space - _space, align(center, body))
+    // 如果当前指定长度 < 剩余空间，则按照指定长度在文字后画线
+    box(
+      width: if rest-len < 0pt { _len } else { 1fr },
+      align(center, body),
+    )
+    // 如果当前行画满，则强制换行，否则如果后面有文字会导致线和文字一起换行
+    if rest-len > 0pt [ \ ]
   }
 
   // 不在当前行的横线
   if rest-len > 5pt {
     // 完整的条数
     let _ratio = rest-len / (page.width - _margin * 2)
-    (
+    for _ in range(calc.trunc(_ratio)) {
       box(width: 100%)[#if is-line-break {
           align(center, body)
           is-line-break = false
         } else { sym.zws }
       ]
-        * calc.trunc(_ratio)
-    )
-
+    }
     // 最后一行的线
     box(width: calc.fract(_ratio) * 100%)[#if is-line-break { align(center, body) } else { sym.zws }]
   }
-  h(_space, weak: true)
+  h(1pt, weak: true)
 }
 
 // 填空的横线
@@ -73,18 +76,21 @@
   update: false,
   stroke: .45pt + black,
   offset: 3pt,
-) = context {
-  let result = _get-answer(body, placeholder, with-number, update)
-  if result == placeholder or _is_empty(result.child) {
-    return _draw-line(len, stroke, offset / 2, result)
-  }
-  underline(
-    evade: false,
-    offset: offset,
-    stroke: stroke,
-    result,
-  )
-}
+) = (
+  h(1pt, weak: true)
+    + context {
+      let result = _get-answer(body, placeholder, with-number, update)
+      if result == placeholder or _is_empty(result.child) {
+        return _draw-line(len, stroke, offset / 2, result)
+      }
+      underline(
+        evade: false,
+        offset: offset,
+        stroke: stroke,
+        result,
+      )
+    }
+)
 
 // 选项的括号
 #let paren(
