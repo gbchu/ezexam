@@ -15,56 +15,56 @@
   set box(stroke: (bottom: stroke), inset: (bottom: offset), outset: (bottom: offset))
   if len == 1fr {
     box(width: len, align(center, body)) + [ \ ]
-    return
-  }
-  let _len = len.to-absolute()
-  assert(_len > 4pt, message: "len must > 4pt")
-
-  let page-width = if page.flipped { page.height } else { page.width }
-  let _columns = page.columns
-  let here-pos-x = here().position().x
-  if _columns > 1 {
-    let one-column-width = (page-width + columns.gutter * (_columns - 1)) / _columns
-    // 当有多个列时，当前内容所在的那一列加上前面所有的列的总宽度
-    page-width = one-column-width * calc.ceil(here-pos-x / one-column-width)
-  }
-
-  let _margin = page.margin
-  if _margin == auto { _margin = 1in }
-  let first-line-available-space = page-width - _margin - here-pos-x
-  let rest-len = _len - first-line-available-space
-  let is-line-break = false
-  // 当前行剩余空间 < 1em 时，则直接换行在新的一行从头开始画
-  if first-line-available-space < 1em.to-absolute() {
-    [ \ ]
-    is-line-break = true
-    rest-len = _len
   } else {
-    // 当前行的线
-    // 如果当前指定长度 < 剩余空间，则按照指定长度在文字后画线
-    box(
-      width: if rest-len < 0pt { _len } else { 1fr },
-      align(center, body),
-    )
-    // 如果当前行画满，则强制换行，否则如果后面有文字会导致线和文字一起换行
-    if rest-len > 0pt [ \ ]
-  }
+    let _len = len.to-absolute()
+    assert(_len > 4pt, message: "len must > 4pt")
 
-  // 不在当前行的横线
-  if rest-len > 5pt {
-    // 完整的条数
-    let _ratio = rest-len / (page.width - _margin * 2)
-    for _ in range(calc.trunc(_ratio)) {
-      box(width: 100%)[#if is-line-break {
-          align(center, body)
-          is-line-break = false
-        } else { sym.zws }
-      ]
+    let page-width = if page.flipped { page.height } else { page.width }
+    let _columns = page.columns
+    let here-pos-x = here().position().x
+    if _columns > 1 {
+      let one-column-width = (page-width + columns.gutter * (_columns - 1)) / _columns
+      // 当有多个列时，当前内容所在的那一列加上前面所有的列的总宽度
+      page-width = one-column-width * calc.ceil(here-pos-x / one-column-width)
     }
-    // 最后一行的线
-    box(width: calc.fract(_ratio) * 100%)[#if is-line-break { align(center, body) } else { sym.zws }]
+
+    let _margin = page.margin
+    if _margin == auto { _margin = 1in }
+    let first-line-available-space = page-width - _margin - here-pos-x
+    let rest-len = _len - first-line-available-space
+    let is-line-break = false
+    // 当前行剩余空间 < 1em 时，则直接换行在新的一行从头开始画
+    if first-line-available-space < 1em.to-absolute() {
+      [ \ ]
+      is-line-break = true
+      rest-len = _len
+    } else {
+      // 当前行的线
+      // 如果当前指定长度 < 剩余空间，则按照指定长度在文字后画线
+      box(
+        width: if rest-len < 0pt { _len } else { 1fr },
+        align(center, body),
+      )
+      // 如果当前行画满，则强制换行，否则如果后面有文字会导致线和文字一起换行
+      if rest-len > 0pt [ \ ]
+    }
+
+    // 不在当前行的横线
+    if rest-len > 5pt {
+      // 完整的条数
+      let _ratio = rest-len / (page.width - _margin * 2)
+      for _ in range(calc.trunc(_ratio)) {
+        box(width: 100%)[#if is-line-break {
+            align(center, body)
+            is-line-break = false
+          } else { sym.zws }
+        ]
+      }
+      // 最后一行的线
+      box(width: calc.fract(_ratio) * 100%)[#if is-line-break { align(center, body) } else { sym.zws }]
+    }
+    h(1pt, weak: true)
   }
-  h(1pt, weak: true)
 }
 
 // 填空的横线
