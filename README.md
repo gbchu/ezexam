@@ -47,6 +47,8 @@ This template can help Chinese university, primary, middle and high school teach
 + 修复 `tag` 方法，当 `par-justify` 的值设置为 true 时，对不齐的问题
 + 修改 `setup` 的参数 `par-justify` 的默认值为 true
 + 修改 `question` 方法的参数 `points-prefix` 默认值
++ 优化 `fillin` 方法，尝试修复某些情况下会报 `layout did not converge within 5 attempts` 警告的问题
+
 
 ### 0 . 3 . 1
 + 修复题号重置后，自动生成的引用标签重复出现的问题 （[#7](https://github.com/gbchu/ezexam/issues/7)）
