@@ -73,7 +73,7 @@
   v(bottom)
   // 更新占位符上的题号
   context counter-placeholder.update(..counter-question.get())
-  // 注册题目到当前节的数据中
+  // 注册题目，统计分数
   {
     let section-idx = current-section-state.get()
     if section-idx >= 0 {

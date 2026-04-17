@@ -1,8 +1,7 @@
 #import "state.typ": section-data-state, current-section-state
 
-/// Set default points for questions in the next section.
-/// Call this before the section heading.
-/// - pts (int, none): default points per question, or none if each question specifies its own points
+// 为接下来的板块设置默认单题分数
+// - pts (int, none): 单题默认分数；每题都有各自分数时可填 none
 #let set-default-pts(pts) = {
   assert(
     pts == none or (type(pts) == int and pts > 0),
@@ -15,7 +14,7 @@
   })
 }
 
-/// Question count for the current section (use in headings).
+// 当前板块的题目数量
 #let q-count = context {
   let section-idx = current-section-state.get()
   let data = section-data-state.final()
@@ -24,7 +23,7 @@
   }
 }
 
-/// Default points per question for the current section (use in headings).
+// 当前板块的单题默认分数
 #let single-pts = context {
   let section-idx = current-section-state.get()
   let data = section-data-state.final()
@@ -34,7 +33,7 @@
   }
 }
 
-/// Total points for the current section (use in headings).
+// 当前板块的总分
 #let section-pts = context {
   let section-idx = current-section-state.get()
   let data = section-data-state.final()
@@ -43,7 +42,7 @@
   }
 }
 
-/// Total points for the entire test paper (use in exam-info or notice).
+// 试卷总分
 #let total-pts = context {
   let data = section-data-state.final()
   [#data.map(s => s.questions.sum(default: 0)).sum(default: 0)]
