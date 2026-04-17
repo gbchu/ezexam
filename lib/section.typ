@@ -1,7 +1,7 @@
 #import "state.typ": section-data-state, current-section-state
 
-// 为接下来的板块设置默认单题分数
-// - pts (int, none): 单题默认分数；每题都有各自分数时可填 none
+// 为接下来的板块设置单题默认分值
+// - pts (int, none): 单题默认分值；每题都有各自分数时可填 none
 #let set-default-pts(pts) = {
   assert(
     pts == none or (type(pts) == int and pts > 0),
@@ -23,7 +23,7 @@
   }
 }
 
-// 当前板块的单题默认分数
+// 当前板块的单题默认分值
 #let single-pts = context {
   let section-idx = current-section-state.get()
   let data = section-data-state.final()
@@ -42,7 +42,7 @@
   }
 }
 
-// 试卷总分
+// 整卷总分
 #let total-pts = context {
   let data = section-data-state.final()
   [#data.map(s => s.questions.sum(default: 0)).sum(default: 0)]
