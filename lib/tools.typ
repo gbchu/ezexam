@@ -5,11 +5,11 @@
 
 
 #let _SPECIAL-CHAR = "《（【"
-// 以特殊字符，数学公式开头的行，使用box包裹该字符（除掉左侧加的间距）
+// 以特殊字符，数学公式开头的行特殊处理（除掉左侧加的间距）
 #let _boxed-content(body) = {
   if body.func() == math.equation {
     assert(not body.block, message: "Block-level formulas are not allowed at the beginning!")
-    return box(body)
+    return h(-.25em, weak: true) + body
   }
 
   if body.has("text") {
