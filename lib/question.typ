@@ -43,33 +43,40 @@
   show-ref-prefix: true,
   supplement: none,
 ) = context {
-  assert(supplement != auto, message: "supplement expected none, str, content, function")
-  let _label = _format-label(label, label-color, label-weight, with-heading-label)
   set par(leading: line-height) if line-height != auto
-  let _ref-prefix = none
+  let label = _format-label(label, label-color, label-weight, with-heading-label)
+  let body = terms(
+    indent: indent,
+    hanging-indent: if hanging-indent == auto { measure(label).width + 1em } else { hanging-indent },
+    separator: h(1em, weak: true),
+    (
+      label,
+      _format-points(points, points-prefix, points-suffix, points-separate)
+        + h(first-line-indent, weak: true)
+        + _format-content[#body],
+    ),
+  )
   v(top)
-  [#figure(
-      supplement: if ref-on {
+  if ref-on [
+    #assert(supplement != auto, message: "supplement expected none, str, content, function")
+    #show figure.where(kind: _QUESTION): it => {
+      set block(breakable: true)
+      align(left, it.body)
+    }
+    #let _ref-prefix = none
+    #figure(
+      supplement: {
         _ref-prefix = _format-ref-prefix()
         supplement + if show-ref-prefix [#_ref-prefix.replace("-", " - ")#h(-.25em, weak: true)]
         _ref-prefix = std.label(_ref-prefix + str(counter-question.get().first() + 1))
       },
       kind: _QUESTION,
-    )[
-      #terms(
-        indent: indent,
-        hanging-indent: if hanging-indent == auto { measure(_label).width + 1em } else { hanging-indent },
-        separator: h(1em, weak: true),
-        (
-          _label,
-          _format-points(points, points-prefix, points-suffix, points-separate)
-            + h(first-line-indent, weak: true)
-            + _format-content[#body],
-        ),
-      )
-    ]
-    #_ref-prefix
-  ]
+      body,
+    )#_ref-prefix
+  ] else {
+    counter-question.step()
+    body
+  }
   v(bottom)
   // 更新占位符上的题号
   context counter-placeholder.update(..counter-question.get())

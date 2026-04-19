@@ -310,11 +310,6 @@
   set underline(offset: .25em)
 
   show ref: set text(ref-color)
-  import "lib/const.typ": _QUESTION
-  show figure.where(kind: _QUESTION): it => {
-    set block(breakable: true)
-    align(left, it.body)
-  }
 
   set math.cases(gap: 1em)
   set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
