@@ -9,7 +9,7 @@
 #let _boxed-content(body) = {
   if body.func() == math.equation {
     assert(not body.block, message: "Block-level formulas are not allowed at the beginning!")
-    return h(-.25em, weak: true) + body
+    return h(-.25em) + body
   }
 
   if body.has("text") {
