@@ -1,6 +1,6 @@
 #import "config.typ": heiti, kaiti
 #import "const.typ": EXAM, HANDOUTS
-#import "section.typ": total-pts
+#import "question.typ": total-pts
 #import "state.typ": answer-state, chapter-pages-state, mode-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
 #import "tools.typ": _create-seal, _trim-content
