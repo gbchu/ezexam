@@ -4,7 +4,7 @@
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman-font
 #import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
-#import "lib/question.typ": question
+#import "lib/question.typ": q-count, question, section-pts, set-default-pts, single-pts, total-pts
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/outline.typ": (
   chapter, cover, draft, exam-info, exam-type, notice, score, score-box, secret, solution, solution-block, subject,
