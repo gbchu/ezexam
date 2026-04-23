@@ -1,10 +1,9 @@
-#import "lib/state.typ": *
 #import "lib/const.typ": EVERY_PAGE, EXAM, FIRST_PAGE, HANDOUTS, ODD_PAGE
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman-font
 #import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
-#import "lib/question.typ": question
+#import "lib/question.typ": count, point, points, question, total-points
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/outline.typ": (
   chapter, cover, draft, exam-info, exam-type, notice, score, score-box, secret, solution, solution-block, subject,
@@ -74,6 +73,7 @@
   doc,
 ) = {
   assert(mode in (HANDOUTS, EXAM), message: "mode expected " + HANDOUTS + ", " + EXAM)
+  import "lib/state.typ": *
   mode-state.update(mode)
   assert(type(font) == array and type(heading-font) == array, message: "font expected array")
   // 为页码添加在不同模式下的默认值
@@ -139,17 +139,9 @@
 
   let _footer(page-format, page-is-current-total-format: false, is-outline-page: false) = {
     if page-format == none { return }
-    let final = counter(page).final().last()
-    let (first-page, last-page, total-page) = chapter-pages-state
+    let (current-chapter-start-page, total-page) = chapter-pages-state
       .final()
-      .at(
-        counter-title.get().first() - 1,
-        default: (
-          first-page: 1,
-          last-page: final,
-          total-page: final,
-        ),
-      )
+      .at(counter-title.get().first() - 1, default: (1,) + counter(page).final())
 
     let current = counter(page).get()
     if page-is-current-total-format { current.push(total-page) }
@@ -191,7 +183,7 @@
         dy: -margin,
         block(width: width - margin * 2)[
           //当前章节第一页弥封线
-          #if current-page == first-page {
+          #if current-page == current-chapter-start-page {
             seal-line.first
             return
           }
@@ -199,7 +191,7 @@
           #if seal-line-scope == FIRST_PAGE { return }
 
           // 其它页码是否加弥封线的算法
-          #(current-page -= first-page - 1) // 在组多套试卷时，重新把页码按照1，2，3，4... 重新计算
+          #(current-page -= current-chapter-start-page - 1) // 在组多套试卷时，重新把页码按照1，2，3，4... 重新计算
           // 分页时，一页纸页码增加 2
           #if flipped and footer-is-separate {
             current-page = calc.ceil(current-page / 2)
