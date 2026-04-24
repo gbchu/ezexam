@@ -16,8 +16,8 @@
   if len == 1fr {
     box(width: len, align(center, body)) + [ \ ]
   } else {
-    let _len = len.to-absolute()
-    assert(_len > 4pt, message: "len must > 4pt")
+    let len = len.to-absolute()
+    assert(len > 4pt, message: "len must > 4pt")
 
     let page-width = if page.flipped { page.height } else { page.width }
     let _columns = page.columns
@@ -31,18 +31,18 @@
     let _margin = page.margin
     if _margin == auto { _margin = 1in }
     let first-line-available-space = page-width - _margin - here-pos-x
-    let rest-len = _len - first-line-available-space
+    let rest-len = len - first-line-available-space
     let is-line-break = false
     // 当前行剩余空间 < 1em 时，则直接换行在新的一行从头开始画
     if first-line-available-space < 1em.to-absolute() {
       [ \ ]
       is-line-break = true
-      rest-len = _len
+      rest-len = len
     } else {
       // 当前行的线
       // 如果当前指定长度 < 剩余空间，则按照指定长度在文字后画线
       box(
-        width: if rest-len < 0pt { _len } else { 1fr },
+        width: if rest-len < 0pt { len } else { 1fr },
         align(center, body),
       )
       // 如果当前行画满，则强制换行，否则如果后面有文字会导致线和文字一起换行

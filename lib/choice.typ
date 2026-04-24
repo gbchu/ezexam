@@ -61,17 +61,17 @@
     assert(choice-number > 0, message: "choices must have at least one option")
     // 拼接选项并添加标签和间距;获取选项中最长的宽度
     let max-width = 0pt
-    for index in range(choice-number) {
-      choices-arr.at(index) = _format-choice(
-        _trim-content[#choices-arr.at(index)],
-        numbering(label, index + 1),
+    for i in range(choice-number) {
+      choices-arr.at(i) = _format-choice(
+        _trim-content[#choices-arr.at(i)],
+        numbering(label, i + 1),
         indent,
         spacing,
         label-position,
       )
 
       if columns != auto { continue }
-      max-width = calc.max(max-width, measure(choices-arr.at(index)).width)
+      max-width = calc.max(max-width, measure(choices-arr.at(i)).width)
     }
 
     v(top)

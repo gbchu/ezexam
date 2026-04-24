@@ -102,9 +102,7 @@
   prefix: "【",
   suffix: "】",
 ) = context {
-  text(font: if font == auto { heiti + text.font } else { font }, weight: weight, color)[#box(prefix)#body#box(
-      suffix,
-    )#h(.5em, weak: true)]
+  text(font: if font == auto { heiti + text.font } else { font }, weight: weight, color)[#box(prefix)#body#box(suffix)#h(.5em, weak: true)]
 }
 
 // 图文混排
@@ -129,37 +127,37 @@
     [ \ ] + box(place(dx: figure-x, dy: figure-y - par.leading * 2, figure)),
   )
 
-  let _columns = (1fr, measure(figure).width)
-  let _gap = -figure-x + gap
+  let columns = (1fr, measure(figure).width)
+  let gap = -figure-x + gap
   if style == _FIGURE_LEFT_TEXT_RIGHT {
     body = body.rev()
-    _columns = _columns.rev()
-    _gap = figure-x + gap
+    columns = columns.rev()
+    gap = figure-x + gap
   }
 
   grid(
-    columns: _columns,
+    columns: columns,
     inset: (
       top: top,
       bottom: bottom,
     ),
-    gutter: _gap,
+    gutter: gap,
     ..body,
   )
 }
 
 #let page-restart(num: 1) = context {
-  assert(type(num) == int, message: "num expected integer")
+  assert(type(num) == int and num > 0, message: "num expected positive integer")
   pagebreak(weak: true)
   let chapter-index = counter-title.get().first() - 1
   let chapter-final = counter-title.final().first() - 1
   if chapter-index < 0 or chapter-index == chapter-final { return } // 处于目录页或最后一页时，不重新开始页码
   let current = counter(page).get().first() - 1
   let page-restart = page-restart-state.get()
-  // 如果重新开始页码，则将之前的页码总数更新到当前页码 - 1
+  // 如果重新开始页码，则将之前章节的页码总数更新到当前页码 - 1
   chapter-pages-state.update(pre => {
     for index in range(page-restart, chapter-index + 1) {
-      pre.at(index).total-page = current
+      pre.at(index).last() = current
     }
     pre
   })
