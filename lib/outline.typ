@@ -1,8 +1,9 @@
 #import "config.typ": heiti, kaiti
-#import "const.typ": EXAM, HANDOUTS
+#import "const.typ": EXAM
 #import "state.typ": answer-state, chapter-pages-state, mode-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
 #import "tools.typ": _create-seal, _trim-content
+#import "question.typ": tot-pts
 
 // 封面
 #let cover(
@@ -24,13 +25,15 @@
   }
 
   if date == auto [\ #datetime.today().display("[year]年[month]月[day]日")] else [\ #date]
+  counter(page).update(0)
 }
 
-#let chapter(body) = {
+#let chapter(body) = context {
   pagebreak(weak: true)
   counter-chapter.step()
   set heading(numbering: _ => counter-chapter.display(num => box(width: 1em, align(right)[#num.~])))
   place(hide[= #body <chapter>])
+  counter(heading.where(level: 1)).update(0)
   counter(heading).update(0)
   counter-question.update(0)
 }
@@ -57,7 +60,7 @@
       } else { weight },
       font: if font == auto { text.font } else { font },
       if size == auto {
-        if mode == HANDOUTS { 20pt } else { 16pt }
+        if mode == EXAM { 16pt } else { 20pt }
       } else { size },
       color,
       body,
@@ -68,12 +71,12 @@
   counter-question.update(0)
   counter-title.step()
 
-  // 收集章节的第一页和最后一页
-  let current-page = counter(page).get().first()
-  let final-page = counter(page).final().first()
+  // 收集章节的第 1 页和 本章节要显示的总页数
+  let current-page = counter(page).get()
+  let final-page = counter(page).final()
   chapter-pages-state.update(pre => {
-    if pre != () { pre.last().insert("last-page", current-page - 1) }
-    pre + ((first-page: current-page, last-page: final-page, total-page: final-page),)
+    pre.push(current-page + final-page)
+    pre
   })
 }
 
@@ -92,7 +95,8 @@
 ))
 
 #let exam-info(
-  info: (时间: "120分钟", 满分: "150分"),
+  info: (时间: "120分钟", 满分: tot-pts),
+  columns: auto,
   weight: 500,
   font: auto,
   size: 1em,
@@ -100,14 +104,17 @@
   top: 0pt,
   bottom: 0pt,
 ) = context {
-  assert(info.len() > 0, message: "info cannot be empty")
+  assert(
+    type(info) == dictionary and info.len() > 0,
+    message: "info expected dictionary, found " + repr(info),
+  )
+
   set text(font: heiti + text.font, size, weight: weight)
   set align(center)
   grid(
-    columns: info.len(),
+    columns: if columns == auto { info.len() } else { columns },
     gutter: gap,
     inset: (top: top, bottom: bottom),
-    align: center + horizon,
     ..for (key, value) in info { ([#key：#value],) }
   )
 }
@@ -197,16 +204,16 @@
 
     // 解析题号的格式化
     #counter-explain.step()
-    #let _label = none
-    #let _space = 0em
+    #let label = none
+    #let space = 0em
     #if show-number {
-      _label = context numbering("1.", ..counter-explain.get())
-      _space = .75em
+      label = context numbering("1.", ..counter-explain.get())
+      space = .75em
     }
     #terms(
       hanging-indent: 0em,
-      separator: h(_space, weak: true),
-      (_label, text(color, _trim-content(body))),
+      separator: h(space, weak: true),
+      (label, text(color, _trim-content(body))),
     )
   ]
   v(bottom)
