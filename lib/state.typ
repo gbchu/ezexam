@@ -2,5 +2,8 @@
 #let answer-state = state("answer", false)
 #let answer-color-state = state("answer-color", blue)
 #let subject-state = state("subject", none)
-#let chapter-pages-state = state("chapter-pages", ()) // 章节的第一页、最后一页、总页码
+// 章节的首页、本章节要显示的总页数 如 ((1,20),(7,20),....)
+#let chapter-pages-state = state("chapter-pages", ())
 #let page-restart-state = state("page-restart", 0)
+// 小节题目数、每题分数、小节总分 如 (((8,5,40),(3,6,18),(5,0,77)),...)
+#let question-count-points-state = state("question-count-points", ())
