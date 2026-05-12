@@ -3,7 +3,7 @@
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman-font
 #import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
-#import "lib/question.typ": count, point, points, question, total-points
+#import "lib/question.typ": per-pts, q-count, question, sec-pts, set-points, tot-pts
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/outline.typ": (
   chapter, cover, draft, exam-info, exam-type, notice, score, score-box, secret, solution, solution-block, subject,
@@ -141,7 +141,7 @@
     if page-format == none { return }
     let (current-chapter-start-page, total-page) = chapter-pages-state
       .final()
-      .at(counter-title.get().first() - 1, default: (1,) + counter(page).final())
+      .at(counter-title.get().first() - 1, default: (1, ..counter(page).final()))
 
     let current = counter(page).get()
     if page-is-current-total-format { current.push(total-page) }
