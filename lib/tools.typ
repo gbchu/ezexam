@@ -1,8 +1,6 @@
-#import "const.typ": EXAM
 #import "config.typ": heiti
 #import "counter.typ": counter-title
-#import "state.typ": chapter-pages-state, mode-state, page-restart-state
-
+#import "state.typ": chapter-pages-state, page-restart-state
 
 #let _SPECIAL-CHAR = "《（【"
 // 以特殊字符，数学公式开头的行特殊处理（除掉左侧加的间距）
@@ -102,7 +100,9 @@
   prefix: "【",
   suffix: "】",
 ) = context {
-  text(font: if font == auto { heiti + text.font } else { font }, weight: weight, color)[#box(prefix)#body#box(suffix)#h(.5em, weak: true)]
+  text(font: if font == auto { heiti + text.font } else { font }, weight: weight, color)[#box(prefix)#body#box(
+      suffix,
+    )#h(.5em, weak: true)]
 }
 
 // 图文混排
