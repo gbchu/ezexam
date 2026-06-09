@@ -50,7 +50,7 @@
   show-seal-line: true,
   seal-line-student-info: (
     姓名: underline[~~~~~~~~~~~~~],
-    准考证号: table(
+    考生号: table(
       columns: 14,
       inset: .8em,
       [],
@@ -87,17 +87,13 @@
     }
   }
 
-  assert(
-    (page-numbering, outline-page-numbering).all(item => type(item) in (str, function, type(none))),
-    message: "page numbering expected str, function, none",
-  )
   // 除目录页的页码检测：包含两个1,两个1中间不能是连续空格、包含数字
   let is-match = (
     [#page-numbering].func() == [#zh-arabic].func()
       or (
         type(page-numbering) == str
           and regex(
-            "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$|^\D*①\D*[^\d\s]\D*①\D*$|^\D*⓵\D*[^\d\s]\D*⓵\D*$",
+            "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$|^\D*①\D*[^\d\s]\D*①\D*$",
           )
             in page-numbering
       )
@@ -137,21 +133,21 @@
   let is-odd-r-even-l = page-align == "odd-r-even-l"
   footer-is-separate = paper-columns == 2 and footer-is-separate and not is-odd-r-even-l
 
-  let _footer(page-format, page-is-current-total-format: false, is-outline-page: false) = {
+  let _footer(page-format, page-is-match: false, is-outline-page: false) = {
     if page-format == none { return }
     let (current-chapter-start-page, total-page) = chapter-pages-state
       .final()
       .at(counter-title.get().first() - 1, default: (1, ..counter(page).final()))
 
     let current = counter(page).get()
-    if page-is-current-total-format { current.push(total-page) }
+    if page-is-match { current.push(total-page) }
     let _numbering = numbering(page-format, ..current)
     // 处于分栏下且左右页脚分离
     if footer-is-separate {
       current.first() += 1
       grid(
         columns: (1fr, 1fr),
-        align: center + horizon,
+        align: center,
         // 左页码
         _numbering,
         // 右页码
@@ -234,7 +230,7 @@
     foreground: watermark,
     footer: context _footer(
       page-numbering,
-      page-is-current-total-format: is-match,
+      page-is-match: is-match,
     ),
   )
   set columns(gutter: gap)
@@ -277,9 +273,7 @@
   set heading(
     numbering: heading-numbering,
     hanging-indent: heading-hanging-indent,
-    bookmarked: if mode == EXAM {
-      false
-    } else { auto },
+    bookmarked: if mode == EXAM { false } else { auto },
   )
   // 试卷模式下，书签只显示章节
   show <chapter>: set heading(bookmarked: true)
