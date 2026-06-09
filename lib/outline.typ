@@ -12,7 +12,7 @@
   author: none,
   date: auto,
 ) = {
-  set page(footer: none, columns: 1)
+  set page(footer: none, background: none, columns: 1)
   set align(center + horizon)
   text(25pt, title)
 
@@ -128,7 +128,7 @@
 
 #let notice(label: "1.", indent: 2em, hanging-indent: auto, ..children) = context {
   text(font: heiti)[注意事项：]
-  set enum(numbering: label, indent: indent)
+  set enum(numbering: label, indent: indent, spacing: 1.5em)
   set par(
     hanging-indent: if hanging-indent == auto {
       -indent - enum.body-indent - measure(label).width
