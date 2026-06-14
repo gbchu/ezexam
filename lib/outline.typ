@@ -204,16 +204,15 @@
 
     // 解析题号的格式化
     #counter-explain.step()
-    #let label = none
     #let space = 0em
-    #if show-number {
-      label = context numbering("1.", ..counter-explain.get())
+    #let label = if show-number {
+      context numbering("1.", ..counter-explain.get())
       space = .75em
     }
     #terms(
       hanging-indent: 0em,
       separator: h(space, weak: true),
-      (label, text(color, _trim-content(body))),
+      terms.item(label, text(color, _trim-content(body))),
     )
   ]
   v(bottom)
