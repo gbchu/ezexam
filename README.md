@@ -51,6 +51,8 @@ This template can help Chinese university, primary, middle and high school teach
 + 修改 `setup` 的参数 `par-justify` 的默认值为 true
 + 修改 `question` 方法的参数 `points-prefix` 默认值
 + 修改 `subject` 方法的参数 `top, bottom` 默认值
++ 新增 `set-per-pts` 方法，`q-conut`, `per-pts`, `sec-pts`, `tot-pts` 常量；方便统计小节的题量、小节每题的分数、小节的总分、试卷总分；
+感谢 [@Naptie](https://github.com/Naptie) 提交的 ([pr#8](https://github.com/gbchu/ezexam/pull/8))
 + 优化 `fillin` 方法，尝试修复某些情况下会报 `layout did not converge within 5 attempts` 警告的问题
 
 
