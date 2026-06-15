@@ -34,22 +34,23 @@
   _current-chapter-q-cnt-pts().at(heading-idx).at(idx)
 }
 
-// 当前小节的题目数量、每题分数、小节分数、总分
-#let q-count = _current-sec-q-cnt-pts(0)
+// 当前小节的题目数量、每题分数、小节分数、总分、总题数
+#let sec-q-cnt = _current-sec-q-cnt-pts(0)
 #let per-pts = _current-sec-q-cnt-pts(1)
 #let sec-pts = _current-sec-q-cnt-pts(-1)
 #let tot-pts = context _current-chapter-q-cnt-pts().fold(0, (acc, (.., sec-pts)) => acc + sec-pts)
+#let tot-q-cnt = context _current-chapter-q-cnt-pts().fold(0, (acc, (sec-q-cnt, ..)) => acc + sec-q-cnt)
 
 // 更新每个小节的问题数、总分数
 #let _update-question-count-points(points, chapter-idx, heading-idx) = {
   if heading-idx < 0 { return } // 题目没有小节标题时
   question-count-points-state.update(pre => {
     if pre.len() == chapter-idx { pre.push(((0, none, 0),)) } // 当前章节未设置分数时
-    let chapter-count-pts = pre.at(chapter-idx)
-    if chapter-count-pts.len() == heading-idx { chapter-count-pts.push((0, none, 0)) } // 当前小节没有初始化时
-    let (count, per-pts, sec-pts) = chapter-count-pts.at(heading-idx)
-    chapter-count-pts.at(heading-idx) = (count + 1, per-pts, sec-pts + if points != none { points } else { per-pts })
-    pre.at(chapter-idx) = chapter-count-pts
+    let chapter-cnt-pts = pre.at(chapter-idx)
+    if chapter-cnt-pts.len() == heading-idx { chapter-cnt-pts.push((0, none, 0)) } // 当前小节没有初始化时
+    let (cnt, per-pts, sec-pts) = chapter-cnt-pts.at(heading-idx)
+    chapter-cnt-pts.at(heading-idx) = (cnt + 1, per-pts, sec-pts + if points != none { points } else { per-pts })
+    pre.at(chapter-idx) = chapter-cnt-pts
     pre
   })
 }
