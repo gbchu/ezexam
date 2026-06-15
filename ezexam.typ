@@ -3,7 +3,7 @@
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman-font
 #import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
-#import "lib/question.typ": per-pts, q-count, question, sec-pts, set-per-pts, tot-pts
+#import "lib/question.typ": per-pts, sec-q-cnt, question, sec-pts, set-per-pts, tot-pts, tot-q-cnt
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/outline.typ": (
   chapter, cover, draft, exam-info, exam-type, notice, score, score-box, secret, solution, solution-block, subject,
