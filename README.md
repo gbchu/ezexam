@@ -51,6 +51,7 @@ This template can help Chinese university, primary, middle and high school teach
 + 修改 `setup` 的参数 `par-justify` 的默认值为 true
 + 修改 `question` 方法的参数 `points-prefix` 默认值
 + 修改 `subject` 方法的参数 `top, bottom` 默认值
++ 修改 `choices` 方法的参数 `sapcing` ，重命名为 `body-indent`
 + 新增 `set-per-pts` 方法，`sec-q-cnt`, `per-pts`, `sec-pts`, `tot-pts`, `tot-q-cnt` 常量；方便统计小节的题量、小节每题的分数、小节的总分、试卷总分；
 感谢 [@Naptie](https://github.com/Naptie) 提交的 ([pr#8](https://github.com/gbchu/ezexam/pull/8))
 + 优化 `fillin` 方法，尝试修复某些情况下会报 `layout did not converge within 5 attempts` 警告的问题
@@ -136,7 +137,7 @@ This template can help Chinese university, primary, middle and high school teach
 + 废弃 `underdot` 方法；使用新的方法实现中文着重号
 
 ### 0 . 2 . 4
-+ 优化 `choices` 方法；新增参数 `label-position` ； 该参数可在选项为图表时，修改标签的位置。默认在左侧；将参数 `body-indent` 名修改为 `sapcing` ；更加符合语境
++ 优化 `choices` 方法；新增参数 `label-position` ； 该参数可在选项为图表时，修改标签的位置。默认在左侧；将参数 `body-indent` 名修改为 `sapcing`
 + 优化 `question` 方法，修复题号偏移的 bug
 + 修复修改 `setup` 方法的 `paper` 参数时，只修改部分值报错的 bug
 + 修复在 Typst 的最新版 0.14.0 中数学字体报警告问题
