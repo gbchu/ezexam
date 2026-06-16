@@ -2,11 +2,11 @@
 
 #let _CHOICE_MIN_GAP = .15in
 
-#let _format-choice(choice, label, indent, spacing, label-position) = {
+#let _format-choice(choice, label, indent, body-indent, label-position) = {
   if choice.func() not in (image, table) {
     return par(
-      hanging-indent: indent + spacing + measure(label).width,
-      h(indent) + label + h(spacing, weak: true) + choice,
+      hanging-indent: indent + body-indent + measure(label).width,
+      h(indent) + label + h(body-indent, weak: true) + choice,
     )
   }
 
@@ -14,13 +14,13 @@
   set grid(inset: (left: indent), align: center)
   if label-position == bottom {
     grid(
-      pad(bottom: spacing, choice),
+      pad(bottom: body-indent, choice),
       label,
     )
   } else {
     grid(
       columns: 2,
-      label, pad(left: spacing, choice),
+      label, pad(left: body-indent, choice),
     )
   }
 }
@@ -45,7 +45,7 @@
   c-gap: 0pt,
   r-gap: 2em,
   indent: 0pt,
-  spacing: 5pt,
+  body-indent: 5pt,
   top: 0pt,
   bottom: 0pt,
   label: "A.",
@@ -66,7 +66,7 @@
         _trim-content[#choices-arr.at(i)],
         numbering(label, i + 1),
         indent,
-        spacing,
+        body-indent,
         label-position,
       )
 
