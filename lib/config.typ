@@ -13,8 +13,8 @@
 )
 
 #let roman = (
-  (name: "Times New Roman", covers: regex("\w")), // 西文字体
-  (name: "TeX Gyre Termes", covers: regex("\w")), //（无Times New Roman时）
+  (name: "Times New Roman", covers: regex("[a-zA-Z0-9]")), // 西文字体
+  (name: "TeX Gyre Termes", covers: regex("[a-zA-Z0-9]")), //（无Times New Roman时）
   (name: "STIX Two Math", covers: regex("[𝑗𝑓𝑧𝜋∅±/]")),
   "TeX Gyre Termes Math",
   "Noto Serif CJK SC", // 中文字体
