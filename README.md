@@ -43,7 +43,7 @@ This template can help Chinese university, primary, middle and high school teach
 
 ## Changelog
 ### 0 . 3 . 2
-+ ⚠️ 修改字体，`roman` 重命名为 `roman-font`， 并调整 𝑗𝑓𝑧𝜋∅±/ 的字体为 `STIX Two Math` ，修复 𝑗𝑓 加绝对值后，左侧绝对值的线被遮挡的问题
++ ⚠️ 修改字体，调整 𝑗𝑓𝑧𝜋∅±/ 的字体为 `STIX Two Math` ，修复 𝑗𝑓 加绝对值后，左侧绝对值的线被遮挡的问题
 + 修复 `tag` 方法，当 `par-justify` 的值设置为 true 时，对不齐的问题
 + 修复 `cover` 方法
   + 页码清 0，导致目录页未能从 1 开始的问题；

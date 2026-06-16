@@ -116,13 +116,7 @@
         + _format-content[#body],
     ),
   )
-  /*   let body = list(
-    marker: label,
-    indent: indent,
-    body-indent: 1em,
-    _format-points(points, points-prefix, points-suffix, points-separate)
-      + _format-content[#body],
-  ) */
+
   v(top)
   if ref-on [
     #assert(supplement != auto, message: "supplement expected none, str, content, function")
