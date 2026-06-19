@@ -1,4 +1,5 @@
 #import "config.typ": heiti
+#import "const.typ": CIRCLE, TEXT
 #import "counter.typ": counter-title
 #import "state.typ": chapter-pages-state, page-restart-state
 
@@ -71,8 +72,8 @@
     line(length: 100%, stroke: (dash: line-type))
   } else {
     let data = (
-      "circle": 4 * (circle(width: 1.25em, stroke: .5pt),),
-      "text": ("弥", "封", "线", none),
+      { CIRCLE }: 4 * (circle(width: 1.25em, stroke: .5pt),),
+      { TEXT }: ("弥", "封", "线", none),
     )
     let seal-line = (4 * (line(length: 100%, stroke: (dash: line-type)),))
       .zip(data.at(decoration))
@@ -106,8 +107,6 @@
 }
 
 // 图文混排
-#let _TEXT_LEFT_FIGURE_RIGHT = "tf"
-#let _FIGURE_LEFT_TEXT_RIGHT = "ft"
 #let text-figure(
   figure: none,
   figure-x: 0pt,
@@ -115,13 +114,10 @@
   top: 0pt,
   bottom: 0pt,
   gap: 0pt,
-  style: _TEXT_LEFT_FIGURE_RIGHT,
+  style: "tf",
   text,
 ) = context {
-  assert(
-    style in (_TEXT_LEFT_FIGURE_RIGHT, _FIGURE_LEFT_TEXT_RIGHT),
-    message: "style expected " + _TEXT_LEFT_FIGURE_RIGHT + ", " + _FIGURE_LEFT_TEXT_RIGHT,
-  )
+  assert(style in ("tf", "ft"), message: "style expected 'tf', 'ft'")
   let body = (
     text, // [ \ ] 是为了在当前页还有一行时，换页
     [ \ ] + box(place(dx: figure-x, dy: figure-y - par.leading * 2, figure)),
@@ -129,7 +125,7 @@
 
   let columns = (1fr, measure(figure).width)
   let gap = -figure-x + gap
-  if style == _FIGURE_LEFT_TEXT_RIGHT {
+  if style == "ft" {
     body = body.rev()
     columns = columns.rev()
     gap = figure-x + gap
