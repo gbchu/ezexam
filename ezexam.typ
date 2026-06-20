@@ -1,9 +1,9 @@
-#import "lib/const.typ": EVERY_PAGE, EXAM, FIRST_PAGE, HANDOUTS, ODD_PAGE
+#import "lib/const.typ": CIRCLE, EVERY_PAGE, EXAM, FIRST_PAGE, HANDOUTS, ODD_PAGE, TEXT
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman
 #import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
-#import "lib/question.typ": per-pts, sec-q-cnt, question, sec-pts, set-per-pts, tot-pts, tot-q-cnt
+#import "lib/question.typ": per-pts, question, sec-pts, sec-q-cnt, set-per-pts, tot-pts, tot-q-cnt
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/outline.typ": (
   chapter, cover, draft, exam-info, exam-type, notice, score, score-box, secret, solution, solution-block, subject,
@@ -75,18 +75,33 @@
   assert(mode in (HANDOUTS, EXAM), message: "mode expected " + HANDOUTS + ", " + EXAM)
   import "lib/state.typ": *
   mode-state.update(mode)
-  assert(type(font) == array and type(heading-font) == array, message: "font expected array")
-  // 为页码添加在不同模式下的默认值
-  if page-numbering == auto {
-    page-numbering = "1 / 1"
-    if mode == EXAM {
-      page-numbering = zh-arabic(prefix: context {
+
+  let mode-config = (
+    { EXAM }: (
+      page-numbering: zh-arabic(prefix: context {
         [#subject-state.get()]
         if (mode-state.get() == none) [参考答案] else [试题]
-      })
-    }
-  }
+      }),
+      outline-target: <chapter>,
+      heading-numbering: (..item) => numbering("一、", ..item) + h(-.3em),
+      heading-hanging-indent: 2em,
+      h1-size: 11pt,
+    ),
+    { HANDOUTS }: (
+      page-numbering: "1 / 1",
+      outline-target: heading,
+      heading-numbering: "1.1.1.1.1.",
+      heading-hanging-indent: auto,
+      h1-size: 1em,
+    ),
+  ).at(mode)
 
+  assert(
+    type(font) == array and type(heading-font) == array,
+    message: "font must be an array, e.g., ('kaiti', 'heiti', ...)",
+  )
+
+  if page-numbering == auto { page-numbering = mode-config.page-numbering }
   // 除目录页的页码检测：包含两个1,两个1中间不能是连续空格、包含数字
   let is-match = (
     [#page-numbering].func() == [#zh-arabic].func()
@@ -105,8 +120,8 @@
       message: "seal-line-scope expected " + EVERY_PAGE + ", " + FIRST_PAGE + ", " + ODD_PAGE,
     )
     assert(
-      seal-line-decoration in ("text", "circle", none),
-      message: "seal-line-decoration expected 'text', 'circle', none",
+      seal-line-decoration in (TEXT, CIRCLE, none),
+      message: "seal-line-decoration expected" + TEXT + ", " + CIRCLE + ", " + none,
     )
     import "lib/tools.typ": _create-seal
     _create-seal = _create-seal.with(
@@ -127,9 +142,7 @@
   }
 
   paper = a4 + paper
-  let paper-columns = paper.columns
-  let margin = paper.margin
-  let flipped = paper.flipped
+  let (margin, flipped, columns: paper-columns) = paper
   let is-odd-r-even-l = page-align == "odd-r-even-l"
   footer-is-separate = paper-columns == 2 and footer-is-separate and not is-odd-r-even-l
 
@@ -236,7 +249,7 @@
   set columns(gutter: gap)
 
   set outline(
-    target: if mode == EXAM { <chapter> } else { heading },
+    target: mode-config.outline-target,
     title: text(1.5em)[#h(1fr)目#h(1em)录#h(1fr)],
   )
 
@@ -246,13 +259,6 @@
     it
     pagebreak(weak: true)
     counter(page).update(1)
-  }
-  // 讲义模式下的章节目录样式
-  show outline.entry.where(level: 1): it => {
-    if mode-state.get() == HANDOUTS and it.element.bookmarked != auto {
-      return text(weight: 700, it)
-    }
-    it
   }
 
   set par(
@@ -264,23 +270,14 @@
   set text(font: font, font-size)
 
   if heading-numbering == auto {
-    heading-numbering = "1.1.1.1.1."
-    if mode == EXAM {
-      heading-numbering = (..item) => numbering("一、", ..item) + h(-.3em)
-      heading-hanging-indent = 2em
-    }
+    heading-numbering = mode-config.heading-numbering
+    heading-hanging-indent = mode-config.heading-hanging-indent
   }
   set heading(
     numbering: heading-numbering,
     hanging-indent: heading-hanging-indent,
-    bookmarked: if mode == EXAM { false } else { auto },
   )
-  // 试卷模式下，书签只显示章节
-  show <chapter>: set heading(bookmarked: true)
-  if h1-size == auto {
-    h1-size = font-size
-    if mode == HANDOUTS { h1-size = 1em }
-  }
+  if h1-size == auto { h1-size = mode-config.h1-size }
   show heading: it => {
     set par(leading: 1.3em)
     set text(h1-size) if it.level == 1
@@ -294,11 +291,10 @@
   set list(marker: list-marker, spacing: list-spacing, indent: list-indent)
   set table.cell(align: horizon + center, stroke: .5pt)
   set underline(offset: .25em)
-
   show ref: set text(ref-color)
 
   set math.cases(gap: 1em)
-  set math.equation(numbering: "（1）", supplement: [Eq -]) if mode == HANDOUTS
+  set math.equation(numbering: "（1）", supplement: [EQ -]) if mode == HANDOUTS
   show math.equation: set text(font: font)
   let space = h(.25em, weak: true)
   show math.equation.where(block: false): it => space + math.display(it) + space
