@@ -50,6 +50,7 @@
   bottom: 0pt,
 ) = context {
   let mode = mode-state.get()
+  set par(spacing: 1.3em)
   v(top)
   align(
     position,
