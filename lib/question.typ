@@ -11,7 +11,7 @@
     message: "points expected positive number or none, found " + repr(points),
   )
   let chapter-index = counter-chapter.get().first() - 1
-  // 第一章没有调用chapter方法，则
+  // 第1章没有调用chapter方法时
   if chapter-index < 0 {
     chapter-index = 0
     counter-chapter.update(1)
@@ -22,7 +22,7 @@
     if pre.len() == chapter-index {
       pre.push(init-cnt-pts)
     } else {
-      pre.at(chapter-index) = init-cnt-pts
+      pre.at(chapter-index) += init-cnt-pts
     }
     pre
   })
