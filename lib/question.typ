@@ -11,19 +11,26 @@
     message: "points expected positive number or none, found " + repr(points),
   )
   let chapter-index = counter-chapter.get().first() - 1
+  // 第一章没有调用chapter方法，则
+  if chapter-index < 0 {
+    chapter-index = 0
+    counter-chapter.update(1)
+  }
   question-count-points-state.update(pre => {
     let zeros = points.len() * (0,)
     let init-cnt-pts = zeros.zip(points, zeros)
     if pre.len() == chapter-index {
       pre.push(init-cnt-pts)
     } else {
-      pre.at(chapter-index) += init-cnt-pts
+      pre.at(chapter-index) = init-cnt-pts
     }
     pre
   })
 }
 
-#let _current-chapter-q-cnt-pts() = question-count-points-state.final().at(counter-chapter.get().first() - 1)
+#let _current-chapter-q-cnt-pts() = (
+  question-count-points-state.final().at(counter-chapter.get().first() - 1, default: ((0, none, 0),))
+)
 
 #let _current-sec-q-cnt-pts(idx) = context {
   let heading-idx = counter(heading).get().first() - 1
@@ -31,7 +38,7 @@
     heading-idx >= 0,
     message: "the count of current questions and points will not be available! Unless a heading is added.",
   )
-  _current-chapter-q-cnt-pts().at(heading-idx).at(idx)
+  _current-chapter-q-cnt-pts().at(heading-idx, default: (0, none, 0)).at(idx)
 }
 
 // 当前小节的题目数量、每题分数、小节分数、总分、总题数
