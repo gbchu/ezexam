@@ -34,11 +34,12 @@
 
 #let _current-sec-q-cnt-pts(idx) = context {
   let heading-idx = counter(heading).get().first() - 1
-  assert(
-    heading-idx >= 0,
-    message: "the count of current questions and points will not be available! Unless a heading is added.",
-  )
-  _current-chapter-q-cnt-pts().at(heading-idx, default: (0, none, 0)).at(idx)
+  if heading-idx < 0 {
+    heading-idx = 0
+    counter(heading).update(1)
+  }
+
+  [#_current-chapter-q-cnt-pts().at(heading-idx, default: (0, none, 0)).at(idx)]
 }
 
 // 当前小节的题目数量、每题分数、小节分数、总分、总题数

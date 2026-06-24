@@ -259,6 +259,13 @@
     it
     pagebreak(weak: true)
     counter(page).update(1)
+    counter(heading).update(0)
+  }
+
+  // 讲义模式下小节调用统计分数，题量时对应更新heading counter
+  show outline.entry: it => {
+    it
+    counter(heading).step()
   }
 
   set par(
