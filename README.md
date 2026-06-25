@@ -44,6 +44,7 @@ This template can help Chinese university, primary, middle and high school teach
 ## Changelog
 ### 0 . 3 . 2
 + ⚠️ 修改字体，调整 𝑗𝑓𝑧𝜋∅±/ 的字体为 `STIX Two Math` ，修复 𝑗𝑓 加绝对值后，左侧绝对值的线被遮挡的问题
++ 修复 `solution` 方法，当以数学公式开头时，左侧和上一段落对不齐的问题
 + 修复 `tag` 方法，当 `par-justify` 的值设置为 true 时，对不齐的问题
 + 修复 `cover` 方法
   + 页码清 0，导致目录页未能从 1 开始的问题；
@@ -52,9 +53,9 @@ This template can help Chinese university, primary, middle and high school teach
 + 修改 `question` 方法的参数 `points-prefix` 默认值
 + 修改 `subject` 方法的参数 `top, bottom` 默认值
 + 修改 `choices` 方法的参数 `sapcing` ，重命名为 `body-indent`
-+ 新增 `set-per-pts` 方法，`sec-q-cnt`, `per-pts`, `sec-pts`, `tot-pts`, `tot-q-cnt` 常量；方便统计小节的题量、小节每题的分数、小节的总分、试卷总分；
++ 新增 `set-per-pts` 方法，`sec-q-cnt`, `per-pts`, `sec-pts`, `tot-pts`, `tot-q-cnt` 常量；方便自动统计小节的题量、试卷总题量、小节的总分、试卷总分等
 感谢 [@Naptie](https://github.com/Naptie) 提交的 ([pr#8](https://github.com/gbchu/ezexam/pull/8))
-+ 优化 `fillin` 方法，尝试修复某些情况下会报 `layout did not converge within 5 attempts` 警告的问题
+<!-- + 优化 `fillin` 方法，尝试修复某些情况下会报 `layout did not converge within 5 attempts` 警告的问题 -->
 
 
 ### 0 . 3 . 1
