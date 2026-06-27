@@ -208,7 +208,7 @@
     // 解析题号的格式化
     #counter-explain.step()
     #terms(
-      hanging-indent: 1.25em,
+      hanging-indent: 0em,
       separator: h(.5em, weak: true),
       terms.item(
         if show-number {
