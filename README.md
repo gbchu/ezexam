@@ -47,9 +47,11 @@ This template can help Chinese university, primary, middle and high school teach
 + 修复 `solution` 方法，当以数学公式开头时，左侧和上一段落对不齐的问题
 + 修复 `tag` 方法，当 `par-justify` 的值设置为 true 时，对不齐的问题
 + 修复 `cover` 方法
-  + 页码清 0，导致目录页未能从 1 开始的问题；
+  + 页码清 0，导致目录页未能从 1 开始的问题
   + 试卷开启 gap-line 时，封面页会显示分割线的问题
-+ 修复 `draft` 方法 在 paper 为 a3 时，翻转且分栏问题
++ 修复 `draft` 方法
+  + 在 paper 为 a3 时，翻转且分栏问题
+  + 前面页码增加问题
 + 修改 `setup` 的参数 `par-justify` 的默认值为 true
 + 修改 `question` 方法的参数 `points-prefix` 默认值
 + 修改 `subject` 方法的参数 `top, bottom` 默认值
