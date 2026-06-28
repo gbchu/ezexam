@@ -98,7 +98,7 @@
 
   assert(
     type(font) == array and type(heading-font) == array,
-    message: "font must be an array, e.g., ('kaiti', 'heiti', ...)",
+    message: "font must be an array, e.g., ('heiti', ...)",
   )
 
   if page-numbering == auto { page-numbering = mode-config.page-numbering }
@@ -106,11 +106,7 @@
   let is-match = (
     [#page-numbering].func() == [#zh-arabic].func()
       or (
-        type(page-numbering) == str
-          and regex(
-            "^\D*1\D*[^\d\s]\D*1\D*$|^\D*i\D*[^\d\s]\D*i\D*$|^\D*I\D*[^\d\s]\D*I\D*$",
-          )
-            in page-numbering
+        type(page-numbering) == str and regex("(?i)^\D*[1i]\D*[^\d\s]\D*[1i]\D*$") in page-numbering
       )
   )
 
@@ -177,7 +173,7 @@
       )
     }
 
-    // 添加弥封线
+    // 弥封线
     if mode-state.get() == EXAM and seal-line != none and not is-outline-page {
       let current-page = current.first()
       let width = page.height
