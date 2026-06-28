@@ -1,10 +1,10 @@
-// #import "@preview/ezexam:0.3.2": *
-#import "/ezexam.typ": *
+#import "@preview/ezexam:0.3.2": *
+
 #show: setup.with(
   mode: EXAM,
   paper: a3,
   show-answer: true,
-  show-gap-line: true
+  show-gap-line: true,
 )
 
 #outline()
@@ -170,6 +170,8 @@
   + 若存在 $phi$，使得对任意 $x$，都有 $5cos x - cos(5x + phi) lt.slant b$，求 $b$ 的最小值.
 ]
 
+#page-restart()
+
 #let answer = tag.with(prefix: "答案：", suffix: none, color: maroon)
 #solution-block[
   #solution(title: "解析")[
@@ -184,3 +186,5 @@
     解: #lorem(8)#score(8)
   ]
 ]
+
+#draft()
