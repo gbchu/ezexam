@@ -33,7 +33,6 @@
   counter-chapter.step()
   set heading(numbering: _ => counter-chapter.display(num => box(width: 1em, align(right)[#num.~])))
   place(hide[= #body <chapter>])
-  counter(heading.where(level: 1)).update(0)
   counter(heading).update(0)
   counter-question.update(0)
 }
@@ -144,7 +143,7 @@
   if not answer-state.get() { return }
   let pre-mode = mode-state.get()
   let set-mode(_mode) = mode-state.update(_mode)
-  counter-explain.update(0) // 解析题号从 1 开始重新编号
+  counter-explain.update(0)
   pagebreak(weak: true)
   set-mode(none)
   title(name)
