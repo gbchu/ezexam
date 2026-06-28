@@ -2,7 +2,7 @@
 #import "const.typ": EXAM
 #import "state.typ": answer-state, chapter-pages-state, mode-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
-#import "tools.typ": _create-seal, _format-content
+#import "tools.typ": _create-seal, _format-content, page-restart
 #import "question.typ": tot-pts
 
 // 封面
@@ -232,6 +232,7 @@
   line-type: "solid",
   supplement: none,
 ) = {
+  page-restart()
   set page(margin: .5in, footer: none, background: none, flipped: false, columns: 1)
   title(spacing: 1em, bottom: 0pt, name)
   _create-seal(line-type: line-type, supplement: supplement, info: student-info)
