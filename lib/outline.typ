@@ -207,15 +207,9 @@
 
     // 解析题号的格式化
     #counter-explain.step()
-    #terms(
-      hanging-indent: 0em,
-      separator: h(.5em, weak: true),
-      terms.item(
-        if show-number {
-          context numbering("1.", ..counter-explain.get())
-        },
-        text(color, _format-content(body)),
-      ),
+    #list(
+      marker: if show-number { context numbering("1.", ..counter-explain.get()) },
+      text(color, _format-content(body)),
     )
   ]
   v(bottom)
