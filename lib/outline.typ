@@ -232,7 +232,7 @@
   line-type: "solid",
   supplement: none,
 ) = {
-  set page(margin: .5in, footer: none)
+  set page(margin: .5in, footer: none, background: none, flipped: false, columns: 1)
   title(spacing: 1em, bottom: 0pt, name)
   _create-seal(line-type: line-type, supplement: supplement, info: student-info)
 }
