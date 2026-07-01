@@ -71,14 +71,14 @@
 ]
 
 #question[
-  若圆 $x^2 + (y + 2)^2 = r^2 (r > 0)$ 上到直线 $y = sqrt(3)x + 2$ 的距离为 1 的点有且仅有 2 个，则 R 的取值范围是
+  若圆 $x^2 + (y + 2)^2 = r^2 (r > 0)$ 上到直线 $y = sqrt(3)x + 2$ 的距离为 1 的点有且仅有 2 个，则 $r$ 的取值范围是
   #paren[B]
   #choices([(0, 1)], [(1, 3)], [(3, +∞)], [(0, +∞)])
 ]
 
 #question[
   若实数 $x, y, z$ 满足 $2 + log_2 x = 3 + log_3y = 5 + log_5 z$，则 $x, y, z$ 的大小关系不可能是 #paren[B]
-  #choices([$x > y > z$], [$x > z > y$], [$y > x > z$], [$y > z > x$])
+  #choices($x > y > z$, $x > z > y$, $y > x > z$, $y > z > x$)
 ]
 
 
@@ -159,7 +159,7 @@
   的离心率为 $(2sqrt(2)) / 3$.
   + 求椭圆的标准方程；
   + 设点 $P(m, n)$.
-    + 若 $P$ 不在 $y$ 轴上，设 R 是射线 $A P$ 上一点，$|A R| dot |A P| = 3$，用 $m, n$ 表示点 R 的坐标；
+    + 若 $P$ 不在 $y$ 轴上，设 $R$ 是射线 $A P$ 上一点，$|A R| dot |A P| = 3$，用 $m, n$ 表示点 $R$ 的坐标；
     + 设直线$O Q$ 的斜率为 $k_1$，直线 $O P$ 的斜率为 $k_2$，若 $k_1 = 3k_2$，$M$为椭圆上一点，求 $|P M|$ 的最大值.
 ]
 
@@ -172,19 +172,25 @@
 
 #page-restart()
 
-#let answer = tag.with(prefix: "答案：", suffix: none, color: maroon)
 #solution-block[
+  #let answer = tag.with(prefix: "答案：", suffix: none, color: maroon)
+  = 选择
   #solution(title: "解析")[
     #answer[A]
 
-    解: #lorem(6)#score(6)
+    解析: #lorem(6)#score(5)
   ]
 
   #solution[
     #answer[B]
 
-    解: #lorem(8)#score(8)
+    解析: #lorem(8)#score(6)
+  ]
+
+  = 填空
+  #solution[
+    #answer[6]
+
+    解析: #lorem(8)#score(5)
   ]
 ]
-
-#draft()
