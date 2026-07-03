@@ -2,8 +2,8 @@
 
 #show: setup.with(
   mode: EXAM,
-  paper: a3,
-  show-answer: true,
+  // paper: a3,
+  // show-answer: true,
   show-gap-line: true,
 )
 
@@ -101,7 +101,7 @@
 
 = 填空题：本题共 #sec-q-cnt 小题，每小题 #per-pts 分，共 #sec-pts 分。
 #question[
-  若直线 $y = 2x +5$ 是曲线 $y = e^x + x + a$ 的切线，则 $a =$#fillin[4].
+  若直线 $y = 2x +5$ 是曲线 $y = e^x + x + a$ 的切线，则 $a$= #fillin[4].
 ]
 
 #question[
@@ -109,7 +109,7 @@
 ]
 
 #question[
-  一个箱子里有 5 个球，分别以 1$~$5 标号，若有放回取三次，记至少取出一次的球的个数 $X$，则 $E(X) =$#fillin[$61/25$].
+  一个箱子里有 5 个球，分别以 1$~$5 标号，若有放回取三次，记至少取出一次的球的个数 $X$，则 $E(X)$= #fillin[$61/25$].
 ]
 
 = 解答题：本题共 #sec-q-cnt 小题，共 #sec-pts 分。解答应写出文字说明、证明过程或演算步骤。
