@@ -63,7 +63,6 @@
       // 最后一行的线
       box(width: calc.fract(_ratio) * 100%)[#if is-line-break { align(center, body) } else { sym.zws }]
     }
-    h(1pt, weak: true)
   }
 }
 
@@ -76,21 +75,23 @@
   update: false,
   stroke: .45pt + black,
   offset: 3pt,
-) = (
-  h(1pt, weak: true)
-    + context {
-      let result = _get-answer(body, placeholder, with-number, update)
-      if result == placeholder or _is_empty(result.child) {
-        return _draw-line(len, stroke, offset / 2, result)
-      }
-      underline(
-        evade: false,
-        offset: offset,
-        stroke: stroke,
-        result,
-      )
-    }
-)
+) = context {
+  let result = _get-answer(body, placeholder, with-number, update)
+  let space = h(.25em, weak: true)
+  space
+  if result == placeholder or _is_empty(result.child) {
+    _draw-line(len, stroke, offset / 2, result)
+  } else {
+    underline(
+      evade: false,
+      offset: offset,
+      stroke: stroke,
+      result,
+    )
+  }
+  space
+}
+
 
 // 选项的括号
 #let paren(
@@ -101,7 +102,10 @@
   update: false,
 ) = [
   #if justify { h(1fr) }
-  #h(0pt, weak: true)（~~#context _get-answer(body, placeholder, with-number, update)~~）
+  #let space = h(0pt, weak: true)
+  #space
+  （~~#context _get-answer(body, placeholder, with-number, update)~~）
+  #space
 ]
 
 // 类似英文中的7选5题型专用语法糖
