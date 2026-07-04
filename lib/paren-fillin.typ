@@ -12,7 +12,7 @@
 
 #let _draw-line(len, stroke, offset, body) = {
   assert(type(len) == length or len == 1fr, message: "expect length, 1fr")
-  set box(stroke: (bottom: stroke), inset: (bottom: offset), outset: (bottom: offset))
+  set box(stroke: (bottom: stroke), inset: (bottom: offset))
   if len == 1fr {
     box(width: len, align(center, body)) + [ \ ]
   } else {
@@ -75,19 +75,21 @@
   update: false,
   stroke: .45pt + black,
   offset: 3pt,
-) = context {
-  let result = _get-answer(body, placeholder, with-number, update)
+) = {
   let space = h(.25em, weak: true)
   space
-  if result == placeholder or _is_empty(result.child) {
-    _draw-line(len, stroke, offset / 2, result)
-  } else {
-    underline(
-      evade: false,
-      offset: offset,
-      stroke: stroke,
-      result,
-    )
+  context {
+    let result = _get-answer(body, placeholder, with-number, update)
+    if result == placeholder or _is_empty(result.child) {
+      _draw-line(len, stroke, offset, result)
+    } else {
+      underline(
+        evade: false,
+        offset: offset,
+        stroke: stroke,
+        result,
+      )
+    }
   }
   space
 }
