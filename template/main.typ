@@ -2,8 +2,8 @@
 
 #show: setup.with(
   mode: EXAM,
-  // paper: a3,
-  // show-answer: true,
+  paper: a3,
+  show-answer: true,
   show-gap-line: true,
 )
 
