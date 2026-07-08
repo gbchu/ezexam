@@ -39,6 +39,7 @@
   list-spacing: auto,
   list-indent: 0pt,
   ref-color: rgb("#0a6e96"),
+  strong-han-dot: false,
   resume: true,
   watermark: none,
   watermark-color: rgb("#f666"),
@@ -306,7 +307,14 @@
   // 中文着重号
   let han-zi = regex("\p{Han}")
   show strong: content => {
-    show han-zi: it => box(place(text("·", .8em), dx: .45em, dy: .75em) + it)
+    set text(weight: 700)
+    show han-zi: it => {
+      if strong-han-dot {
+        box(place(text("·", .8em), dx: .45em, dy: .75em) + text(weight: 400, it))
+      } else {
+        it
+      }
+    }
     content.body
   }
 
@@ -317,4 +325,3 @@
 
   doc
 }
-
