@@ -296,7 +296,7 @@
   set underline(offset: .25em)
   show ref: set text(ref-color)
 
-  set math.cases(gap: 1em)
+  set math.cases(gap: .75em)
   set math.equation(numbering: "（1）", supplement: [EQ -]) if mode == HANDOUTS
   show math.equation: set text(font: font, weight: "regular")
   let space = h(.25em, weak: true)
