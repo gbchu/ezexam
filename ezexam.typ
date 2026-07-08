@@ -298,7 +298,7 @@
 
   set math.cases(gap: 1em)
   set math.equation(numbering: "（1）", supplement: [EQ -]) if mode == HANDOUTS
-  show math.equation: set text(font: font)
+  show math.equation: set text(font: font, weight: "regular")
   let space = h(.25em, weak: true)
   show math.equation.where(block: false): it => space + math.display(it) + space
   show "∥": [#space\//#space]
