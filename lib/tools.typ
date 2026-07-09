@@ -4,10 +4,10 @@
 #import "state.typ": chapter-pages-state, page-restart-state
 
 #let _SPECIAL-CHAR = "《（【"
-// 以特殊字符，数学公式开头的行特殊处理（除掉左侧加的间距）
-#let _boxed-content(body) = {
+// 以特殊字符，数学公式开头的行特殊处理
+#let _trim-left-space(body) = {
   if body.func() == math.equation {
-    assert(not body.block, message: "Block-level formulas are not allowed at the beginning!")
+    assert(not body.block, message: "block level formulas are not allowed at the beginning!")
     return h(-.25em) + body
   }
 
@@ -23,22 +23,15 @@
 
 #let _trim-content(body) = {
   if _is_empty(body) { return body }
+  show parbreak: [ \ ] // 去除数学公式在 question 方法中，新的段落以数学公式开头时，左侧加间距的问题(typst留下的坑)
   if body.has("children") {
     body = body.children
     if _is_empty(body.first()) { body = body.slice(1) } // 去除开头的空行，换行
-    body.first() = _boxed-content(body.first())
-    return body.join()
+    body.first() = _trim-left-space(body.first())
+    body.join()
+  } else {
+    _trim-left-space(body)
   }
-  _boxed-content(body)
-}
-
-// 去除数学公式在 question 方法中，换行后以数学公式开头时，最左侧加间距的问题(typst留下的坑)
-#let _format-content(body) = {
-  body = _trim-content(body)
-  if not body.has("children") { return body }
-  let children = body.children
-  if parbreak() not in children { return body }
-  children.map(child => if child == parbreak() [ \ ] else { child }).join()
 }
 
 // 生成弥封线
@@ -142,6 +135,7 @@
   )
 }
 
+// 指定开始页码
 #let page-restart(num: 1) = context {
   assert(type(num) == int and num > 0, message: "num expected positive integer")
   pagebreak(weak: true)

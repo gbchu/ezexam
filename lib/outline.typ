@@ -2,7 +2,7 @@
 #import "const.typ": EXAM
 #import "state.typ": answer-state, chapter-pages-state, mode-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
-#import "tools.typ": _create-seal, _format-content, page-restart
+#import "tools.typ": _create-seal, _trim-content, page-restart
 #import "question.typ": tot-pts
 
 // 封面
@@ -208,7 +208,7 @@
     #counter-explain.step()
     #list(
       marker: if show-number { context numbering("1.", ..counter-explain.get()) },
-      text(color, _format-content(body)),
+      text(color, _trim-content(body)),
     )
   ]
   v(bottom)
