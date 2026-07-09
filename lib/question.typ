@@ -1,7 +1,7 @@
 #import "state.typ": mode-state, question-count-points-state
 #import "const.typ": HANDOUTS, _QUESTION
 #import "counter.typ": counter-chapter, counter-placeholder, counter-question
-#import "tools.typ": _format-content
+#import "tools.typ": _trim-content
 
 // 设置每节每题的默认分数
 #let set-per-pts(..pts) = context {
@@ -83,7 +83,7 @@
   hanging-indent: auto,
   label: "1.1.1.1.1.1.",
   label-color: black,
-  label-weight: 400,
+  label-weight: 100,
   with-heading-label: false,
   points: none,
   points-separate: true,
@@ -108,7 +108,7 @@
       label,
       _format-points(points, points-prefix, points-suffix, points-separate)
         + h(first-line-indent)
-        + _format-content[#body],
+        + _trim-content[#body],
     ),
   )
 
