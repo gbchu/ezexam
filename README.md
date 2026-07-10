@@ -62,7 +62,8 @@ This template can help Chinese university, primary, middle and high school teach
 + 修改 `choices` 方法的参数 `sapcing` ，重命名为 `body-indent`
 + 新增 `set-per-pts` 方法，`sec-q-cnt`, `per-pts`, `sec-pts`, `tot-pts`, `tot-q-cnt` 常量；方便自动统计小节的题量、试卷总题量、小节的总分、试卷总分等；
   感谢 [@Naptie](https://github.com/Naptie) 提交的 ([pr#8](https://github.com/gbchu/ezexam/pull/8))
-+ ⚠️ 着重号重构为 `emph-dot` 方法，
++ ⚠️ 着重号重构为 `emph-dot` 方法；
+   感谢 [@arshtyi](https://github.com/arshtyi) 提交的 ([pr#9](https://github.com/gbchu/ezexam/pull/9))
 
 
 ### 0 . 3 . 1
