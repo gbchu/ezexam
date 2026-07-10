@@ -44,10 +44,11 @@ This template can help Chinese university, primary, middle and high school teach
 ## Changelog
 ### 0 . 3 . 2
 + ⚠️ `typst` 版本更新至 `0.15.0`
-+ ⚠️ 修改字体，调整 𝑗𝑓𝑧𝜋∅±/①～⑳的字体为 `STIX Two Math` ，修复 𝑗𝑓 加绝对值后，左侧绝对值的线被遮挡的问题
-+ 修复公式中的中文字体自动加粗的问题
++ ⚠️ 修改字体，调整 𝑗𝑓𝑧𝜋∅±/①～⑳ 的字体为 `STIX Two Math` ，修复 𝑗𝑓 加绝对值后，左侧绝对值的线被遮挡的问题
++ 修复公式中的中文字体某些场景下自动加粗的问题
++ 修复 `strong` 方法不生效及 `terms` 方法 `term` 不加粗的问题
 + 修复 `solution` 方法，当以数学公式开头时，左侧和上一段落对不齐的问题
-+ 修复 `tag` 方法，当 `par-justify` 的值设置为 true 时，对不齐的问题
++ 修复 `tag` 方法，当 `par-justify` 的值设置为 `true` 时，对不齐的问题
 + 修复 `fillin` 方法，左右间距不同问题
 + 修复 `cover` 方法
   + 页码清 0，导致目录页未能从 1 开始的问题
@@ -55,12 +56,13 @@ This template can help Chinese university, primary, middle and high school teach
 + 修复 `draft` 方法
   + 在 paper 为 a3 时，翻转且分栏问题
   + 前面页码增加问题
-+ 修改 `setup` 的参数 `par-justify` 的默认值为 true
-+ 修改 `question` 方法的参数 `points-prefix` 默认值
++ 修改 `setup` 的参数 `par-justify` 默认值为 `true`
++ 修改 `question` 方法的参数 `points-prefix`, `label-weight` 的默认值
 + 修改 `subject` 方法的参数 `top, bottom` 默认值
 + 修改 `choices` 方法的参数 `sapcing` ，重命名为 `body-indent`
-+ 新增 `set-per-pts` 方法，`sec-q-cnt`, `per-pts`, `sec-pts`, `tot-pts`, `tot-q-cnt` 常量；方便自动统计小节的题量、试卷总题量、小节的总分、试卷总分等
-感谢 [@Naptie](https://github.com/Naptie) 提交的 ([pr#8](https://github.com/gbchu/ezexam/pull/8))
++ 新增 `set-per-pts` 方法，`sec-q-cnt`, `per-pts`, `sec-pts`, `tot-pts`, `tot-q-cnt` 常量；方便自动统计小节的题量、试卷总题量、小节的总分、试卷总分等；
+  感谢 [@Naptie](https://github.com/Naptie) 提交的 ([pr#8](https://github.com/gbchu/ezexam/pull/8))
++ ⚠️ 着重号重构为 `emph-dot` 方法，
 
 
 ### 0 . 3 . 1
