@@ -1,7 +1,7 @@
 #import "lib/const.typ": CIRCLE, EVERY_PAGE, EXAM, FIRST_PAGE, HANDOUTS, ODD_PAGE, TEXT
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman
-#import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
+#import "lib/tools.typ": emph-dot, page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
 #import "lib/question.typ": per-pts, question, sec-pts, sec-q-cnt, set-per-pts, tot-pts, tot-q-cnt
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
@@ -73,9 +73,12 @@
   doc,
 ) = {
   assert(mode in (HANDOUTS, EXAM), message: "mode expected " + HANDOUTS + ", " + EXAM)
+  assert(
+    type(font) == array and type(heading-font) == array,
+    message: "font must be an array, e.g., ('heiti', ...)",
+  )
   import "lib/state.typ": *
   mode-state.update(mode)
-
   let mode-config = (
     { EXAM }: (
       page-numbering: zh-arabic(prefix: context {
@@ -95,11 +98,6 @@
       h1-size: 1em,
     ),
   ).at(mode)
-
-  assert(
-    type(font) == array and type(heading-font) == array,
-    message: "font must be an array, e.g., ('heiti', ...)",
-  )
 
   if page-numbering == auto { page-numbering = mode-config.page-numbering }
   // 除目录页的页码检测：包含两个1,两个1中间不能是连续空格、包含数字
@@ -302,13 +300,6 @@
   let space = h(.25em, weak: true)
   show math.equation.where(block: false): it => space + math.display(it) + space
   show "∥": [#space\//#space]
-
-  // 中文着重号
-  let han-zi = regex("\p{Han}")
-  show strong: content => {
-    show han-zi: it => box(place(text("·", .8em), dx: .45em, dy: .75em) + it)
-    content.body
-  }
 
   if show-answer {
     answer-state.update(true)

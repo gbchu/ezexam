@@ -154,3 +154,10 @@
   page-restart-state.update(chapter-index + 1)
   counter(page).update(num)
 }
+
+// 中文着重号
+#let _han-zi = regex("\p{Han}")
+#let emph-dot(body) = {
+  show _han-zi: it => box(place(text("·", .7em), dx: .4em, dy: .7em) + it)
+  body
+}
