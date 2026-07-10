@@ -1,7 +1,7 @@
 #import "lib/const.typ": CIRCLE, EVERY_PAGE, EXAM, FIRST_PAGE, HANDOUTS, ODD_PAGE, TEXT
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman
-#import "lib/tools.typ": page-restart, tag, text-figure, zh-arabic
+#import "lib/tools.typ": emph-dot, page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
 #import "lib/question.typ": per-pts, question, sec-pts, sec-q-cnt, set-per-pts, tot-pts, tot-q-cnt
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
@@ -39,7 +39,6 @@
   list-spacing: auto,
   list-indent: 0pt,
   ref-color: rgb("#0a6e96"),
-  strong-han-dot: false,
   resume: true,
   watermark: none,
   watermark-color: rgb("#f666"),
@@ -303,20 +302,6 @@
   let space = h(.25em, weak: true)
   show math.equation.where(block: false): it => space + math.display(it) + space
   show "∥": [#space\//#space]
-
-  // 中文着重号
-  let han-zi = regex("\p{Han}")
-  show strong: content => {
-    set text(weight: 700)
-    show han-zi: it => {
-      if strong-han-dot {
-        box(place(text("·", .8em), dx: .45em, dy: .75em) + text(weight: 400, it))
-      } else {
-        it
-      }
-    }
-    content.body
-  }
 
   if show-answer {
     answer-state.update(true)

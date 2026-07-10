@@ -106,6 +106,14 @@
     )#h(.5em, weak: true)]
 }
 
+#let _HAN-ZI = regex("\p{Han}")
+#let emph-dot(body) = {
+  show _HAN-ZI: it => box(
+    place(text("·", .8em), dx: .39em, dy: .75em) + it,
+  )
+  body
+}
+
 // 图文混排
 #let text-figure(
   figure: none,
