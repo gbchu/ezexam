@@ -56,6 +56,7 @@ This template can help Chinese university, primary, middle and high school teach
 + 修复 `draft` 方法
   + 在 paper 为 a3 时，翻转且分栏问题
   + 前面页码增加问题
++ 修复目录页码显示不正确的问题
 + 修改 `setup` 的参数 `par-justify` 默认值为 `true`
 + 修改 `question` 方法的参数 `points-prefix`, `label-weight` 的默认值
 + 修改 `subject` 方法的参数 `top, bottom` 默认值
