@@ -140,7 +140,7 @@
   let is-odd-r-even-l = page-align == "odd-r-even-l"
   footer-is-separate = paper-columns == 2 and footer-is-separate and not is-odd-r-even-l
 
-  let _footer(page-format, page-is-match: false, is-outline-page: false) = {
+  let _footer(page-format, page-is-match: false, is-outline-page: false) = context {
     if page-format == none { return }
     let (current-chapter-start-page, total-page) = chapter-pages-state
       .final()
@@ -235,7 +235,7 @@
     ..paper,
     background: gap-line,
     foreground: watermark,
-    footer: context _footer(
+    footer: _footer(
       page-numbering,
       page-is-match: is-match,
     ),
