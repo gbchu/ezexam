@@ -44,7 +44,7 @@ This template can help Chinese university, primary, middle and high school teach
 ## Changelog
 ### 0 . 3 . 2
 + ⚠️ `typst` 版本更新至 `0.15.0`
-+ ⚠️ 修改字体，调整 𝑗𝑓𝑧𝜋∅±/①～⑳ 的字体为 `STIX Two Math` ，修复 𝑗𝑓 加绝对值后，左侧绝对值的线被遮挡的问题
++ ⚠️ 修改字体，调整 𝑗𝑓𝑧𝜋∅± 的字体为 `STIX Two Math` ，修复 𝑗𝑓 加绝对值后，左侧绝对值的线被遮挡的问题
 + 修复公式中的中文字体某些场景下自动加粗的问题
 + 修复 `strong` 方法不生效及 `terms` 方法 `term` 不加粗的问题
 + 修复 `solution` 方法，当以数学公式开头时，左侧和上一段落对不齐的问题
