@@ -139,7 +139,7 @@
   for child in children.pos() [+ #par(child)]
 }
 
-#let solution-block(name: "参考答案", body) = context {
+#let solution-block(name: context subject-state.get() + "参考答案", body) = context {
   if not answer-state.get() { return }
   let pre-mode = mode-state.get()
   let set-mode(_mode) = mode-state.update(_mode)
