@@ -299,7 +299,7 @@
   show math.equation: set text(font: font, weight: "regular")
   let space = h(.25em, weak: true)
   show math.equation.where(block: false): it => space + math.display(it) + space
-  show "∥": [#space\//#space]
+  show "∥": [#space\/#h(-.2em)/#space]
 
   if show-answer {
     answer-state.update(true)
