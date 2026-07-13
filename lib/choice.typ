@@ -6,7 +6,7 @@
   if choice.func() not in (image, table) {
     return par(
       hanging-indent: indent + body-indent + measure(label).width,
-      h(indent) + label + h(body-indent, weak: true) + choice,
+      h(indent) + label + h(body-indent, weak: true) + _trim-content(choice),
     )
   }
 
@@ -63,7 +63,7 @@
     let max-width = 0pt
     for i in range(choice-number) {
       choices-arr.at(i) = _format-choice(
-        _trim-content[#choices-arr.at(i)],
+        [#choices-arr.at(i)],
         numbering(label, i + 1),
         indent,
         body-indent,
