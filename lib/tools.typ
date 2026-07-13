@@ -96,7 +96,7 @@
 ) = context {
   text(font: if font == auto { heiti + text.font } else { font }, weight: weight, color)[#box(prefix)#body#box(
       suffix,
-    )#h(.5em, weak: true)]
+    )#h(.25em, weak: true)]
 }
 
 // 图文混排
