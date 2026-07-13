@@ -48,7 +48,7 @@ This template can help Chinese university, primary, middle and high school teach
 + 修复公式中的中文字体某些场景下自动加粗的问题
 + 修复 `strong` 方法不生效及 `terms` 方法 `term` 不加粗的问题
 + 修复 `solution` 方法，当以数学公式开头时，左侧和上一段落对不齐的问题
-+ 修复 `tag` 方法，当 `par-justify` 的值设置为 `true` 时，对不齐的问题
++ 修复 `tag` 方法，当 `par-justify` 的值设置为 `true` 时，对不齐的问题并优化右间距
 + 修复 `fillin` 方法，左右间距不同问题
 + 修复 `cover` 方法
   + 页码清 0，导致目录页未能从 1 开始的问题
