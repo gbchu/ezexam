@@ -1,6 +1,6 @@
 #import "config.typ": heiti, kaiti
 #import "const.typ": EXAM, SOLUTION
-#import "state.typ": answer-state, chapter-pages-state, mode-state, subject-state
+#import "state.typ": answer-color-state, answer-state, chapter-pages-state, mode-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
 #import "tools.typ": _create-seal, _trim-content, page-restart
 #import "question.typ": tot-pts
@@ -31,16 +31,22 @@
 #let chapter(body, label: auto) = context {
   pagebreak(weak: true)
   counter-chapter.step()
+  let is-exam = mode-state.get() == EXAM
   set heading(
     offset: 0,
     numbering: _ => numbering(
       if label == auto {
-        if mode-state.get() == EXAM { "1. " } else { "第1章" }
+        if is-exam { "1．" } else { "第1章" }
       } else { label },
       ..counter-chapter.get(),
     ),
   )
-  place(hide(align(center)[= #body <chapter>]))
+  let body = align(center)[= #body <chapter>]
+  if is-exam {
+    place(hide(body))
+  } else {
+    body
+  }
   counter(heading).update(0)
   counter-question.update(0)
 }
