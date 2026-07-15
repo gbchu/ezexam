@@ -264,14 +264,14 @@
         it.element.location(),
         it.indented(
           box(
-            align(text(it.prefix(), white, weight: outline-chapter-weight), right),
+            align(text(it.prefix(), white, weight: outline-chapter-weight, 1.1em), right),
             width: outline-chapter-width,
             fill: outline-chapter-color,
             radius: (left: 5pt),
             inset: 4pt,
           ),
           [#box(
-              text(it.body(), weight: outline-chapter-weight, outline-chapter-color),
+              text(it.body(), weight: outline-chapter-weight, outline-chapter-color, 1.1em),
               fill: outline-chapter-color.opacify(-92%),
               inset: (x: 2pt, y: 4pt),
             ) #box(width: 1fr, repeat(".", gap: .15em)) #it.page()],
