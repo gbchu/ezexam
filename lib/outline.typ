@@ -40,7 +40,7 @@
       ..counter-chapter.get(),
     ),
   )
-  [= #body <chapter>]
+  place(hide(align(center)[= #body <chapter>]))
   counter(heading).update(0)
   counter-question.update(0)
 }
