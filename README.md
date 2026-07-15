@@ -8,7 +8,7 @@ This template can help Chinese university, primary, middle and high school teach
 
 ## Example
 ```typst
-#import "@preview/ezexam:0.3.2": *
+#import "@preview/ezexam:0.3.6": *
 #show: setup.with(
   mode: EXAM,
   paper: a3
@@ -67,8 +67,8 @@ This template can help Chinese university, primary, middle and high school teach
 + ⚠️ 着重号重构为 `emph-dot` 方法；
    感谢 [@arshtyi](https://github.com/arshtyi) 提交的 ([pr#9](https://github.com/gbchu/ezexam/pull/9))
 + `chapter` 方法，新增参数 `label` , 该参数可以修改目录页章节的编号方式，并修复在讲义模式下目录页章节部分缩进不正确的问题 ([issues#10](https://github.com/gbchu/ezexam/issues/10))
-
 + `setup` 方法，新增参数 `outline-chapter-width` , `outline-chapter-weight` , `outline-chapter-color` , 现在可以为目录页的章节部分添加样式及对齐方式
++ 将参考答案加入到目录显示中
 
 
 ### 0 . 3 . 1
