@@ -1,6 +1,8 @@
 // mode
 #let EXAM = "exam"
 #let HANDOUTS = "handouts"
+#let OUTLINE = "outline"
+#let SOLUTION = "solution"
 
 // 弥封线作用域
 #let EVERY_PAGE = "every-page"
