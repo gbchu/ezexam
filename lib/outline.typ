@@ -160,6 +160,10 @@
   counter-explain.update(0)
   pagebreak(weak: true)
   set-mode(SOLUTION)
+  place(hide[
+    #set heading(offset: 1, numbering: none)
+    = #text(weight: 700, answer-color-state.get(), 1.1em)[参考答案] <chapter>
+  ])
   title(name)
   body
   pagebreak(weak: true)
