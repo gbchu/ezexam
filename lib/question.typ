@@ -19,7 +19,7 @@
   question-count-points-state.update(pre => {
     let zeros = points.len() * (0,)
     let init-cnt-pts = zeros.zip(points, zeros)
-    if pre.len() == chapter-index {
+    if pre.len() <= chapter-index {
       pre.push(init-cnt-pts)
     } else {
       pre.at(chapter-index) += init-cnt-pts
