@@ -19,6 +19,9 @@
   show-gap-line: false,
   footer-is-separate: true,
   outline-page-numbering: "I",
+  outline-chapter-width: auto,
+  outline-chapter-weight: 700,
+  outline-chapter-color: purple,
   font: roman,
   font-size: 11pt,
   line-height: 2em,
@@ -79,22 +82,25 @@
   )
   import "lib/state.typ": *
   mode-state.update(mode)
+  import "lib/const.typ": OUTLINE, SOLUTION
   let mode-config = (
     { EXAM }: (
       page-numbering: zh-arabic(prefix: context {
         [#subject-state.get()]
-        if (mode-state.get() == none) [参考答案] else [试题]
+        if (mode-state.get() == SOLUTION) [参考答案] else [试题]
       }),
       outline-target: <chapter>,
       heading-numbering: (..item) => numbering("一、", ..item) + h(-.3em),
       heading-hanging-indent: 2em,
+      heading-offset: 0,
       h1-size: 11pt,
     ),
     { HANDOUTS }: (
       page-numbering: "1 / 1",
       outline-target: heading,
-      heading-numbering: "1.1.1.1.1.",
+      heading-numbering: (..item) => numbering("1.", ..item.filter(v => v > 0)),
       heading-hanging-indent: auto,
+      heading-offset: 1,
       h1-size: 1em,
     ),
   ).at(mode)
@@ -140,7 +146,7 @@
   let is-odd-r-even-l = page-align == "odd-r-even-l"
   footer-is-separate = paper-columns == 2 and footer-is-separate and not is-odd-r-even-l
 
-  let _footer(page-format, page-is-match: false, is-outline-page: false) = context {
+  let _footer(page-format, page-is-match: false) = context {
     if page-format == none { return }
     let (current-chapter-start-page, total-page) = chapter-pages-state
       .final()
@@ -172,7 +178,8 @@
     }
 
     // 弥封线
-    if mode-state.get() == EXAM and seal-line != none and not is-outline-page {
+    let _mode = mode-state.get()
+    if _mode == EXAM and seal-line != none and not _mode == OUTLINE {
       let current-page = current.first()
       let width = page.height
       if flipped {
@@ -247,19 +254,53 @@
     title: text(1.5em)[#h(1fr)目#h(1em)录#h(1fr)],
   )
 
-  show outline: it => {
-    set page(footer: _footer(outline-page-numbering, is-outline-page: true))
-    set par(justify: true)
-    it
-    pagebreak(weak: true)
-    counter(page).update(1)
-    counter(heading).update(0)
+  // 讲义模式下小节调用统计分数，题量等，目录的分数题量在目录页正确显示的设置
+  show outline.entry: it => {
+    let ele = it.element
+    if ele.depth != 1 { return it }
+    let offset = ele.offset
+    if offset == 0 {
+      link(
+        it.element.location(),
+        it.indented(
+          box(
+            align(text(it.prefix(), white), right),
+            width: outline-chapter-width,
+            fill: outline-chapter-color,
+            radius: (left: 5pt),
+            inset: 4pt,
+          ),
+          [#box(
+              text(it.body(), weight: outline-chapter-weight, outline-chapter-color),
+              fill: outline-chapter-color.opacify(-92%),
+              inset: (x: 2pt, y: 4pt),
+            ) #box(width: 1fr, repeat(".", gap: .15em)) #it.page()],
+        ),
+      )
+      // 新的章节则将 heading counter 更新为 0，chapter counter 加 1
+      counter-chapter.step()
+      counter(heading).update(0)
+    } else {
+      it
+    }
+
+    // 除了章节外的一级标题更新 heading counter
+    if offset == 1 {
+      counter(heading).step()
+    }
   }
 
-  // 讲义模式下小节调用统计分数，题量时对应更新heading counter
-  show outline.entry: it => {
+  show outline: it => {
+    set page(footer: _footer(outline-page-numbering))
+    set par(justify: true)
+    mode-state.update(OUTLINE)
     it
-    counter(heading).step()
+    pagebreak(weak: true)
+    mode-state.update(mode)
+    counter(page).update(1)
+    // 讲义模式下，目录更新完毕后，heading,chapter counter 重置为 0
+    counter(heading).update(0)
+    counter-chapter.update(0)
   }
 
   set par(
@@ -277,11 +318,12 @@
   set heading(
     numbering: heading-numbering,
     hanging-indent: heading-hanging-indent,
+    offset: mode-config.heading-offset,
   )
   if h1-size == auto { h1-size = mode-config.h1-size }
   show heading: it => {
     set par(leading: 1.3em)
-    set text(h1-size) if it.level == 1
+    set text(h1-size) if it.level == 1 or it.level == 2 and mode-state.get() != EXAM
     v(heading-top)
     text(heading-color, font: heading-font + text.font, it)
     v(heading-bottom)
