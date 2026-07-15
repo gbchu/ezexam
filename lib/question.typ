@@ -1,5 +1,5 @@
 #import "state.typ": mode-state, question-count-points-state
-#import "const.typ": HANDOUTS, _QUESTION
+#import "const.typ": HANDOUTS, OUTLINE, _QUESTION
 #import "counter.typ": counter-chapter, counter-placeholder, counter-question
 #import "tools.typ": _trim-content
 
@@ -29,17 +29,23 @@
 }
 
 #let _default-cnt-pts = (0, none, 0)
-#let _current-chapter-q-cnt-pts() = (
-  question-count-points-state.final().at(counter-chapter.get().first() - 1, default: (_default-cnt-pts,))
-)
+
+#let _current-chapter-q-cnt-pts() = {
+  let chapter-idx = counter-chapter.get().first() - 1
+  if chapter-idx < 0 { chapter-idx = 0 } // 多个章节且第一章没有调用chapter方法时
+  question-count-points-state.final().at(chapter-idx, default: (_default-cnt-pts,))
+}
 
 #let _current-sec-q-cnt-pts(idx) = context {
-  let heading-idx = counter(heading).get().first() - 1
-  if heading-idx < 0 {
-    heading-idx = 0
-    counter(heading).update(1)
-  }
-
+  let mode = mode-state.get()
+  // 讲义模式下，由于标题设置了offset = 1，这里的counter(heading).get() 获取的数组
+  // 在目录页的结果为(1,), (2,) , ...
+  // 在正文页的结果为(0，1), (0，2) , ...
+  // 所以这里要确保始终选择的都是 1, 2 , ...
+  let index = if mode == HANDOUTS { 1 } else { 0 }
+  let heading-idx = counter(heading).get().at(index, default: 1) - 1
+  if mode == OUTLINE { heading-idx += 1 } // 目录页下 heading-idx 从 0 开始,不需要减 1，这里给加回来
+  if heading-idx < 0 { heading-idx = 0 } // 在前面没有任何标题时，heading-idx 默认为 0
   [#_current-chapter-q-cnt-pts().at(heading-idx, default: _default-cnt-pts).at(idx)]
 }
 
@@ -50,16 +56,18 @@
 #let tot-pts = context _current-chapter-q-cnt-pts().fold(0, (acc, (.., sec-pts)) => acc + sec-pts)
 #let tot-q-cnt = context _current-chapter-q-cnt-pts().fold(0, (acc, (sec-q-cnt, ..)) => acc + sec-q-cnt)
 
-#let _format-label(label, label-color, label-weight, with-heading-label, headings) = context counter-question.display(
-  num => {
-    let result = text(label-color, weight: label-weight, numbering(
+#let _format-label(label, label-color, label-weight, with-heading-label, headings) = context {
+  let result = text(
+    label-color,
+    weight: label-weight,
+    numbering(
       label,
-      ..if with-heading-label { headings.filter(item => item != 0) } + (num,),
-    ))
-    if mode-state.get() == HANDOUTS { return result }
-    box(width: 1em, align(right, result))
-  },
-)
+      ..if with-heading-label { headings } + counter-question.get(),
+    ),
+  )
+  if mode-state.get() == HANDOUTS { return result }
+  box(width: 1em, align(right, result))
+}
 
 #let _format-points(points, prefix, suffix, separate) = {
   if points == none { return }
@@ -72,7 +80,7 @@
 
 #let _format-ref-prefix(chapter, headings) = {
   if chapter == 0 { chapter = 1 }
-  let heading-label = headings.filter(item => item != 0)
+  let heading-label = headings.filter(item => item > 0)
   str(chapter) + if heading-label != () { "-" + heading-label.map(str).join(".") } + "-"
 }
 
@@ -81,7 +89,7 @@
   indent: 0em,
   first-line-indent: 0em,
   hanging-indent: auto,
-  label: "1.1.1.1.1.1.",
+  label: "1.",
   label-color: black,
   label-weight: 100,
   with-heading-label: false,
@@ -98,7 +106,8 @@
 ) = context {
   set par(leading: line-height) if line-height != auto
   let chapter = counter-chapter.get().first()
-  let headings = counter(heading).get()
+  // 讲义模式下，由于标题设置了offset = 1，这里的headings第一个均为 0，需要去掉
+  let headings = counter(heading).get().filter(v => v > 0)
   let label = _format-label(label, label-color, label-weight, with-heading-label, headings)
   let body = terms(
     indent: indent,
@@ -141,8 +150,9 @@
 
   // 更新每小节题目数，总分等
   let chapter-idx = chapter - 1
-  let heading-idx = headings.first() - 1
+  let heading-idx = headings.at(0, default: 0) - 1
   question-count-points-state.update(pre => {
+    if heading-idx < 0 { return pre }
     if pre.len() == chapter-idx or pre == () { pre.push((_default-cnt-pts,)) } // 当前章节未设置分数时
     let chapter-cnt-pts = pre.at(chapter-idx)
     if chapter-cnt-pts.len() == heading-idx { chapter-cnt-pts.push(_default-cnt-pts) } // 当前小节没有初始化时
