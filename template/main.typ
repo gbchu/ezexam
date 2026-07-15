@@ -1,10 +1,11 @@
-#import "@preview/ezexam:0.3.2": *
+#import "@preview/ezexam:0.3.6": *
 
 #show: setup.with(
   mode: EXAM,
   paper: a3,
   show-answer: true,
   show-gap-line: true,
+  outline-chapter-width: 2em,
 )
 
 #outline()
