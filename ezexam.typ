@@ -264,7 +264,7 @@
         it.element.location(),
         it.indented(
           box(
-            align(text(it.prefix(), white), right),
+            align(text(it.prefix(), white, weight: outline-chapter-weight), right),
             width: outline-chapter-width,
             fill: outline-chapter-color,
             radius: (left: 5pt),
