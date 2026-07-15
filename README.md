@@ -42,7 +42,7 @@ This template can help Chinese university, primary, middle and high school teach
 ```
 
 ## Changelog
-### 0 . 3 . 2
+### 0 . 3 . 6
 + ⚠️ `typst` 版本更新至 `0.15.0`
 + ⚠️ 修改字体，调整 𝑗𝑓𝑧𝜋∅± 的字体为 `STIX Two Math` ，修复 𝑗𝑓 加绝对值后，左侧绝对值的线被遮挡的问题
 + 修复公式中的中文字体某些场景下自动加粗的问题
@@ -66,6 +66,9 @@ This template can help Chinese university, primary, middle and high school teach
   感谢 [@Naptie](https://github.com/Naptie) 提交的 ([pr#8](https://github.com/gbchu/ezexam/pull/8))
 + ⚠️ 着重号重构为 `emph-dot` 方法；
    感谢 [@arshtyi](https://github.com/arshtyi) 提交的 ([pr#9](https://github.com/gbchu/ezexam/pull/9))
++ `chapter` 方法，新增参数 `label` , 该参数可以修改目录页章节的编号方式，并修复在讲义模式下目录页章节部分缩进不正确的问题 ([issues#10](https://github.com/gbchu/ezexam/issues/10))
+
++ `setup` 方法，新增参数 `outline-chapter-width` , `outline-chapter-weight` , `outline-chapter-color` , 现在可以为目录页的章节部分添加样式及对齐方式
 
 
 ### 0 . 3 . 1
