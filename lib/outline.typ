@@ -1,5 +1,5 @@
 #import "config.typ": heiti, kaiti
-#import "const.typ": EXAM
+#import "const.typ": EXAM, SOLUTION
 #import "state.typ": answer-state, chapter-pages-state, mode-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
 #import "tools.typ": _create-seal, _trim-content, page-restart
@@ -28,11 +28,19 @@
   counter(page).update(0)
 }
 
-#let chapter(body) = context {
+#let chapter(body, label: auto) = context {
   pagebreak(weak: true)
   counter-chapter.step()
-  set heading(numbering: _ => counter-chapter.display(num => box(width: 1em, align(right)[#num.~])))
-  place(hide[= #body <chapter>])
+  set heading(
+    offset: 0,
+    numbering: _ => numbering(
+      if label == auto {
+        if mode-state.get() == EXAM { "1. " } else { "第1章" }
+      } else { label },
+      ..counter-chapter.get(),
+    ),
+  )
+  [= #body <chapter>]
   counter(heading).update(0)
   counter-question.update(0)
 }
@@ -48,19 +56,19 @@
   top: 0pt,
   bottom: 0pt,
 ) = context {
-  let mode = mode-state.get()
-  set par(spacing: 1.3em) if mode == EXAM
+  let is-exam = mode-state.get() == EXAM
+  set par(spacing: 1.3em) if is-exam
   v(top)
   align(
     position,
     text(
       tracking: spacing,
       weight: if weight == auto {
-        if mode == EXAM { 400 } else { 700 }
+        if is-exam { 400 } else { 700 }
       } else { weight },
       font: if font == auto { text.font } else { font },
       if size == auto {
-        if mode == EXAM { 16pt } else { 20pt }
+        if is-exam { 16pt } else { 20pt }
       } else { size },
       color,
       body,
@@ -145,7 +153,7 @@
   let set-mode(_mode) = mode-state.update(_mode)
   counter-explain.update(0)
   pagebreak(weak: true)
-  set-mode(none)
+  set-mode(SOLUTION)
   title(name)
   body
   pagebreak(weak: true)
