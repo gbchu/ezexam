@@ -141,12 +141,12 @@
     seal
   }
 
-  paper = a4 + paper
-  let (margin, flipped, columns: paper-columns) = paper
   let is-odd-r-even-l = page-align == "odd-r-even-l"
-  footer-is-separate = paper-columns == 2 and footer-is-separate and not is-odd-r-even-l
-
   let _footer(page-format, page-is-match: false) = context {
+    let margin = page.margin
+    let flipped = page.flipped
+    let columns = page.columns
+    let footer-is-separate = page.columns == 2 and footer-is-separate and not is-odd-r-even-l
     if page-format == none { return }
     let (current-chapter-start-page, total-page) = chapter-pages-state
       .final()
@@ -223,11 +223,12 @@
     }
   }
 
-  let gap-line = if paper-columns > 1 and show-gap-line {
-    line(angle: 90deg, length: 100% - margin * 2, stroke: .5pt)
+  let gap-line = context if page.columns > 1 and show-gap-line {
+    line(angle: 90deg, length: 100% - page.margin * 2, stroke: .5pt)
   }
 
-  watermark = if watermark != none {
+  watermark = context if watermark != none {
+    let paper-columns = paper.columns
     place(horizon)[
       #set par(leading: .5em)
       #set text(watermark-size, watermark-color, font: watermark-font)
@@ -239,7 +240,7 @@
   }
 
   set page(
-    ..paper,
+    ..a4 + paper,
     background: gap-line,
     foreground: watermark,
     footer: _footer(
@@ -325,7 +326,9 @@
   show heading: it => {
     set par(leading: 1.3em)
     let _mode = mode-state.get()
-    let _size = if _mode == EXAM and it.level == 1 or _mode == HANDOUTS and it.level == 2 { h1-size } else if (
+    let _size = if (
+      _mode in (EXAM, SOLUTION) and it.level == 1 or _mode in (HANDOUTS, SOLUTION) and it.level == 2
+    ) { h1-size } else if (
       // 讲义模式下，由于设置了 offset = 1 导致1级变2，2变3，字体会降一级，这里设置回默认值
       _mode == HANDOUTS and it.depth == 2
     ) { 1.2em } else { 1em }
