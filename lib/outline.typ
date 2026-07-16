@@ -157,8 +157,10 @@
   for child in children.pos() [+ #par(child)]
 }
 
-#let solution-block(name: context subject-state.get() + "参考答案", body) = context {
+#let solution-block(name: "参考答案", paper: (:), body) = context {
   if not answer-state.get() { return }
+  assert(type(paper) == dictionary, message: "paper expected dictionary")
+  set page(..paper) if paper.len() > 0
   let pre-mode = mode-state.get()
   let set-mode(_mode) = mode-state.update(_mode)
   counter-explain.update(0)
@@ -166,7 +168,7 @@
   set-mode(SOLUTION)
   place(hide[
     #set heading(offset: 1, numbering: none)
-    = #text(weight: 700, answer-color-state.get(), 1.1em)[参考答案] <chapter>
+    = #text(weight: 700, answer-color-state.get(), 1.1em)[#name] <chapter>
   ])
   title(name)
   body
