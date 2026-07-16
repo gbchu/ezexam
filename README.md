@@ -61,7 +61,7 @@ This template can help Chinese university, primary, middle and high school teach
 + 修改 `question` 方法的参数 `points-prefix`, `label-weight` 的默认值
 + 修改 `subject` 方法的参数 `top, bottom` 默认值
 + 修改 `choices` 方法的参数 `sapcing` ，重命名为 `body-indent`
-+ 为 `solution-block` 方法的标题添加科目名的显示
++ 为 `solution-block` 方法添加参数 `paper` ，该参数可以设置解析页面显示方式
 + 新增 `set-per-pts` 方法，`sec-q-cnt`, `per-pts`, `sec-pts`, `tot-pts`, `tot-q-cnt` 常量；方便自动统计小节的题量、试卷总题量、小节的总分、试卷总分等；
   感谢 [@Naptie](https://github.com/Naptie) 提交的 ([pr#8](https://github.com/gbchu/ezexam/pull/8))
 + ⚠️ 着重号重构为 `emph-dot` 方法；
