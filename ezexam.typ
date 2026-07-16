@@ -101,7 +101,7 @@
       heading-numbering: (..item) => numbering("1.", ..item.filter(v => v > 0)),
       heading-hanging-indent: auto,
       heading-offset: 1,
-      h1-size: 1em,
+      h1-size: 1.2em,
     ),
   ).at(mode)
 
@@ -264,14 +264,14 @@
         it.element.location(),
         it.indented(
           box(
-            align(text(it.prefix(), white, weight: outline-chapter-weight, 1.1em), right),
+            align(text(it.prefix().child, white, weight: outline-chapter-weight, 1.1em), right),
             width: outline-chapter-width,
             fill: outline-chapter-color,
             radius: (left: 5pt),
             inset: 4pt,
           ),
           [#box(
-              text(it.body(), weight: outline-chapter-weight, outline-chapter-color, 1.1em),
+              text(it.body().child, weight: outline-chapter-weight, outline-chapter-color, 1.1em),
               fill: outline-chapter-color.opacify(-92%),
               inset: (x: 2pt, y: 4pt),
             ) #box(width: 1fr, repeat(".", gap: .15em)) #it.page()],
@@ -293,6 +293,7 @@
   show outline: it => {
     set page(footer: _footer(outline-page-numbering))
     set par(justify: true)
+    set heading(offset: 0)
     mode-state.update(OUTLINE)
     it
     pagebreak(weak: true)
@@ -323,9 +324,14 @@
   if h1-size == auto { h1-size = mode-config.h1-size }
   show heading: it => {
     set par(leading: 1.3em)
-    set text(h1-size) if it.level == 1 or it.level == 2 and mode-state.get() != EXAM
+    let _mode = mode-state.get()
+    let _size = if _mode == EXAM and it.level == 1 or _mode == HANDOUTS and it.level == 2 { h1-size } else if (
+      // 讲义模式下，由于设置了 offset = 1 导致1级变2，2变3，字体会降一级，这里设置回默认值
+      _mode == HANDOUTS and it.depth == 2
+    ) { 1.2em } else { 1em }
+
     v(heading-top)
-    text(heading-color, font: heading-font + text.font, it)
+    text(heading-color, font: heading-font + text.font, it, _size)
     v(heading-bottom)
     if not resume { counter-question.update(0) }
   }
