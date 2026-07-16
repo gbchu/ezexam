@@ -5,7 +5,6 @@
   paper: a3,
   show-answer: true,
   show-gap-line: true,
-  outline-chapter-width: 2em,
 )
 
 #outline()
