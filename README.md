@@ -66,7 +66,9 @@ This template can help Chinese university, primary, middle and high school teach
   感谢 [@Naptie](https://github.com/Naptie) 提交的 ([pr#8](https://github.com/gbchu/ezexam/pull/8))
 + ⚠️ 着重号重构为 `emph-dot` 方法；
    感谢 [@arshtyi](https://github.com/arshtyi) 提交的 ([pr#9](https://github.com/gbchu/ezexam/pull/9))
-+ `chapter` 方法，新增参数 `label` , 该参数可以修改目录页章节的编号方式，并修复在讲义模式下目录页章节部分缩进不正确的问题 ([issues#10](https://github.com/gbchu/ezexam/issues/10))
++ `chapter` 方法
+  + 新增参数 `label` , 该参数可以修改目录页章节的编号方式，并修复在讲义模式下目录页章节部分缩进不正确的问题 ([issues#10](https://github.com/gbchu/ezexam/issues/10))
+  + 现在在非 `EXAM` 模式下，章节将会居中显示，不再隐藏。同时新增参数 `color` , `size` , `font`
 + `setup` 方法，新增参数 `outline-chapter-width` , `outline-chapter-weight` , `outline-chapter-color` , 现在可以为目录页的章节部分添加样式及对齐方式
 + 将参考答案加入到目录显示中
 
