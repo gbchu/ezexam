@@ -8,7 +8,7 @@ This template can help Chinese university, primary, middle and high school teach
 
 ## Example
 ```typst
-#import "@preview/ezexam:0.3.6": *
+#import "@preview/ezexam:0.4.0": *
 #show: setup.with(
   mode: EXAM,
   paper: a3
@@ -42,7 +42,7 @@ This template can help Chinese university, primary, middle and high school teach
 ```
 
 ## Changelog
-### 0 . 3 . 6
+### 0 . 4 . 0
 + ⚠️ `typst` 版本更新至 `0.15.0`
 + ⚠️ 修改字体，调整 𝑗𝑓𝑧𝜋∅± 的字体为 `STIX Two Math` ，修复 𝑗𝑓 加绝对值后，左侧绝对值的线被遮挡的问题
 + 修复公式中的中文字体某些场景下自动加粗的问题
