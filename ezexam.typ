@@ -1,7 +1,7 @@
 #import "lib/const.typ": CIRCLE, EVERY_PAGE, EXAM, FIRST_PAGE, HANDOUTS, ODD_PAGE, TEXT
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman
-#import "lib/tools.typ": emph-dot, page-restart, tag, text-figure, zh-arabic
+#import "lib/tools.typ": emph-dot, page-restart, circ-num, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
 #import "lib/question.typ": per-pts, question, sec-pts, sec-q-cnt, set-per-pts, tot-pts, tot-q-cnt
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
