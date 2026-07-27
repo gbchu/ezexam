@@ -71,6 +71,7 @@ This template can help Chinese university, primary, middle and high school teach
   + 现在在非 `EXAM` 模式下，章节将会居中显示，不再隐藏。同时新增参数 `color` , `size` , `font`
 + `setup` 方法，新增参数 `outline-chapter-width` , `outline-chapter-weight` , `outline-chapter-color` , 现在可以为目录页的章节部分添加样式及对齐方式
 + 将参考答案加入到目录显示中
++ 新增输入带圈数字 `circ-num` 方法，该方法可方便输入带圈数字
 
 
 ### 0 . 3 . 1
