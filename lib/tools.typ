@@ -161,3 +161,31 @@
   show _han-zi: it => box(place(text("·", .7em), dx: .4em, dy: .7em) + it)
   body
 }
+
+// 带圈数字
+#let circ-num(num) = {
+  assert(type(num) == int and num >= 0 and num <= 20, message: "circled number only support 0 ~ 20")
+  (
+    "⓪",
+    "①",
+    "②",
+    "③",
+    "④",
+    "⑤",
+    "⑥",
+    "⑦",
+    "⑧",
+    "⑨",
+    "⑩",
+    "⑪",
+    "⑫",
+    "⑬",
+    "⑭",
+    "⑮",
+    "⑯",
+    "⑰",
+    "⑱",
+    "⑲",
+    "⑳",
+  ).at(num)
+}
