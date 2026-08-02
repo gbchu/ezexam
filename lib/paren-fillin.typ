@@ -14,7 +14,7 @@
   assert(type(len) == length or len == 1fr, message: "expect length, 1fr")
   set box(stroke: (bottom: stroke), inset: (bottom: offset))
   if len == 1fr {
-    box(width: len, align(center, body)) + [ \ ]
+    box(width: len, align(center, body))
   } else {
     let len = len.to-absolute()
     assert(len > 4pt, message: "len must > 4pt")
