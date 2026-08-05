@@ -1,7 +1,7 @@
 #import "lib/const.typ": CIRCLE, EVERY_PAGE, EXAM, FIRST_PAGE, HANDOUTS, ODD_PAGE, TEXT
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman
-#import "lib/tools.typ": emph-dot, page-restart, circ-num, tag, text-figure, zh-arabic
+#import "lib/tools.typ": circ-num, emph-dot, page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
 #import "lib/question.typ": per-pts, question, sec-pts, sec-q-cnt, set-per-pts, tot-pts, tot-q-cnt
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
@@ -29,6 +29,7 @@
   par-justify: true,
   first-line-indent: 0em,
   heading-numbering: auto,
+  heading-body-indent: auto,
   heading-hanging-indent: auto,
   h1-size: auto,
   heading-font: heiti,
@@ -90,7 +91,8 @@
         if (mode-state.get() == SOLUTION) [参考答案] else [试题]
       }),
       outline-target: <chapter>,
-      heading-numbering: (..item) => numbering("一、", ..item) + h(-.3em),
+      heading-numbering: "一、",
+      heading-body-indent: -.3em,
       heading-hanging-indent: 2em,
       heading-offset: 0,
       h1-size: 11pt,
@@ -98,7 +100,8 @@
     { HANDOUTS }: (
       page-numbering: "1 / 1",
       outline-target: heading,
-      heading-numbering: (..item) => numbering("1.", ..item.filter(v => v > 0)),
+      heading-numbering: "1.",
+      heading-body-indent: 0em,
       heading-hanging-indent: auto,
       heading-offset: 1,
       h1-size: 1.2em,
@@ -315,10 +318,15 @@
 
   if heading-numbering == auto {
     heading-numbering = mode-config.heading-numbering
+  }
+  if heading-body-indent == auto {
+    heading-body-indent = mode-config.heading-body-indent
+  }
+  if heading-hanging-indent == auto {
     heading-hanging-indent = mode-config.heading-hanging-indent
   }
   set heading(
-    numbering: heading-numbering,
+    numbering: (..item) => numbering(heading-numbering, ..item.filter(v => v > 0)) + h(heading-body-indent),
     hanging-indent: heading-hanging-indent,
     offset: mode-config.heading-offset,
   )
