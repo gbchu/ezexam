@@ -15,7 +15,7 @@
   paper: a4,
   page-numbering: auto,
   page-align: center,
-  gap: 1in,
+  gap: 2cm,
   show-gap-line: false,
   footer-is-separate: true,
   outline-page-numbering: "I",
