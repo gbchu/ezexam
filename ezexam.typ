@@ -136,9 +136,9 @@
     )
     let seal = (first: _create-seal(info: seal-line-student-info))
     if seal-line-scope != FIRST_PAGE {
-      seal.insert("left", _create-seal())
+      seal.insert("odd", _create-seal())
       if seal-line-scope == EVERY_PAGE {
-        seal.insert("right", _create-seal(rotate-deg: 90deg, rotate-origin: right + bottom))
+        seal.insert("even", _create-seal(rotate-deg: 90deg, rotate-origin: right + bottom))
       }
     }
     seal
@@ -146,11 +146,11 @@
 
   let is-odd-r-even-l = page-align == "odd-r-even-l"
   let _footer(page-format, page-is-match: false) = context {
+    if page-format == none { return }
     let margin = page.margin
     let flipped = page.flipped
     let columns = page.columns
-    let footer-is-separate = page.columns == 2 and footer-is-separate and not is-odd-r-even-l
-    if page-format == none { return }
+    let footer-is-separate = columns > 1 and footer-is-separate and not is-odd-r-even-l
     let (current-chapter-start-page, total-page) = chapter-pages-state
       .final()
       .at(counter-title.get().first() - 1, default: (1, ..counter(page).final()))
@@ -162,7 +162,7 @@
     if footer-is-separate {
       current.first() += 1
       grid(
-        columns: (1fr, 1fr),
+        columns: (1fr,) * columns,
         align: center,
         // 左页码
         _numbering,
@@ -211,7 +211,7 @@
           }
 
           #if calc.odd(current-page) {
-            seal-line.left
+            seal-line.odd
             return
           }
 
@@ -219,24 +219,37 @@
 
           #move(
             dx: if flipped { page.height } else { page.width } - margin * 2 - 100% + 2em,
-            seal-line.right,
+            seal-line.even,
           )
         ],
       )
     }
   }
 
-  let gap-line = context if page.columns > 1 and show-gap-line {
-    line(angle: 90deg, length: 100% - page.margin * 2, stroke: .5pt)
+  let gap-line = context if show-gap-line {
+    let page-columns = page.columns
+    if page-columns == 1 { return }
+    let available-width = 100% - page.margin * 2
+    set line(angle: 90deg, stroke: .5pt, length: available-width)
+    block(width: available-width)[
+      #for column in range(1, page-columns) {
+        place(
+          left + horizon,
+          move(
+            dx: 1 / page-columns * 100% * column,
+            line(),
+          ),
+        )
+      }]
   }
 
   watermark = context if watermark != none {
-    let paper-columns = paper.columns
+    let page-columns = page.columns
     place(horizon)[
       #set par(leading: .5em)
       #set text(watermark-size, watermark-color, font: watermark-font)
       #grid(
-        columns: paper-columns * (1fr,),
+        columns: page-columns * (1fr,),
         ..paper-columns * (rotate(watermark-rotate, watermark),),
       )
     ]
