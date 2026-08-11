@@ -2,7 +2,7 @@
 #import "const.typ": EXAM, SOLUTION
 #import "state.typ": answer-color-state, answer-state, chapter-pages-state, mode-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
-#import "tools.typ": _create-seal, _trim-content, page-restart
+#import "tools.typ": _create-seal, _fallback, _trim-content, page-restart
 #import "question.typ": tot-pts
 
 // 封面
@@ -24,14 +24,14 @@
     text(font: kaiti, 15pt)[\ 作者：#author]
   }
 
-  if date == auto [\ #datetime.today().display("[year]年[month]月[day]日")] else [\ #date]
+  [\ #_fallback(date, datetime.today().display("[year]年[month]月[day]日"))]
   counter(page).update(0)
 }
 
 #let chapter(body, label: "1．", color: black, size: 1.4em, font: auto) = context {
   pagebreak(weak: true)
   counter-chapter.step()
-  let font = if font == auto { text.font } else { font }
+  let font = _fallback(font, text.font)
   set heading(
     offset: 0,
     numbering: _ => text(color, size, font: font, numbering(label, ..counter-chapter.get())),
@@ -63,7 +63,7 @@
       weight: if weight == auto {
         if is-exam { 400 } else { 700 }
       } else { weight },
-      font: if font == auto { text.font } else { font },
+      font: _fallback(font, text.font),
       if size == auto {
         if is-exam { 16pt } else { 18.5pt }
       } else { size },
@@ -118,7 +118,7 @@
   set text(font: heiti + text.font, size, weight: weight)
   set align(center)
   grid(
-    columns: if columns == auto { info.len() } else { columns },
+    columns: _fallback(columns, info.len()),
     gutter: gap,
     inset: (top: top, bottom: bottom),
     ..for (key, value) in info { ([#key：#value],) }
@@ -136,9 +136,7 @@
   text(font: heiti)[注意事项：]
   set enum(numbering: label, indent: indent, spacing: 1.3em)
   set par(
-    hanging-indent: if hanging-indent == auto {
-      -indent - enum.body-indent - measure(label).width
-    } else { hanging-indent },
+    hanging-indent: _fallback(hanging-indent, -indent - enum.body-indent - measure(label).width),
     leading: 1.3em,
   )
   for child in children.pos() [+ #par(child)]
