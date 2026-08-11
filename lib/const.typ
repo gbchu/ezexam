@@ -15,3 +15,5 @@
 
 // figure kind
 #let _QUESTION = "question"
+
+#let ODD_R_EVEN_L = "odd-r-even-l"
