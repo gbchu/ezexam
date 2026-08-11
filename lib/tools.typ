@@ -3,6 +3,8 @@
 #import "counter.typ": counter-title
 #import "state.typ": chapter-pages-state, page-restart-state
 
+#let _fallback(value, default) = if value == auto { default } else { value }
+
 #let _SPECIAL-CHAR = "《（【"
 // 以特殊字符，数学公式开头的行特殊处理
 #let _trim-left-space(body) = {
@@ -94,7 +96,7 @@
   prefix: "【",
   suffix: "】",
 ) = context text(
-  font: if font == auto { heiti + text.font } else { font },
+  font: _fallback(font, heiti + text.font),
   weight: weight,
   color,
 )[#box(prefix)#body#box(suffix)#h(.25em, weak: true)]
