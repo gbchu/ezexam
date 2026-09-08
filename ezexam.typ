@@ -1,4 +1,4 @@
-#import "lib/const.typ": CIRCLE, EVERY_PAGE, EXAM, FIRST_PAGE, HANDOUTS, ODD_PAGE, TEXT
+#import "lib/const.typ": *
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
 #import "lib/config.typ": a3, a4, heiti, kaiti, roman
 #import "lib/tools.typ": circ-num, emph-dot, page-restart, tag, text-figure, zh-arabic
@@ -83,7 +83,6 @@
   )
   import "lib/state.typ": *
   mode-state.update(mode)
-  import "lib/const.typ": OUTLINE, SOLUTION
   let mode-config = (
     { EXAM }: (
       page-numbering: zh-arabic(prefix: context {
@@ -108,7 +107,8 @@
     ),
   ).at(mode)
 
-  if page-numbering == auto { page-numbering = mode-config.page-numbering }
+  import "lib/tools.typ": _fallback, _get-margin-y
+  page-numbering = _fallback(page-numbering, mode-config.page-numbering)
   // 除目录页的页码检测：包含两个1,两个1中间不能是连续空格、包含数字
   let is-match = (
     [#page-numbering].func() == [#zh-arabic].func()
@@ -134,94 +134,80 @@
       rotate-deg: -90deg,
       rotate-origin: left + bottom,
     )
-    let seal = (first: _create-seal(info: seal-line-student-info))
+    let seal = ({ FIRST_PAGE }: _create-seal(info: seal-line-student-info))
     if seal-line-scope != FIRST_PAGE {
-      seal.insert("odd", _create-seal())
+      seal.insert(ODD_PAGE, _create-seal())
       if seal-line-scope == EVERY_PAGE {
-        seal.insert("even", _create-seal(rotate-deg: 90deg, rotate-origin: right + bottom))
+        seal.insert({ EVERY_PAGE }, _create-seal(rotate-deg: 90deg, rotate-origin: right + bottom))
       }
     }
     seal
   }
 
-  let is-odd-r-even-l = page-align == "odd-r-even-l"
+  let is-odd-r-even-l = page-align == ODD_R_EVEN_L
   let _footer(page-format, page-is-match: false) = context {
     if page-format == none { return }
-    let margin = page.margin
-    let flipped = page.flipped
-    let columns = page.columns
-    let footer-is-separate = columns > 1 and footer-is-separate and not is-odd-r-even-l
     let (current-chapter-start-page, total-page) = chapter-pages-state
       .final()
       .at(counter-title.get().first() - 1, default: (1, ..counter(page).final()))
 
     let current = counter(page).get()
     if page-is-match { current.push(total-page) }
-    let _numbering = numbering(page-format, ..current)
+
     // 处于分栏下且左右页脚分离
+    let page-columns = page.columns
+    let footer-is-separate = page-columns > 1 and footer-is-separate and not is-odd-r-even-l
     if footer-is-separate {
-      current.first() += 1
       grid(
-        columns: (1fr,) * columns,
         align: center,
-        // 左页码
-        _numbering,
-        // 右页码
-        numbering(page-format, ..current),
+        columns: (1fr,) * page-columns,
+        ..for _ in range(page-columns) {
+          (numbering(page-format, ..current),)
+          current.first() += 1
+        }
       )
-      counter(page).step()
+      counter(page).update(pre => pre + page-columns - 1)
     } else {
       // 页面的页脚是未分离, 则让奇数页在右侧，偶数页在左侧
       align(
         if is-odd-r-even-l {
           if calc.odd(current.first()) { right } else { left }
         } else { page-align },
-        _numbering,
+        numbering(page-format, ..current),
       )
     }
 
     // 弥封线
     let _mode = mode-state.get()
     if _mode == EXAM and seal-line != none and not _mode == OUTLINE {
-      let current-page = current.first()
-      let width = page.height
-      if flipped {
-        width = page.width
-        if footer-is-separate { current-page -= 1 }
+      // 在组多套试卷时，重新把页码按照1，2，3，4... 重新计算
+      let current-page = current.first() - current-chapter-start-page + 1
+      // 分页时，一页纸页码增加 page-columns - 1
+      let page-flipped = page.flipped
+      if page-flipped and footer-is-separate {
+        current-page = calc.ceil(current-page / page-columns - 1)
       }
 
+      let dx = .5cm
+      let position = right
+      let is-odd = calc.odd(current-page)
+      let key = EVERY_PAGE // 默认偶数页
+      if is-odd {
+        dx = -dx
+        position = left
+        key = if current-page == 1 { FIRST_PAGE } else { ODD_PAGE }
+      }
+
+      let (t, b) = _get-margin-y(page.margin)
+
       place(
-        bottom,
-        dx: -1em,
-        dy: -margin,
-        block(width: width - margin * 2)[
-          //当前章节第一页弥封线
-          #if current-page == current-chapter-start-page {
-            seal-line.first
-            return
-          }
-
-          #if seal-line-scope == FIRST_PAGE { return }
-
-          // 其它页码是否加弥封线的算法
-          #(current-page -= current-chapter-start-page - 1) // 在组多套试卷时，重新把页码按照1，2，3，4... 重新计算
-          // 分页时，一页纸页码增加 2
-          #if flipped and footer-is-separate {
-            current-page = calc.ceil(current-page / 2)
-          }
-
-          #if calc.odd(current-page) {
-            seal-line.odd
-            return
-          }
-
-          #if seal-line-scope == ODD_PAGE { return }
-
-          #move(
-            dx: if flipped { page.height } else { page.width } - margin * 2 - 100% + 2em,
-            seal-line.even,
-          )
-        ],
+        dx: dx,
+        dy: -b,
+        position + bottom,
+        block(
+          width: if page-flipped { page.width } else { page.height } - b - t,
+          seal-line.at(key, default: none),
+        ),
       )
     }
   }
@@ -229,18 +215,17 @@
   let gap-line = context if show-gap-line {
     let page-columns = page.columns
     if page-columns == 1 { return }
-    let available-width = 100% - page.margin * 2
-    set line(angle: 90deg, stroke: .5pt, length: available-width)
-    block(width: available-width)[
-      #for column in range(1, page-columns) {
-        place(
-          left + horizon,
-          move(
-            dx: 1 / page-columns * 100% * column,
-            line(),
-          ),
-        )
-      }]
+    let (t, b) = _get-margin-y(page.margin)
+    set line(angle: 90deg, stroke: .5pt, length: 100% - t - b)
+    for column in range(1, page-columns) {
+      place(
+        left + horizon,
+        move(
+          dx: 1 / page-columns * 100% * column,
+          line(),
+        ),
+      )
+    }
   }
 
   watermark = context if watermark != none {
@@ -259,10 +244,7 @@
     ..a4 + paper,
     background: gap-line,
     foreground: watermark,
-    footer: _footer(
-      page-numbering,
-      page-is-match: is-match,
-    ),
+    footer: _footer(page-numbering, page-is-match: is-match),
   )
   set columns(gutter: gap)
 
@@ -329,27 +311,20 @@
   )
   set text(font: font, font-size)
 
-  if heading-numbering == auto {
-    heading-numbering = mode-config.heading-numbering
-  }
-  if heading-body-indent == auto {
-    heading-body-indent = mode-config.heading-body-indent
-  }
-  if heading-hanging-indent == auto {
-    heading-hanging-indent = mode-config.heading-hanging-indent
-  }
   set heading(
-    numbering: (..item) => numbering(heading-numbering, ..item.filter(v => v > 0)) + h(heading-body-indent),
-    hanging-indent: heading-hanging-indent,
+    numbering: (..item) => (
+      numbering(_fallback(heading-numbering, mode-config.heading-numbering), ..item.filter(v => v > 0))
+        + h(_fallback(heading-body-indent, mode-config.heading-body-indent))
+    ),
+    hanging-indent: _fallback(heading-hanging-indent, mode-config.heading-hanging-indent),
     offset: mode-config.heading-offset,
   )
-  if h1-size == auto { h1-size = mode-config.h1-size }
   show heading: it => {
     set par(leading: 1.3em)
     let _mode = mode-state.get()
     let _size = if (
       _mode in (EXAM, SOLUTION) and it.level == 1 or _mode in (HANDOUTS, SOLUTION) and it.level == 2
-    ) { h1-size } else if (
+    ) { _fallback(h1-size, mode-config.h1-size) } else if (
       // 讲义模式下，由于设置了 offset = 1 导致1级变2，2变3，字体会降一级，这里设置回默认值
       _mode == HANDOUTS and it.depth == 2
     ) { 1.2em } else { 1em }
