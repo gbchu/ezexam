@@ -135,81 +135,79 @@
       rotate-origin: left + bottom,
     )
     let seal = ({ FIRST_PAGE }: _create-seal(info: seal-line-student-info))
-    if seal-line-scope != FIRST_PAGE {
-      seal.insert(ODD_PAGE, _create-seal())
-      if seal-line-scope == EVERY_PAGE {
-        seal.insert({ EVERY_PAGE }, _create-seal(rotate-deg: 90deg, rotate-origin: right + bottom))
-      }
+    if seal-line-scope == ODD_PAGE {
+      seal.insert({ ODD_PAGE }, _create-seal())
+    } else if seal-line-scope == EVERY_PAGE {
+      seal.insert({ EVERY_PAGE }, _create-seal(rotate-deg: 90deg, rotate-origin: right + bottom))
     }
     seal
   }
 
   let is-odd-r-even-l = page-align == ODD_R_EVEN_L
+
   let _footer(page-format, page-is-match: false) = context {
-    if page-format == none { return }
+    let counter-page = counter(page)
     let (current-chapter-start-page, total-page) = chapter-pages-state
       .final()
-      .at(counter-title.get().first() - 1, default: (1, ..counter(page).final()))
-
-    let current = counter(page).get()
-    if page-is-match { current.push(total-page) }
-
+      .at(counter-title.get().first() - 1, default: (1, ..counter-page.final()))
+    let current = counter-page.get()
     // 处于分栏下且左右页脚分离
     let page-columns = page.columns
     let footer-is-separate = page-columns > 1 and footer-is-separate and not is-odd-r-even-l
-    if footer-is-separate {
-      grid(
-        align: center,
-        columns: (1fr,) * page-columns,
-        ..for _ in range(page-columns) {
-          (numbering(page-format, ..current),)
-          current.first() += 1
-        }
-      )
-      counter(page).update(pre => pre + page-columns - 1)
-    } else {
-      // 页面的页脚是未分离, 则让奇数页在右侧，偶数页在左侧
-      align(
-        if is-odd-r-even-l {
-          if calc.odd(current.first()) { right } else { left }
-        } else { page-align },
-        numbering(page-format, ..current),
-      )
+    if page-format != none {
+      if page-is-match { current.push(total-page) }
+      if footer-is-separate {
+        grid(
+          align: center,
+          columns: (1fr,) * page-columns,
+          ..for _ in range(page-columns) {
+            (numbering(page-format, ..current),)
+            current.first() += 1
+          }
+        )
+        counter(page).update(pre => pre + page-columns - 1)
+      } else {
+        // 页面的页脚是未分离, 则让奇数页在右侧，偶数页在左侧
+        align(
+          if is-odd-r-even-l {
+            if calc.odd(current.first()) { right } else { left }
+          } else { page-align },
+          numbering(page-format, ..current),
+        )
+      }
     }
 
     // 弥封线
-    let _mode = mode-state.get()
-    if _mode == EXAM and seal-line != none and not _mode == OUTLINE {
-      // 在组多套试卷时，重新把页码按照1，2，3，4... 重新计算
-      let current-page = current.first() - current-chapter-start-page + 1
-      // 分页时，一页纸页码增加 page-columns - 1
-      let page-flipped = page.flipped
-      if page-flipped and footer-is-separate {
-        current-page = calc.ceil(current-page / page-columns - 1)
-      }
-
-      let dx = .5cm
-      let position = right
-      let is-odd = calc.odd(current-page)
-      let key = EVERY_PAGE // 默认偶数页
-      if is-odd {
-        dx = -dx
-        position = left
-        key = if current-page == 1 { FIRST_PAGE } else { ODD_PAGE }
-      }
-
-      let (t, b) = _get-margin-y(page.margin)
-
-      place(
-        dx: dx,
-        dy: -b,
-        position + bottom,
-        block(
-          width: if page-flipped { page.width } else { page.height } - b - t,
-          seal-line.at(key, default: none),
-        ),
-      )
+    if mode-state.get() != EXAM or seal-line == none { return }
+    // 在组多套试卷时，重新把页码按照1，2，3，4... 重新计算
+    let current-page = current.first() - current-chapter-start-page + 1
+    // 分页时，一页纸页码增加 page-columns - 1
+    let page-flipped = page.flipped
+    if page-flipped and footer-is-separate and page-numbering != none {
+      current-page = calc.ceil(current-page / page-columns - 1)
     }
+
+    let dx = .5cm
+    let position = right
+    let is-odd = calc.odd(current-page)
+    let key = EVERY_PAGE // 默认偶数页
+    if is-odd {
+      dx = -dx
+      position = left
+      key = if current-page == 1 { FIRST_PAGE } else { ODD_PAGE }
+    }
+
+    let (t, b) = _get-margin-y(page.margin)
+
+    place(
+      dx: dx,
+      dy: -b,
+      position + bottom,
+      block(
+        width: if page-flipped { page.width } else { page.height } - b - t,
+        seal-line.at(key, default: none),
+      ),
+    )
   }
 
   let gap-line = context if show-gap-line {
