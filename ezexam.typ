@@ -107,7 +107,7 @@
     ),
   ).at(mode)
 
-  import "lib/tools.typ": _delta-in-outside, _fallback, _get-margin-right, _get-margin-y
+  import "lib/tools.typ": _fallback, _get-margin-x, _get-margin-y
   page-numbering = _fallback(page-numbering, mode-config.page-numbering)
   // 除目录页的页码检测：包含两个1,两个1中间不能是连续空格、包含数字
   let is-match = (
@@ -212,20 +212,23 @@
   }
 
   let gap-line = context if show-gap-line {
+    real-page-state.update(pre => pre + 1)
     let page-columns = page.columns
     if page-columns == 1 { return }
     let page-margin = page.margin
+    let (l, r) = _get-margin-x(page-margin)
     let (t, b) = _get-margin-y(page-margin)
     set line(angle: 90deg, stroke: .5pt, length: 100% - t - b)
-    for column in range(1, page-columns) {
-      place(
-        left + horizon,
-        move(
-          dx: 1 / page-columns * 100% * column + _delta-in-outside(page-margin),
+    set place(left + horizon)
+    layout(size => {
+      let usable-width = size.width - l - r
+      for col in range(1, page-columns) {
+        place(
+          dx: l + (usable-width / page-columns) * col,
           line(),
-        ),
-      )
-    }
+        )
+      }
+    })
   }
 
   watermark = context if watermark != none {
