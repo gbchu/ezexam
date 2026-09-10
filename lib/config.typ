@@ -12,6 +12,8 @@
   flipped: false,
 )
 
+#let in-outside = (margin: (inside: 1.2in, outside: .8in, y: 1in))
+
 #let roman = (
   (name: "Times New Roman", covers: regex("[a-zA-Z0-9]")), // 西文字体
   (name: "TeX Gyre Termes", covers: regex("[a-zA-Z0-9]")), //（无Times New Roman时）
