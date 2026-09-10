@@ -1,6 +1,6 @@
 #import "lib/const.typ": *
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
-#import "lib/config.typ": a3, a4, heiti, kaiti, roman
+#import "lib/config.typ": a3, a4, heiti, in-outside, kaiti, roman
 #import "lib/tools.typ": circ-num, emph-dot, page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
 #import "lib/question.typ": per-pts, question, sec-pts, sec-q-cnt, set-per-pts, tot-pts, tot-q-cnt
@@ -107,7 +107,7 @@
     ),
   ).at(mode)
 
-  import "lib/tools.typ": _fallback, _get-margin-y
+  import "lib/tools.typ": _delta-in-outside, _fallback, _get-margin-right, _get-margin-y
   page-numbering = _fallback(page-numbering, mode-config.page-numbering)
   // 除目录页的页码检测：包含两个1,两个1中间不能是连续空格、包含数字
   let is-match = (
@@ -134,10 +134,11 @@
       rotate-deg: -90deg,
       rotate-origin: left + bottom,
     )
+
     let seal = ({ FIRST_PAGE }: _create-seal(info: seal-line-student-info))
-    if seal-line-scope == ODD_PAGE {
-      seal.insert({ ODD_PAGE }, _create-seal())
-    } else if seal-line-scope == EVERY_PAGE {
+    if seal-line-scope == FIRST_PAGE { return seal }
+    seal.insert({ ODD_PAGE }, _create-seal())
+    if seal-line-scope == EVERY_PAGE {
       seal.insert({ EVERY_PAGE }, _create-seal(rotate-deg: 90deg, rotate-origin: right + bottom))
     }
     seal
@@ -213,13 +214,14 @@
   let gap-line = context if show-gap-line {
     let page-columns = page.columns
     if page-columns == 1 { return }
-    let (t, b) = _get-margin-y(page.margin)
+    let page-margin = page.margin
+    let (t, b) = _get-margin-y(page-margin)
     set line(angle: 90deg, stroke: .5pt, length: 100% - t - b)
     for column in range(1, page-columns) {
       place(
         left + horizon,
         move(
-          dx: 1 / page-columns * 100% * column,
+          dx: 1 / page-columns * 100% * column + _delta-in-outside(page-margin),
           line(),
         ),
       )
@@ -233,7 +235,7 @@
       #set text(watermark-size, watermark-color, font: watermark-font)
       #grid(
         columns: page-columns * (1fr,),
-        ..paper-columns * (rotate(watermark-rotate, watermark),),
+        ..page-columns * (rotate(watermark-rotate, watermark),),
       )
     ]
   }
@@ -320,15 +322,16 @@
   show heading: it => {
     set par(leading: 1.3em)
     let _mode = mode-state.get()
-    let _size = if (
-      _mode in (EXAM, SOLUTION) and it.level == 1 or _mode in (HANDOUTS, SOLUTION) and it.level == 2
+    let level = it.level
+    let size = if (
+      (_mode == EXAM and level == 1) or (_mode == HANDOUTS and level == 2) or (_mode == SOLUTION and level <= 2)
     ) { _fallback(h1-size, mode-config.h1-size) } else if (
       // 讲义模式下，由于设置了 offset = 1 导致1级变2，2变3，字体会降一级，这里设置回默认值
       _mode == HANDOUTS and it.depth == 2
     ) { 1.2em } else { 1em }
 
     v(heading-top)
-    text(heading-color, font: heading-font + text.font, it, _size)
+    text(heading-color, font: heading-font + text.font, it, size)
     v(heading-bottom)
     if not resume { counter-question.update(0) }
   }
