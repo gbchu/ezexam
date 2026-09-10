@@ -2,11 +2,13 @@
 #let answer-state = state("answer", false)
 #let answer-color-state = state("answer-color", blue)
 #let subject-state = state("subject", none)
+
 // 章节的首页、本章节要显示的总页数 如 ((1,20),(7,20),....)
 #let chapter-pages-state = state("chapter-pages", ())
 #let page-restart-state = state("page-restart", 0)
+
 // 小节题目数、每题分数、小节总分 如 (((8,5,40),(3,6,18),(5,0,77)),...)
 #let question-count-points-state = state("question-count-points", ())
 
-// 当前容器宽度
-#let container-width-state = state("container-width", 0pt)
+// 去除封面，目录的实际页数
+#let real-page-state = state("real-page", 1)
