@@ -1,9 +1,42 @@
 #import "config.typ": heiti
 #import "const.typ": CIRCLE, TEXT
 #import "counter.typ": counter-title
-#import "state.typ": chapter-pages-state, page-restart-state
+#import "state.typ": chapter-pages-state, page-restart-state, real-page-state
 
 #let _fallback(value, default) = if value == auto { default } else { value }
+
+#let _get-margin-x(margin, default-margin: 1in) = {
+  let page-margin = _fallback(margin, default-margin)
+  if type(page-margin) != dictionary {
+    return (l: page-margin, r: page-margin)
+  }
+
+  if "right" in page-margin.keys() or "left" in page-margin.keys() {
+    return (
+      l: page-margin.at("left", default: default-margin),
+      r: page-margin.at("right", default: default-margin),
+    )
+  }
+
+  let m-left = page-margin.at("inside", default: 1.2in)
+  let m-right = page-margin.at("outside", default: .8in)
+  if (calc.even(real-page-state.get())) {
+    (m-left, m-right) = (m-right, m-left)
+  }
+
+  (l: m-left, r: m-right)
+}
+
+#let _get-margin-y(margin, default-margin: 1in) = {
+  let page-margin = _fallback(margin, default-margin)
+  if type(page-margin) == dictionary {
+    return (
+      t: page-margin.at("top", default: default-margin),
+      b: page-margin.at("bottom", default: default-margin),
+    )
+  }
+  (t: page-margin, b: page-margin)
+}
 
 #let _SPECIAL-CHAR = "《（【"
 // 以特殊字符，数学公式开头的行特殊处理
@@ -25,7 +58,8 @@
 
 #let _trim-content(body) = {
   if _is_empty(body) { return body }
-  show parbreak: [ \ ] // 去除数学公式在 question 方法中，新的段落以数学公式开头时，左侧加间距的问题(typst留下的坑)
+  // 去除数学公式在 question 方法中，新的段落以数学公式开头时，左侧加间距的问题
+  show parbreak: [ \ ]
   if body.has("children") {
     body = body.children
     if _is_empty(body.first()) { body = body.slice(1) } // 去除开头的空行，换行
@@ -63,23 +97,24 @@
       )
     }
   )
+
   #if decoration == none {
     line(length: 100%, stroke: (dash: line-type))
-  } else {
-    let data = (
-      { CIRCLE }: 4 * (circle(width: 1.25em, stroke: .5pt),),
-      { TEXT }: ("弥", "封", "线", none),
-    )
-    let seal-line = (4 * (line(length: 100%, stroke: (dash: line-type)),))
-      .zip(data.at(decoration))
-      .flatten()
-      .slice(0, -1)
-    grid(
-      columns: seal-line.len(),
-      align: horizon,
-      ..seal-line,
-    )
+    return
   }
+
+  #let value = (
+    { CIRCLE }: 4 * (circle(width: 1.25em, stroke: .5pt),),
+    { TEXT }: ("弥", "封", "线", none),
+  ).at(decoration)
+
+  #let seal-line = (4 * (line(length: 100%, stroke: (dash: line-type)),)).zip(value).flatten().slice(0, -1)
+
+  #grid(
+    columns: seal-line.len(),
+    align: horizon,
+    ..seal-line,
+  )
 ]
 
 // 一种页码格式: "第x页（共xx页）
@@ -128,10 +163,7 @@
 
   grid(
     columns: columns,
-    inset: (
-      top: top,
-      bottom: bottom,
-    ),
+    inset: (top: top, bottom: bottom),
     gutter: gap,
     ..body,
   )
