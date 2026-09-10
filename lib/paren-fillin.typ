@@ -1,6 +1,6 @@
 #import "state.typ": answer-color-state, answer-state
 #import "counter.typ": counter-placeholder, counter-question
-#import "tools.typ": _is_empty
+#import "tools.typ": _fallback, _get-margin-x, _is_empty
 
 #let _get-answer(body, placeholder, with-number, update) = {
   if answer-state.get() { return text(answer-color-state.get(), body) }
@@ -10,41 +10,42 @@
   if update { counter-question.step() }
 }
 
+#let _get-space() = {
+  let page-width = if page.flipped { page.height } else { page.width }
+  let (l, r) = _get-margin-x(page.margin) // 这里如果启用in-outside，左右是反的
+  let page-columns = page.columns
+  let trim-margin-x-width = page-width - l - r
+  let container-width = (trim-margin-x-width - columns.gutter * (page-columns - 1)) / page-columns
+
+  let here-pos-x = here().position().x
+  let cols = here-pos-x / container-width // 当前位置所在列
+  let end-pos-x = r + container-width * calc.ceil(cols) + columns.gutter * calc.floor(cols)
+
+  (container-width, end-pos-x - here-pos-x)
+}
+
 #let _draw-line(len, stroke, offset, body) = {
   assert(type(len) == length or len == 1fr, message: "expect length, 1fr")
   set box(stroke: (bottom: stroke), inset: (bottom: offset))
+  body = align(center, body)
   if len == 1fr {
-    box(width: len, align(center, body))
+    box(width: len, body)
   } else {
     let len = len.to-absolute()
     assert(len > 4pt, message: "len must > 4pt")
 
-    let page-width = if page.flipped { page.height } else { page.width }
-    let _columns = page.columns
-    let here-pos-x = here().position().x
-    if _columns > 1 {
-      let one-column-width = (page-width + columns.gutter * (_columns - 1)) / _columns
-      // 当有多个列时，当前内容所在的那一列加上前面所有的列的总宽度
-      page-width = one-column-width * calc.ceil(here-pos-x / one-column-width)
-    }
-
-    let _margin = page.margin
-    if _margin == auto { _margin = 1in }
-    let first-line-available-space = page-width - _margin - here-pos-x
-    let rest-len = len - first-line-available-space
+    let (first-line-useable-width, container-width) = _get-space()
+    let rest-len = len - first-line-useable-width
     let is-line-break = false
     // 当前行剩余空间 < 1em 时，则直接换行在新的一行从头开始画
-    if first-line-available-space < 1em.to-absolute() {
+    if first-line-useable-width < 1em.to-absolute() {
       [ \ ]
       is-line-break = true
       rest-len = len
     } else {
       // 当前行的线
       // 如果当前指定长度 < 剩余空间，则按照指定长度在文字后画线
-      box(
-        width: if rest-len < 0pt { len } else { 1fr },
-        align(center, body),
-      )
+      box(width: if rest-len < 0pt { len } else { 1fr }, body)
       // 如果当前行画满，则强制换行，否则如果后面有文字会导致线和文字一起换行
       if rest-len > 0pt [ \ ]
     }
@@ -52,16 +53,16 @@
     // 不在当前行的横线
     if rest-len > 5pt {
       // 完整的条数
-      let _ratio = rest-len / (page.width - _margin * 2)
+      let _ratio = rest-len / container-width
       for _ in range(calc.trunc(_ratio)) {
         box(width: 100%)[#if is-line-break {
-            align(center, body)
+            body
             is-line-break = false
           } else { sym.zws }
         ]
       }
       // 最后一行的线
-      box(width: calc.fract(_ratio) * 100%)[#if is-line-break { align(center, body) } else { sym.zws }]
+      box(width: calc.fract(_ratio) * 100%)[#if is-line-break { body } else { sym.zws }]
     }
   }
 }
