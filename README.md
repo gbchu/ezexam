@@ -73,7 +73,7 @@ This template can help Chinese university, primary, middle and high school teach
 + `setup` 方法，新增参数 `outline-chapter-width` , `outline-chapter-weight` , `outline-chapter-color` , 现在可以为目录页的章节部分添加样式及对齐方式
 + 将参考答案加入到目录显示中
 + 新增输入带圈数字 `circ-num` 方法，该方法可方便输入带圈数字
-+ 现在 page 支持设置 margin 的 inside 和 outside
++ 现在 page 支持设置 margin 的 inside 和 outside，为了方便设置，添加常量 `in-outside`
 
 
 ### 0 . 3 . 1
