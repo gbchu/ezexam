@@ -1,6 +1,6 @@
 #import "config.typ": heiti, kaiti
 #import "const.typ": EXAM, SOLUTION
-#import "state.typ": answer-color-state, answer-state, chapter-pages-state, mode-state, subject-state
+#import "state.typ": answer-color-state, answer-state, chapter-pages-state, mode-state, real-page-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
 #import "tools.typ": _create-seal, _fallback, _trim-content, page-restart
 #import "question.typ": tot-pts
@@ -12,7 +12,7 @@
   author: none,
   date: auto,
 ) = {
-  set page(footer: none, background: none, columns: 1)
+  set page(footer: real-page-state.update(0), background: none, columns: 1)
   set align(center + horizon)
   text(25pt, title)
 
