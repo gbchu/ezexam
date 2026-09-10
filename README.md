@@ -57,6 +57,7 @@ This template can help Chinese university, primary, middle and high school teach
   + 在 paper 为 a3 时，翻转且分栏问题
   + 前面页码增加问题
 + 修复目录页码显示不正确的问题
++ 修复不显示页码时，弥封线消失的问题
 + 修改 `setup` 的参数 `par-justify` 和 `gap` 的默认值 ； 添加参数 `heading-body-indent`
 + 修改 `question` 方法的参数 `points-prefix`, `label-weight` 的默认值
 + 修改 `subject` 方法的参数 `top, bottom` 默认值
@@ -72,6 +73,7 @@ This template can help Chinese university, primary, middle and high school teach
 + `setup` 方法，新增参数 `outline-chapter-width` , `outline-chapter-weight` , `outline-chapter-color` , 现在可以为目录页的章节部分添加样式及对齐方式
 + 将参考答案加入到目录显示中
 + 新增输入带圈数字 `circ-num` 方法，该方法可方便输入带圈数字
++ 现在 page 支持设置 margin 的 inside 和 outside
 
 
 ### 0 . 3 . 1
