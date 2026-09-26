@@ -1,6 +1,6 @@
 #import "lib/const.typ": *
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
-#import "lib/config.typ": a3, a4, heiti, in-outside, kaiti, times-songti-math, times-songti
+#import "lib/config.typ": a3, a4, heiti, in-outside, kaiti
 #import "lib/tools.typ": circ-num, emph-dot, page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
 #import "lib/question.typ": per-pts, question, sec-pts, sec-q-cnt, set-per-pts, tot-pts, tot-q-cnt
@@ -22,8 +22,16 @@
   outline-chapter-width: auto,
   outline-chapter-weight: 700,
   outline-chapter-color: purple,
-  font: times-songti,
-  font-math: times-songti-math,
+  font: (
+    "Times New Roman",
+    "TeX Gyre Termes", //（无 Times New Roman 时的 fallback）
+    "Noto Serif CJK SC", // 中文字体
+  ),
+  font-math: (
+    (name: "STIX Two Math", covers: regex("[∅𝜋𝑓𝑗𝑧±]")),
+    "TeX Gyre Termes Math",
+    "Noto Serif CJK SC",
+  ),
   font-size: 11pt,
   line-height: 2em,
   par-spacing: 2em,
@@ -47,7 +55,7 @@
   resume: true,
   watermark: none,
   watermark-color: rgb("#f666"),
-  watermark-font: times-songti,
+  watermark-font: auto,
   watermark-size: 88pt,
   watermark-rotate: -45deg,
   show-answer: false,
@@ -236,7 +244,7 @@
     let page-columns = page.columns
     place(horizon)[
       #set par(leading: .5em)
-      #set text(watermark-size, watermark-color, font: watermark-font)
+      #set text(watermark-size, watermark-color, font: _fallback(watermark-font, text.font))
       #grid(
         columns: page-columns * (1fr,),
         ..page-columns * (rotate(watermark-rotate, watermark),),
