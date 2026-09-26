@@ -14,7 +14,7 @@
 
 #let in-outside = (margin: (inside: 1.2in, outside: .8in, y: 1in))
 
-#let _regex = regex("[^a-zA-Z0-9，。、；：？！\"\"''（）《》]")
+#let _regex = regex("[^a-zA-Z0-9]")
 #let heiti = (
   (name: "SimHei", covers: _regex),
   (name: "Noto Sans CJK SC", covers: _regex),
