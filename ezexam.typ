@@ -1,6 +1,6 @@
 #import "lib/const.typ": *
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
-#import "lib/config.typ": a3, a4, heiti, in-outside, kaiti, roman
+#import "lib/config.typ": a3, a4, heiti, in-outside, kaiti, times-songti-math, times-songti
 #import "lib/tools.typ": circ-num, emph-dot, page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
 #import "lib/question.typ": per-pts, question, sec-pts, sec-q-cnt, set-per-pts, tot-pts, tot-q-cnt
@@ -22,7 +22,8 @@
   outline-chapter-width: auto,
   outline-chapter-weight: 700,
   outline-chapter-color: purple,
-  font: roman,
+  font: times-songti,
+  font-math: times-songti-math,
   font-size: 11pt,
   line-height: 2em,
   par-spacing: 2em,
@@ -46,7 +47,7 @@
   resume: true,
   watermark: none,
   watermark-color: rgb("#f666"),
-  watermark-font: roman,
+  watermark-font: times-songti,
   watermark-size: 88pt,
   watermark-rotate: -45deg,
   show-answer: false,
@@ -347,7 +348,7 @@
 
   set math.cases(gap: .75em)
   set math.equation(numbering: "（1）", supplement: [EQ -]) if mode == HANDOUTS
-  show math.equation: set text(font: font, weight: "regular")
+  show math.equation: set text(font: font-math, weight: "regular")
   let space = h(.25em, weak: true)
   show math.equation.where(block: false): it => space + math.display(it) + space
   show "∥": [#space\/#h(-.2em)/#space]
