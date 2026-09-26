@@ -14,15 +14,19 @@
 
 #let in-outside = (margin: (inside: 1.2in, outside: .8in, y: 1in))
 
-#let roman = (
-  (name: "Times New Roman", covers: regex("[a-zA-Z0-9]")), // 西文字体
-  (name: "TeX Gyre Termes", covers: regex("[a-zA-Z0-9]")), //（无Times New Roman时）
-  (name: "STIX Two Math", covers: regex("[∅𝜋𝑓𝑗𝑧±]")),
-  "TeX Gyre Termes Math",
+#let times-songti = (
+  "Times New Roman",
+  "TeX Gyre Termes", //（无 Times New Roman 时的 fallback）
   "Noto Serif CJK SC", // 中文字体
 )
 
-#let _regex = regex("[^a-zA-Z0-9，。、；：？！\"\"''（）《》〈〉…—·]")
+#let times-songti-math = (
+  (name: "STIX Two Math", covers: regex("[∅𝜋𝑓𝑗𝑧±]")),
+  "TeX Gyre Termes Math",
+  "Noto Serif CJK SC",
+)
+
+#let _regex = regex("[^a-zA-Z0-9，。、；：？！\"\"''（）《》]")
 #let heiti = (
   (name: "SimHei", covers: _regex),
   (name: "Noto Sans CJK SC", covers: _regex),
