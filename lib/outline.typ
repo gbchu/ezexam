@@ -2,7 +2,7 @@
 #import "const.typ": EXAM, SOLUTION
 #import "state.typ": answer-color-state, answer-state, chapter-pages-state, mode-state, real-page-state, subject-state
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
-#import "tools.typ": _create-seal, _fallback, _trim-content, page-restart
+#import "tools.typ": _create-seal, _fallback, _patch-font, _trim-content, page-restart
 #import "question.typ": tot-pts
 
 // 封面
@@ -16,12 +16,14 @@
   set align(center + horizon)
   text(25pt, title)
 
-  if subtitle != none {
-    text(font: heiti, 22pt)[\ #subtitle]
-  }
+  context {
+    if subtitle != none {
+      text(font: _patch-font(heiti), 22pt)[\ #subtitle]
+    }
 
-  if author != none {
-    text(font: kaiti, 15pt)[\ 作者：#author]
+    if author != none {
+      text(font: _patch-font(kaiti), 15pt)[\ 作者：#author]
+    }
   }
 
   [\ #_fallback(date, datetime.today().display("[year]年[month]月[day]日"))]
@@ -96,7 +98,7 @@
 #let secret(body: "绝密★启用前") = place(top, float: true, clearance: 1.5em, text(font: heiti, 10.5pt, body))
 
 #let exam-type(prefix: "试卷类型：", type) = context place(top + right, text(
-  font: heiti + text.font,
+  font: _patch-font(heiti),
   prefix + type,
 ))
 
@@ -115,7 +117,7 @@
     message: "info expected dictionary, found " + repr(info),
   )
 
-  set text(font: heiti + text.font, size, weight: weight)
+  set text(font: _patch-font(heiti), size, weight: weight)
   set align(center)
   grid(
     columns: _fallback(columns, info.len()),

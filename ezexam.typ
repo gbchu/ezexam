@@ -1,6 +1,6 @@
 #import "lib/const.typ": *
+#import "lib/config.typ": *
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
-#import "lib/config.typ": a3, a4, heiti, in-outside, kaiti
 #import "lib/tools.typ": circ-num, emph-dot, page-restart, tag, text-figure, zh-arabic
 #import "lib/choice.typ": choices
 #import "lib/question.typ": per-pts, question, sec-pts, sec-q-cnt, set-per-pts, tot-pts, tot-q-cnt
@@ -28,7 +28,7 @@
     "Noto Serif CJK SC", // 中文字体
   ),
   font-math: (
-    (name: "STIX Two Math", covers: regex("[∅𝜋𝑓𝑗𝑧±]")),
+    (name: "STIX Two Math", covers: regex("[𝜋𝑓𝑗𝑧∅±]")),
     "TeX Gyre Termes Math",
     "Noto Serif CJK SC",
   ),
@@ -88,7 +88,7 @@
   assert(mode in (HANDOUTS, EXAM), message: "mode expected " + HANDOUTS + ", " + EXAM)
   assert(
     type(font) == array and type(heading-font) == array,
-    message: "font must be an array, e.g., ('heiti', ...)",
+    message: "font must be an array, e.g., ('Times New Roman','SimHei', ...)",
   )
   import "lib/state.typ": *
   mode-state.update(mode)
@@ -116,7 +116,7 @@
     ),
   ).at(mode)
 
-  import "lib/tools.typ": _fallback, _get-margin-x, _get-margin-y
+  import "lib/tools.typ": _fallback, _get-margin-x, _get-margin-y, _patch-font
   page-numbering = _fallback(page-numbering, mode-config.page-numbering)
   // 除目录页的页码检测：包含两个1,两个1中间不能是连续空格、包含数字
   let is-match = (
@@ -343,7 +343,7 @@
     ) { 1.2em } else { 1em }
 
     v(heading-top)
-    text(heading-color, font: heading-font + text.font, it, size)
+    text(heading-color, font: _patch-font(heading-font), it, size)
     v(heading-bottom)
     if not resume { counter-question.update(0) }
   }
@@ -356,7 +356,7 @@
 
   set math.cases(gap: .75em)
   set math.equation(numbering: "（1）", supplement: [EQ -]) if mode == HANDOUTS
-  show math.equation: set text(font: font-math, weight: "regular")
+  show math.equation: set text(font: font-math, weight: 400)
   let space = h(.25em, weak: true)
   show math.equation.where(block: false): it => space + math.display(it) + space
   show "∥": [#space\/#h(-.2em)/#space]
