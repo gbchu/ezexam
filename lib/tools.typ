@@ -3,6 +3,8 @@
 #import "counter.typ": counter-title
 #import "state.typ": chapter-pages-state, page-restart-state, real-page-state
 
+#let _patch-font(font) = text.font.slice(0, -1) + font
+
 #let _fallback(value, default) = if value == auto { default } else { value }
 
 #let _get-margin-x(margin, default-margin: 1in) = {
@@ -131,7 +133,7 @@
   prefix: "【",
   suffix: "】",
 ) = context text(
-  font: _fallback(font, heiti + text.font),
+  font: _fallback(font, text.font.slice(0, -1) + heiti),
   weight: weight,
   color,
 )[#box(prefix)#body#box(suffix)#h(.25em, weak: true)]
