@@ -28,7 +28,6 @@
     "Noto Serif CJK SC", // 中文字体
   ),
   font-math: (
-    (name: "STIX Two Math", covers: regex("[𝜋𝑓𝑗𝑧∅±]")),
     "TeX Gyre Termes Math",
     "Noto Serif CJK SC",
   ),
@@ -356,10 +355,13 @@
 
   set math.cases(gap: .75em)
   set math.equation(numbering: "（1）", supplement: [EQ -]) if mode == HANDOUTS
-  show math.equation: set text(font: font-math, weight: 400)
   let space = h(.25em, weak: true)
-  show math.equation.where(block: false): it => space + math.display(it) + space
-  show "∥": [#space\/#h(-.2em)/#space]
+  show math.equation: it => {
+    set text(font: font-math, weight: 400)
+    if it.block { it } else { space + math.display(it) + space }
+  }
+  show math.parallel: [#space\/#(h(-.2em))/#space]
+  show math.pi: it => math.upright(it)
 
   if show-answer {
     answer-state.update(true)
