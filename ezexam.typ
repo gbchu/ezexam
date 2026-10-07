@@ -320,7 +320,7 @@
     first-line-indent: (amount: first-line-indent, all: true),
     justify: par-justify,
   )
-  set text(font: font, font-size)
+  set text(font: font, font-size, lang: "zh")
 
   set heading(
     numbering: (..item) => (
@@ -360,7 +360,7 @@
     set text(font: font-math, weight: 400)
     if it.block { it } else { space + math.display(it) + space }
   }
-  show math.parallel: [#space\/#(h(-.2em))/#space]
+  show math.parallel: math.class("relation", [/#h(-.25em)/])
   show math.pi: it => math.upright(it)
   show math.gt.eq: math.gt.eq.slant
   show math.lt.eq: math.lt.eq.slant
