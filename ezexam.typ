@@ -362,6 +362,8 @@
   }
   show math.parallel: [#space\/#(h(-.2em))/#space]
   show math.pi: it => math.upright(it)
+  show math.gt.eq: math.gt.eq.slant
+  show math.lt.eq: math.lt.eq.slant
 
   if show-answer {
     answer-state.update(true)
