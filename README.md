@@ -60,7 +60,7 @@ This template can help Chinese university, primary, middle and high school teach
 + 修复不显示页码时，弥封线消失的问题
 + 修改 `setup` 的参数 `par-justify` 和 `gap` 的默认值 ； 添加参数 `heading-body-indent`
   + `font-math` 参数回归，方便单独设置数学字体
-+ 修改 `question` 方法的参数 `points-prefix`, `label-weight` 的默认值
++ 修改 `question` 方法的参数 `points-prefix`, `label-weight` 的默认值；添加 `sub-label` 参数，方便设置解答题中子问题的编号方式
 + 修改 `subject` 方法的参数 `top, bottom` 默认值
 + 修改 `choices` 方法的参数 `sapcing` ，重命名为 `body-indent`
 + 为 `solution-block` 方法添加参数 `paper` ，该参数可以设置解析页面显示方式，比如经常试卷页需要 `a3` 显示，解析页 `a4 `显示，此时该参数就派上用场了
