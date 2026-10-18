@@ -3,6 +3,13 @@
 #import "counter.typ": counter-title
 #import "state.typ": chapter-pages-state, page-restart-state, real-page-state
 
+// enum 列表的编号方式
+#let _list-numbering(number-style) = (..n) => {
+  assert(type(number-style) == array and number-style.len() > 0, message: "enum-numbering must be a non-empty array")
+  let nums = n.pos()
+  numbering(number-style.at(nums.len() - 1, default: number-style.last()), nums.last())
+}
+
 #let _patch-font(font) = text.font.slice(0, -1) + font
 
 #let _fallback(value, default) = if value == auto { default } else { value }
