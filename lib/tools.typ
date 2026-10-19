@@ -47,7 +47,7 @@
   (t: page-margin, b: page-margin)
 }
 
-#let _SPECIAL-CHAR = "《（【"
+#let _SPECIAL-CHAR-REGEX = regex("[《（【]")
 // 以特殊字符，数学公式开头的行特殊处理
 #let _trim-left-space(body) = {
   if body.func() == math.equation {
@@ -55,11 +55,8 @@
     return h(-.25em) + body
   }
 
-  if body.has("text") {
-    let text = body.text
-    let first = text.first()
-    if first in _SPECIAL-CHAR { return box(first) + text.slice(first.len()) }
-  }
+  show _SPECIAL-CHAR-REGEX: it => box(it)
+  show h: none // 去除以 tag 方法开头的行左侧的间距
   body
 }
 
@@ -143,7 +140,7 @@
   font: _fallback(font, text.font.slice(0, -1) + heiti),
   weight: weight,
   color,
-)[#box(prefix)#body#box(suffix)#h(.25em, weak: true)]
+)[#h(.25em, weak: true)#box(prefix)#body#box(suffix)~]
 
 // 图文混排
 #let text-figure(
