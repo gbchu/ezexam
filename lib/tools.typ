@@ -56,7 +56,6 @@
   }
 
   show _SPECIAL-CHAR-REGEX: it => box(it)
-  show h: none // 去除以 tag 方法开头的行左侧的间距
   body
 }
 
@@ -140,7 +139,7 @@
   font: _fallback(font, text.font.slice(0, -1) + heiti),
   weight: weight,
   color,
-)[#h(.25em, weak: true)#box(prefix)#body#box(suffix)~]
+)[#h(0em, weak: true)#prefix#body#box(suffix)#h(.45em, weak: true)]
 
 // 图文混排
 #let text-figure(
