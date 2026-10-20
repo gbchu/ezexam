@@ -43,11 +43,16 @@ This template can help Chinese university, primary, middle and high school teach
 
 ## Changelog
 ### 0 . 4 . 0
-+ ⚠️ `typst` 版本更新至 `0.15.0`
++ ⚠️ `typst` 版本最低需要 `0.15.0`
 + ⚠️ 调整字体，去除 covers 以提高性能
++ ⚠️ 修改 `choices` 方法的参数 `sapcing` ，重命名为 `body-indent`
++ ⚠️ 修改 `setup , question , solution` 方法的参数 `line-height` 重命名为 `line-spacing` ，更加符合语义
++ ⚠️ 着重号重构为 `emph-dot` 方法；
+   感谢 [@arshtyi](https://github.com/arshtyi) 提交的 ([pr#9](https://github.com/gbchu/ezexam/pull/9))
 + 修复公式中的中文字体某些场景下自动加粗的问题
++ 修复当调节段落行距时，选项多行显示时，选项之间的行距不变的问题
 + 修复 `strong` 方法不生效及 `terms` 方法 `term` 不加粗的问题
-+ 修复 `solution` 方法，当以数学公式开头时，左侧和上一段落对不齐的问题
++ 修复 `solution` 方法，当以数学公式开头时，左侧和上一段落对不齐的问题；
 + 修复 `tag` 方法，当 `par-justify` 的值设置为 `true` 时，对不齐的问题并优化右间距
 + 修复 `fillin` 方法，左右间距不同问题；调整默认长度
 + 修复 `cover` 方法
@@ -58,20 +63,21 @@ This template can help Chinese university, primary, middle and high school teach
   + 前面页码增加问题
 + 修复目录页码显示不正确的问题
 + 修复不显示页码时，弥封线消失的问题
-+ 修改 `setup` 的参数 `par-justify` 和 `gap` 的默认值 ； 添加参数 `heading-body-indent`
++ `setup` 方法
+  + 修改参数 `par-justify` 和 `gap` 的默认值 ；
   + `font-math` 参数回归，方便单独设置数学字体
-+ 修改 `question` 方法的参数 `points-prefix`, `label-weight` 的默认值；添加 `sub-label` 参数，方便设置解答题中子问题的编号方式
+  + 新增参数 `heading-body-indent`
+  + 新增参数 `outline-chapter-width` , `outline-chapter-weight` , `outline-chapter-color` , 现在可以为目录页的章节部分添加样式及对齐方式
++ `question` 方法
+  + 修改参数 `points-prefix`, `label-weight` 的默认值；
+  + 新增 `sub-label` 参数，方便设置解答题中子问题的编号方式
 + 修改 `subject` 方法的参数 `top, bottom` 默认值
-+ 修改 `choices` 方法的参数 `sapcing` ，重命名为 `body-indent`
-+ 为 `solution-block` 方法添加参数 `paper` ，该参数可以设置解析页面显示方式，比如经常试卷页需要 `a3` 显示，解析页 `a4 `显示，此时该参数就派上用场了
++ `solution-block` 方法新增参数 `paper` ，该参数可以单独设置解析页面显示方式，比如试卷页需要 `a3` 显示，解析页 `a4 `显示
 + 新增 `set-per-pts` 方法，`sec-q-cnt`, `per-pts`, `sec-pts`, `tot-pts`, `tot-q-cnt` 常量；方便自动统计小节的题量、试卷总题量、小节的总分、试卷总分等；
   感谢 [@Naptie](https://github.com/Naptie) 提交的 ([pr#8](https://github.com/gbchu/ezexam/pull/8))
-+ ⚠️ 着重号重构为 `emph-dot` 方法；
-   感谢 [@arshtyi](https://github.com/arshtyi) 提交的 ([pr#9](https://github.com/gbchu/ezexam/pull/9))
 + `chapter` 方法
   + 新增参数 `label` , 该参数可以修改目录页章节的编号方式，并修复在讲义模式下目录页章节部分缩进不正确的问题 ([issues#10](https://github.com/gbchu/ezexam/issues/10))
   + 现在在非 `EXAM` 模式下，章节将会居中显示，不再隐藏。同时新增参数 `color` , `size` , `font`
-+ `setup` 方法，新增参数 `outline-chapter-width` , `outline-chapter-weight` , `outline-chapter-color` , 现在可以为目录页的章节部分添加样式及对齐方式
 + 将参考答案加入到目录显示中
 + 新增输入带圈数字 `circ-num` 方法，该方法可方便输入带圈数字
 + 支持设置页面 `margin` 的 `inside` 和 `outside`，为了方便设置，添加常量 `in-outside`
