@@ -46,7 +46,7 @@ This template can help Chinese university, primary, middle and high school teach
 + ⚠️ `typst` 版本最低需要 `0.15.0`
 + ⚠️ 调整字体，去除 covers 以提高性能
 + ⚠️ 修改 `choices` 方法的参数 `sapcing` ，重命名为 `body-indent`
-+ ⚠️ 修改 `setup , question , solution` 方法的参数 `line-height` 重命名为 `line-spacing` ，更加符合语义
++ ⚠️ 修改 `setup , question , solution` 方法的参数 `line-height` ，重命名为 `line-spacing` ，更加符合语义
 + ⚠️ 着重号重构为 `emph-dot` 方法；
    感谢 [@arshtyi](https://github.com/arshtyi) 提交的 ([pr#9](https://github.com/gbchu/ezexam/pull/9))
 + 修复公式中的中文字体某些场景下自动加粗的问题
