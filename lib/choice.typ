@@ -43,7 +43,7 @@
 #let choices(
   columns: auto,
   c-gap: 0pt,
-  r-gap: 2em,
+  r-gap: auto,
   indent: 0pt,
   body-indent: 5pt,
   top: 0pt,
@@ -78,7 +78,7 @@
     grid(
       columns: _count-columns(container.width, choice-number, max-width + c-gap, columns) * (1fr,),
       column-gutter: c-gap,
-      row-gutter: r-gap,
+      row-gutter: if r-gap == auto { par.leading } else { r-gap },
       align: horizon,
       ..choices-arr
     )
