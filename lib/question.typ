@@ -98,14 +98,14 @@
   points-separate: true,
   points-prefix: "（",
   points-suffix: "分）",
-  line-height: auto,
+  line-spacing: auto,
   top: 0pt,
   bottom: 0pt,
   ref-on: false,
   show-ref-prefix: true,
   supplement: none,
 ) = context {
-  set par(leading: line-height) if line-height != auto
+  set par(leading: line-spacing) if line-spacing != auto
   set enum(numbering: _list-numbering(sub-label), full: true) if sub-label != auto
   let chapter = counter-chapter.get().first()
   // 讲义模式下，由于标题设置了offset = 1，这里的headings第一个均为 0，需要去掉

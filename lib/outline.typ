@@ -179,7 +179,7 @@
   radius: 5pt,
   bg-color: white,
   breakable: true,
-  line-height: auto,
+  line-spacing: auto,
   top: 0pt,
   bottom: 0pt,
   inset: (:),
@@ -197,7 +197,7 @@
     stroke: border-stroke,
     fill: bg-color,
   )[
-    #set par(leading: line-height) if line-height != auto
+    #set par(leading: line-spacing) if line-spacing != auto
     // 标题
     #if title != none {
       let title-box = box(fill: title-bg-color, inset: 5pt, radius: title-radius, text(
