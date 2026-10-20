@@ -32,7 +32,7 @@
     "Noto Serif CJK SC",
   ),
   font-size: 11pt,
-  line-height: 2em,
+  line-spacing: 2em,
   par-spacing: 2em,
   par-justify: true,
   first-line-indent: 0em,
@@ -315,7 +315,7 @@
   }
 
   set par(
-    leading: line-height,
+    leading: line-spacing,
     spacing: par-spacing,
     first-line-indent: (amount: first-line-indent, all: true),
     justify: par-justify,
