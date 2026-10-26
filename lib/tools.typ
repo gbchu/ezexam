@@ -63,7 +63,7 @@
 
 #let _trim-content(body) = {
   if _is_empty(body) { return body }
-  // 去除数学公式在 question 方法中，新的段落以数学公式开头时，左侧加间距的问题
+  // 去除新的段落以数学公式开头时，左侧加间距的问题
   show parbreak: [ \ ]
   if body.has("children") {
     body = body.children
@@ -139,7 +139,7 @@
   font: _fallback(font, text.font.slice(0, -1) + heiti),
   weight: weight,
   color,
-)[#h(0em, weak: true)#prefix#body#box(suffix)#h(.45em, weak: true)]
+)[#prefix#body#box(suffix)#h(0.45em, weak: true)]
 
 // 图文混排
 #let text-figure(
