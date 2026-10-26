@@ -6,8 +6,7 @@
 #import "lib/question.typ": per-pts, question, sec-pts, sec-q-cnt, set-per-pts, tot-pts, tot-q-cnt
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
 #import "lib/outline.typ": (
-  chapter, cover, draft, exam-info, exam-type, notice, score, score-box, secret, solution, solution-env, subject,
-  title,
+  chapter, cover, draft, exam-info, exam-type, notice, score, score-box, secret, solution, solution-env, subject, title,
 )
 
 #let setup(
@@ -153,7 +152,7 @@
   }
 
   let is-odd-r-even-l = page-align == ODD_R_EVEN_L
-
+  footer-is-separate-state.update(footer-is-separate)
   let _footer(page-numbering, page-is-match: false) = context {
     let counter-page = counter(page)
     let (current-chapter-start-page, total-page) = chapter-pages-state
@@ -162,7 +161,7 @@
     let current = counter-page.get()
     // 处于分栏下且左右页脚分离
     let page-columns = page.columns
-    let footer-is-separate = page-columns > 1 and footer-is-separate and not is-odd-r-even-l
+    let footer-is-separate = page-columns > 1 and footer-is-separate-state.get() and not is-odd-r-even-l
     if page-numbering != none {
       if page-is-match { current.push(total-page) }
       if footer-is-separate {
