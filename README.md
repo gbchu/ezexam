@@ -69,6 +69,7 @@ This template can help Chinese university, primary, middle and high school teach
   + `font-math` 参数回归，方便单独设置数学字体
   + 新增参数 `heading-body-indent`
   + 新增参数 `outline-chapter-width` , `outline-chapter-weight` , `outline-chapter-color` , 现在可以为目录页的章节部分添加样式及对齐方式
+  + `paper` 参数新增预设值，`a3-3cols`, `a4-2cols`, `a4-flipped`, `a4-flipped-2cols`
 + `question` 方法
   + 修改参数 `points-prefix`, `label-weight` 的默认值；
   + 新增 `sub-label` 参数，方便设置解答题中子问题的编号方式
