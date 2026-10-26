@@ -70,7 +70,7 @@
       } else { weight },
       font: _fallback(font, text.font),
       if size == auto {
-        if is-exam { 16pt } else { 18.5pt }
+        if is-exam { 1.45em } else { 1.68em }
       } else { size },
       color,
       body,
@@ -90,7 +90,7 @@
   })
 }
 
-#let subject(body, size: 21.5pt, spacing: 1em, font: heiti, top: 0pt, bottom: 0pt) = {
+#let subject(body, size: 1.95em, spacing: 1em, font: heiti, top: 0pt, bottom: 0pt) = {
   set par(spacing: 1.3em)
   v(top)
   align(center, text(tracking: spacing, font: font, size)[#body])
@@ -98,7 +98,7 @@
   subject-state.update(body)
 }
 
-#let secret(body: "绝密★启用前") = place(top, float: true, clearance: 1.5em, text(font: heiti, 10.5pt, body))
+#let secret(body: "绝密★启用前") = place(top, float: true, clearance: 1.5em, text(font: heiti, .909em, body))
 
 #let exam-type(prefix: "试卷类型：", type) = context place(top + right, text(
   font: _patch-font(heiti),
@@ -173,7 +173,7 @@
 #let solution(
   body,
   title: none,
-  title-size: 12pt,
+  title-size: 1.0909em,
   title-weight: 700,
   title-color: white,
   title-bg-color: maroon,

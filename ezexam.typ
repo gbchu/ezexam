@@ -101,7 +101,7 @@
       heading-body-indent: -.3em,
       heading-hanging-indent: 2em,
       heading-offset: 0,
-      h1-size: 11pt,
+      h1-size: font-size,
     ),
     { HANDOUTS }: (
       page-numbering: "1 / 1",

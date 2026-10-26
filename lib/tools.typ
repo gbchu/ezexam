@@ -86,10 +86,10 @@
 ) = rotate(rotate-deg, origin: rotate-origin)[
   #assert(type(info) == dictionary, message: "expected dictionary, found " + str(type(info)))
   #set par(spacing: 10pt)
-  #set text(font: heiti, 12pt)
+  #set text(font: heiti, 1.0909em)
   #set align(center)
   #set grid(columns: 2, align: horizon, gutter: .5em)
-  #if supplement != none { text(tracking: .8in, supplement) }
+  #if supplement != none { text(tracking: 4.724em, supplement) }
   #grid(
     columns: if info.len() == 0 { 1 } else { info.len() },
     gutter: 1em,
