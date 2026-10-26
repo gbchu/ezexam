@@ -1,6 +1,9 @@
-#import "config.typ": heiti, kaiti
+#import "config.typ": a4-2cols, heiti, kaiti
 #import "const.typ": EXAM, SOLUTION
-#import "state.typ": answer-color-state, answer-state, chapter-pages-state, mode-state, real-page-state, subject-state
+#import "state.typ": (
+  answer-color-state, answer-state, chapter-pages-state, footer-is-separate-state, mode-state, real-page-state,
+  subject-state,
+)
 #import "counter.typ": counter-chapter, counter-explain, counter-question, counter-title
 #import "tools.typ": _create-seal, _fallback, _patch-font, _trim-content, page-restart
 #import "question.typ": tot-pts
@@ -150,9 +153,12 @@
   set page(..paper) if paper.len() > 0
   let pre-mode = mode-state.get()
   let set-mode(_mode) = mode-state.update(_mode)
+  let pre-footer-separate = footer-is-separate-state.get()
+  let set-separate(_is-separate) = footer-is-separate-state.update(_is-separate)
   counter-explain.update(0)
   pagebreak(weak: true)
   set-mode(SOLUTION)
+  set-separate(paper != a4-2cols) // a4 双列 默认页脚不分开
   place(hide[
     #set heading(offset: 1, numbering: none)
     = #text(weight: 700, answer-color-state.get(), 1.1em)[#name] <chapter>
@@ -161,6 +167,7 @@
   body
   pagebreak(weak: true)
   set-mode(pre-mode)
+  set-separate(pre-footer-separate)
 }
 
 #let solution(
