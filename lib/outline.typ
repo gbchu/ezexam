@@ -144,7 +144,7 @@
   for child in children.pos() [+ #par(child)]
 }
 
-#let solution-block(name: "参考答案", paper: (:), body) = context {
+#let solution-env(name: "参考答案", paper: (:), body) = context {
   if not answer-state.get() { return }
   assert(type(paper) == dictionary, message: "paper expected dictionary")
   set page(..paper) if paper.len() > 0
