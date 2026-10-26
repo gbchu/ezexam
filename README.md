@@ -69,7 +69,7 @@ This template can help Chinese university, primary, middle and high school teach
   + `font-math` 参数回归，方便单独设置数学字体
   + 新增参数 `heading-body-indent`
   + 新增参数 `outline-chapter-width` , `outline-chapter-weight` , `outline-chapter-color` , 现在可以为目录页的章节部分添加样式及对齐方式
-  + `paper` 参数新增预设值，`a3-3cols`, `a4-2cols`, `a4-flipped`, `a4-flipped-2cols`
+  + `paper` 参数新增以下预设值：` a3-3cols, a3-binding, a3-3cols-binding, a4-2cols, a4-2cols-binding, a4-landscape, a4-landscape-binding, a4-landscape-2cols, a4-landscape-2cols-binding`
 + `question` 方法
   + 修改参数 `points-prefix`, `label-weight` 的默认值；
   + 新增 `sub-label` 参数，方便设置解答题中子问题的编号方式
@@ -82,7 +82,6 @@ This template can help Chinese university, primary, middle and high school teach
   + 现在在非 `EXAM` 模式下，章节将会居中显示，不再隐藏。同时新增参数 `color` , `size` , `font`
 + 将参考答案加入到目录显示中
 + 新增输入带圈数字 `circ-num` 方法，该方法可方便输入带圈数字
-+ 支持设置页面 `margin` 的 `inside` 和 `outside`，为了方便设置，添加常量 `in-outside`
 
 
 ### 0 . 3 . 1
