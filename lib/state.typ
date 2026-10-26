@@ -12,3 +12,6 @@
 
 // 去除封面，目录的实际页数
 #let real-page-state = state("real-page", 1)
+
+// 页码是否分离
+#let footer-is-separate-state = state("footer-is-separate", true)
