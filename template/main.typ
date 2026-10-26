@@ -4,7 +4,7 @@
   mode: EXAM,
   paper: a3,
   show-answer: true,
-  show-gap-line: true,
+  show-gap-line: true
 )
 
 #outline()
@@ -30,12 +30,12 @@
 = 单选题：本题共 #sec-q-cnt 小题，每小题 #per-pts 分，共 #sec-pts 分。在每小题给出的四个选项中，只有一项是符合题目要求的。
 
 #question[
-  $(1 + 5"i")"i"$ 的虚部为 #paren[C]
+  $(1 + 5upright(i))upright(i)$ 的虚部为 #paren[C]
   #choices(-1, 0, 1, 6)
 ]
 
 #question[
-  集合 $U = {x | x$为小于9的正整数}, $A = {1,3,5}$, 则 $complement_U A$ 中的元素个数为 #paren[C]
+  集合 $U = {x | x "为小于9的正整数"}$, $A = {1,3,5}$, 则 $complement_U A$ 中的元素个数为 #paren[C]
   #choices(0, 3, 5, 8)
 ]
 
@@ -46,34 +46,34 @@
 
 #question[
   若点 $(a,0) (a > 0)$ 是函数 $y = 2tan(x - pi / 3)$ 的图象的一个对称中心，则 $a$ 的最小值为 #paren[B]
-  #choices([30°], [60°], [90°], [135°])
+  #choices([$30^°$], [$60^°$], [$90^°$], [$135^°$])
 ]
 
 #question[
-  设 $f(x)$ 是定义在 R 上且周期为 2 的偶函数，当 $2 lt.slant x lt.slant 3$ 时，$f(x) = 5 - 2x$，则 $f(-3 / 4 ) =$
+  设 $f(x)$ 是定义在 *R* 上且周期为 2 的偶函数，当 $2 <= x <= 3$ 时，$f(x) = 5 - 2x$，则 $f(-3 / 4 ) =$
   #paren[A]
   #choices([$-1 / 2$], [$-1 / 4$], [$1 / 4$], [$1 / 2$])
 ]
 
 #question[
-  已知视风速是真风速和船风速的和向量，船风速与船行驶速度大小相等，方向相反.则真风速等级是 #paren[A]
+  已知视风速是真风速和船风速的和向量，船风速与船行驶速度大小相等，方向相反。则真风速等级是 #paren[A]
   #text-figure(
     figure: image("6.png", height: 1.5in),
     figure-x: -1in,
     figure-y: 10pt,
   )[#choices(
     columns: 1,
-    [轻风 (1.6$~$3.3 m/s)],
-    [微风 (3.4$~$5.4 m/s)],
-    [和风 (5.5$~$7.8 m/s)],
-    [劲风 (8.0$~$10.7 m/s)],
+    [轻风 $(1.6~3.3 "m/s")$],
+    [微风 $(3.4~5.4 "m/s")$],
+    [和风 $(5.5~7.8 "m/s")$],
+    [劲风 $(8.0~10.7 "m/s")$],
   )]
 ]
 
 #question[
   若圆 $x^2 + (y + 2)^2 = r^2 (r > 0)$ 上到直线 $y = sqrt(3)x + 2$ 的距离为 1 的点有且仅有 2 个，则 $r$ 的取值范围是
   #paren[B]
-  #choices([(0, 1)], [(1, 3)], [(3, +∞)], [(0, +∞)])
+  #choices([$(0, 1)$], [$(1, 3)$], [$(3, +∞)$], [$(0, +∞)$])
 ]
 
 #question[
@@ -91,17 +91,17 @@
 #question[
   设抛物线 $C: y^2 = 6x$ 的焦点为 $F$，过 $F$的直线交 $C$ 于$A、B$，过 $F$ 且垂直于 $A B$的直线交准线 $l$: $y = -3 / 2x$
   于 $E$，过点$A$作准线的垂线，垂足为$D$，则 #paren[ACD]
-  #choices([$|A D| = |A F|$], [$|A E| = |A B|$], [$|A B| gt.slant 6$], [$|A E| dot |B E| gt.slant 18$])
+  #choices([$|A D| = |A F|$], [$|A E| = |A B|$], [$|A B| >= 6$], [$|A E| dot |B E| >= 18$])
 ]
 
 #question[
-  已知 $triangle A B C$ 的面积为 $1 / 4$，若 $cos 2A + cos 2B + cos 2C = 2,cos A cos B sin C = 1 / 4$，则 #paren[ACD]
+  已知 $triangle A B C$ 的面积为 $1 / 4$，若 $cos 2A + cos 2B + cos 2C = 2$,$cos A cos B sin C = 1 / 4$，则 #paren[ACD]
   #choices([$sin C = sin^2 A + sin^2 B$], [$A B = sqrt(2)$], [$sin A + sin B = sqrt(6) / 2$], [$A C^2 + B C^2 = 3$])
 ]
 
 = 填空题：本题共 #sec-q-cnt 小题，每小题 #per-pts 分，共 #sec-pts 分。
 #question[
-  若直线 $y = 2x +5$ 是曲线 $y = e^x + x + a$ 的切线，则 $a$= #fillin[4].
+  若直线 $y = 2x + 5$ 是曲线 $y = "e"^x + x + a$ 的切线，则 $a=$ #fillin[4].
 ]
 
 #question[
@@ -109,7 +109,7 @@
 ]
 
 #question[
-  一个箱子里有 5 个球，分别以 1$~$5 标号，若有放回取三次，记至少取出一次的球的个数 $X$，则 $E(X)$= #fillin[$61/25$].
+  一个箱子里有 5 个球，分别以 1$~$5 标号，若有放回取三次，记至少取出一次的球的个数 $X$，则 $E(X)=$#fillin[$61/25$].
 ]
 
 = 解答题：本题共 #sec-q-cnt 小题，共 #sec-pts 分。解答应写出文字说明、证明过程或演算步骤。
@@ -130,7 +130,7 @@
     top: 10pt,
     figure: table(
       columns: 4,
-      [$P(chi^2 gt.slant k)$], [0.005], [0.010], [0.001],
+      [$P(chi^2 >= k)$], [0.005], [0.010], [0.001],
       [$k$], [3.841], [6.635], [10.828],
     ),
   )[附：$chi^2 = n(a d - b c)^2 / ((a + b)(c + d)(a + c)(b + d))$]
@@ -147,7 +147,7 @@
   + 证明：平面 $P A B perp "平面" P A D$
   + 若 $P A = A B = sqrt(2), A D = sqrt(3) + 1, B C = 2$，$P, B, C, D$ 在同一个球面上，设该球面的球心为 $O$.
     #text-figure(
-      figure: image("17.png", height: 1.6in),
+      figure: image("17.png", height: 1.5in),
     )[
       + 证明：$O$ 在平面 $A B C D$上；
       + 求直线 $A C$ 与直线 $P O$ 所成角的余弦值.
@@ -166,29 +166,28 @@
 #question(points: 17)[
   设函数 $f(x) = 5cos x - cos 5x$.
   + 求 $f(x)$ 在 $[0, pi / 4]$ 的最大值；
-  + 给定 $theta in (0,pi)，a$ 为实数，证明：存在 $y in [a - theta, a + theta]$，使得 $cos y lt.slant cos theta$；
-  + 若存在 $phi$，使得对任意 $x$，都有 $5cos x - cos(5x + phi) lt.slant b$，求 $b$ 的最小值.
+  + 给定 $theta in (0,pi)，a$ 为实数，证明：存在 $y in [a - theta, a + theta]$，使得 $cos y <= cos theta$；
+  + 若存在 $phi$，使得对任意 $x$，都有 $5cos x - cos(5x + phi) <= b$，求 $b$ 的最小值.
 ]
 
-#solution-block[
-  #let answer = tag.with(prefix: "答案：", suffix: [ \ ], color: maroon)
+#solution-env[
+  #let answer = tag.with(prefix: "答案：", suffix: none, color: maroon)
   = 选择题
   #solution(title: "解析")[
     #answer[A]
 
-    #tag[解析]: #lorem(6)#score(5)
-  ]
-
-  #solution[
-    #answer[B]
-
-    #tag[解析]: #lorem(8)#score(6)
+    #tag[解析]: #lorem(6)
   ]
 
   = 填空题
   #solution[
     #answer[6]
 
-    #tag[解析]: #lorem(8)#score(5)
+    #tag[解析]: #lorem(6)
+  ]
+
+  = 解答题
+  #solution[
+    #tag[解析]: #lorem(6)#score(5)
   ]
 ]
