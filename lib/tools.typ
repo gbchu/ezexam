@@ -130,7 +130,7 @@
 
 #let tag(
   body,
-  color: blue,
+  color: fuchsia,
   font: auto,
   weight: 400,
   prefix: "【",
