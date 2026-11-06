@@ -171,7 +171,7 @@
 ]
 
 #solution-env[
-  #let answer = tag.with(prefix: "答案：", suffix: none, color: maroon)
+  #let answer = tag.with(prefix: "答案：", suffix: none)
   = 选择题
   #solution(title: "解析")[
     #answer[A]
