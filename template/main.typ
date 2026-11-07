@@ -4,12 +4,12 @@
   mode: EXAM,
   paper: a3,
   show-answer: true,
-  show-gap-line: true
+  show-gap-line: true,
 )
 
 #outline()
-#chapter[2025新高考I卷]
-#title[2025年普通高等学校招生全国统一考试]
+#chapter[2026新高考I卷]
+#title[2026年普通高等学校招生全国统一考试]
 #subject[数学]
 #secret()
 #score-box(y: .35in)
@@ -26,162 +26,151 @@
 )
 
 #set-per-pts(5, 6, 5) // 设置小节每题的分数
-
-= 单选题：本题共 #sec-q-cnt 小题，每小题 #per-pts 分，共 #sec-pts 分。在每小题给出的四个选项中，只有一项是符合题目要求的。
-
+= 单选题：本题共 #sec-q-cnt 小题，每小题 #per-pts 分，共 #sec-pts 分.在每小题给出的四个选项中，只有一项是符合题目要求的.
 #question[
-  $(1 + 5upright(i))upright(i)$ 的虚部为 #paren[C]
-  #choices(-1, 0, 1, 6)
+  样本数据6，8，4，5，12的中位数为 #paren[B]
+  #choices(5, 6, 8, 9)
 ]
 
 #question[
-  集合 $U = {x | x "为小于9的正整数"}$, $A = {1,3,5}$, 则 $complement_U A$ 中的元素个数为 #paren[C]
-  #choices(0, 3, 5, 8)
-]
-
-#question[
-  若双曲线 $C$ 的虚轴长为实轴长的 $sqrt(7)$ 倍，则 $C$ 的离心率为 #paren[D]
-  #choices([$sqrt(2)$], 2, [$sqrt(7)$], [$2sqrt(2)$])
-]
-
-#question[
-  若点 $(a,0) (a > 0)$ 是函数 $y = 2tan(x - pi / 3)$ 的图象的一个对称中心，则 $a$ 的最小值为 #paren[B]
-  #choices([$30^°$], [$60^°$], [$90^°$], [$135^°$])
-]
-
-#question[
-  设 $f(x)$ 是定义在 *R* 上且周期为 2 的偶函数，当 $2 <= x <= 3$ 时，$f(x) = 5 - 2x$，则 $f(-3 / 4 ) =$
+  已知平面向量$bold(a)$,$bold(b)$不共线，且$2bold(a)+y bold(b)=x bold(a)- 3bold(b)$，则
   #paren[A]
-  #choices([$-1 / 2$], [$-1 / 4$], [$1 / 4$], [$1 / 2$])
+  #choices([$x=2，y=-3$], [$x=-2，y=3$], [$x=2，y=3$], [$x=-2，y=-3$])
 ]
 
 #question[
-  已知视风速是真风速和船风速的和向量，船风速与船行驶速度大小相等，方向相反。则真风速等级是 #paren[A]
-  #text-figure(
-    figure: image("6.png", height: 1.5in),
-    figure-x: -1in,
-    figure-y: 10pt,
-  )[#choices(
-    columns: 1,
-    [轻风 $(1.6~3.3 "m/s")$],
-    [微风 $(3.4~5.4 "m/s")$],
-    [和风 $(5.5~7.8 "m/s")$],
-    [劲风 $(8.0~10.7 "m/s")$],
-  )]
+  已知集合$A = {sin (7pi)/6,cos (5pi)/3,tan (5pi)/4}$，$B = {-sqrt(3)/2,-1/2,1}$，则$A inter B=$ #paren[C]
+  #choices(top: 10pt, bottom: 5pt, [${-sqrt(3)/2,-1/2}$], [${-sqrt(3)/2,1}$], [${-1/2,1}$], [${-sqrt(3)/2,-1/2,1}$])
 ]
 
 #question[
-  若圆 $x^2 + (y + 2)^2 = r^2 (r > 0)$ 上到直线 $y = sqrt(3)x + 2$ 的距离为 1 的点有且仅有 2 个，则 $r$ 的取值范围是
+  曲线$y=5x+8ln x$在点$(1,5)$处的切线方程为 #paren[D]
+  #choices([$y=3x+2$], [$y=5x$], [$y=8x-3$], [$y=13x-8$])
+]
+
+#question[
+  已知抛物线$C_1:y^2=2p_1x(p_1>0)$和$C_2:x^2=2p_2y(p_2>0)$均经过点(4,8)，则$C_1$的焦点与$C_2$的焦点之间的距离为#paren[D]
+  #choices([12], [$4sqrt(5)$], [6], [$sqrt(65) / 2$])
+]
+
+#question[
+  已知函数$f(x)=frac(x+2, upright(e)^x+a)$的最大值为1，则$a$= #paren[B]
+  #choices($1/2$, 1, $3/2$, 2)
+]
+
+#question[
+  一百零八塔位于宁夏回族自治区青钢峡市，以其独特的速筑格局和深远的历史文化间名遐迩，该塔群共有108座塔，依山势自上而下排成12行，将第$i$行中塔的座数记为$a_i (i=1,2,dots.c,12)$，其中$a_1=1,a_2=a_3=3,a_4=a_5=5$，且$a_6,a_7,dots.c,a_12$是一个首项为7，公差为2的等差数列，将$a_1,a_2,dots.c,a_12$，分为6组，每组2个数，使得每组的2个数之和可构成一个项数为6且公差为$d(d>0)$的等差数列，则$d=$
   #paren[B]
-  #choices([$(0, 1)$], [$(1, 3)$], [$(3, +∞)$], [$(0, +∞)$])
+  #choices(2, 4, 6, 8)
 ]
 
 #question[
-  若实数 $x, y, z$ 满足 $2 + log_2 x = 3 + log_3y = 5 + log_5 z$，则 $x, y, z$ 的大小关系不可能是 #paren[B]
-  #choices($x > y > z$, $x > z > y$, $y > x > z$, $y > z > x$)
+  设$U={(x_1,x_2,x_3) | x_i in {-2,-1,1,2},i=1,2,3}$为空间中64个点构成的集合。点$P(1,1,1)$，记样本空间$Omega = complement_U {P}$。从$Omega$中随机取一个点。定义随机变量$X$如下：对$Omega$中的每个点$A=(x_1,x_2,x_3)$。令$X(A)=x_1+x_2+x_3$，则$X$的数学期望为
+  #paren[A]
+  #choices([$-1/(21)$], [$-1/(63)$], 0, [$1/7$])
 ]
 
-
-= 多选题：本题共 #sec-q-cnt 小题，每小题 #per-pts 分，共 #sec-pts 分。在每小题给出的选项中，有多项符合题目要求。全部选对的得 #per-pts 分，部分选对的得部分分，有选错的得 0 分。
+= 多选题：本题共 #sec-q-cnt 小题，每小题 #per-pts 分，共 #sec-pts 分.在每小题给出的选项中，有多项符合题目要求.全部选对的得 6 分，部分选对的得部分分，有选错的得 0 分.
 #question[
-  在正三棱柱 $A B C-A_1B_1C_1$ 中，$D$ 为 $B C$ 中点，则 #paren[BD]
-  #choices([$A D perp A_1C$], [$B C perp "平面" A A_1D$], [$C C_1 parallel "平面" A A_1D$], [$A D parallel A_1B_1$])
-]
-
-#question[
-  设抛物线 $C: y^2 = 6x$ 的焦点为 $F$，过 $F$的直线交 $C$ 于$A、B$，过 $F$ 且垂直于 $A B$的直线交准线 $l$: $y = -3 / 2x$
-  于 $E$，过点$A$作准线的垂线，垂足为$D$，则 #paren[ACD]
-  #choices([$|A D| = |A F|$], [$|A E| = |A B|$], [$|A B| >= 6$], [$|A E| dot |B E| >= 18$])
+  设$z=3+2"i"$，则 #paren[ACD]
+  #choices([$overline(z)=3-2"i"$], [$|z|=5$], [$z^2=5+12"i"$], [$frac(z+3, z-1) in$ *R*])
 ]
 
 #question[
-  已知 $triangle A B C$ 的面积为 $1 / 4$，若 $cos 2A + cos 2B + cos 2C = 2$,$cos A cos B sin C = 1 / 4$，则 #paren[ACD]
-  #choices([$sin C = sin^2 A + sin^2 B$], [$A B = sqrt(2)$], [$sin A + sin B = sqrt(6) / 2$], [$A C^2 + B C^2 = 3$])
-]
-
-= 填空题：本题共 #sec-q-cnt 小题，每小题 #per-pts 分，共 #sec-pts 分。
-#question[
-  若直线 $y = 2x + 5$ 是曲线 $y = "e"^x + x + a$ 的切线，则 $a=$ #fillin[4].
-]
-
-#question[
-  若一个正项等比数列的前 4 项和为 4，前 8 项和为 68，则该等比数列的公比为 #fillin[2].
+  在空间中，$A、B$为两个定点，动点$C$到直线$A B$的距离为2，动点$D$到直线$A B$的距离为1，若二面角$C-A B-D$为60°，则
+  #paren[BC]
+  #choices(
+    [$angle C A D gt.slant 60°$],
+    [$C D gt.slant sqrt(3)$],
+    [当$A B perp C D$时，$C D perp "平面" A B D$],
+    [当$A B perp "平面" A C D$时，$A C perp A D$],
+  )
 ]
 
 #question[
-  一个箱子里有 5 个球，分别以 1$~$5 标号，若有放回取三次，记至少取出一次的球的个数 $X$，则 $E(X)=$#fillin[$61/25$].
+  已知圆$C_(1):(x+1)^(2)+y^(2)=1$，圆$C_(2):(x-1)^(2)+y^(2)=1$，圆$C_(3):x^(2)+(y-sqrt(3))^(2)=1$，直线$l:y=k x+b$与$C_(1),C_(2),C_(3)$均有两个交点。记$l$被$C_(1),C_(2),C_(3)$截得的弦长分别为$s_(1),s_(2),s_(3)$，则#paren[BCD]
+  #choices(
+    [$k$可以取任意实数],
+    [满足$s_(1)=s_(2)=s_(3)$的直线共有3条],
+    [满足$s_(1)+s_(2)+s_(3)=3$的直线多于3条],
+    [当$b=0$时，$s_(1)+s_(2)+s_(3)$的最大值为$frac(2 sqrt(21), 3)$],
+  )
 ]
 
-= 解答题：本题共 #sec-q-cnt 小题，共 #sec-pts 分。解答应写出文字说明、证明过程或演算步骤。
-#question(points: 13, bottom: 1in)[
-  为研究某疾病与超声波检查结果的关系，从做过超声波检查的人群中随机调查了1000人，得到如下的列联表：
-  #align(center)[
-    #table(
-      columns: 4,
-      [], [正常], [不正常], [合计],
-      [患该疾病], [20], [180], [200],
-      [未患该疾病], [780], [20], [800],
-      [合计], [800], [200], [1000],
-    )
-  ]
-  + 记超声波检查结果不正常者患有该疾病的概率为$p$，求$p$的估计值；
-  + 根据小概率值$alpha=0.001$的独立性检验，分析超声波检查结果是否与患该疾病有关.
+= 填空题：本题共 #sec-q-cnt 小题，每小题 #per-pts 分，共 #sec-pts 分.
+#question[
+  双曲线$5x^(2)-6y^(2)=1$的离心率为#fillin[$sqrt(66)/6$].
+]
+
+#question[
+  已知$f(x)=2sin(a x+θ)(a in upright(bold(Z)),0 lt.slant θ < 2π)$是偶函数，$f(x)$在区间$(0,frac(π, 2))$单调递增。则
+
+  $θ$=#fillin[$(3pi)/2$]，$f(frac(2π, 3))$=#fillin[0或2].
+]
+
+#question[
+  设实数$q$满足：存在数列${a_(n)}$，使得对于任意$n in upright(bold(N))^(*)$，均有$a_(1)+a_(2)+dots.c+a_(3n)=n^(2)+n$，且${a_(n)}$中有某连续9项$a_(k),a_(k+1),dots.c,a_(k+8)$是公比为$q$的等比数列。则$q$的最大值为#fillin[$root(3, 3/2)$].
+]
+
+= 解答题：本题共 #sec-q-cnt 小题，共 #sec-pts 分.解答应写出文字说明、证明过程或演算步骤.
+#let question = question.with(bottom: .5in)
+#question(points: 13)[
+  如图，在直三棱柱$A B C-A_(1)B_(1)C_(1)$中，$angle A C B=90°$，$A C=B C$，$D$，$E$分别为$A B$，$A C_(1)$的中点.
   #text-figure(
-    top: 10pt,
-    figure: table(
-      columns: 4,
-      [$P(chi^2 >= k)$], [0.005], [0.010], [0.001],
-      [$k$], [3.841], [6.635], [10.828],
-    ),
-  )[附：$chi^2 = n(a d - b c)^2 / ((a + b)(c + d)(a + c)(b + d))$]
+    figure: image("15.png", height: 1.8in),
+    figure-x: 20pt,
+    figure-y: 10pt,
+  )[
+    + 证明：$D E parallel$ 平面$B C C_(1)B_(1)$；
+    + 设$C C_(1)=2$，直线$D E$与平面$A C C_(1)A_(1)$所成的角为$45°$，求直线$D E$到平面$B C C_(1)B_(1)$的距离.
+
+  ]
 ]
 
-#question(points: 15, bottom: 1in)[
-  设数列 ${a_n}$ 满足 $a_1 = 3"， "a_(n+1) / n = a_n / (n+1) + 1 / (n(n+1))$.
-  + 证明：${n a_n}$ 为等差数列；
-  + 设 $f(x) = a_1x + a_2x^2 + dots.c + a_m x^m，求 f'(-2)$.
+#question(points: 15)[
+  已知在$triangle A B C$中，$A B = 3$，$B C = 2 sqrt(3)$，$cos B = frac(sqrt(3), 3)$.
+  + 求$cos A$；
+  + 设$D$，$E$两点满足：$D$在$B A$的延长线上，$D E parallel B C$，$A E perp A C$。若$D E = sqrt(6)$，求$C E$.
 ]
 
-#question(points: 15, bottom: 1in)[
-  如图所示的四棱锥 $P - A B C D$ 中，$P A perp "平面" A B C D, B C parallel A D, A B perp A D$.
-  + 证明：平面 $P A B perp "平面" P A D$
-  + 若 $P A = A B = sqrt(2), A D = sqrt(3) + 1, B C = 2$，$P, B, C, D$ 在同一个球面上，设该球面的球心为 $O$.
-    #text-figure(
-      figure: image("17.png", height: 1.5in),
-    )[
-      + 证明：$O$ 在平面 $A B C D$上；
-      + 求直线 $A C$ 与直线 $P O$ 所成角的余弦值.
-    ]
-]
-
-#question(points: 17, bottom: 1in)[
-  设椭圆 $C: x^2 / a^2 + y^2 / b^2 = 1 (a > b > 0)$，记 $A$为椭圆下端点，$B$ 为右端点，$|A B|= sqrt(10)$，且椭圆 $C$
-  的离心率为 $(2sqrt(2)) / 3$.
-  + 求椭圆的标准方程；
-  + 设点 $P(m, n)$.
-    + 若 $P$ 不在 $y$ 轴上，设 $R$ 是射线 $A P$ 上一点，$|A R| dot |A P| = 3$，用 $m, n$ 表示点 $R$ 的坐标；
-    + 设直线$O Q$ 的斜率为 $k_1$，直线 $O P$ 的斜率为 $k_2$，若 $k_1 = 3k_2$，$M$为椭圆上一点，求 $|P M|$ 的最大值.
+#question(points: 15)[
+  设整数$N gt.slant 2$，某同学用一个球进行投篮练习，至多投篮$N$次，当且仅当投中1次时或$N$次均未投中时，停止练习。设该同学每次投中的概率为$p$
+  ($0 < p < 1$)，各次投中与否相互独立。记$X$为停止练习时该同学的投篮次数。
+  + 当$N = 4$，$p = frac(1, 3)$时，求$X$的分布列；
+  + 设$k$，$m$均为自然数。
+    + 当$k lt.slant N - 1$时，求$P(X > k)$；
+    + 当$k + m lt.slant N - 1$时，证明：$P(X > k + m | X > k) = P(X > m)$.
 ]
 
 #question(points: 17)[
-  设函数 $f(x) = 5cos x - cos 5x$.
-  + 求 $f(x)$ 在 $[0, pi / 4]$ 的最大值；
-  + 给定 $theta in (0,pi)，a$ 为实数，证明：存在 $y in [a - theta, a + theta]$，使得 $cos y <= cos theta$；
-  + 若存在 $phi$，使得对任意 $x$，都有 $5cos x - cos(5x + phi) <= b$，求 $b$ 的最小值.
+  已知椭圆$C:frac(x^(2), a^(2)) + frac(y^(2), b^(2)) = 1$ ($a > b > 0$)的左焦点为$F(-1,0)$，离心率为$frac(1, 2)$。
+  + 求$C$的方程；
+  + 设$O$为坐标原点，过$F$且斜率大于$0$的动直线$l$与$C$交于$P$，$Q$两点，其中$Q$在第三象限，直线$P O$与$C$的另一个交点为$R$。
+    + 若$triangle P Q R$的面积是$triangle P F O$的面积的$3$倍，求$l$的方程；
+    + 求$tan angle P Q R$的最小值.
+]
+
+#question(points: 17)[
+  已知函数$f(x)$的定义域为R，且当$x < 0$时，$f(x) = 2^x$。对任意$x_(0) in "R"$，定义集合$D(x_(0)) = {d in upright(bold(R)) | f(x_(0) + d) > f(x_(0))}$.
+  + 若当$x gt.slant 0$时，$f(x) = 1 - x$，求$D(-1)$；
+  + 若$f(x)$是奇函数，$f(x_(1)) lt.slant f(x_(2))$，且$x_(1) x_(2)!= 0$，证明：$D(x_(2)) subset.eq D(x_(1))$；
+  + 设$f(x)$满足：①若$f(x_(1)) lt.slant f(x_(2))$，则$D(x_(2)) subset.eq D(x_(1))$；②当$0 < x < 1$时，$f(x) < f(0)$。
+    + 证明：$f(0) gt.slant 1$；
+    + 证明：$f(x)$在区间$(0, +oo)$单调递增.
 ]
 
 #solution-env[
   #let answer = tag.with(prefix: "答案：", suffix: none)
   = 选择题
   #solution(title: "解析")[
-    #answer[A]
+    #answer[B]
 
     #tag[解析]: #lorem(6)
   ]
 
   = 填空题
   #solution[
-    #answer[6]
+    #answer[$6$]
 
     #tag[解析]: #lorem(6)
   ]
