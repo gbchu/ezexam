@@ -99,17 +99,17 @@
 
 = 填空题：本题共 #sec-q-cnt 小题，每小题 #per-pts 分，共 #sec-pts 分.
 #question[
-  双曲线$5x^(2)-6y^(2)=1$的离心率为#fillin[$sqrt(66)/6$].
+  双曲线$5x^(2)-6y^(2)=1$的离心率为#fillin[$underline(sqrt(66)/6)$].
 ]
 
 #question[
   已知$f(x)=2sin(a x+θ)(a in upright(bold(Z)),0 lt.slant θ < 2π)$是偶函数，$f(x)$在区间$(0,frac(π, 2))$单调递增。则
 
-  $θ$=#fillin[$(3pi)/2$]，$f(frac(2π, 3))$=#fillin[0或2].
+  $θ$=#fillin[$underline((3pi)/2)$]，$f(frac(2π, 3))$=#fillin[~0或2].
 ]
 
 #question[
-  设实数$q$满足：存在数列${a_(n)}$，使得对于任意$n in upright(bold(N))^(*)$，均有$a_(1)+a_(2)+dots.c+a_(3n)=n^(2)+n$，且${a_(n)}$中有某连续9项$a_(k),a_(k+1),dots.c,a_(k+8)$是公比为$q$的等比数列。则$q$的最大值为#fillin[$root(3, 3/2)$].
+  设实数$q$满足：存在数列${a_(n)}$，使得对于任意$n in upright(bold(N))^(*)$，均有$a_(1)+a_(2)+dots.c+a_(3n)=n^(2)+n$，且${a_(n)}$中有某连续9项$a_(k),a_(k+1),dots.c,a_(k+8)$是公比为$q$的等比数列。则$q$的最大值为#fillin[$underline(root(3, 3/2))$].
 ]
 
 = 解答题：本题共 #sec-q-cnt 小题，共 #sec-pts 分.解答应写出文字说明、证明过程或演算步骤.
