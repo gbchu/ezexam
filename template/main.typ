@@ -165,18 +165,18 @@
   #solution(title: "解析")[
     #answer[B]
 
-    #tag[解析]: #lorem(6)
+    #tag[解析] #lorem(6)
   ]
 
   = 填空题
   #solution[
     #answer[$6$]
 
-    #tag[解析]: #lorem(6)
+    #tag[解析] #lorem(6)
   ]
 
   = 解答题
   #solution[
-    #tag[解析]: #lorem(6)#score(5)
+    #tag[解析] #lorem(6)#score(5)
   ]
 ]
