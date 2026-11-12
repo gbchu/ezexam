@@ -323,7 +323,7 @@
 
   set heading(
     numbering: (..item) => (
-      numbering(_fallback(heading-numbering, mode-config.heading-numbering), ..item.filter(v => v > 0))
+      numbering(_fallback(heading-numbering, mode-config.heading-numbering), ..item.pos().filter(v => v > 0))
         + h(_fallback(heading-body-indent, mode-config.heading-body-indent))
     ),
     hanging-indent: _fallback(heading-hanging-indent, mode-config.heading-hanging-indent),
