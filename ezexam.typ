@@ -1,7 +1,7 @@
 #import "lib/const.typ": *
 #import "lib/config.typ": *
 #import "lib/counter.typ": counter-chapter, counter-question, counter-title
-#import "lib/tools.typ": circ-num, emph-dot, page-restart, tag, text-figure, zh-arabic
+#import "lib/tools.typ": circ-num, emph-dot, page-restart, tag, text-figure, zh-arabic,iu, eu
 #import "lib/choice.typ": choices
 #import "lib/question.typ": per-pts, question, sec-pts, sec-q-cnt, set-per-pts, tot-pts, tot-q-cnt
 #import "lib/paren-fillin.typ": fillin, fillinn, paren, parenn
@@ -360,6 +360,7 @@
     if it.block { it } else { space + math.display(it) + space }
   }
   show math.parallel: math.class("relation", [/#h(-.25em)/])
+  // show math.parallel.eq: math.class("relation", [/#h(-.25em)/])
   show math.pi: it => math.upright(it)
   show math.gt.eq: math.gt.eq.slant
   show math.lt.eq: math.lt.eq.slant
