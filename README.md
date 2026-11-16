@@ -44,7 +44,7 @@ This template can help Chinese university, primary, middle and high school teach
 ## Changelog
 ### 0 . 4 . 0
 + ⚠️ `typst` 版本最低需要 `0.15.0`
-+ ⚠️ 调整字体，去除 covers 以提高性能
++ ⚠️ 调整字体
 + ⚠️ 修改 `choices` 方法的参数 `sapcing` ，重命名为 `body-indent`
 + ⚠️ 修改 `setup , question , solution` 方法的参数 `line-height` ，重命名为 `line-spacing` ，更加符合语义
 + ⚠️ 修改 `solution-block` 方法名为 `solution-env`
@@ -82,6 +82,7 @@ This template can help Chinese university, primary, middle and high school teach
   + 现在在非 `EXAM` 模式下，章节将会居中显示，不再隐藏。同时新增参数 `color` , `size` , `font`
 + 将参考答案加入到目录显示中
 + 新增输入带圈数字 `circ-num` 方法，该方法可方便输入带圈数字
++ 新增 `eu`, `iu`， 用以输入自然常数和虚数正体；调整平行且相等的形状，符合国内输入样式
 
 
 ### 0 . 3 . 1
