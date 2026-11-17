@@ -359,11 +359,35 @@
     set text(font: font-math, weight: 400)
     if it.block { it } else { space + math.display(it) + space }
   }
-  show math.parallel: math.class("relation", [/#h(-.25em)/])
-  show math.parallel.eq: math.class("relation", move($stretch(=, size: #150%)^parallel$, dy: .25em))
+
   show math.pi: it => math.upright(it)
   show math.gt.eq: math.gt.eq.slant
   show math.lt.eq: math.lt.eq.slant
+  show math.parallel: math.class("relation", [/#h(-.25em)/])
+  show math.parallel.eq: math.class("relation", box(
+    width: .9em,
+    height: 1em,
+    baseline: .375em,
+    [
+      #set line(stroke: (thickness: .04em, cap: "round"))
+      // 1. 倾斜平行线
+      #place(dx: .34em, line(
+        start: (0em, .6em),
+        end: (.2em, 0em),
+      ))
+      #place(dx: .34em, line(
+        start: (.16em, .6em),
+        end: (.36em, 0em),
+      ))
+
+      // 2. 等号
+      #place(dx: .1em, dy: .6em, box(
+        width: .7em,
+        height: .14em,
+        stroke: (y: .04em),
+      ))
+    ],
+  ))
 
   if show-answer {
     answer-state.update(true)
