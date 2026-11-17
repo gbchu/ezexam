@@ -82,7 +82,7 @@ This template can help Chinese university, primary, middle and high school teach
   + 现在在非 `EXAM` 模式下，章节将会居中显示，不再隐藏。同时新增参数 `color` , `size` , `font`
 + 将参考答案加入到目录显示中
 + 新增输入带圈数字 `circ-num` 方法，该方法可方便输入带圈数字
-+ 新增 `eu`, `iu`， 用以输入自然常数和虚数正体；调整平行/平行且相等的形状，符合国内输入样式
++ 新增 `eu`, `iu`， 用以输入自然常数和虚数正体；调整平行且相等的形状，符合国内输入样式
 
 
 ### 0 . 3 . 1
