@@ -54,7 +54,7 @@
 ]
 
 #question[
-  已知函数$f(x)=frac(x+2, upright(e)^x+a)$的最大值为1，则$a$= #paren[B]
+  已知函数$f(x)=frac(x+2, eu^x+a)$的最大值为1，则$a$= #paren[B]
   #choices($1/2$, 1, $3/2$, 2)
 ]
 
@@ -72,8 +72,8 @@
 
 = 多选题：本题共 #sec-q-cnt 小题，每小题 #per-pts 分，共 #sec-pts 分.在每小题给出的选项中，有多项符合题目要求.全部选对的得 6 分，部分选对的得部分分，有选错的得 0 分.
 #question[
-  设$z=3+2"i"$，则 #paren[ACD]
-  #choices([$overline(z)=3-2"i"$], [$|z|=5$], [$z^2=5+12"i"$], [$frac(z+3, z-1) in$ *R*])
+  设$z=3+2iu$，则 #paren[ACD]
+  #choices([$overline(z)=3-2iu$], [$|z|=5$], [$z^2=5+12iu$], [$frac(z+3, z-1) in$ *R*])
 ]
 
 #question[
