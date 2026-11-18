@@ -367,21 +367,21 @@
   show math.parallel.eq: math.class("relation", box(
     width: .9em,
     height: 1em,
-    baseline: .375em,
+    baseline: horizon,
     [
       #set line(stroke: (thickness: .04em, cap: "round"))
       // 1. 倾斜平行线
-      #place(dx: .34em, line(
+      #place(top + left, dx: .34em, dy: -.1em, line(
         start: (0em, .6em),
         end: (.2em, 0em),
       ))
-      #place(dx: .34em, line(
+      #place(top + left, dx: .34em, dy: -.1em, line(
         start: (.16em, .6em),
         end: (.36em, 0em),
       ))
 
       // 2. 等号
-      #place(dx: .1em, dy: .6em, box(
+      #place(top + left, dx: .1em, dy: .5em, box(
         width: .7em,
         height: .14em,
         stroke: (y: .04em),
