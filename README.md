@@ -83,6 +83,7 @@ This template can help Chinese university, primary, middle and high school teach
 + 将参考答案加入到目录显示中
 + 新增输入带圈数字 `circ-num` 方法，该方法可方便输入带圈数字
 + 新增 `eu`, `iu`， 用以输入自然常数和虚数正体；调整平行且相等的形状，符合国内输入样式
++ 新增 `vect` 方法，方便输入向量，根据传入的内容，单字母加粗，多字母加箭头
 
 
 ### 0 . 3 . 1
