@@ -231,3 +231,7 @@
 
 #let eu = $upright(e)$
 #let iu = $upright(i)$
+#let vect(letter) = {
+  if [#letter].has("children") { return math.arrow(letter) }
+  math.bold(letter)
+}
