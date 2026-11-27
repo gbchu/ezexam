@@ -238,6 +238,24 @@
     gap: .15em,
   ))#score-prefix#points#score-suffix]
 
+
+#let answer-table(rows: 2, cell-x: 1.25em, cell-y: .5em, ..data) = context {
+  let data = data.pos()
+  let length = data.len()
+  let current-explain-idx = counter-explain.get().first() + 1
+  set align(center)
+  table(
+    rows: rows,
+    columns: int((length + 1) * 2 / rows),
+    inset: (x: 1.25em, y: cell-y),
+    [题号],
+    ..range(current-explain-idx, current-explain-idx + length).map(str),
+    [答案],
+    ..data
+  )
+  counter-explain.update(pre => pre + length)
+}
+
 // 草稿纸
 #let draft(
   name: "草稿纸",
