@@ -239,9 +239,9 @@
   ))#score-prefix#points#score-suffix]
 
 
-#let answer-table(rows: 2, cell-x: 1.25em, cell-y: .5em, ..data) = context {
-  let data = data.pos()
-  let length = data.len()
+#let answer-table(rows: 2, cell-x: 1.25em, cell-y: .5em, ..answers) = context {
+  let answers = answers.pos()
+  let length = answers.len()
   let current-explain-idx = counter-explain.get().first() + 1
   set align(center)
   table(
@@ -251,7 +251,7 @@
     [题号],
     ..range(current-explain-idx, current-explain-idx + length).map(str),
     [答案],
-    ..data
+    ..answers
   )
   counter-explain.update(pre => pre + length)
 }
